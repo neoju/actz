@@ -8,7 +8,7 @@
     <div
         class="border-4 border-foreground p-8 rounded-3xl rotate-3 hover:rotate-0 transition-transform duration-300"
     >
-        <h1 class="text-7xl font-bold tracking-tighter">PT</h1>
+        <h1 class="text-7xl font-bold tracking-tighter">Actz</h1>
     </div>
 
     <div class="w-full text-center space-y-4 mt-20">
