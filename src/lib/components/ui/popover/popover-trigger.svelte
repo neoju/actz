@@ -1,0 +1,16 @@
+<script lang="ts">
+	import { Popover as PopoverPrimitive } from "bits-ui";
+
+	let {
+		children,
+		ref = $bindable(null),
+		...restProps
+	}: PopoverPrimitive.TriggerProps = $props();
+</script>
+
+<PopoverPrimitive.Trigger
+	bind:ref
+	{...restProps}
+>
+	{@render children?.()}
+</PopoverPrimitive.Trigger>
