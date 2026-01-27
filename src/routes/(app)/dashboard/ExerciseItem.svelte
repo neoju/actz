@@ -1,9 +1,17 @@
 <script lang="ts">
     import * as Accordion from "$lib/components/ui/accordion";
+    import * as Collapsible from "$lib/components/ui/collapsible";
     import { Button } from "$lib/components/ui/button";
     import { cn } from "$lib/utils";
     import exercisesDB from "../../api/exercises.json";
-    import { Check, SkipForward, Play, Circle, Lock } from "@lucide/svelte";
+    import {
+        Check,
+        ChevronDown,
+        SkipForward,
+        Play,
+        Circle,
+        Lock,
+    } from "@lucide/svelte";
 
     let {
         exercise,
@@ -220,6 +228,33 @@
             <div class="text-sm text-muted-foreground">
                 {detail?.description || "No description available."}
             </div>
+
+            {#if detail?.instructions}
+                <Collapsible.Root class="w-full">
+                    <Collapsible.Trigger
+                        class="flex items-center justify-between w-full"
+                    >
+                        <span class="font-semibold">Instructions</span>
+                        <Button variant="ghost" size="sm" class="w-9 p-0">
+                            <ChevronDown
+                                class="h-4 w-4 transition-transform data-[state=open]:rotate-180"
+                            />
+                            <span class="sr-only">Toggle</span>
+                        </Button>
+                    </Collapsible.Trigger>
+                    <Collapsible.Content
+                        class="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down flex flex-col gap-2 overflow-hidden transition-all duration-300"
+                    >
+                        <ol
+                            class="list-decimal list-inside space-y-2 text-sm text-muted-foreground mt-2"
+                        >
+                            {#each detail.instructions as instruction}
+                                <li class="text-sm">{instruction}</li>
+                            {/each}
+                        </ol>
+                    </Collapsible.Content>
+                </Collapsible.Root>
+            {/if}
 
             <div class="grid grid-cols-2 gap-4 p-4 bg-muted rounded-lg">
                 <div>

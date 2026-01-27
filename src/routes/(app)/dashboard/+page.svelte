@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Button } from "$lib/components/ui/button";
     import * as Card from "$lib/components/ui/card";
     import { cn } from "$lib/utils";
     import { Check, Lock } from "@lucide/svelte";
@@ -20,18 +21,52 @@
 
     // Sort days
     let days = $derived(plan.days.sort((a: any, b: any) => a.order - b.order));
+
+    // Collapsible state
+    let planDescOpen = $state(false);
+    let ptSummaryOpen = $state(false);
 </script>
 
 <div class="space-y-6 pb-8">
     <!-- Header -->
     <div class="space-y-2 pt-4">
-        <h1 class="text-3xl font-bold tracking-tight">Your Weekly Plan</h1>
-        <p class="text-muted-foreground">
+        <h1 class="text-3xl font-bold tracking-tight mb-10">
+            Your Weekly Plan
+        </h1>
+
+        <p class="text-sm font-bold">Description:</p>
+        <p
+            class={cn(
+                "px-4 text-muted-foreground transition-all line-clamp-2 text-sm",
+                planDescOpen && "line-clamp-none",
+            )}
+        >
             {plan.planDescription || "Stay consistent!"}
         </p>
-        <div class="p-4 bg-muted/50 rounded-lg text-sm italic">
+        {#if !planDescOpen}
+            <Button
+                variant="ghost"
+                class="text-primary ml-1"
+                onclick={() => (planDescOpen = true)}>... Read more</Button
+            >
+        {/if}
+
+        <p class="text-sm font-bold my-2">Personal Trainer's Note:</p>
+        <p
+            class={cn(
+                "px-4 bg-muted/50 rounded-lg text-sm italic transition-all",
+                !ptSummaryOpen && "line-clamp-2",
+            )}
+        >
             " {plan.ptSummary} "
-        </div>
+        </p>
+        {#if !ptSummaryOpen}
+            <Button
+                variant="ghost"
+                class="text-primary ml-1"
+                onclick={() => (ptSummaryOpen = true)}>... Read more</Button
+            >
+        {/if}
     </div>
 
     <!-- Days List -->
