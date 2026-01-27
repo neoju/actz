@@ -5,13 +5,9 @@
 </script>
 
 <div class="flex-1 flex flex-col items-center justify-center space-y-12">
-    <div
-        class="border-4 border-foreground p-8 rounded-3xl rotate-3 hover:rotate-0 transition-transform duration-300"
-    >
-        <h1 class="text-7xl font-bold tracking-tighter">Actz</h1>
-    </div>
+    <img src="/actz.png" alt="App Logo" class="w-48 h-48" />
 
-    <div class="w-full text-center space-y-4 mt-20">
+    <div class="w-full text-center space-y-4">
         <Button
             onclick={() => signIn("google")}
             variant="outline"
