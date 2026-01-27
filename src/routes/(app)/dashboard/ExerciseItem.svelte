@@ -2,6 +2,7 @@
     import * as Accordion from "$lib/components/ui/accordion";
     import * as Collapsible from "$lib/components/ui/collapsible";
     import { Button } from "$lib/components/ui/button";
+    import PressHoldButton from "$lib/components/PressHoldButton.svelte";
     import { cn } from "$lib/utils";
     import exercisesDB from "../../api/exercises.json";
     import {
@@ -56,8 +57,6 @@
     // Client-state for sets
     let currentSet = $state(1);
     let isSetInProgress = $state(false);
-    let pressTimer: any;
-    let pressedButton = $state<"main" | "skip" | null>(null);
 
     // Timer logic
     let isTimerExercise = $derived(detail?.tags?.includes("timer") ?? false);
@@ -78,8 +77,6 @@
         if (status === "PENDING") {
             currentSet = 1;
             isSetInProgress = false;
-            pressedButton = null;
-            clearTimeout(pressTimer);
             clearInterval(timerInterval);
             timeLeft = 0;
         }
@@ -143,44 +140,34 @@
         if (status !== "IN_PROGRESS") return false;
         if (isTimerExercise && timeLeft > 0) return false;
 
+        if (currentSet === totalSets && isSetInProgress) {
+            return true;
+        }
         if (totalSets > 1) return isSetInProgress;
         if (isTimerExercise && isSetInProgress) return true;
-        return true;
+        return false;
     }
 
-    function handlePressStart(
-        e: Event,
-        type: "main" | "skip",
-        action: () => void,
-    ) {
-        let needHold = false;
-        if (type === "skip") needHold = true;
-        else if (type === "main") needHold = requiresHold();
-
-        if (needHold) {
-            e.preventDefault();
-            pressedButton = type;
-            pressTimer = setTimeout(() => {
-                action();
-                pressedButton = null;
-            }, 1000);
-        } else {
-            action();
+    // Derived button content for set exercises
+    let buttonContent = $derived.by(() => {
+        if (isTimerExercise && timeLeft > 0) {
+            return `${Math.floor(timeLeft / 60)}:${(timeLeft % 60).toString().padStart(2, "0")}`;
         }
-    }
-
-    function handlePressEnd() {
-        if (pressedButton) {
-            clearTimeout(pressTimer);
-            pressedButton = null;
+        if (isSetInProgress) {
+            return totalSets > 1 ? `Finish Set ${currentSet}` : "Finish";
         }
-    }
+        return totalSets > 1 ? `Start Set ${currentSet}` : "Start";
+    });
 
-    function handleClick() {
-        if (!requiresHold()) {
-            handleMainAction();
-        }
-    }
+    // Derived button classes for set exercises
+    let buttonClasses = $derived(
+        cn(
+            "flex-1",
+            isSetInProgress
+                ? "bg-red-600 hover:bg-red-700"
+                : "bg-green-600 hover:bg-green-700",
+        ),
+    );
 </script>
 
 <Accordion.Item
@@ -222,7 +209,7 @@
         <div class="space-y-4 pt-2">
             {#if detail?.youtube_tutor_video && initialized}
                 <div
-                    class="aspect-video w-full rounded-md overflow-hidden bg-black"
+                    class="aspect-video w-full rounded-md overflow-hidden bg-gray-400"
                 >
                     <iframe
                         width="100%"
@@ -288,172 +275,73 @@
             <div class="flex gap-2">
                 {#if status === "PENDING"}
                     <div class="flex gap-2 w-full">
-                        <Button
-                            class="flex-1"
-                            onmousedown={(e) =>
-                                handlePressStart(e, "main", handleClick)}
-                            ontouchstart={(e) =>
-                                handlePressStart(e, "main", handleClick)}
-                            onmouseup={handlePressEnd}
-                            onmouseleave={handlePressEnd}
-                            ontouchend={handlePressEnd}
-                        >
+                        <Button class="flex-1" onclick={handleMainAction}>
                             Start Exercise
                         </Button>
-                        <Button
+                        <PressHoldButton
                             class="flex-1 border-yellow-500 text-yellow-700"
                             variant="outline"
-                            onmousedown={(e) =>
-                                handlePressStart(e, "skip", () =>
-                                    onUpdateActivity(
-                                        exercise.id,
-                                        "SKIPPED",
-                                        activity?.id,
-                                    ),
+                            onAction={() =>
+                                onUpdateActivity(
+                                    exercise.id,
+                                    "SKIPPED",
+                                    activity?.id,
                                 )}
-                            ontouchstart={(e) =>
-                                handlePressStart(e, "skip", () =>
-                                    onUpdateActivity(
-                                        exercise.id,
-                                        "SKIPPED",
-                                        activity?.id,
-                                    ),
-                                )}
-                            onmouseup={handlePressEnd}
-                            onmouseleave={handlePressEnd}
-                            ontouchend={handlePressEnd}
-                            disabled={pressedButton === "skip"}
                         >
                             Skip
-                        </Button>
+                        </PressHoldButton>
                     </div>
                 {:else if status === "IN_PROGRESS"}
                     <!-- Dynamic Button for Sets -->
                     {#if totalSets > 1}
-                        <Button
-                            onmousedown={(e) =>
-                                handlePressStart(e, "main", handleMainAction)}
-                            onmouseup={handlePressEnd}
-                            onmouseleave={handlePressEnd}
-                            ontouchstart={(e) =>
-                                handlePressStart(e, "main", handleMainAction)}
-                            ontouchend={handlePressEnd}
-                            onclick={handleClick}
+                        {#if requiresHold()}
+                            <PressHoldButton
+                                onAction={handleMainAction}
+                                variant="default"
+                                class={buttonClasses}
+                            >
+                                {buttonContent}
+                            </PressHoldButton>
+                        {:else}
+                            <Button
+                                onclick={handleMainAction}
+                                variant="default"
+                                class={buttonClasses}
+                            >
+                                {buttonContent}
+                            </Button>
+                        {/if}
+                    {:else if requiresHold()}
+                        <PressHoldButton
+                            onAction={handleMainAction}
                             variant="default"
-                            class={cn(
-                                "flex-1 transition-transform select-none touch-none relative overflow-hidden",
-                                isSetInProgress
-                                    ? "bg-red-600 hover:bg-red-700"
-                                    : "bg-green-600 hover:bg-green-700",
-                                pressedButton === "main" &&
-                                    isSetInProgress &&
-                                    "scale-95 duration-1000 ease-linear",
-                            )}
+                            class={buttonClasses}
                         >
-                            <div
-                                class={cn(
-                                    "absolute left-0 top-0 bottom-0 bg-white/20 transition-all ease-linear h-full",
-                                    pressedButton === "main" && isSetInProgress
-                                        ? "w-full duration-1000"
-                                        : "w-0 duration-0",
-                                )}
-                            ></div>
-                            <span class="relative z-10">
-                                {#if isSetInProgress}
-                                    {#if isTimerExercise && timeLeft > 0}
-                                        {Math.floor(timeLeft / 60)}:{(
-                                            timeLeft % 60
-                                        )
-                                            .toString()
-                                            .padStart(2, "0")}
-                                    {:else}
-                                        {pressedButton === "main"
-                                            ? "Hold to Finish..."
-                                            : `Finish Set ${currentSet}`}
-                                    {/if}
-                                {:else}
-                                    Start Set {currentSet}
-                                {/if}
-                            </span>
-                        </Button>
+                            {buttonContent}
+                        </PressHoldButton>
                     {:else}
                         <Button
-                            onmousedown={(e) =>
-                                handlePressStart(e, "main", handleMainAction)}
-                            onmouseup={handlePressEnd}
-                            onmouseleave={handlePressEnd}
-                            ontouchstart={(e) =>
-                                handlePressStart(e, "main", handleMainAction)}
-                            ontouchend={handlePressEnd}
-                            onclick={handleClick}
+                            onclick={handleMainAction}
                             variant="default"
-                            class={cn(
-                                "flex-1 bg-green-600 hover:bg-green-700 transition-transform select-none touch-none relative overflow-hidden",
-                                pressedButton === "main" &&
-                                    "scale-95 duration-1000 ease-linear",
-                            )}
+                            class={buttonClasses}
                         >
-                            <div
-                                class={cn(
-                                    "absolute left-0 top-0 bottom-0 bg-white/20 transition-all ease-linear h-full",
-                                    pressedButton === "main"
-                                        ? "w-full duration-1000"
-                                        : "w-0 duration-0",
-                                )}
-                            ></div>
-                            <span class="relative z-10">
-                                {#if isTimerExercise && isSetInProgress && timeLeft > 0}
-                                    {Math.floor(timeLeft / 60)}:{(timeLeft % 60)
-                                        .toString()
-                                        .padStart(2, "0")}
-                                {:else}
-                                    {pressedButton === "main"
-                                        ? "Hold to Finish..."
-                                        : "Finish"}
-                                {/if}
-                            </span>
+                            {buttonContent}
                         </Button>
                     {/if}
 
-                    <Button
-                        onmousedown={(e) =>
-                            handlePressStart(e, "skip", () =>
-                                onUpdateActivity(
-                                    exercise.id,
-                                    "SKIPPED",
-                                    activity?.id,
-                                ),
-                            )}
-                        onmouseup={handlePressEnd}
-                        onmouseleave={handlePressEnd}
-                        ontouchstart={(e) =>
-                            handlePressStart(e, "skip", () =>
-                                onUpdateActivity(
-                                    exercise.id,
-                                    "SKIPPED",
-                                    activity?.id,
-                                ),
-                            )}
-                        ontouchend={handlePressEnd}
+                    <PressHoldButton
                         variant="outline"
-                        class={cn(
-                            "relative overflow-hidden transition-transform select-none touch-none",
-                            pressedButton === "skip" &&
-                                "scale-95 duration-1000 ease-linear",
-                        )}
-                    >
-                        <div
-                            class={cn(
-                                "absolute left-0 top-0 bottom-0 bg-black/10 transition-all ease-linear h-full",
-                                pressedButton === "skip"
-                                    ? "w-full duration-1000"
-                                    : "w-0 duration-0",
+                        class="flex-1 border-yellow-500 text-yellow-700"
+                        onAction={() =>
+                            onUpdateActivity(
+                                exercise.id,
+                                "SKIPPED",
+                                activity?.id,
                             )}
-                        ></div>
-                        <span class="relative z-10">
-                            {pressedButton === "skip" ? "Hold..." : "Skip"}
-                        </span>
-                    </Button>
+                        disabled={isLocked || cooldownActive}
+                    >
+                        Skip
+                    </PressHoldButton>
                 {:else}
                     <AlertDialog.Root
                         open={showResetDialog}
