@@ -14,13 +14,21 @@
     } from "@lucide/svelte";
 
     let {
+        isOpened,
         exercise,
         isLocked,
         cooldownActive,
-        cooldownTime,
         onUpdateActivity,
         onStartCooldown,
     } = $props();
+
+    let initialized = $state(false);
+
+    $effect(() => {
+        if (!initialized && isOpened) {
+            initialized = true;
+        }
+    });
 
     let detail = $derived(
         exercisesDB.find(
@@ -206,7 +214,7 @@
     </Accordion.Trigger>
     <Accordion.Content>
         <div class="space-y-4 pt-2">
-            {#if detail?.youtube_tutor_video}
+            {#if detail?.youtube_tutor_video && initialized}
                 <div
                     class="aspect-video w-full rounded-md overflow-hidden bg-black"
                 >
@@ -276,9 +284,46 @@
             <!-- Actions -->
             <div class="flex gap-2">
                 {#if status === "PENDING"}
-                    <Button onclick={handleClick} class="w-full">
-                        Start Exercise
-                    </Button>
+                    <div class="flex gap-2 w-full">
+                        <Button
+                            class="flex-1"
+                            onmousedown={(e) =>
+                                handlePressStart(e, "main", handleClick)}
+                            ontouchstart={(e) =>
+                                handlePressStart(e, "main", handleClick)}
+                            onmouseup={handlePressEnd}
+                            onmouseleave={handlePressEnd}
+                            ontouchend={handlePressEnd}
+                        >
+                            Start Exercise
+                        </Button>
+                        <Button
+                            class="flex-1 border-yellow-500 text-yellow-700"
+                            variant="outline"
+                            onmousedown={(e) =>
+                                handlePressStart(e, "skip", () =>
+                                    onUpdateActivity(
+                                        exercise.id,
+                                        "SKIPPED",
+                                        activity?.id,
+                                    ),
+                                )}
+                            ontouchstart={(e) =>
+                                handlePressStart(e, "skip", () =>
+                                    onUpdateActivity(
+                                        exercise.id,
+                                        "SKIPPED",
+                                        activity?.id,
+                                    ),
+                                )}
+                            onmouseup={handlePressEnd}
+                            onmouseleave={handlePressEnd}
+                            ontouchend={handlePressEnd}
+                            disabled={pressedButton === "skip"}
+                        >
+                            Skip
+                        </Button>
+                    </div>
                 {:else if status === "IN_PROGRESS"}
                     <!-- Dynamic Button for Sets -->
                     {#if totalSets > 1}

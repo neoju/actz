@@ -1,14 +1,15 @@
 <script lang="ts">
     import * as Accordion from "$lib/components/ui/accordion";
-    import * as Card from "$lib/components/ui/card";
     import { Button } from "$lib/components/ui/button";
     import { ChevronLeft } from "@lucide/svelte";
     import { invalidateAll } from "$app/navigation";
-    import { cn } from "$lib/utils";
     import ExerciseItem from "../../ExerciseItem.svelte";
 
     let { data } = $props();
     let selectedDay = $derived(data.day);
+
+    // svelte-ignore state_referenced_locally
+    let openedExercise = $state<string | undefined>(data.day.exercises[0]?.id);
 
     async function updateActivity(
         plannedExerciseId: string,
@@ -114,12 +115,12 @@
 
     <!-- Details -->
 
-    <Accordion.Root type="single" class="w-full">
+    <Accordion.Root type="single" class="w-full" bind:value={openedExercise}>
         {#each selectedDay.exercises as exercise, index}
             <ExerciseItem
                 {exercise}
                 {cooldownActive}
-                {cooldownTime}
+                isOpened={openedExercise === exercise.id}
                 isLocked={isExerciseLocked(index)}
                 onUpdateActivity={updateActivity}
                 onStartCooldown={startCooldown}
