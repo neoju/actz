@@ -89,22 +89,17 @@
     {disabled}
     class={cn(
         "relative overflow-hidden transition-transform select-none touch-none",
-        isPressed && "scale-95",
         className,
     )}
-    style={isPressed
-        ? `transition-duration: ${holdDuration}ms; transition-timing-function: linear;`
-        : ""}
     {...restProps}
 >
-    {#if showProgress && isPressed}
-        <div
-            class="absolute left-0 top-0 bottom-0 bg-white/20 h-full transition-all ease-linear"
-            style={isPressed
-                ? `width: 100%; transition-duration: ${holdDuration}ms;`
-                : "width: 0; transition-duration: 0ms;"}
-        ></div>
-    {/if}
+    <div
+        class={cn(
+            "absolute left-0 top-0 z-11 -translate-x-full w-full h-full",
+            "transition-transform duration-1000 bg-white/50",
+            isPressed && "translate-x-0",
+        )}
+    ></div>
     <span class="relative z-10">
         {@render children?.()}
     </span>

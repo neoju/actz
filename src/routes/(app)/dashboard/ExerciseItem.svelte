@@ -209,7 +209,7 @@
         <div class="space-y-4 pt-2">
             {#if detail?.youtube_tutor_video && initialized}
                 <div
-                    class="aspect-video w-full rounded-md overflow-hidden bg-gray-400"
+                    class="aspect-video w-full rounded-md overflow-hidden bg-gray-500"
                 >
                     <iframe
                         width="100%"
