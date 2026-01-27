@@ -8,7 +8,7 @@ generator client {
   engineType          = "client"
   binaryTargets       = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
   output              = "../generated/prisma"
-  runtime             = "nodejs"
+  runtime             = "bun"
 }
 
 model User {
