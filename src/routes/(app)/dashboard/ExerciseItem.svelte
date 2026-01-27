@@ -12,6 +12,8 @@
         Circle,
         Lock,
     } from "@lucide/svelte";
+    import Loader from "@lucide/svelte/icons/loader";
+    import * as AlertDialog from "$lib/components/ui/alert-dialog";
 
     let {
         isOpened,
@@ -22,6 +24,8 @@
         onStartCooldown,
     } = $props();
 
+    // AlertDialog state for reset confirmation
+    let showResetDialog = $state(false);
     let initialized = $state(false);
 
     $effect(() => {
@@ -112,7 +116,7 @@
         }
     }
 
-    function handleMainAction() {
+    async function handleMainAction() {
         if (status === "PENDING") {
             onUpdateActivity(exercise.id, "IN_PROGRESS");
         } else if (status === "IN_PROGRESS") {
@@ -129,7 +133,7 @@
                     return;
                 }
 
-                onUpdateActivity(exercise.id, "COMPLETED", activity?.id);
+                await onUpdateActivity(exercise.id, "COMPLETED", activity?.id);
                 onStartCooldown();
             }
         }
@@ -452,18 +456,64 @@
                         </span>
                     </Button>
                 {:else}
-                    <Button
-                        onclick={() =>
-                            onUpdateActivity(
-                                exercise.id,
-                                "IN_PROGRESS",
-                                activity?.id,
-                            )}
-                        variant="outline"
-                        size="sm"
+                    <AlertDialog.Root
+                        open={showResetDialog}
+                        onOpenChange={(e) => (showResetDialog = e)}
                     >
-                        Reset
-                    </Button>
+                        <AlertDialog.Trigger>
+                            {#snippet child()}
+                                <Button
+                                    onclick={() => (showResetDialog = true)}
+                                    variant="outline"
+                                    size="sm"
+                                >
+                                    Reset
+                                </Button>
+                            {/snippet}
+                        </AlertDialog.Trigger>
+                        <AlertDialog.Content>
+                            <AlertDialog.Header>
+                                <AlertDialog.Title
+                                    >Reset Exercise</AlertDialog.Title
+                                >
+                                <AlertDialog.Description>
+                                    Are you sure you want to reset this
+                                    exercise? This will set its status back to
+                                    pending.
+                                </AlertDialog.Description>
+                            </AlertDialog.Header>
+                            <AlertDialog.Footer>
+                                <AlertDialog.Cancel>
+                                    {#snippet child()}
+                                        <Button
+                                            variant="outline"
+                                            onclick={() =>
+                                                (showResetDialog = false)}
+                                        >
+                                            Cancel
+                                        </Button>
+                                    {/snippet}
+                                </AlertDialog.Cancel>
+                                <AlertDialog.Action>
+                                    {#snippet child()}
+                                        <Button
+                                            variant="destructive"
+                                            onclick={async () => {
+                                                await onUpdateActivity(
+                                                    exercise.id,
+                                                    "IN_PROGRESS",
+                                                    activity?.id,
+                                                );
+                                                showResetDialog = false;
+                                            }}
+                                        >
+                                            Reset
+                                        </Button>
+                                    {/snippet}
+                                </AlertDialog.Action>
+                            </AlertDialog.Footer>
+                        </AlertDialog.Content>
+                    </AlertDialog.Root>
                     <span
                         class="text-sm text-muted-foreground self-center ml-2"
                     >
