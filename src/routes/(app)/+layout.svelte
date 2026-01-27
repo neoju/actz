@@ -25,8 +25,8 @@
     <div
         class="w-full max-w-md min-h-screen bg-background shadow-2xl overflow-hidden relative flex flex-col border-x border-border"
     >
-        <main class="flex-1 p-6 flex flex-col">
-            <ModeSwitcher class="fixed z-50 top-5 right-5" />
+        <main class="flex-1 p-4 flex flex-col">
+            <ModeSwitcher class="absolute z-50 top-5 right-5" />
             {@render children()}
         </main>
     </div>
