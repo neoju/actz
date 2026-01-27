@@ -11,7 +11,29 @@ export async function POST({ request, locals }) {
       return json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const data = await request.json();
+    // Fetch user profile from database
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: {
+        age: true,
+        gender: true,
+        weight: true,
+        height: true,
+        fitnessLevel: true,
+        equipment: true,
+        schedule: true,
+        limitations: true,
+        target: true,
+      },
+    });
+
+    if (!user || !user.age || !user.weight || !user.height) {
+      return json(
+        { error: "Please update your profile first" },
+        { status: 400 },
+      );
+    }
+
     const {
       age,
       gender,
@@ -22,7 +44,7 @@ export async function POST({ request, locals }) {
       schedule,
       limitations,
       target,
-    } = data;
+    } = user;
 
     // Calculate BMI
     const heightInMeters = height / 100;
@@ -93,7 +115,7 @@ export async function POST({ request, locals }) {
 
     const client = new GoogleGenAI({ apiKey });
     const response = await client.models.generateContent({
-      model: "gemini-2.5-flash",
+      model: "gemini-3-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -138,26 +160,8 @@ export async function POST({ request, locals }) {
 
     const result = JSON.parse(resultText);
 
-    // Save to Database
-
-    // 1. Update User Profile
-    await prisma.user.update({
-      where: { id: session.user.id },
-      data: {
-        age: Number(age),
-        gender,
-        weight: Number(weight),
-        height: Number(height),
-        fitnessLevel,
-        equipment,
-        schedule,
-        limitations,
-        target,
-      },
-    });
-
-    // 2. Create Weekly Plan
-    // We deactivate any previous active plans
+    // Save Weekly Plan to Database
+    // Deactivate any previous active plans
     await prisma.weeklyPlan.updateMany({
       where: { userId: session.user.id, isActive: true },
       data: { isActive: false },

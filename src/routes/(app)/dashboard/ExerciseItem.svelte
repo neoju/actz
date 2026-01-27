@@ -164,6 +164,8 @@
                 action();
                 pressedButton = null;
             }, 1000);
+        } else {
+            action();
         }
     }
 
@@ -225,10 +227,7 @@
                     <iframe
                         width="100%"
                         height="100%"
-                        src={detail.youtube_tutor_video.replace(
-                            "watch?v=",
-                            "embed/",
-                        )}
+                        src={detail.youtube_tutor_video}
                         title={exercise.name}
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -2,14 +2,13 @@
     import SunIcon from "@lucide/svelte/icons/sun";
     import MoonIcon from "@lucide/svelte/icons/moon";
 
-    import { toggleMode, ModeWatcher } from "mode-watcher";
+    import { toggleMode } from "mode-watcher";
     import { Button } from "$lib/components/ui/button/index.js";
     import { cn } from "tailwind-variants";
 
     let { class: className = "" } = $props();
 </script>
 
-<ModeWatcher />
 <Button
     class={cn(className)}
     onclick={toggleMode}
