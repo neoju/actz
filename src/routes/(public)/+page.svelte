@@ -20,8 +20,9 @@
             />
             <span class="flex flex-1 justify-center">Continue with Google</span>
         </Button>
-        <p class="text-center text-sm text-muted-foreground mt-5">
-            By clicking continue, you agree to our <a
+        <p class="text-center text-sm text-muted-foreground mx-auto">
+            By clicking continue, you agree to our
+            <a
                 href="/terms"
                 class="underline underline-offset-4 hover:text-primary"
                 >Terms of Service</a
