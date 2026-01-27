@@ -34,6 +34,8 @@
   "dependencies": {
     "@auth/core": "^0.41.1",
     "@auth/sveltekit": "^1.11.1",
-    "mode-watcher": "^1.1.0"
+    "@google/genai": "^1.38.0",
+    "mode-watcher": "^1.1.0",
+    "zod": "^4.3.6"
   }
 }

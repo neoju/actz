@@ -1,0 +1,502 @@
+[
+  {
+    "name": "Standard Push-Up",
+    "category": "Chest",
+    "level": "Beginner",
+    "tags": ["push", "bodyweight", "foundation", "core"],
+    "description": "Bodyweight pressing movement performed in a plank position.",
+    "key_principles": "Core-to-upper body integration.",
+    "key_technical_checkpoints": "Hands slightly wider than shoulders; body moves as one rigid unit; elbows stay tucked.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=IODxDxX7oi4"
+  },
+  {
+    "name": "Goblet Squat",
+    "category": "Legs",
+    "level": "Beginner",
+    "tags": ["legs", "quads", "dumbbell", "beginner"],
+    "description": "Squatting while holding a weight against the chest.",
+    "key_principles": "Mastering squat mechanics with a front-loaded weight.",
+    "key_technical_checkpoints": "Keep weight tight to chest; use elbows to push knees out; maintain a flat back.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=MeIiIdhvXT4"
+  },
+  {
+    "name": "Plank",
+    "category": "Core",
+    "level": "Beginner",
+    "tags": ["isometric", "core", "bodyweight", "foundation"],
+    "description": "Holding a push-up position on the forearms.",
+    "key_principles": "Isometric core stability and anti-extension.",
+    "key_technical_checkpoints": "Flat back; squeeze glutes; shoulders directly over elbows.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=pSHjTRCQxIw"
+  },
+  {
+    "name": "Lat Pulldown",
+    "category": "Back",
+    "level": "Beginner",
+    "tags": ["pull", "vertical", "machine", "lats"],
+    "description": "Sitting and pulling a weighted bar down toward the upper chest.",
+    "key_principles": "Vertical pulling with controlled resistance.",
+    "key_technical_checkpoints": "Avoid leaning back excessively; pull with elbows, not hands.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=CAwf7n6Luuc"
+  },
+  {
+    "name": "Dumbbell Lateral Raise",
+    "category": "Shoulders",
+    "level": "Beginner",
+    "tags": ["isolation", "shoulders", "dumbbell", "width"],
+    "description": "Lifting dumbbells out to the sides.",
+    "key_principles": "Lateral deltoid isolation.",
+    "key_technical_checkpoints": "Lean slightly forward; lead with elbows; don't lift above shoulder height.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=3VkX2fX_S0E"
+  },
+  {
+    "name": "Barbell Bench Press",
+    "category": "Chest",
+    "level": "Intermediate",
+    "tags": ["push", "compound", "barbell", "strength"],
+    "description": "Lying on a bench, pressing a barbell from chest to full arm extension.",
+    "key_principles": "Horizontal pushing power and structural stability.",
+    "key_technical_checkpoints": "Keep feet flat; tuck elbows at 45°; maintain a slight arch in the lower back.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=vcBig73ojpE"
+  },
+  {
+    "name": "Romanian Deadlift (RDL)",
+    "category": "Legs",
+    "level": "Intermediate",
+    "tags": ["legs", "hamstrings", "hinge", "barbell"],
+    "description": "Hinge movement lowering weights while keeping legs mostly straight.",
+    "key_principles": "Hamstring and glute isolation via the hip hinge.",
+    "key_technical_checkpoints": "Move hips backward; go only until you feel a deep stretch in hamstrings.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=jEy_beKl7Wk"
+  },
+  {
+    "name": "Barbell Back Squat",
+    "category": "Legs",
+    "level": "Advanced",
+    "tags": ["legs", "quads", "barbell", "compound"],
+    "description": "Squatting with a bar on the upper back.",
+    "key_principles": "Lower body strength and axial loading management.",
+    "key_technical_checkpoints": "Sit back into hips; knees track over toes; keep chest up.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=8PMjqgR8Wa8"
+  },
+  {
+    "name": "Hanging Leg Raise",
+    "category": "Core",
+    "level": "Advanced",
+    "tags": ["abs", "core", "bodyweight", "lower abs"],
+    "description": "Hanging from a bar and lifting legs toward the chest.",
+    "key_principles": "Advanced abdominal strength and grip endurance.",
+    "key_technical_checkpoints": "Don't swing; focus on curling the pelvis upward toward the ribs.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=PrI6v3v6v8k"
+  },
+  {
+    "name": "Traditional Deadlift",
+    "category": "Back",
+    "level": "Advanced",
+    "tags": ["pull", "posterior chain", "barbell", "compound"],
+    "description": "Lifting a loaded barbell from the ground to hip height.",
+    "key_principles": "Maximum posterior chain strength and total body bracing.",
+    "key_technical_checkpoints": "Bar stays close to shins; neutral spine; drive with legs then pull with hips.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=ytGaGIn3SjE"
+  },
+  {
+    "name": "Chest Dips",
+    "category": "Chest",
+    "level": "Intermediate",
+    "tags": ["push", "bodyweight", "lower chest", "triceps"],
+    "description": "Lowering and lifting the body using parallel bars.",
+    "key_principles": "Vertical pressing targeting the lower pectorals.",
+    "key_technical_checkpoints": "Lean forward for chest focus; keep shoulders stable.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=2z8JmcrW-As"
+  },
+  {
+    "name": "Pull-Up",
+    "category": "Back",
+    "level": "Intermediate",
+    "tags": ["pull", "vertical", "bodyweight", "lats"],
+    "description": "Lifting bodyweight to a bar using an overhand grip.",
+    "key_principles": "Vertical pulling and relative strength.",
+    "key_technical_checkpoints": "Dead hang start; pull chest to bar; control the descent.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=eGo4IYlbE5g"
+  },
+  {
+    "name": "Bulgarian Split Squat",
+    "category": "Legs",
+    "level": "Advanced",
+    "tags": ["legs", "quads", "unilateral", "dumbbell"],
+    "description": "Single-leg squat with rear foot elevated.",
+    "key_principles": "Unilateral strength and balance.",
+    "key_technical_checkpoints": "Keep front heel planted; maintain upright or slightly leaned torso.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=2C-uNgKwPLE"
+  },
+  {
+    "name": "Arnold Press",
+    "category": "Shoulders",
+    "level": "Intermediate",
+    "tags": ["push", "shoulders", "dumbbell", "hypertrophy"],
+    "description": "Shoulder press with a rotational wrist movement.",
+    "key_principles": "Multi-planar deltoid engagement.",
+    "key_technical_checkpoints": "Rotate palms toward you at bottom, away at top.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=6Z15_WdXmVw"
+  },
+  {
+    "name": "Skull Crushers",
+    "category": "Arms",
+    "level": "Intermediate",
+    "tags": ["isolation", "triceps", "barbell", "long head"],
+    "description": "Lowering a bar toward the forehead while lying down.",
+    "key_principles": "Tricep long-head activation through stretch.",
+    "key_technical_checkpoints": "Upper arms stationary; lower slightly behind the head.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=ir5P_pZ0_8M"
+  },
+  {
+    "name": "Kettlebell Swing",
+    "category": "HIIT",
+    "level": "Intermediate",
+    "tags": ["full body", "power", "kettlebell", "hinge"],
+    "description": "Swinging a kettlebell through a hip hinge motion.",
+    "key_principles": "Explosive posterior chain power.",
+    "key_technical_checkpoints": "Hinge at hips, don't squat; snap hips forward to move weight.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=mK0p9U9_qM8"
+  },
+  {
+    "name": "Box Jumps",
+    "category": "HIIT",
+    "level": "Advanced",
+    "tags": ["plyometric", "legs", "explosive", "power"],
+    "description": "Jumping onto an elevated platform.",
+    "key_principles": "Plyometric explosive power and landing mechanics.",
+    "key_technical_checkpoints": "Land softly; step down to protect joints.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=52r_Ul5k03g"
+  },
+  {
+    "name": "Incline Dumbbell Press",
+    "category": "Chest",
+    "level": "Intermediate",
+    "tags": ["push", "dumbbell", "upper chest", "hypertrophy"],
+    "description": "Pressing dumbbells on a 30-45 degree incline.",
+    "key_principles": "Upper chest (clavicular head) targeting.",
+    "key_technical_checkpoints": "Shoulders back and down; control dumbbells on the descent.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=8iPEnn-ltC8"
+  },
+  {
+    "name": "Seated Cable Row",
+    "category": "Back",
+    "level": "Beginner",
+    "tags": ["pull", "horizontal", "cable", "mid-back"],
+    "description": "Pulling a cable handle toward the waist while seated.",
+    "key_principles": "Mid-back development and posture.",
+    "key_technical_checkpoints": "Keep chest up; squeeze shoulder blades at the peak.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=GZbfZ033f74"
+  },
+  {
+    "name": "Leg Press",
+    "category": "Legs",
+    "level": "Beginner",
+    "tags": ["legs", "quads", "machine", "hypertrophy"],
+    "description": "Pushing a weighted platform with the feet.",
+    "key_principles": "Quad isolation with low spinal stress.",
+    "key_technical_checkpoints": "Don't lock knees; keep lower back flat on the pad.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=IZxyjW7MPJQ"
+  },
+  {
+    "name": "Overhead Press",
+    "category": "Shoulders",
+    "level": "Advanced",
+    "tags": ["push", "shoulders", "barbell", "power"],
+    "description": "Standing barbell press to full overhead lockout.",
+    "key_principles": "Vertical pressing and full body tension.",
+    "key_technical_checkpoints": "Squeeze glutes; bar path stays close to face; head through at top.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=2yjwxtZ_Vkg"
+  },
+  {
+    "name": "Barbell Bicep Curl",
+    "category": "Arms",
+    "level": "Beginner",
+    "tags": ["isolation", "biceps", "barbell", "mass"],
+    "description": "Curling a barbell using a supinated grip.",
+    "key_principles": "Bicep hypertrophy through isolation.",
+    "key_technical_checkpoints": "Keep elbows pinned; avoid using body momentum.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=sAq_ocpRh_I"
+  },
+  {
+    "name": "Bicycle Crunches",
+    "category": "Core",
+    "level": "Beginner",
+    "tags": ["abs", "core", "bodyweight", "rotation"],
+    "description": "Supine core rotation with pedaling legs.",
+    "key_principles": "Engaging obliques and rectus abdominis.",
+    "key_technical_checkpoints": "Opposite elbow to knee; move slowly and with control.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=9FGilxCbdz8"
+  },
+  {
+    "name": "Burpees",
+    "category": "HIIT",
+    "level": "Advanced",
+    "tags": ["full body", "cardio", "bodyweight", "explosive"],
+    "description": "Combination of squat, plank, push-up, and jump.",
+    "key_principles": "Metabolic conditioning and full body power.",
+    "key_technical_checkpoints": "Maintain core tension; land flat-footed on the jump.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=auBLPXO8Fww"
+  },
+  {
+    "name": "Cable Crossover",
+    "category": "Chest",
+    "level": "Intermediate",
+    "tags": ["isolation", "cable", "chest", "tension"],
+    "description": "Bringing cable handles together across the midline.",
+    "key_principles": "Constant tension throughout the pectorals.",
+    "key_technical_checkpoints": "Chest out; slight elbow bend; hard squeeze at center.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=W7S4mPUP508"
+  },
+  {
+    "name": "Face Pulls",
+    "category": "Shoulders",
+    "level": "Beginner",
+    "tags": ["pull", "rear delt", "posture", "cable"],
+    "description": "Pulling a cable rope toward the forehead.",
+    "key_principles": "Shoulder health and rear deltoid isolation.",
+    "key_technical_checkpoints": "Pull rope apart; thumbs pointing back; keep elbows high.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=eIq5CB9JfKE"
+  },
+  {
+    "name": "Hip Thrust",
+    "category": "Legs",
+    "level": "Intermediate",
+    "tags": ["legs", "glutes", "barbell", "power"],
+    "description": "Weighted bridge with shoulders on a bench.",
+    "key_principles": "Maximal glute activation and hip extension.",
+    "key_technical_checkpoints": "Vertical shins at top; chin tucked; full hip lockout.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=LM8LGX-uK64"
+  },
+  {
+    "name": "Tricep Pushdown",
+    "category": "Arms",
+    "level": "Beginner",
+    "tags": ["isolation", "triceps", "cable", "hypertrophy"],
+    "description": "Pushing a cable bar/rope down by extending elbows.",
+    "key_principles": "Tricep isolation and elbow health.",
+    "key_technical_checkpoints": "Upper arms stationary; full extension at bottom.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=6FzKu2nDRig"
+  },
+  {
+    "name": "Dead Bug",
+    "category": "Core",
+    "level": "Beginner",
+    "tags": ["stability", "core", "bodyweight", "safe"],
+    "description": "Lowering opposite arm and leg while lying on back.",
+    "key_principles": "Spinal stability and core control.",
+    "key_technical_checkpoints": "Keep lower back glued to the floor; move slowly.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=g_BYB0R-4Ws"
+  },
+  {
+    "name": "Mountain Climbers",
+    "category": "HIIT",
+    "level": "Intermediate",
+    "tags": ["cardio", "core", "bodyweight", "intensity"],
+    "description": "Alternating knee drives in a plank position.",
+    "key_principles": "Cardiovascular endurance and core stability.",
+    "key_technical_checkpoints": "Keep hips low; shoulders over hands.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=nmwgirgXLYM"
+  },
+  {
+    "name": "Barbell Bent-Over Row",
+    "category": "Back",
+    "level": "Intermediate",
+    "tags": ["pull", "horizontal", "barbell", "thickness"],
+    "description": "Pulling a bar to the waist while hinged.",
+    "key_principles": "Horizontal pulling for back thickness.",
+    "key_technical_checkpoints": "Neutral spine; pull elbows past the ribs; control the bar.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=9efgcAjQ870"
+  },
+  {
+    "name": "Walking Lunges",
+    "category": "Legs",
+    "level": "Beginner",
+    "tags": ["legs", "glutes", "unilateral", "dynamic"],
+    "description": "Stepping forward into alternating lunges.",
+    "key_principles": "Dynamic balance and lower body isolation.",
+    "key_technical_checkpoints": "Upright torso; front knee over ankle; 90-degree angles.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=QOVaHwm-Q6U"
+  },
+  {
+    "name": "Lateral Raise (Dumbbell)",
+    "category": "Shoulders",
+    "level": "Beginner",
+    "tags": ["isolation", "shoulders", "dumbbell"],
+    "description": "Lifting weights to the side for shoulder width.",
+    "key_principles": "Lateral deltoid focus.",
+    "key_technical_checkpoints": "Lead with elbows; don't swing; stop at shoulder height.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=3VkX2fX_S0E"
+  },
+  {
+    "name": "Hammer Curl",
+    "category": "Arms",
+    "level": "Beginner",
+    "tags": ["isolation", "biceps", "dumbbell", "forearms"],
+    "description": "Neutral grip bicep curl.",
+    "key_principles": "Targeting the brachialis and brachioradialis.",
+    "key_technical_checkpoints": "Keep palms facing each other; no wrist rotation.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=zC3nLlEvin4"
+  },
+  {
+    "name": "Russian Twist",
+    "category": "Core",
+    "level": "Beginner",
+    "tags": ["abs", "obliques", "rotation", "core"],
+    "description": "Seated torso rotation.",
+    "key_principles": "Oblique strength and coordination.",
+    "key_technical_checkpoints": "Follow hands with gaze; keep feet elevated for challenge.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=wkD8rjk6074"
+  },
+  {
+    "name": "Skater Hops",
+    "category": "HIIT",
+    "level": "Intermediate",
+    "tags": ["cardio", "lateral", "bodyweight", "balance"],
+    "description": "Lateral explosive jumps.",
+    "key_principles": "Lateral power and athletic stability.",
+    "key_technical_checkpoints": "Land softly; stick the landing; use arms for balance.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=W0S8u4pXAnc"
+  },
+  {
+    "name": "Inverted Row",
+    "category": "Back",
+    "level": "Beginner",
+    "tags": ["pull", "bodyweight", "horizontal", "beginner"],
+    "description": "Horizontal row under a bar with feet on the ground.",
+    "key_principles": "Bodyweight pulling for back strength.",
+    "key_technical_checkpoints": "Body in straight line; pull chest to bar.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=KzIAs_EHe08"
+  },
+  {
+    "name": "Leg Extension",
+    "category": "Legs",
+    "level": "Beginner",
+    "tags": ["legs", "quads", "machine", "isolation"],
+    "description": "Seated leg extension against resistance.",
+    "key_principles": "Pure quad isolation.",
+    "key_technical_checkpoints": "Align knee with machine pivot; control descent.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=m0FOpMEgero"
+  },
+  {
+    "name": "Rear Delt Fly",
+    "category": "Shoulders",
+    "level": "Beginner",
+    "tags": ["isolation", "shoulders", "dumbbell", "rear delt"],
+    "description": "Hinged lateral lift for the back of the shoulder.",
+    "key_principles": "Rear deltoid isolation and upper back health.",
+    "key_technical_checkpoints": "Pinkies up; squeeze shoulder blades; keep spine flat.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=ttuvuo9kbOM"
+  },
+  {
+    "name": "Preacher Curl",
+    "category": "Arms",
+    "level": "Beginner",
+    "tags": ["isolation", "biceps", "barbell", "strict"],
+    "description": "Curling on a slanted support pad.",
+    "key_principles": "Strict bicep isolation without momentum.",
+    "key_technical_checkpoints": "Full extension at bottom; armpits tight to pad.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=vngli9UR6Hk"
+  },
+  {
+    "name": "Bird Dog",
+    "category": "Core",
+    "level": "Beginner",
+    "tags": ["stability", "core", "bodyweight", "balance"],
+    "description": "Extending opposite arm and leg on all fours.",
+    "key_principles": "Spinal stability and balance.",
+    "key_technical_checkpoints": "Don't arch back; reach long; keep hips square.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=wiFNA3sqjCA"
+  },
+  {
+    "name": "High Knees",
+    "category": "HIIT",
+    "level": "Beginner",
+    "tags": ["cardio", "warm-up", "bodyweight", "speed"],
+    "description": "Running in place with high knee drives.",
+    "key_principles": "Cardiovascular speed and hip flexor engagement.",
+    "key_technical_checkpoints": "Stay on balls of feet; drive knees to hip height.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=D098O67S_kU"
+  },
+  {
+    "name": "Machine Chest Press",
+    "category": "Chest",
+    "level": "Beginner",
+    "tags": ["push", "chest", "machine", "beginner"],
+    "description": "Seated horizontal press using a machine.",
+    "key_principles": "Foundational chest strength with guided path.",
+    "key_technical_checkpoints": "Set seat height at mid-chest; keep back against pad.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=nw998S9W50I"
+  },
+  {
+    "name": "One-Arm Dumbbell Row",
+    "category": "Back",
+    "level": "Beginner",
+    "tags": ["pull", "unilateral", "dumbbell", "back"],
+    "description": "Sawing motion dumbbell pull.",
+    "key_principles": "Unilateral back strength and core stability.",
+    "key_technical_checkpoints": "Pull toward hip; keep back flat; avoid torso twist.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=dFzZp-K9-Hk"
+  },
+  {
+    "name": "Standing Calf Raise",
+    "category": "Legs",
+    "level": "Beginner",
+    "tags": ["legs", "calves", "isolation", "hypertrophy"],
+    "description": "Rising on toes with weight.",
+    "key_principles": "Calf muscle hypertrophy.",
+    "key_technical_checkpoints": "Full stretch at bottom; hard squeeze at top.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=m_6K_N7qFes"
+  },
+  {
+    "name": "Upright Row",
+    "category": "Shoulders",
+    "level": "Intermediate",
+    "tags": ["pull", "shoulders", "barbell", "traps"],
+    "description": "Pulling weight vertically toward chin.",
+    "key_principles": "Side delt and trap activation.",
+    "key_technical_checkpoints": "Keep bar close; elbows above wrists; pull to mid-chest.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=JaH7S60Re04"
+  },
+  {
+    "name": "Close-Grip Bench Press",
+    "category": "Arms",
+    "level": "Intermediate",
+    "tags": ["push", "triceps", "barbell", "compound"],
+    "description": "Bench press with narrow hand placement.",
+    "key_principles": "Tricep-dominant pressing strength.",
+    "key_technical_checkpoints": "Hands shoulder-width; elbows close to body.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=nEF0bv2FW94"
+  },
+  {
+    "name": "Side Plank",
+    "category": "Core",
+    "level": "Beginner",
+    "tags": ["isometric", "core", "obliques", "stability"],
+    "description": "Balancing on one forearm sideways.",
+    "key_principles": "Oblique and lateral core stability.",
+    "key_technical_checkpoints": "Keep hips high; straight body alignment.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=N_vH8O_Oid8"
+  },
+  {
+    "name": "Bear Crawl",
+    "category": "HIIT",
+    "level": "Intermediate",
+    "tags": ["full body", "core", "bodyweight", "coordination"],
+    "description": "Moving on all fours with hovering knees.",
+    "key_principles": "Dynamic core and coordination.",
+    "key_technical_checkpoints": "Flat back; small movements; knees close to floor.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=f7Bf-WvD1_0"
+  },
+  {
+    "name": "Jumping Jacks",
+    "category": "HIIT",
+    "level": "Beginner",
+    "tags": ["cardio", "warm-up", "bodyweight", "classic"],
+    "description": "Classic jumping arm/leg spread.",
+    "key_principles": "Metabolic warm-up and coordination.",
+    "key_technical_checkpoints": "Soft landing; full arm range.",
+    "youtube_tutor_video": "https://www.youtube.com/watch?v=nGaXj3kkmrU"
+  }
+]
