@@ -1,55 +1,57 @@
-datasource db {
-  provider = "mongodb"
-  url      = env("MONGODB_URI")
-}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider            = "prisma-client"
-  engineType          = "client"
-  binaryTargets       = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
-  output              = "../generated/prisma"
-  runtime             = "bun"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
 }
 
 model User {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(cuid())
   name          String?
-  email         String?         @unique
+  email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
 
   // Onboarding Data
-  age           Int?
-  gender        String?
-  weight        Float?
-  height        Float?
-  fitnessLevel  String?
-  equipment     String?
-  schedule      String?
-  limitations   String?
-  target        String?
+  age          Int?
+  gender       String?
+  weight       Float?
+  height       Float?
+  fitnessLevel String?
+  equipment    String?
+  schedule     String?
+  limitations  String?
+  target       String?
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  weeklyPlans   WeeklyPlan[]
-  activities    ExerciseActivity[]
+  weeklyPlans WeeklyPlan[]
+  activities  ExerciseActivity[]
 }
 
 model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId
+  id                String  @id @default(cuid())
+  userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.String
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -58,17 +60,17 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(cuid())
   sessionToken String   @unique
-  userId       String   @db.ObjectId
+  userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model WeeklyPlan {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId          String    @db.ObjectId
-  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   ptSummary       String?
   planDescription String?
@@ -76,57 +78,57 @@ model WeeklyPlan {
   endDate         DateTime?
   isActive        Boolean   @default(true)
 
-  days            DayPlan[]
+  days DayPlan[]
 
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model DayPlan {
-  id              String            @id @default(auto()) @map("_id") @db.ObjectId
-  weeklyPlanId    String            @db.ObjectId
-  weeklyPlan      WeeklyPlan        @relation(fields: [weeklyPlanId], references: [id], onDelete: Cascade)
+  id           String     @id @default(cuid())
+  weeklyPlanId String
+  weeklyPlan   WeeklyPlan @relation(fields: [weeklyPlanId], references: [id], onDelete: Cascade)
 
-  dayName         String            // e.g., "Day 1", "Monday"
-  title           String            // e.g., "Push Day"
-  estimatedTime   String?
-  order           Int               // 1-7
+  dayName       String // e.g., "Day 1", "Monday"
+  title         String // e.g., "Push Day"
+  estimatedTime String?
+  order         Int // 1-7
 
-  exercises       PlannedExercise[]
+  exercises PlannedExercise[]
 }
 
 model PlannedExercise {
-  id              String            @id @default(auto()) @map("_id") @db.ObjectId
-  dayPlanId       String            @db.ObjectId
-  dayPlan         DayPlan           @relation(fields: [dayPlanId], references: [id], onDelete: Cascade)
+  id        String  @id @default(cuid())
+  dayPlanId String
+  dayPlan   DayPlan @relation(fields: [dayPlanId], references: [id], onDelete: Cascade)
 
-  name            String
-  sets            String?
-  reps            String?
-  notes           String?
-  order           Int
+  name  String
+  sets  String?
+  reps  String?
+  notes String?
+  order Int
 
-  activities      ExerciseActivity[]
+  activities ExerciseActivity[]
 }
 
 model ExerciseActivity {
-  id                String          @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String          @db.ObjectId
-  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  plannedExerciseId String          @db.ObjectId
+  plannedExerciseId String
   plannedExercise   PlannedExercise @relation(fields: [plannedExerciseId], references: [id], onDelete: Cascade)
 
-  status            ActivityStatus  @default(PENDING)
-  startedAt         DateTime?
-  completedAt       DateTime?
+  status      ActivityStatus @default(PENDING)
+  startedAt   DateTime?
+  completedAt DateTime?
 
   // Optional: Track actual performance
-  actualSets        Int?
-  actualReps        Int?
+  actualSets Int?
+  actualReps Int?
 
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum ActivityStatus {
