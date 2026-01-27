@@ -4,10 +4,11 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client"
-  engineType = "client"
-  binaryTargets = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
-  output   = "../generated/prisma"
+  provider            = "prisma-client"
+  engineType          = "client"
+  binaryTargets       = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
+  output              = "../generated/prisma"
+  runtime             = "nodejs"
 }
 
 model User {
