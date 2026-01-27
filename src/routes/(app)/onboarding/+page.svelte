@@ -13,62 +13,47 @@
         fitnessLevelOptions,
         createInitialProfileData,
     } from "$lib/schemas/profile";
+    import { useUpdateProfileMutation } from "$lib/queries/profile";
+    import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
+
+    // Use TanStack Query mutations
+    const updateProfileMutation = useUpdateProfileMutation();
+    const generatePlanMutation = useGenerateWeeklyPlanMutation();
 
     let profileData = $state(createInitialProfileData());
-    let isLoading = $state(false);
     let loadingStep = $state<"profile" | "plan" | null>(null);
     let errors: Record<string, string[] | undefined> = $state({});
 
+    // Derive loading state from mutations
+    let isLoading = $derived(
+        updateProfileMutation.isPending || generatePlanMutation.isPending,
+    );
+
     async function handleSubmit(e: Event) {
         e.preventDefault();
-        isLoading = true;
         errors = {};
 
         const result = profileSchema.safeParse(profileData);
 
         if (!result.success) {
             errors = result.error.flatten().fieldErrors;
-            isLoading = false;
             return;
         }
 
         try {
             // Step 1: Update user profile
             loadingStep = "profile";
-            const profileResponse = await fetch("/api/user/profile", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(profileData),
-            });
-
-            if (!profileResponse.ok) {
-                const error = await profileResponse.json();
-                console.error("Failed to update profile:", error);
-                return;
-            }
+            await updateProfileMutation.mutateAsync(result.data);
 
             // Step 2: Generate weekly plan
             loadingStep = "plan";
-            const planResponse = await fetch("/api/weekly-plan", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            await generatePlanMutation.mutateAsync();
 
-            if (planResponse.ok) {
-                const result = await planResponse.json();
-                goto("/dashboard");
-            } else {
-                const error = await planResponse.json();
-                console.error("Failed to generate weekly plan:", error);
-            }
+            // Navigate to dashboard on success
+            goto("/dashboard");
         } catch (error) {
             console.error("Error submitting form:", error);
         } finally {
-            isLoading = false;
             loadingStep = null;
         }
     }

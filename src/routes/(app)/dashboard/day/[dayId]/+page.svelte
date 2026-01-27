@@ -2,8 +2,8 @@
     import * as Accordion from "$lib/components/ui/accordion";
     import { Button } from "$lib/components/ui/button";
     import { ChevronLeft } from "@lucide/svelte";
-    import { invalidateAll } from "$app/navigation";
     import ExerciseItem from "../../ExerciseItem.svelte";
+    import { useUpdateActivityMutation } from "$lib/queries/activity";
 
     let { data } = $props();
     let selectedDay = $derived(data.day);
@@ -11,16 +11,19 @@
     // svelte-ignore state_referenced_locally
     let openedExercise = $state<string | undefined>(data.day.exercises[0]?.id);
 
+    // Use TanStack Query mutation for updating activity
+    const updateActivityMutation = useUpdateActivityMutation();
+
     async function updateActivity(
         plannedExerciseId: string,
         status: string,
         activityId?: string,
     ) {
-        await fetch("/api/activity", {
-            method: "POST",
-            body: JSON.stringify({ plannedExerciseId, status, activityId }),
+        await updateActivityMutation.mutateAsync({
+            plannedExerciseId,
+            status,
+            activityId,
         });
-        await invalidateAll();
     }
 
     let maxReachedIndex = $state(0);

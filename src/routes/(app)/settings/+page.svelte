@@ -8,13 +8,20 @@
         FormTextarea,
     } from "$lib/components/ui/form";
     import { ArrowLeft } from "@lucide/svelte";
-    import { onMount } from "svelte";
     import {
         profileSchema,
         equipmentOptions,
         genderOptions,
         fitnessLevelOptions,
     } from "$lib/schemas/profile";
+    import {
+        useProfileQuery,
+        useUpdateProfileMutation,
+    } from "$lib/queries/profile";
+
+    // Use TanStack Query for profile data
+    const profileQuery = useProfileQuery();
+    const updateProfileMutation = useUpdateProfileMutation();
 
     let profileData = $state({
         age: "",
@@ -29,67 +36,47 @@
         target: "",
     });
 
-    let isLoading = $state(false);
     let isEditing = $state(false);
-    let isSaving = $state(false);
     let errors: Record<string, string[] | undefined> = $state({});
 
-    async function fetchProfile() {
-        isLoading = true;
-        try {
-            const response = await fetch("/api/user/profile");
-            if (response.ok) {
-                const data = await response.json();
-                profileData = {
-                    ...data.user,
-                };
-            }
-        } catch (error) {
-            console.error("Failed to fetch profile:", error);
-        } finally {
-            isLoading = false;
+    // Update profileData when query data changes
+    $effect(() => {
+        if (profileQuery.data) {
+            const user = (profileQuery.data as any).user;
+            profileData = {
+                age: user.age?.toString() || "",
+                gender: user.gender || "",
+                weight: user.weight?.toString() || "",
+                height: user.height?.toString() || "",
+                bmi: user.bmi || "",
+                fitnessLevel: user.fitnessLevel || "",
+                equipment: user.equipment || "",
+                schedule: user.schedule || "",
+                limitations: user.limitations || "",
+                target: user.target || "",
+            };
         }
-    }
+    });
 
     async function handleUpdateProfile(e: Event) {
         e.preventDefault();
-        isSaving = true;
         errors = {};
 
         const result = profileSchema.safeParse(profileData);
 
         if (!result.success) {
             errors = result.error.flatten().fieldErrors;
-            isSaving = false;
             return;
         }
 
         try {
-            const response = await fetch("/api/user/profile", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(profileData),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                profileData.bmi = data.user.bmi;
-                isEditing = false;
-            } else {
-                console.error("Failed to update profile");
-            }
+            const data = await updateProfileMutation.mutateAsync(result.data);
+            profileData.bmi = (data as any).user.bmi || "";
+            isEditing = false;
         } catch (error) {
             console.error("Error updating profile:", error);
-        } finally {
-            isSaving = false;
         }
     }
-
-    onMount(() => {
-        fetchProfile();
-    });
 </script>
 
 <div class="space-y-6">
@@ -132,10 +119,16 @@
                     </div>
                 </Card.Header>
 
-                {#if isLoading}
+                {#if profileQuery.isLoading}
                     <Card.Content>
                         <p class="text-muted-foreground text-center py-8">
                             Loading profile...
+                        </p>
+                    </Card.Content>
+                {:else if profileQuery.isError}
+                    <Card.Content>
+                        <p class="text-destructive text-center py-8">
+                            Failed to load profile. Please try again.
                         </p>
                     </Card.Content>
                 {:else if isEditing}
@@ -225,18 +218,38 @@
                                 class="flex-1"
                                 onclick={() => {
                                     isEditing = false;
-                                    fetchProfile();
+                                    if (profileQuery.data) {
+                                        const user = (profileQuery.data as any)
+                                            .user;
+                                        profileData = {
+                                            age: user.age?.toString() || "",
+                                            gender: user.gender || "",
+                                            weight:
+                                                user.weight?.toString() || "",
+                                            height:
+                                                user.height?.toString() || "",
+                                            bmi: user.bmi || "",
+                                            fitnessLevel:
+                                                user.fitnessLevel || "",
+                                            equipment: user.equipment || "",
+                                            schedule: user.schedule || "",
+                                            limitations: user.limitations || "",
+                                            target: user.target || "",
+                                        };
+                                    }
                                 }}
-                                disabled={isSaving}
+                                disabled={updateProfileMutation.isPending}
                             >
                                 Cancel
                             </Button>
                             <Button
                                 type="submit"
                                 class="flex-1"
-                                disabled={isSaving}
+                                disabled={updateProfileMutation.isPending}
                             >
-                                {isSaving ? "Saving..." : "Save Changes"}
+                                {updateProfileMutation.isPending
+                                    ? "Saving..."
+                                    : "Save Changes"}
                             </Button>
                         </Card.Footer>
                     </form>
