@@ -3,84 +3,75 @@
     import PressHoldButton from "$lib/components/PressHoldButton.svelte";
     import { cn } from "$lib/utils";
     import * as AlertDialog from "$lib/components/ui/alert-dialog";
+    import { useExercise } from "./ctx.svelte";
 
-    let {
-        exercise,
-        activity,
-        status,
-        isLocked,
-        cooldownActive,
-        totalSets,
-        currentSet,
-        isSetInProgress,
-        timeLeft,
-        isTimerExercise,
-        onUpdateActivity,
-        onStartSet,
-        onFinishSet,
-        onStartCooldown,
-        onFullscreenStart = undefined,
-    } = $props();
+    const ctx = useExercise();
 
     // Derived button content
     let buttonContent = $derived.by(() => {
-        if (isTimerExercise && timeLeft > 0) {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = (timeLeft % 60).toString().padStart(2, "0");
+        if (ctx.isTimerExercise && ctx.timeLeft > 0) {
+            const minutes = Math.floor(ctx.timeLeft / 60);
+            const seconds = (ctx.timeLeft % 60).toString().padStart(2, "0");
             return `${minutes}:${seconds}`;
         }
-        if (isSetInProgress) {
-            return totalSets > 1 ? `Finish Set ${currentSet}` : "Finish";
+        if (ctx.isSetInProgress) {
+            return ctx.totalSets > 1
+                ? `Finish Set ${ctx.currentSet}`
+                : "Finish";
         }
-        return totalSets > 1 ? `Start Set ${currentSet}` : "Start";
+        return ctx.totalSets > 1 ? `Start Set ${ctx.currentSet}` : "Start";
     });
 
     // Derived button classes
     let buttonClasses = $derived(
         cn(
             "flex-1",
-            isSetInProgress
+            ctx.isSetInProgress
                 ? "bg-red-600 hover:bg-red-700"
                 : "bg-green-600 hover:bg-green-700",
         ),
     );
 
     function requiresHold() {
-        if (status !== "IN_PROGRESS") return false;
-        if (isTimerExercise && timeLeft > 0) return false;
+        if (ctx.status !== "IN_PROGRESS") return false;
+        if (ctx.isTimerExercise && ctx.timeLeft > 0) return false;
 
-        if (currentSet === totalSets && isSetInProgress) {
+        if (ctx.currentSet === ctx.totalSets && ctx.isSetInProgress) {
             return true;
         }
-        if (totalSets > 1) return isSetInProgress;
-        if (isTimerExercise && isSetInProgress) return true;
+        if (ctx.totalSets > 1) return ctx.isSetInProgress;
+        if (ctx.isTimerExercise && ctx.isSetInProgress) return true;
         return false;
     }
 
     async function handleMainAction() {
-        if (status === "PENDING") {
+        if (ctx.status === "PENDING") {
             // Eagerly trigger fullscreen
-            onFullscreenStart?.();
-            await onUpdateActivity(exercise.id, "IN_PROGRESS");
-        } else if (status === "IN_PROGRESS") {
+            ctx.handleFullscreenStart();
+            await ctx.handleUpdateActivity(ctx.exercise.id, "IN_PROGRESS");
+        } else if (ctx.status === "IN_PROGRESS") {
             // Also trigger fullscreen if interacting with in-progress exercise
-            onFullscreenStart?.();
+            ctx.handleFullscreenStart();
 
-            if (totalSets > 1) {
-                if (isSetInProgress) {
-                    onFinishSet();
+            if (ctx.totalSets > 1) {
+                if (ctx.isSetInProgress) {
+                    ctx.handleFinishSet();
                 } else {
-                    onStartSet();
+                    ctx.handleStartSet();
                 }
             } else {
                 // Single set flow
-                if (isTimerExercise && !isSetInProgress) {
-                    onStartSet();
+                if (ctx.isTimerExercise && !ctx.isSetInProgress) {
+                    ctx.handleStartSet();
                     return;
                 }
 
-                await onUpdateActivity(exercise.id, "COMPLETED", activity?.id);
-                onStartCooldown();
+                await ctx.handleUpdateActivity(
+                    ctx.exercise.id,
+                    "COMPLETED",
+                    ctx.activity?.id,
+                );
+                ctx.handleComplete();
             }
         }
     }
@@ -90,7 +81,7 @@
 </script>
 
 <div class="flex gap-2">
-    {#if status === "PENDING"}
+    {#if ctx.status === "PENDING"}
         <div class="flex gap-2 w-full">
             <Button class="flex-1" onclick={handleMainAction}>
                 Start Exercise
@@ -99,12 +90,16 @@
                 class="flex-1 border-yellow-500 text-yellow-700"
                 variant="outline"
                 onAction={() =>
-                    onUpdateActivity(exercise.id, "SKIPPED", activity?.id)}
+                    ctx.handleUpdateActivity(
+                        ctx.exercise.id,
+                        "SKIPPED",
+                        ctx.activity?.id,
+                    )}
             >
                 Skip
             </PressHoldButton>
         </div>
-    {:else if status === "IN_PROGRESS"}
+    {:else if ctx.status === "IN_PROGRESS"}
         <!-- Dynamic Button for Sets -->
         {#if requiresHold()}
             <PressHoldButton
@@ -128,8 +123,12 @@
             variant="outline"
             class="flex-1 border-yellow-500 text-yellow-700"
             onAction={() =>
-                onUpdateActivity(exercise.id, "SKIPPED", activity?.id)}
-            disabled={isLocked || cooldownActive}
+                ctx.handleUpdateActivity(
+                    ctx.exercise.id,
+                    "SKIPPED",
+                    ctx.activity?.id,
+                )}
+            disabled={ctx.isLocked || ctx.cooldownActive}
         >
             Skip
         </PressHoldButton>
@@ -157,10 +156,10 @@
                     <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
                     <AlertDialog.Action
                         onclick={async () => {
-                            await onUpdateActivity(
-                                exercise.id,
+                            await ctx.handleUpdateActivity(
+                                ctx.exercise.id,
                                 "PENDING",
-                                activity?.id,
+                                ctx.activity?.id,
                             );
                             showResetDialog = false;
                         }}
@@ -171,7 +170,7 @@
             </AlertDialog.Content>
         </AlertDialog.Root>
         <span class="text-sm text-muted-foreground self-center ml-2">
-            {status === "COMPLETED" ? "Done!" : "Skipped"}
+            {ctx.status === "COMPLETED" ? "Done!" : "Skipped"}
         </span>
     {/if}
 </div>

@@ -2,23 +2,20 @@
     import { Button } from "$lib/components/ui/button";
     import * as Collapsible from "$lib/components/ui/collapsible";
     import { ChevronDown } from "@lucide/svelte";
+    import { useExercise } from "./ctx.svelte";
 
-    let {
-        detail,
-        exercise,
-        initialized = true,
-        instructionsOpen = false,
-    } = $props();
+    let { instructionsOpen = false } = $props();
+    const ctx = useExercise();
 </script>
 
 <div class="space-y-4 pt-2">
-    {#if detail?.youtube_tutor_video && initialized}
+    {#if ctx.detail?.youtube_tutor_video && ctx.initialized}
         <div class="aspect-video w-full rounded-md overflow-hidden bg-gray-500">
             <iframe
                 width="100%"
                 height="100%"
-                src={detail.youtube_tutor_video}
-                title={exercise.name}
+                src={ctx.detail.youtube_tutor_video}
+                title={ctx.exercise.name}
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
@@ -27,10 +24,10 @@
     {/if}
 
     <div class="text-sm text-muted-foreground">
-        {detail?.description || "No description available."}
+        {ctx.detail?.description || "No description available."}
     </div>
 
-    {#if detail?.instructions}
+    {#if ctx.detail?.instructions}
         <Collapsible.Root class="w-full" open={instructionsOpen}>
             <Collapsible.Trigger
                 class="flex items-center justify-between w-full"
@@ -49,7 +46,7 @@
                 <ol
                     class="list-decimal list-inside space-y-2 text-sm text-muted-foreground mt-2"
                 >
-                    {#each detail.instructions as instruction}
+                    {#each ctx.detail.instructions as instruction}
                         <li class="text-sm">{instruction}</li>
                     {/each}
                 </ol>
@@ -60,16 +57,16 @@
     <div class="grid grid-cols-2 gap-4 p-4 bg-muted rounded-lg">
         <div>
             <span class="font-bold block">Sets</span>
-            {exercise.sets}
+            {ctx.exercise.sets}
         </div>
         <div>
             <span class="font-bold block">Reps</span>
-            {exercise.reps}
+            {ctx.exercise.reps}
         </div>
-        {#if exercise.notes}
+        {#if ctx.exercise.notes}
             <div class="col-span-2">
                 <span class="font-bold block">Notes</span>
-                {exercise.notes}
+                {ctx.exercise.notes}
             </div>
         {/if}
     </div>

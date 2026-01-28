@@ -1,11 +1,11 @@
 <script lang="ts">
+    import { scale, fade } from "svelte/transition";
     import * as Accordion from "$lib/components/ui/accordion";
     import * as Card from "$lib/components/ui/card";
     import { Button } from "$lib/components/ui/button";
     import { ChevronLeft, Trophy, Clock, Timer } from "@lucide/svelte";
-    import ExerciseItem from "../../ExerciseItem.svelte";
     import { useUpdateActivityMutation } from "$lib/queries/activity";
-    import { scale, fade } from "svelte/transition";
+    import ExerciseItem from "$lib/components/exercise/ExerciseItem.svelte";
 
     let { data } = $props();
     let selectedDay = $derived(data.day);

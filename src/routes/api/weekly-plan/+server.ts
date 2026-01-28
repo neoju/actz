@@ -1,8 +1,9 @@
+
 import { json } from "@sveltejs/kit";
 import Groq from "groq-sdk";
 import { z } from "zod";
 import { env } from "$env/dynamic/private";
-import exercises from "../exercises.json";
+import exercisesDB from "$lib/exercises.json";
 import prisma from "$lib/prisma";
 import { getOptimizedContext } from "$lib/utils/context-optimizer";
 
@@ -74,8 +75,8 @@ export async function POST({ request, locals }) {
     const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
 
     // Optimize context based on equipment
-    const { categories, tags, exerciseNames, count } = getOptimizedContext(equipment, exercises);
-    console.log(`Context optimized: ${exercises.length} -> ${count} exercises`);
+    const { categories, tags, exerciseNames, count } = getOptimizedContext(equipment, exercisesDB);
+    console.log(`Context optimized: ${exercisesDB.length} -> ${count} exercises`);
 
     const systemPrompt = `
         You are an elite Personal Trainer (PT) and Nutritionist.
