@@ -13,7 +13,12 @@ export async function load({ params, locals }) {
     .findUnique({
       where: { id: dayId },
       include: {
-        weeklyPlan: true,
+        weeklyPlan: {
+          select: {
+            userId: true,
+            startDate: true,
+          },
+        },
         exercises: {
           orderBy: { order: "asc" },
           include: {
@@ -38,7 +43,20 @@ export async function load({ params, locals }) {
     throw error(403, "Unauthorized");
   }
 
+  // Calculate if this day is in the past
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const planStartDate = new Date(dayPlan.weeklyPlan.startDate);
+  planStartDate.setHours(0, 0, 0, 0);
+
+  const dayDate = new Date(planStartDate);
+  dayDate.setDate(planStartDate.getDate() + (dayPlan.order - 1));
+
+  const isPastDay = dayDate < today;
+
   return {
     day: dayPlan,
+    isPastDay,
   };
 }

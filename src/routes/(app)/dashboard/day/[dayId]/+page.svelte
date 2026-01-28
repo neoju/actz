@@ -1,5 +1,6 @@
 <script lang="ts">
     import { scale, fade } from "svelte/transition";
+    import { Lock } from "@lucide/svelte";
     import * as Accordion from "$lib/components/ui/accordion";
     import * as Card from "$lib/components/ui/card";
     import { Button } from "$lib/components/ui/button";
@@ -10,6 +11,27 @@
 
     let { data } = $props();
     let selectedDay = $derived(data.day);
+    let isPastDay = $derived(data.isPastDay);
+
+    // Check if this is a rest day
+    let isRestDay = $derived(
+        selectedDay.exercises.length === 0 ||
+            selectedDay.title.toLowerCase().includes("rest") ||
+            selectedDay.dayName.toLowerCase().includes("rest"),
+    );
+
+    // Check if any exercise has been touched (started)
+    let isTouched = $derived(
+        selectedDay.exercises.some(
+            (e: any) =>
+                e.activities[0]?.status === "IN_PROGRESS" ||
+                e.activities[0]?.status === "COMPLETED" ||
+                e.activities[0]?.status === "SKIPPED",
+        ),
+    );
+
+    // Only lock if past AND untouched
+    let isPastUntouched = $derived(isPastDay && !isTouched);
 
     // svelte-ignore state_referenced_locally
     let openedExercise = $state<string | undefined>(data.day.exercises[0]?.id);
@@ -22,6 +44,15 @@
         status: string,
         activityId?: string,
     ) {
+        // Prevent updates on past untouched days only
+        if (isPastUntouched) {
+            toast.error("Cannot modify past untouched days", {
+                description:
+                    "This workout day has passed and was never started.",
+            });
+            return;
+        }
+
         // Optimistically update UI immediately
         if (status === "COMPLETED" || status === "SKIPPED") {
             // Find the exercise and update its activity status optimistically
@@ -266,18 +297,101 @@
         </div>
     </div>
 
-    <!-- Details -->
+    <!-- Banner for Past Days -->
+    {#if isPastUntouched}
+        <!-- Past Untouched - Readonly Banner -->
+        <div
+            class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-start gap-3"
+            transition:scale={{ duration: 200 }}
+        >
+            <Lock class="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
+            <div class="space-y-1">
+                <h3 class="text-sm font-semibold text-red-600">
+                    Missed Workout - Read Only
+                </h3>
+                <p class="text-xs text-muted-foreground">
+                    This workout day was never started and cannot be modified.
+                    Focus on today's workout to stay on track with your fitness
+                    goals.
+                </p>
+            </div>
+        </div>
+    {:else if isPastDay && isTouched}
+        <!-- Past Touched - Can Still Complete Banner -->
+        <div
+            class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 flex items-start gap-3"
+            transition:scale={{ duration: 200 }}
+        >
+            <Clock class="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+            <div class="space-y-1">
+                <h3 class="text-sm font-semibold text-yellow-600">
+                    In Progress - Complete Anytime
+                </h3>
+                <p class="text-xs text-muted-foreground">
+                    You started this workout. You can still complete the
+                    remaining exercises whenever you're ready.
+                </p>
+            </div>
+        </div>
+    {/if}
 
-    <Accordion.Root type="single" class="w-full" bind:value={openedExercise}>
-        {#each selectedDay.exercises as exercise, index}
-            <ExerciseItem
-                {exercise}
-                {cooldownActive}
-                isOpened={openedExercise === exercise.id}
-                isLocked={isExerciseLocked(index)}
-                onUpdateActivity={updateActivity}
-                onStartCooldown={startCooldown}
-            />
-        {/each}
-    </Accordion.Root>
+    <!-- Details -->
+    {#if isRestDay}
+        <!-- Rest Day Message -->
+        <div
+            class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-8 text-center space-y-4"
+            transition:scale={{ duration: 200 }}
+        >
+            <div class="flex justify-center">
+                <div
+                    class="h-16 w-16 rounded-full bg-blue-500/20 flex items-center justify-center"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-8 w-8 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-xl font-bold text-blue-600">Rest Day</h3>
+                <p class="text-muted-foreground">
+                    No exercises scheduled for today. Take this time to recover
+                    and prepare for your next workout.
+                </p>
+            </div>
+            <div class="pt-4">
+                <p class="text-sm text-muted-foreground italic">
+                    Rest is an essential part of your fitness journey. Use this
+                    day to stretch, hydrate, and let your muscles recover.
+                </p>
+            </div>
+        </div>
+    {:else}
+        <Accordion.Root
+            type="single"
+            class="w-full"
+            bind:value={openedExercise}
+        >
+            {#each selectedDay.exercises as exercise, index}
+                <ExerciseItem
+                    {exercise}
+                    {cooldownActive}
+                    isOpened={openedExercise === exercise.id}
+                    isLocked={isPastUntouched || isExerciseLocked(index)}
+                    onUpdateActivity={updateActivity}
+                    onStartCooldown={startCooldown}
+                />
+            {/each}
+        </Accordion.Root>
+    {/if}
 </div>
