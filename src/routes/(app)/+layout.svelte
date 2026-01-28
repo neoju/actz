@@ -8,10 +8,10 @@
     import ModeSwitcher from "$lib/components/mode-switcher.svelte";
     import { Button } from "$lib/components/ui/button";
     import * as Sheet from "$lib/components/ui/sheet";
-    import { Menu, House, Settings, LogOut } from "@lucide/svelte";
+    import { Menu, House, Settings, LogOut, BookSearch } from "@lucide/svelte";
     import { ModeWatcher } from "mode-watcher";
     import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
-    import { Toaster } from "svelte-sonner";
+    import { Toaster } from "$lib/components/ui/sonner";
     import "$lib/styles/view-transitions.css";
 
     let { children } = $props();
@@ -103,6 +103,14 @@
                             >
                                 <House class="h-5 w-5" />
                                 <span>Home</span>
+                            </Button>
+                            <Button
+                                variant="ghost"
+                                class="justify-start gap-3"
+                                onclick={() => handleNavigation("/exercises")}
+                            >
+                                <BookSearch class="h-5 w-5" />
+                                <span>Library</span>
                             </Button>
                             <Button
                                 variant="ghost"
