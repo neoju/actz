@@ -1,0 +1,167 @@
+/**
+ * View Transitions CSS
+ *
+ * Provides various animation styles for SvelteKit view transitions
+ * including fade, slide, and scale effects.
+ */
+
+/* ============================================
+   BASE TRANSITION STYLES
+   ============================================ */
+
+/* Default fade transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+/* ============================================
+   FADE ANIMATIONS
+   ============================================ */
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   SLIDE ANIMATIONS
+   ============================================ */
+
+/* Slide from right */
+.transition-slide ::view-transition-old(root) {
+  animation-name: slide-out-left;
+}
+
+.transition-slide ::view-transition-new(root) {
+  animation-name: slide-in-right;
+}
+
+@keyframes slide-out-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   SCALE ANIMATIONS
+   ============================================ */
+
+.transition-scale ::view-transition-old(root) {
+  animation-name: scale-out;
+}
+
+.transition-scale ::view-transition-new(root) {
+  animation-name: scale-in;
+}
+
+@keyframes scale-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   DURATION VARIANTS
+   ============================================ */
+
+.transition-fast ::view-transition-old(root),
+.transition-fast ::view-transition-new(root) {
+  animation-duration: 0.2s;
+}
+
+.transition-slow ::view-transition-old(root),
+.transition-slow ::view-transition-new(root) {
+  animation-duration: 0.6s;
+}
+
+/* ============================================
+   SMOOTH TRANSITIONS
+   ============================================ */
+
+/* Smoother easing for better feel */
+.transition-smooth ::view-transition-old(root),
+.transition-smooth ::view-transition-new(root) {
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   BROWSER FALLBACKS
+   ============================================ */
+
+/* Graceful degradation for browsers without support */
+@supports not (view-transition-name: none) {
+  /* Add fallback styles if needed */
+  .page-transition {
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

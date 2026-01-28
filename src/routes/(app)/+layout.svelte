@@ -2,6 +2,7 @@
     import { page } from "$app/state";
     import { browser } from "$app/environment";
     import { onMount } from "svelte";
+    import { onNavigate } from "$app/navigation";
     import { goto } from "$app/navigation";
     import { signOut } from "@auth/sveltekit/client";
     import ModeSwitcher from "$lib/components/mode-switcher.svelte";
@@ -11,9 +12,22 @@
     import { ModeWatcher } from "mode-watcher";
     import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
     import { Toaster } from "svelte-sonner";
+    import "$lib/styles/view-transitions.css";
 
     let { children } = $props();
     let isMenuOpen = $state(false);
+
+    // Enable view transitions with fade animation
+    onNavigate((navigation) => {
+        if (!document.startViewTransition) return;
+
+        return new Promise((resolve) => {
+            document.startViewTransition(async () => {
+                resolve();
+                await navigation.complete;
+            });
+        });
+    });
 
     // Initialize TanStack Query Client
     const queryClient = new QueryClient({
@@ -112,7 +126,9 @@
                 </Sheet.Root>
             </header>
 
-            <main class="flex-1 p-4 pt-20 flex flex-col overflow-auto">
+            <main
+                class="flex-1 p-4 pt-20 flex flex-col overflow-auto page-transition"
+            >
                 {@render children()}
             </main>
         </div>

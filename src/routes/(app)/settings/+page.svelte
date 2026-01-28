@@ -105,20 +105,20 @@
             generatingPlan = type;
             if (type === "week") {
                 await generateWeeklyPlanMutation.mutateAsync();
-                toast.success("Weekly plan generated!", {
-                    description: "Your new 7-day workout plan is ready.",
-                    action: {
-                        label: "View Plan",
-                        onClick: () => goto("/dashboard"),
+                toast.success("Weekly plan generated successfully!", {
+                    description: "Redirecting to dashboard...",
+                    duration: 2000,
+                    onAutoClose: () => {
+                        goto("/dashboard");
                     },
                 });
             } else {
                 await generateMonthlyPlanMutation.mutateAsync();
-                toast.success("Monthly plan generated!", {
-                    description: "Your new 4-week periodized plan is ready.",
-                    action: {
-                        label: "View Plan",
-                        onClick: () => goto("/dashboard"),
+                toast.success("Monthly plan generated successfully!", {
+                    description: "Redirecting to dashboard...",
+                    duration: 2000,
+                    onAutoClose: () => {
+                        goto("/dashboard");
                     },
                 });
             }
