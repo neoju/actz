@@ -2,7 +2,8 @@
     import { Button } from "$lib/components/ui/button";
     import * as Card from "$lib/components/ui/card";
     import { cn } from "$lib/utils";
-    import { Check, Lock } from "@lucide/svelte";
+    import { Check, Lock, Loader } from "@lucide/svelte";
+    import { navigating } from "$app/state";
 
     let { data } = $props();
     let plan = $derived(data.plan);
@@ -81,8 +82,11 @@
                         e.activities[0]?.status === "COMPLETED" ||
                         e.activities[0]?.status === "SKIPPED",
                 )}
+            {@const dayLink = `/dashboard/day/${day.id}`}
+            {@const isLoading = navigating.to?.url.pathname === dayLink}
+
             <a
-                href={isFuture ? undefined : `/dashboard/day/${day.id}`}
+                href={isFuture ? undefined : dayLink}
                 class={cn("block", isFuture && "pointer-events-none")}
             >
                 <Card.Root
@@ -91,6 +95,7 @@
                         isToday && "border-primary bg-primary/5",
                         isFuture && "opacity-60 bg-muted",
                         isCompleted && "bg-green-500/10 border-green-500/20",
+                        isLoading && "opacity-80",
                     )}
                 >
                     <Card.Header
@@ -104,7 +109,15 @@
                                 {day.dayName}
                             </Card.Description>
                         </div>
-                        {#if isCompleted}
+                        {#if isLoading}
+                            <div
+                                class="h-8 w-8 flex items-center justify-center"
+                            >
+                                <Loader
+                                    class="h-8 w-8 animate-spin text-primary"
+                                />
+                            </div>
+                        {:else if isCompleted}
                             <div
                                 class="h-8 w-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-600"
                             >
