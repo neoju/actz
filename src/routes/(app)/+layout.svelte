@@ -10,6 +10,7 @@
     import { Menu, House, Settings, LogOut } from "@lucide/svelte";
     import { ModeWatcher } from "mode-watcher";
     import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
+    import { Toaster } from "svelte-sonner";
 
     let { children } = $props();
     let isMenuOpen = $state(false);
@@ -50,6 +51,7 @@
 </script>
 
 <ModeWatcher />
+<Toaster richColors position="top-center" />
 <QueryClientProvider client={queryClient}>
     <div
         class="min-h-screen bg-muted/20 text-foreground font-sans antialiased flex justify-center"

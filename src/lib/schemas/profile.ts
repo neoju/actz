@@ -44,12 +44,20 @@ export const profileSchema = z.object({
   schedule: z.string().refine(
     (val) => {
       const parts = val.split(",").map((p) => p.trim());
-      const regex = /^\d+\s*(hr\/day|days\/week)$/i;
+      // Updated regex to support flexible time and frequency formats
+      // Valid examples:
+      // - "30 mins/day" or "30mins/day"
+      // - "1 hr/day" or "1hr/day"
+      // - "2 hours/day" or "2hours/day"
+      // - "3 days/week" or "3days/week"
+      // - "30mins/day, 3days/week" (comma-separated combinations)
+      const regex =
+        /^\d+\s*(hr|hrs|hour|hours|min|mins|minute|minutes|day|days)\s*\/\s*(day|week)$/i;
       return parts.every((part) => regex.test(part));
     },
     {
       message:
-        "Format: 'X hr/day', 'X days/week' or comma separated list (e.g. '1hr/day, 3days/week')",
+        "Format: 'X mins/day', 'X hrs/day', 'X days/week' or comma separated (e.g. '30mins/day, 3days/week')",
     },
   ),
   limitations: z

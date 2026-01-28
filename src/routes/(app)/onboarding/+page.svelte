@@ -32,9 +32,9 @@
 
     // Derive loading state
     let isLoading = $derived(
-        updateProfileMutation.isPending || 
-        generateWeeklyPlanMutation.isPending || 
-        generateMonthlyPlanMutation.isPending
+        updateProfileMutation.isPending ||
+            generateWeeklyPlanMutation.isPending ||
+            generateMonthlyPlanMutation.isPending,
     );
 
     async function handleSubmit(e: Event) {
@@ -52,7 +52,7 @@
             // Step 1: Update user profile
             loadingStep = "profile";
             await updateProfileMutation.mutateAsync(result.data);
-            
+
             // Advance to selection step
             step = "selection";
         } catch (error) {
@@ -156,7 +156,7 @@
                 <FormInput
                     id="schedule"
                     label="Schedule"
-                    placeholder="1 hr/day, 3 days/week"
+                    placeholder="30 mins/day, 3 days/week"
                     bind:value={profileData.schedule}
                     error={errors.schedule?.[0]}
                 />
@@ -193,24 +193,34 @@
     {:else}
         <div class="grid gap-4 md:grid-cols-2">
             <!-- Monthly Plan Option (Recommended) -->
-            <button 
+            <button
                 class="text-left w-full disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading}
                 onclick={() => handleGeneratePlan("month")}
             >
-                <Card.Root class="h-full hover:border-primary transition-colors cursor-pointer relative overflow-hidden border-2 {selectingPlan === 'month' ? 'border-primary' : 'border-border'}">
-                    <div class="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold rounded-bl-lg z-10">
+                <Card.Root
+                    class="h-full hover:border-primary transition-colors cursor-pointer relative overflow-hidden border-2 {selectingPlan ===
+                    'month'
+                        ? 'border-primary'
+                        : 'border-border'}"
+                >
+                    <div
+                        class="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold rounded-bl-lg z-10"
+                    >
                         RECOMMENDED
                     </div>
                     <Card.Header>
                         <div class="flex items-center gap-2 mb-2">
-                             <div class="p-2 rounded-lg bg-primary/10 text-primary">
+                            <div
+                                class="p-2 rounded-lg bg-primary/10 text-primary"
+                            >
                                 <CalendarRange class="w-6 h-6" />
-                             </div>
-                             <Card.Title>Monthly Plan</Card.Title>
+                            </div>
+                            <Card.Title>Monthly Plan</Card.Title>
                         </div>
                         <Card.Description>
-                            A comprehensive 4-week progression designed to build habits.
+                            A comprehensive 4-week progression designed to build
+                            habits.
                         </Card.Description>
                     </Card.Header>
                     <Card.Content>
@@ -228,7 +238,11 @@
                                 Built-in Deload Week
                             </li>
                         </ul>
-                        <Button class="w-full mt-6" variant="default" disabled={isLoading}>
+                        <Button
+                            class="w-full mt-6"
+                            variant="default"
+                            disabled={isLoading}
+                        >
                             {#if selectingPlan === "month"}
                                 Generating Month...
                             {:else}
@@ -240,18 +254,25 @@
             </button>
 
             <!-- Weekly Plan Option -->
-            <button 
+            <button
                 class="text-left w-full disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading}
                 onclick={() => handleGeneratePlan("week")}
             >
-                <Card.Root class="h-full hover:border-primary transition-colors cursor-pointer border-2 {selectingPlan === 'week' ? 'border-primary' : 'border-border'}">
+                <Card.Root
+                    class="h-full hover:border-primary transition-colors cursor-pointer border-2 {selectingPlan ===
+                    'week'
+                        ? 'border-primary'
+                        : 'border-border'}"
+                >
                     <Card.Header>
                         <div class="flex items-center gap-2 mb-2">
-                             <div class="p-2 rounded-lg bg-secondary text-secondary-foreground">
+                            <div
+                                class="p-2 rounded-lg bg-secondary text-secondary-foreground"
+                            >
                                 <CalendarDays class="w-6 h-6" />
-                             </div>
-                             <Card.Title>Weekly Plan</Card.Title>
+                            </div>
+                            <Card.Title>Weekly Plan</Card.Title>
                         </div>
                         <Card.Description>
                             Focus on one week at a time. Ideal for flexibility.
@@ -272,7 +293,11 @@
                                 Flexible Commitment
                             </li>
                         </ul>
-                        <Button class="w-full mt-6" variant="secondary" disabled={isLoading}>
+                        <Button
+                            class="w-full mt-6"
+                            variant="secondary"
+                            disabled={isLoading}
+                        >
                             {#if selectingPlan === "week"}
                                 Generating Week...
                             {:else}

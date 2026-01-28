@@ -7,7 +7,12 @@
         FormSelect,
         FormTextarea,
     } from "$lib/components/ui/form";
-    import { ArrowLeft, CalendarRange, CalendarDays, RefreshCw } from "@lucide/svelte";
+    import {
+        ArrowLeft,
+        CalendarRange,
+        CalendarDays,
+        RefreshCw,
+    } from "@lucide/svelte";
     import {
         profileSchema,
         equipmentOptions,
@@ -21,6 +26,7 @@
     import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
     import { useGenerateMonthlyPlanMutation } from "$lib/queries/monthly-plan";
     import { toast } from "svelte-sonner";
+    import { goto } from "$app/navigation";
 
     // Use TanStack Query
     const profileQuery = useProfileQuery();
@@ -72,6 +78,9 @@
 
         if (!result.success) {
             errors = result.error.flatten().fieldErrors;
+            toast.error("Validation failed", {
+                description: "Please check your inputs and try again.",
+            });
             return;
         }
 
@@ -79,8 +88,15 @@
             const data = await updateProfileMutation.mutateAsync(result.data);
             profileData.bmi = (data as any).user.bmi || "";
             isEditing = false;
+            toast.success("Profile updated successfully!", {
+                description: "Your changes have been saved.",
+            });
         } catch (error) {
             console.error("Error updating profile:", error);
+            toast.error("Failed to update profile", {
+                description:
+                    "Please try again or contact support if the issue persists.",
+            });
         }
     }
 
@@ -89,13 +105,30 @@
             generatingPlan = type;
             if (type === "week") {
                 await generateWeeklyPlanMutation.mutateAsync();
+                toast.success("Weekly plan generated!", {
+                    description: "Your new 7-day workout plan is ready.",
+                    action: {
+                        label: "View Plan",
+                        onClick: () => goto("/dashboard"),
+                    },
+                });
             } else {
                 await generateMonthlyPlanMutation.mutateAsync();
+                toast.success("Monthly plan generated!", {
+                    description: "Your new 4-week periodized plan is ready.",
+                    action: {
+                        label: "View Plan",
+                        onClick: () => goto("/dashboard"),
+                    },
+                });
             }
-            toast.success("Plan regenerated successfully!");
         } catch (error) {
             console.error("Error regenerating plan:", error);
-            toast.error("Failed to regenerate plan.");
+            const planType = type === "week" ? "weekly" : "monthly";
+            toast.error(`Failed to generate ${planType} plan`, {
+                description:
+                    "Please try again or contact support if the issue persists.",
+            });
         } finally {
             generatingPlan = null;
         }
@@ -212,7 +245,7 @@
                             <FormInput
                                 id="schedule"
                                 label="Schedule"
-                                placeholder="1 hr/day, 3 days/week"
+                                placeholder="30 mins/day, 3 days/week"
                                 bind:value={profileData.schedule}
                                 error={errors.schedule?.[0]}
                             />
@@ -375,16 +408,17 @@
 
         <Tabs.Content value="plans" class="mt-4">
             <div class="grid gap-4">
-                 <Card.Root>
+                <Card.Root>
                     <Card.Header>
                         <Card.Title>Weekly Plan</Card.Title>
                         <Card.Description>
-                            Generate a new 7-day workout plan based on your current profile.
+                            Generate a new 7-day workout plan based on your
+                            current profile.
                         </Card.Description>
                     </Card.Header>
                     <Card.Content>
-                        <Button 
-                            variant="secondary" 
+                        <Button
+                            variant="secondary"
                             class="w-full"
                             disabled={generatingPlan !== null}
                             onclick={() => handleRegeneratePlan("week")}
@@ -398,17 +432,18 @@
                             {/if}
                         </Button>
                     </Card.Content>
-                 </Card.Root>
+                </Card.Root>
 
-                 <Card.Root>
+                <Card.Root>
                     <Card.Header>
                         <Card.Title>Monthly Plan</Card.Title>
                         <Card.Description>
-                            Generate a full 4-week periodized plan (Recommended).
+                            Generate a full 4-week periodized plan
+                            (Recommended).
                         </Card.Description>
                     </Card.Header>
                     <Card.Content>
-                         <Button 
+                        <Button
                             class="w-full"
                             disabled={generatingPlan !== null}
                             onclick={() => handleRegeneratePlan("month")}
@@ -422,7 +457,7 @@
                             {/if}
                         </Button>
                     </Card.Content>
-                 </Card.Root>
+                </Card.Root>
             </div>
         </Tabs.Content>
     </Tabs.Root>
