@@ -26,6 +26,7 @@
     let buttonClasses = $derived(
         cn(
             "flex-1",
+            ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
             ctx.isSetInProgress
                 ? "bg-red-600 hover:bg-red-700"
                 : "bg-green-600 hover:bg-green-700",
@@ -44,11 +45,12 @@
         return false;
     }
 
-    async function handleMainAction() {
+    function handleMainAction() {
         if (ctx.status === "PENDING") {
             // Eagerly trigger fullscreen
             ctx.handleFullscreenStart();
-            await ctx.handleUpdateActivity(ctx.exercise.id, "IN_PROGRESS");
+            // Non-blocking: Fire and forget
+            ctx.handleUpdateActivity(ctx.exercise.id, "IN_PROGRESS");
         } else if (ctx.status === "IN_PROGRESS") {
             // Also trigger fullscreen if interacting with in-progress exercise
             ctx.handleFullscreenStart();
@@ -66,7 +68,8 @@
                     return;
                 }
 
-                await ctx.handleUpdateActivity(
+                // Non-blocking: Fire and forget
+                ctx.handleUpdateActivity(
                     ctx.exercise.id,
                     "COMPLETED",
                     ctx.activity?.id,
@@ -83,11 +86,20 @@
 <div class="flex gap-2">
     {#if ctx.status === "PENDING"}
         <div class="flex gap-2 w-full">
-            <Button class="flex-1" onclick={handleMainAction}>
+            <Button
+                class={cn(
+                    "flex-1",
+                    ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
+                )}
+                onclick={handleMainAction}
+            >
                 Start Exercise
             </Button>
             <PressHoldButton
-                class="flex-1 border-yellow-500 text-yellow-700"
+                class={cn(
+                    "flex-1 border-yellow-500 text-yellow-700",
+                    ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
+                )}
                 variant="outline"
                 onAction={() =>
                     ctx.handleUpdateActivity(
@@ -121,7 +133,10 @@
 
         <PressHoldButton
             variant="outline"
-            class="flex-1 border-yellow-500 text-yellow-700"
+            class={cn(
+                "flex-1 border-yellow-500 text-yellow-700",
+                ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
+            )}
             onAction={() =>
                 ctx.handleUpdateActivity(
                     ctx.exercise.id,
@@ -155,8 +170,9 @@
                 <AlertDialog.Footer>
                     <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
                     <AlertDialog.Action
-                        onclick={async () => {
-                            await ctx.handleUpdateActivity(
+                        onclick={() => {
+                            // Non-blocking: Fire and forget
+                            ctx.handleUpdateActivity(
                                 ctx.exercise.id,
                                 "PENDING",
                                 ctx.activity?.id,

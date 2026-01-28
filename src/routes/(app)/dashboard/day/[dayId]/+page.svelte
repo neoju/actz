@@ -6,6 +6,7 @@
     import { ChevronLeft, Trophy, Clock, Timer } from "@lucide/svelte";
     import { useUpdateActivityMutation } from "$lib/queries/activity";
     import ExerciseItem from "$lib/components/exercise/ExerciseItem.svelte";
+    import { toast } from "svelte-sonner";
 
     let { data } = $props();
     let selectedDay = $derived(data.day);
@@ -16,21 +17,45 @@
     // Use TanStack Query mutation for updating activity
     const updateActivityMutation = useUpdateActivityMutation();
 
-    async function updateActivity(
+    function updateActivity(
         plannedExerciseId: string,
         status: string,
         activityId?: string,
     ) {
-        await updateActivityMutation.mutateAsync({
-            plannedExerciseId,
-            status,
-            activityId,
-        });
-
-        // Open next exercise
+        // Optimistically update UI immediately
         if (status === "COMPLETED" || status === "SKIPPED") {
-            openedExercise = selectedDay.exercises[maxReachedIndex + 1]?.id;
+            // Find the exercise and update its activity status optimistically
+            const exerciseIndex = selectedDay.exercises.findIndex(
+                (ex) => ex.id === plannedExerciseId,
+            );
+
+            if (exerciseIndex !== -1) {
+                const exercise = selectedDay.exercises[exerciseIndex];
+
+                // Optimistically update the activity status in the UI
+                if (exercise.activities && exercise.activities[0]) {
+                    exercise.activities[0].status = status;
+                }
+
+                // Trigger UI update by advancing to next exercise
+                openedExercise = selectedDay.exercises[maxReachedIndex + 1]?.id;
+            }
         }
+
+        // Fire API call in background without waiting
+        updateActivityMutation
+            .mutateAsync({
+                plannedExerciseId,
+                status,
+                activityId,
+            })
+            .catch((error) => {
+                console.error("Failed to update activity:", error);
+                toast.error("Failed to update exercise", {
+                    description:
+                        "Your progress may not be saved. Please try again.",
+                });
+            });
     }
 
     let maxReachedIndex = $state(0);
