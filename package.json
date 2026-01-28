@@ -37,13 +37,14 @@
     "@auth/core": "^0.41.1",
     "@auth/prisma-adapter": "^2.11.1",
     "@auth/sveltekit": "^1.11.1",
-    "@google/genai": "^1.38.0",
     "@prisma/adapter-pg": "^7.3.0",
     "@prisma/client": "^7.3.0",
     "@tanstack/svelte-query": "^6.0.18",
     "dotenv": "^17.2.3",
+    "groq-sdk": "^0.37.0",
     "mode-watcher": "^1.1.0",
     "pg": "^8.17.2",
+    "svelte-sonner": "^1.0.7",
     "zod": "^4.3.6"
   }
 }

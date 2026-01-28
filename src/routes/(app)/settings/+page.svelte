@@ -7,7 +7,7 @@
         FormSelect,
         FormTextarea,
     } from "$lib/components/ui/form";
-    import { ArrowLeft } from "@lucide/svelte";
+    import { ArrowLeft, CalendarRange, CalendarDays, RefreshCw } from "@lucide/svelte";
     import {
         profileSchema,
         equipmentOptions,
@@ -18,10 +18,15 @@
         useProfileQuery,
         useUpdateProfileMutation,
     } from "$lib/queries/profile";
+    import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
+    import { useGenerateMonthlyPlanMutation } from "$lib/queries/monthly-plan";
+    import { toast } from "svelte-sonner";
 
-    // Use TanStack Query for profile data
+    // Use TanStack Query
     const profileQuery = useProfileQuery();
     const updateProfileMutation = useUpdateProfileMutation();
+    const generateWeeklyPlanMutation = useGenerateWeeklyPlanMutation();
+    const generateMonthlyPlanMutation = useGenerateMonthlyPlanMutation();
 
     let profileData = $state({
         age: "",
@@ -37,6 +42,7 @@
     });
 
     let isEditing = $state(false);
+    let generatingPlan = $state<"week" | "month" | null>(null);
     let errors: Record<string, string[] | undefined> = $state({});
 
     // Update profileData when query data changes
@@ -77,6 +83,23 @@
             console.error("Error updating profile:", error);
         }
     }
+
+    async function handleRegeneratePlan(type: "week" | "month") {
+        try {
+            generatingPlan = type;
+            if (type === "week") {
+                await generateWeeklyPlanMutation.mutateAsync();
+            } else {
+                await generateMonthlyPlanMutation.mutateAsync();
+            }
+            toast.success("Plan regenerated successfully!");
+        } catch (error) {
+            console.error("Error regenerating plan:", error);
+            toast.error("Failed to regenerate plan.");
+        } finally {
+            generatingPlan = null;
+        }
+    }
 </script>
 
 <div class="space-y-6">
@@ -90,7 +113,7 @@
     <Tabs.Root value="profile" class="w-full">
         <Tabs.List class="w-full grid grid-cols-2">
             <Tabs.Trigger value="profile">Profile</Tabs.Trigger>
-            <Tabs.Trigger value="other">Other</Tabs.Trigger>
+            <Tabs.Trigger value="plans">Plans</Tabs.Trigger>
         </Tabs.List>
 
         <Tabs.Content value="profile" class="mt-4">
@@ -350,20 +373,57 @@
             </Card.Root>
         </Tabs.Content>
 
-        <Tabs.Content value="other" class="mt-4">
-            <Card.Root>
-                <Card.Header>
-                    <Card.Title>Other Settings</Card.Title>
-                    <Card.Description>
-                        Additional settings will be available here soon
-                    </Card.Description>
-                </Card.Header>
-                <Card.Content>
-                    <p class="text-muted-foreground text-center py-8">
-                        Coming soon...
-                    </p>
-                </Card.Content>
-            </Card.Root>
+        <Tabs.Content value="plans" class="mt-4">
+            <div class="grid gap-4">
+                 <Card.Root>
+                    <Card.Header>
+                        <Card.Title>Weekly Plan</Card.Title>
+                        <Card.Description>
+                            Generate a new 7-day workout plan based on your current profile.
+                        </Card.Description>
+                    </Card.Header>
+                    <Card.Content>
+                        <Button 
+                            variant="secondary" 
+                            class="w-full"
+                            disabled={generatingPlan !== null}
+                            onclick={() => handleRegeneratePlan("week")}
+                        >
+                            {#if generatingPlan === "week"}
+                                <RefreshCw class="mr-2 h-4 w-4 animate-spin" />
+                                Generating...
+                            {:else}
+                                <RefreshCw class="mr-2 h-4 w-4" />
+                                Generate New Weekly Plan
+                            {/if}
+                        </Button>
+                    </Card.Content>
+                 </Card.Root>
+
+                 <Card.Root>
+                    <Card.Header>
+                        <Card.Title>Monthly Plan</Card.Title>
+                        <Card.Description>
+                            Generate a full 4-week periodized plan (Recommended).
+                        </Card.Description>
+                    </Card.Header>
+                    <Card.Content>
+                         <Button 
+                            class="w-full"
+                            disabled={generatingPlan !== null}
+                            onclick={() => handleRegeneratePlan("month")}
+                        >
+                            {#if generatingPlan === "month"}
+                                <RefreshCw class="mr-2 h-4 w-4 animate-spin" />
+                                Generating...
+                            {:else}
+                                <RefreshCw class="mr-2 h-4 w-4" />
+                                Generate New Monthly Plan
+                            {/if}
+                        </Button>
+                    </Card.Content>
+                 </Card.Root>
+            </div>
         </Tabs.Content>
     </Tabs.Root>
 </div>
