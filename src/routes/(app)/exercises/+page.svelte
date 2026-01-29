@@ -136,7 +136,7 @@
 
 <div class="space-y-4 pb-8">
     <!-- Header -->
-    <div class="space-y-2 pt-4">
+    <div class="space-y-2 pt-4" data-tour="library-header">
         <h1 class="text-3xl font-bold tracking-tight">Exercise Library</h1>
         <p class="text-sm text-muted-foreground">
             Browse and learn about all available exercises
@@ -144,7 +144,7 @@
     </div>
 
     <!-- Search Bar -->
-    <div class="relative">
+    <div class="relative" data-tour="library-search">
         <SearchIcon
             class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
         />
@@ -173,6 +173,7 @@
             size="sm"
             onclick={() => (showFilters = !showFilters)}
             class="gap-2"
+            data-tour="library-filters"
         >
             <FilterIcon class="h-4 w-4" />
             Filters
@@ -297,6 +298,9 @@
                         "transition-all hover:shadow-md",
                         isExpanded && "shadow-lg border-primary/50",
                     )}
+                    data-tour={filteredExercises.indexOf(exercise) === 0
+                        ? "library-exercise-card"
+                        : undefined}
                 >
                     <button
                         onclick={() => toggleExercise(exercise.name)}

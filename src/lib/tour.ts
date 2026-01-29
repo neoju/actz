@@ -78,7 +78,7 @@ const driverConfig = {
   smoothScroll: true,
   allowClose: true,
   overlayClickNext: false,
-  disableActiveInteraction: false,
+  disableActiveInteraction: true,
   popoverClass: "actz-tour-popover",
   onDestroyStarted: () => {
     // Mark tour as dismissed if user closes it before completion
@@ -142,32 +142,24 @@ export function startDashboardTour() {
         popover: {
           title: "✅ Ready to Start?",
           description:
-            "Great! Now let's see how to complete your workout. Click 'Done' to continue to a workout day.",
+            "Great! Now let's see how to complete your workout. Click 'Start' to continue to a workout day.",
+          doneBtnText: "Start",
+          onNextClick: () => {
+            // Navigate to today's workout day
+            const todayCard = document.querySelector(
+              '[data-tour="today-card"]',
+            ) as HTMLAnchorElement;
+            if (todayCard && todayCard.href) {
+              goto(todayCard.href).then(() => {
+                setTimeout(() => {
+                  startDayTour();
+                }, 500);
+              });
+            }
+          },
         },
       },
     ],
-    onDestroyed: (element, step, options) => {
-      // Check if tour was completed (not just closed)
-      const driver = options.driver;
-      const config = options.config;
-      if (
-        driver &&
-        config.steps &&
-        step === config.steps[config.steps.length - 1]
-      ) {
-        // User reached the last step of this section, continue to next
-        const todayCard = document.querySelector(
-          '[data-tour="today-card"]',
-        ) as HTMLAnchorElement;
-        if (todayCard && todayCard.href) {
-          goto(todayCard.href).then(() => {
-            setTimeout(() => {
-              startDayTour();
-            }, 500);
-          });
-        }
-      }
-    },
     onDestroyStarted: undefined, // Override global setting for this tour section
   });
 
@@ -231,43 +223,26 @@ export function startDayTour() {
         },
       },
       {
-        element: '[data-tour="reset-button"]',
-        popover: {
-          title: "🔄 Reset Exercise",
-          description:
-            "Made a mistake? Use the 'Reset' button to set an exercise back to pending status so you can do it again.",
-          side: "bottom",
-          align: "start",
-        },
-      },
-      {
         popover: {
           title: "📱 Almost Done!",
           description:
-            "Now let's check out the settings and exercise library. Click 'Done' to continue.",
+            "Now let's check out the settings and exercise library. Click 'Next' to continue.",
+          nextBtnText: "Next",
+          onNextClick: () => {
+            // Open menu
+            const menuButton = document.querySelector(
+              '[data-tour="menu-button"]',
+            ) as HTMLButtonElement;
+            if (menuButton) {
+              menuButton.click();
+              setTimeout(() => {
+                startMenuTour();
+              }, 300);
+            }
+          },
         },
       },
     ],
-    onDestroyed: (element, step, options) => {
-      const driver = options.driver;
-      const config = options.config;
-      if (
-        driver &&
-        config.steps &&
-        step === config.steps[config.steps.length - 1]
-      ) {
-        // Continue to next section
-        const menuButton = document.querySelector(
-          '[data-tour="menu-button"]',
-        ) as HTMLButtonElement;
-        if (menuButton) {
-          menuButton.click();
-          setTimeout(() => {
-            startMenuTour();
-          }, 300);
-        }
-      }
-    },
     onDestroyStarted: undefined,
   });
 
@@ -294,23 +269,20 @@ export function startMenuTour() {
             "This is where you manage your profile and generate new workout plans. Let's check it out!",
           side: "left",
           align: "start",
-        },
-      },
-      {
-        popover: {
-          title: "Going to Settings...",
-          description: "Click 'Done' to navigate to settings.",
-        },
-        onDeselected: () => {
-          const settingsLink = document.querySelector(
-            '[data-tour="settings-link"]',
-          ) as HTMLElement;
-          if (settingsLink) {
-            settingsLink.click();
-            setTimeout(() => {
-              startSettingsTour();
-            }, 500);
-          }
+          onNextClick: () => {
+            const settingsLink = document.querySelector(
+              '[data-tour="settings-link"]',
+            ) as HTMLElement;
+            if (settingsLink) {
+              // close the menu
+              settingsLink.click();
+              goto("/settings").then(() => {
+                setTimeout(() => {
+                  startSettingsTour();
+                }, 500);
+              });
+            }
+          },
         },
       },
     ],
@@ -368,22 +340,19 @@ export function startSettingsTour() {
         popover: {
           title: "📚 One More Thing...",
           description: "Let's check out the exercise library!",
-        },
-        onDeselected: () => {
-          // Navigate back and open menu again
-          goto("/dashboard").then(() => {
-            setTimeout(() => {
-              const menuButton = document.querySelector(
-                '[data-tour="menu-button"]',
-              ) as HTMLButtonElement;
-              if (menuButton) {
-                menuButton.click();
-                setTimeout(() => {
-                  startLibraryTour();
-                }, 300);
-              }
-            }, 500);
-          });
+          nextBtnText: "Take me there",
+          onNextClick: () => {
+            const menuButton = document.querySelector(
+              '[data-tour="menu-button"]',
+            ) as HTMLButtonElement;
+            if (menuButton) {
+              // close the menu
+              menuButton.click();
+              setTimeout(() => {
+                startLibraryTour();
+              }, 300);
+            }
+          },
         },
       },
     ],
@@ -397,10 +366,13 @@ export function startSettingsTour() {
  * Library Tour
  *
  * Final step of the guided tour. Shows users:
- * - Exercise library location
+ * - Exercise library location and navigation
+ * - Search functionality
+ * - Filter options
+ * - Exercise card details
  * - Completion message
  *
- * On completion, marks tour as completed and closes the menu.
+ * On completion, marks tour as completed and navigates to dashboard.
  */
 export function startLibraryTour() {
   const driverObj = driver({
@@ -411,8 +383,76 @@ export function startLibraryTour() {
         popover: {
           title: "📚 Exercise Library",
           description:
-            "Browse our comprehensive exercise library to learn new movements and see detailed instructions.",
+            "Browse our comprehensive exercise library to learn new movements and see detailed instructions. Let's explore it!",
           side: "left",
+          align: "start",
+          onNextClick: () => {
+            // Navigate to library page
+            const libraryLink = document.querySelector(
+              '[data-tour="library-link"]',
+            ) as HTMLElement;
+            if (libraryLink) {
+              libraryLink.click();
+              setTimeout(() => {
+                startLibraryPageTour();
+              }, 500);
+            }
+          },
+        },
+      },
+    ],
+    onDestroyStarted: undefined,
+  });
+
+  driverObj.drive();
+}
+
+/**
+ * Library Page Tour
+ *
+ * Detailed tour of the Exercise Library page showing all features.
+ */
+export function startLibraryPageTour() {
+  const driverObj = driver({
+    ...driverConfig,
+    steps: [
+      {
+        element: '[data-tour="library-header"]',
+        popover: {
+          title: "📖 Exercise Library",
+          description:
+            "Welcome to the exercise library! Here you can browse all available exercises, learn proper form, and discover new movements.",
+          side: "bottom",
+          align: "start",
+        },
+      },
+      {
+        element: '[data-tour="library-search"]',
+        popover: {
+          title: "🔍 Search Exercises",
+          description:
+            "Use the search bar to quickly find exercises by name, tags, or category. Try searching for 'push up' or 'legs'.",
+          side: "bottom",
+          align: "start",
+        },
+      },
+      {
+        element: '[data-tour="library-filters"]',
+        popover: {
+          title: "🎛️ Filter Options",
+          description:
+            "Click here to filter exercises by category (Chest, Legs, etc.) or difficulty level (Beginner, Intermediate, Advanced).",
+          side: "bottom",
+          align: "start",
+        },
+      },
+      {
+        element: '[data-tour="library-exercise-card"]',
+        popover: {
+          title: "💪 Exercise Details",
+          description:
+            "Click on any exercise card to expand it and see detailed instructions, proper form tips, equipment needed, and video tutorials.",
+          side: "top",
           align: "start",
         },
       },
@@ -420,7 +460,7 @@ export function startLibraryTour() {
         popover: {
           title: "🎉 Tour Complete!",
           description:
-            "You're all set! Remember to update your profile information for the most personalized workout plans. Now go crush your workouts! 💪",
+            "You're all set! Remember to update your profile information in Settings for the most personalized workout plans. Now go crush your workouts! 💪",
         },
       },
     ],
@@ -432,17 +472,10 @@ export function startLibraryTour() {
         config.steps &&
         step === config.steps[config.steps.length - 1]
       ) {
-        // Mark tour as completed only if user finished it
+        // Mark tour as completed
         markTourAsCompleted();
       }
-      // Close menu and navigate to dashboard
-      const sheet = document.querySelector('[data-tour="menu-sheet"]');
-      if (sheet) {
-        const closeButton = document.querySelector(
-          '[aria-label="Close"]',
-        ) as HTMLButtonElement;
-        if (closeButton) closeButton.click();
-      }
+      // Navigate back to dashboard
       goto("/dashboard");
     },
     onDestroyStarted: undefined,
@@ -461,8 +494,9 @@ export function startLibraryTour() {
  * 1. Dashboard Tour → Day View Tour
  * 2. Day View Tour → Menu Tour
  * 3. Menu Tour → Settings Tour
- * 4. Settings Tour → Library Tour
- * 5. Library Tour → Completion
+ * 4. Settings Tour → Library Tour (menu link)
+ * 5. Library Tour → Library Page Tour (with detailed steps)
+ * 6. Library Page Tour → Completion
  *
  * @example
  * import { startCompleteTour } from "$lib/tour";
