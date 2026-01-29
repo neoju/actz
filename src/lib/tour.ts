@@ -14,26 +14,52 @@ import "$lib/styles/tour.css";
 import { goto } from "$app/navigation";
 
 // Tour state management
-const TOUR_STORAGE_KEY = "actz_tour_completed";
+const TOUR_STORAGE_KEY = "actz_tour_status";
+const TOUR_SESSION_KEY = "actz_tour_shown_this_session";
 
 /**
- * Check if the user has completed the guided tour
- * @returns {boolean} True if tour was completed, false otherwise
+ * Check if the tour should be shown
+ * @returns {boolean} True if tour should be shown, false otherwise
  */
-
-export function hasCompletedTour(): boolean {
+export function shouldShowTour(): boolean {
   if (typeof window === "undefined") return false;
-  return localStorage.getItem(TOUR_STORAGE_KEY) === "true";
+
+  // Check if user has dismissed or completed the tour
+  const tourStatus = localStorage.getItem(TOUR_STORAGE_KEY);
+  if (tourStatus === "completed" || tourStatus === "dismissed") {
+    return false;
+  }
+
+  // Check if we've already shown it this session
+  const shownThisSession = sessionStorage.getItem(TOUR_SESSION_KEY);
+  if (shownThisSession === "true") {
+    return false;
+  }
+
+  return true;
 }
 
 export function markTourAsCompleted(): void {
   if (typeof window === "undefined") return;
-  localStorage.setItem(TOUR_STORAGE_KEY, "true");
+  localStorage.setItem(TOUR_STORAGE_KEY, "completed");
+  sessionStorage.setItem(TOUR_SESSION_KEY, "true");
+}
+
+export function markTourAsDismissed(): void {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(TOUR_STORAGE_KEY, "dismissed");
+  sessionStorage.setItem(TOUR_SESSION_KEY, "true");
+}
+
+export function markTourShownThisSession(): void {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(TOUR_SESSION_KEY, "true");
 }
 
 export function resetTour(): void {
   if (typeof window === "undefined") return;
   localStorage.removeItem(TOUR_STORAGE_KEY);
+  sessionStorage.removeItem(TOUR_SESSION_KEY);
 }
 
 /**
@@ -54,6 +80,10 @@ const driverConfig = {
   overlayClickNext: false,
   disableActiveInteraction: false,
   popoverClass: "actz-tour-popover",
+  onDestroyStarted: () => {
+    // Mark tour as dismissed if user closes it before completion
+    markTourAsDismissed();
+  },
 };
 
 /**
@@ -116,20 +146,29 @@ export function startDashboardTour() {
         },
       },
     ],
-    onDestroyed: () => {
-      // After dashboard tour, navigate to day view and start day tour
-      const todayCard = document.querySelector(
-        '[data-tour="today-card"]',
-      ) as HTMLAnchorElement;
-      if (todayCard && todayCard.href) {
-        goto(todayCard.href).then(() => {
-          // Wait for navigation and then start day tour
-          setTimeout(() => {
-            startDayTour();
-          }, 500);
-        });
+    onDestroyed: (element, step, options) => {
+      // Check if tour was completed (not just closed)
+      const driver = options.driver;
+      const config = options.config;
+      if (
+        driver &&
+        config.steps &&
+        step === config.steps[config.steps.length - 1]
+      ) {
+        // User reached the last step of this section, continue to next
+        const todayCard = document.querySelector(
+          '[data-tour="today-card"]',
+        ) as HTMLAnchorElement;
+        if (todayCard && todayCard.href) {
+          goto(todayCard.href).then(() => {
+            setTimeout(() => {
+              startDayTour();
+            }, 500);
+          });
+        }
       }
     },
+    onDestroyStarted: undefined, // Override global setting for this tour section
   });
 
   driverObj.drive();
@@ -209,18 +248,27 @@ export function startDayTour() {
         },
       },
     ],
-    onDestroyed: () => {
-      // After day tour, open menu and continue tour
-      const menuButton = document.querySelector(
-        '[data-tour="menu-button"]',
-      ) as HTMLButtonElement;
-      if (menuButton) {
-        menuButton.click();
-        setTimeout(() => {
-          startMenuTour();
-        }, 300);
+    onDestroyed: (element, step, options) => {
+      const driver = options.driver;
+      const config = options.config;
+      if (
+        driver &&
+        config.steps &&
+        step === config.steps[config.steps.length - 1]
+      ) {
+        // Continue to next section
+        const menuButton = document.querySelector(
+          '[data-tour="menu-button"]',
+        ) as HTMLButtonElement;
+        if (menuButton) {
+          menuButton.click();
+          setTimeout(() => {
+            startMenuTour();
+          }, 300);
+        }
       }
     },
+    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -266,6 +314,7 @@ export function startMenuTour() {
         },
       },
     ],
+    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -338,6 +387,7 @@ export function startSettingsTour() {
         },
       },
     ],
+    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -374,13 +424,20 @@ export function startLibraryTour() {
         },
       },
     ],
-    onDestroyed: () => {
-      // Mark tour as completed
-      markTourAsCompleted();
+    onDestroyed: (element, step, options) => {
+      const driver = options.driver;
+      const config = options.config;
+      if (
+        driver &&
+        config.steps &&
+        step === config.steps[config.steps.length - 1]
+      ) {
+        // Mark tour as completed only if user finished it
+        markTourAsCompleted();
+      }
       // Close menu and navigate to dashboard
       const sheet = document.querySelector('[data-tour="menu-sheet"]');
       if (sheet) {
-        // Close sheet by clicking overlay or finding close button
         const closeButton = document.querySelector(
           '[aria-label="Close"]',
         ) as HTMLButtonElement;
@@ -388,6 +445,7 @@ export function startLibraryTour() {
       }
       goto("/dashboard");
     },
+    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -411,5 +469,6 @@ export function startLibraryTour() {
  * startCompleteTour();
  */
 export function startCompleteTour() {
+  markTourShownThisSession();
   startDashboardTour();
 }

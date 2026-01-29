@@ -8,11 +8,19 @@
     import ModeSwitcher from "$lib/components/mode-switcher.svelte";
     import { Button } from "$lib/components/ui/button";
     import * as Sheet from "$lib/components/ui/sheet";
-    import { Menu, House, Settings, LogOut, BookSearch } from "@lucide/svelte";
+    import {
+        Menu,
+        House,
+        Settings,
+        LogOut,
+        BookSearch,
+        MapPin,
+    } from "@lucide/svelte";
     import { ModeWatcher } from "mode-watcher";
     import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
     import { Toaster } from "$lib/components/ui/sonner";
     import "$lib/styles/view-transitions.css";
+    import { resetTour, startCompleteTour } from "$lib/tour";
 
     let { children } = $props();
     let isMenuOpen = $state(false);
@@ -56,6 +64,16 @@
     function handleNavigation(path: string) {
         isMenuOpen = false;
         goto(path);
+    }
+
+    function handleRestartTour() {
+        isMenuOpen = false;
+        resetTour();
+        goto("/dashboard").then(() => {
+            setTimeout(() => {
+                startCompleteTour();
+            }, 500);
+        });
     }
 
     async function handleLogout() {
@@ -128,6 +146,14 @@
                                 <span>Settings</span>
                             </Button>
                             <div class="border-t border-border my-2"></div>
+                            <Button
+                                variant="ghost"
+                                class="justify-start gap-3"
+                                onclick={handleRestartTour}
+                            >
+                                <MapPin class="h-5 w-5" />
+                                <span>Restart Guided Tour</span>
+                            </Button>
                             <Button
                                 variant="ghost"
                                 class="justify-start gap-3 text-destructive hover:text-destructive hover:bg-destructive/10"

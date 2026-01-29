@@ -12,10 +12,8 @@
         CalendarRange,
         CalendarDays,
         RefreshCw,
-        MapPin,
     } from "@lucide/svelte";
     import { goto } from "$app/navigation";
-    import { resetTour, startCompleteTour } from "$lib/tour";
     import {
         profileSchema,
         equipmentOptions,
@@ -100,15 +98,6 @@
                     "Please try again or contact support if the issue persists.",
             });
         }
-    }
-
-    function handleRestartTour() {
-        resetTour();
-        goto("/dashboard").then(() => {
-            setTimeout(() => {
-                startCompleteTour();
-            }, 500);
-        });
     }
 
     async function handleRegeneratePlan(duration: "week" | "month") {
@@ -471,26 +460,6 @@
                                 <RefreshCw class="mr-2 h-4 w-4" />
                                 Generate New Monthly Plan
                             {/if}
-                        </Button>
-                    </Card.Content>
-                </Card.Root>
-
-                <Card.Root>
-                    <Card.Header>
-                        <Card.Title>Guided Tour</Card.Title>
-                        <Card.Description>
-                            Need help? Take the guided tour again to learn how
-                            to use the app.
-                        </Card.Description>
-                    </Card.Header>
-                    <Card.Content>
-                        <Button
-                            variant="outline"
-                            class="w-full"
-                            onclick={handleRestartTour}
-                        >
-                            <MapPin class="mr-2 h-4 w-4" />
-                            Restart Guided Tour
                         </Button>
                     </Card.Content>
                 </Card.Root>

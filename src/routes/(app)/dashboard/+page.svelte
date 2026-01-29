@@ -12,7 +12,7 @@
     } from "@lucide/svelte";
     import { navigating } from "$app/state";
     import { onMount } from "svelte";
-    import { hasCompletedTour, startCompleteTour } from "$lib/tour";
+    import { shouldShowTour, startCompleteTour } from "$lib/tour";
 
     let { data } = $props();
     let plan = $derived(data.plan);
@@ -86,11 +86,8 @@
             }
         }, 100);
 
-        // Start tour for first-time users
-        const tourCompleted = hasCompletedTour();
-        console.log("[Tour] Has completed tour:", tourCompleted);
-
-        if (!tourCompleted) {
+        // Start tour for first-time users after login
+        if (shouldShowTour()) {
             console.log("[Tour] Starting tour in 1 second...");
             setTimeout(() => {
                 console.log("[Tour] Launching complete tour");
