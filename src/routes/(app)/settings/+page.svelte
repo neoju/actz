@@ -12,7 +12,10 @@
         CalendarRange,
         CalendarDays,
         RefreshCw,
+        MapPin,
     } from "@lucide/svelte";
+    import { goto } from "$app/navigation";
+    import { resetTour, startCompleteTour } from "$lib/tour";
     import {
         profileSchema,
         equipmentOptions,
@@ -26,7 +29,6 @@
     import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
     import { useGenerateMonthlyPlanMutation } from "$lib/queries/monthly-plan";
     import { toast } from "svelte-sonner";
-    import { goto } from "$app/navigation";
 
     // Use TanStack Query
     const profileQuery = useProfileQuery();
@@ -100,10 +102,19 @@
         }
     }
 
-    async function handleRegeneratePlan(type: "week" | "month") {
+    function handleRestartTour() {
+        resetTour();
+        goto("/dashboard").then(() => {
+            setTimeout(() => {
+                startCompleteTour();
+            }, 500);
+        });
+    }
+
+    async function handleRegeneratePlan(duration: "week" | "month") {
         try {
-            generatingPlan = type;
-            if (type === "week") {
+            generatingPlan = duration;
+            if (duration === "week") {
                 await generateWeeklyPlanMutation.mutateAsync();
                 toast.success("Weekly plan generated successfully!", {
                     description: "Redirecting to dashboard...",
@@ -124,7 +135,7 @@
             }
         } catch (error) {
             console.error("Error regenerating plan:", error);
-            const planType = type === "week" ? "weekly" : "monthly";
+            const planType = duration === "week" ? "weekly" : "monthly";
             toast.error(`Failed to generate ${planType} plan`, {
                 description:
                     "Please try again or contact support if the issue persists.",
@@ -145,8 +156,12 @@
 
     <Tabs.Root value="profile" class="w-full">
         <Tabs.List class="w-full grid grid-cols-2">
-            <Tabs.Trigger value="profile">Profile</Tabs.Trigger>
-            <Tabs.Trigger value="plans">Plans</Tabs.Trigger>
+            <Tabs.Trigger value="profile" data-tour="profile-tab"
+                >Profile</Tabs.Trigger
+            >
+            <Tabs.Trigger value="plans" data-tour="plans-tab"
+                >Plans</Tabs.Trigger
+            >
         </Tabs.List>
 
         <Tabs.Content value="profile" class="mt-4">
@@ -168,6 +183,7 @@
                                 size="sm"
                                 variant="outline"
                                 onclick={() => (isEditing = true)}
+                                data-tour="edit-profile"
                             >
                                 Edit
                             </Button>
@@ -455,6 +471,26 @@
                                 <RefreshCw class="mr-2 h-4 w-4" />
                                 Generate New Monthly Plan
                             {/if}
+                        </Button>
+                    </Card.Content>
+                </Card.Root>
+
+                <Card.Root>
+                    <Card.Header>
+                        <Card.Title>Guided Tour</Card.Title>
+                        <Card.Description>
+                            Need help? Take the guided tour again to learn how
+                            to use the app.
+                        </Card.Description>
+                    </Card.Header>
+                    <Card.Content>
+                        <Button
+                            variant="outline"
+                            class="w-full"
+                            onclick={handleRestartTour}
+                        >
+                            <MapPin class="mr-2 h-4 w-4" />
+                            Restart Guided Tour
                         </Button>
                     </Card.Content>
                 </Card.Root>

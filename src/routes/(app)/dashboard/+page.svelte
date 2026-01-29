@@ -12,6 +12,7 @@
     } from "@lucide/svelte";
     import { navigating } from "$app/state";
     import { onMount } from "svelte";
+    import { hasCompletedTour, startCompleteTour } from "$lib/tour";
 
     let { data } = $props();
     let plan = $derived(data.plan);
@@ -84,6 +85,18 @@
                 }
             }
         }, 100);
+
+        // Start tour for first-time users
+        const tourCompleted = hasCompletedTour();
+        console.log("[Tour] Has completed tour:", tourCompleted);
+
+        if (!tourCompleted) {
+            console.log("[Tour] Starting tour in 1 second...");
+            setTimeout(() => {
+                console.log("[Tour] Launching complete tour");
+                startCompleteTour();
+            }, 1000);
+        }
     });
 </script>
 
@@ -95,14 +108,16 @@
         </h1>
 
         <p class="text-sm font-bold">Description:</p>
-        <p
-            class={cn(
-                "px-4 text-muted-foreground transition-all line-clamp-2 text-sm",
-                planDescOpen && "line-clamp-none",
-            )}
-        >
-            {plan.planDescription || "Stay consistent!"}
-        </p>
+        <div data-tour="plan-description">
+            <p
+                class={cn(
+                    "px-4 text-muted-foreground transition-all line-clamp-2 text-sm",
+                    planDescOpen && "line-clamp-none",
+                )}
+            >
+                {plan.planDescription || "Stay consistent!"}
+            </p>
+        </div>
         {#if !planDescOpen}
             <Button
                 variant="ghost"
@@ -112,14 +127,16 @@
         {/if}
 
         <p class="text-sm font-bold my-2">Personal Trainer's Note:</p>
-        <p
-            class={cn(
-                "px-4 bg-muted/50 rounded-lg text-sm italic transition-all",
-                !ptSummaryOpen && "line-clamp-2",
-            )}
-        >
-            " {plan.ptSummary} "
-        </p>
+        <div data-tour="pt-summary">
+            <p
+                class={cn(
+                    "px-4 bg-muted/50 rounded-lg text-sm italic transition-all",
+                    !ptSummaryOpen && "line-clamp-2",
+                )}
+            >
+                " {plan.ptSummary} "
+            </p>
+        </div>
         {#if !ptSummaryOpen}
             <Button
                 variant="ghost"
@@ -162,6 +179,7 @@
                 href={isDisabled ? undefined : dayLink}
                 class={cn("block", isDisabled && "pointer-events-none")}
                 data-today={isToday}
+                data-tour={isToday && !isRestDay ? "today-card" : undefined}
             >
                 <Card.Root
                     class={cn(

@@ -84,11 +84,16 @@
                             variant="outline"
                             size="icon"
                             class="ml-2 bg-primary!"
+                            data-tour="menu-button"
                         >
                             <Menu class="h-5 w-5" />
                         </Button>
                     </Sheet.Trigger>
-                    <Sheet.Content side="right" class="w-75 sm:w-100">
+                    <Sheet.Content
+                        side="right"
+                        class="w-75 sm:w-100"
+                        data-tour="menu-sheet"
+                    >
                         <Sheet.Header>
                             <Sheet.Title>Menu</Sheet.Title>
                             <Sheet.Description>
@@ -108,6 +113,7 @@
                                 variant="ghost"
                                 class="justify-start gap-3"
                                 onclick={() => handleNavigation("/exercises")}
+                                data-tour="library-link"
                             >
                                 <BookSearch class="h-5 w-5" />
                                 <span>Library</span>
@@ -116,6 +122,7 @@
                                 variant="ghost"
                                 class="justify-start gap-3"
                                 onclick={() => handleNavigation("/settings")}
+                                data-tour="settings-link"
                             >
                                 <Settings class="h-5 w-5" />
                                 <span>Settings</span>

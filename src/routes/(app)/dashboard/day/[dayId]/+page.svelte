@@ -382,14 +382,16 @@
             bind:value={openedExercise}
         >
             {#each selectedDay.exercises as exercise, index}
-                <ExerciseItem
-                    {exercise}
-                    {cooldownActive}
-                    isOpened={openedExercise === exercise.id}
-                    isLocked={isPastUntouched || isExerciseLocked(index)}
-                    onUpdateActivity={updateActivity}
-                    onStartCooldown={startCooldown}
-                />
+                <div data-tour={index === 0 ? "exercise-item" : undefined}>
+                    <ExerciseItem
+                        {exercise}
+                        {cooldownActive}
+                        isOpened={openedExercise === exercise.id}
+                        isLocked={isPastUntouched || isExerciseLocked(index)}
+                        onUpdateActivity={updateActivity}
+                        onStartCooldown={startCooldown}
+                    />
+                </div>
             {/each}
         </Accordion.Root>
     {/if}

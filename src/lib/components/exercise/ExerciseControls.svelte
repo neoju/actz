@@ -43,7 +43,11 @@
                 </Button>
             {:else}
                 <!-- Normal mode - Start button opens focus mode -->
-                <Button class="flex-1" onclick={handleStartFocusMode}>
+                <Button
+                    class="flex-1"
+                    onclick={handleStartFocusMode}
+                    data-tour="start-button"
+                >
                     <MaximizeIcon class="h-4 w-4 mr-2" />
                     Start in Focus Mode
                 </Button>
@@ -57,6 +61,7 @@
                                 {...props}
                                 variant="outline"
                                 class="flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50"
+                                data-tour="skip-button"
                             >
                                 Skip
                             </Button>
@@ -106,6 +111,7 @@
                             variant="outline"
                             class="flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50"
                             disabled={ctx.isLocked || ctx.cooldownActive}
+                            data-tour="skip-button"
                         >
                             Skip
                         </Button>
@@ -139,7 +145,12 @@
         >
             <AlertDialog.Trigger>
                 {#snippet child({ props })}
-                    <Button {...props} variant="outline" size="sm">
+                    <Button
+                        {...props}
+                        variant="outline"
+                        size="sm"
+                        data-tour="reset-button"
+                    >
                         Reset
                     </Button>
                 {/snippet}

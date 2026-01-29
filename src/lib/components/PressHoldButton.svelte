@@ -55,7 +55,7 @@
         disabled,
         children,
         ...restProps
-    }: Props = $props();
+    }: Props & Record<string, any> = $props();
 
     let isPressed = $state(false);
     let pressTimer: ReturnType<typeof setTimeout> | null = null;
