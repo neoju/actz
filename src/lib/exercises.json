@@ -3,7 +3,12 @@
     "name": "Standard Push-Up",
     "category": "Chest",
     "level": "Beginner",
-    "tags": ["push", "bodyweight", "foundation", "core"],
+    "tags": [
+      "push",
+      "bodyweight",
+      "foundation",
+      "core"
+    ],
     "description": "Bodyweight pressing movement performed in a plank position.",
     "key_principles": "Core-to-upper body integration.",
     "key_technical_checkpoints": "Hands slightly wider than shoulders; body moves as one rigid unit; elbows stay tucked.",
@@ -21,11 +26,16 @@
     "name": "Goblet Squat",
     "category": "Legs",
     "level": "Beginner",
-    "tags": ["legs", "quads", "dumbbell", "beginner"],
+    "tags": [
+      "legs",
+      "quads",
+      "dumbbell",
+      "beginner"
+    ],
     "description": "Squatting while holding a weight against the chest.",
     "key_principles": "Mastering squat mechanics with a front-loaded weight.",
     "key_technical_checkpoints": "Keep weight tight to chest; use elbows to push knees out; maintain a flat back.",
-    "tutor_video": "https://www.youtube.com/embed/gCESNsDsbqk",
+    "tutor_video": "https://www.youtube.com/embed/MeIiIdhvXT4",
     "instructions": [
       "Stand with your feet slightly wider than shoulder-width apart, with your toes pointed slightly outward. Hold a dumbbell or kettlebell vertically against your chest with both hands, cupping the top of the weight. Keep your elbows tucked in.",
       "Brace your core to keep your back straight and your chest up. This will help you maintain an upright posture throughout the movement.",
@@ -39,11 +49,17 @@
     "name": "Plank",
     "category": "Core",
     "level": "Beginner",
-    "tags": ["isometric", "core", "bodyweight", "foundation", "timer"],
+    "tags": [
+      "isometric",
+      "core",
+      "bodyweight",
+      "foundation",
+      "timer"
+    ],
     "description": "Holding a push-up position on the forearms.",
     "key_principles": "Isometric core stability and anti-extension.",
     "key_technical_checkpoints": "Flat back; squeeze glutes; shoulders directly over elbows.",
-    "tutor_video": "https://www.youtube.com/embed/pSHjTRCQxIw",
+    "tutor_video": "https://www.youtube.com/embed/Z90xpWvuUPs",
     "instructions": [
       "Begin in a prone position on the floor. Place your forearms on the ground with your elbows aligned directly under your shoulders and your hands clasped or flat on the floor.",
       "Extend your legs straight behind you, with your feet together or hip-width apart. Your weight should be supported by your forearms and the balls of your feet.",
@@ -57,7 +73,12 @@
     "name": "Lat Pulldown",
     "category": "Back",
     "level": "Beginner",
-    "tags": ["pull", "vertical", "machine", "lats"],
+    "tags": [
+      "pull",
+      "vertical",
+      "machine",
+      "lats"
+    ],
     "description": "Sitting and pulling a weighted bar down toward the upper chest.",
     "key_principles": "Vertical pulling with controlled resistance.",
     "key_technical_checkpoints": "Avoid leaning back excessively; pull with elbows, not hands.",
@@ -75,7 +96,12 @@
     "name": "Dumbbell Lateral Raise",
     "category": "Shoulders",
     "level": "Beginner",
-    "tags": ["isolation", "shoulders", "dumbbell", "width"],
+    "tags": [
+      "isolation",
+      "shoulders",
+      "dumbbell",
+      "width"
+    ],
     "description": "Lifting dumbbells out to the sides.",
     "key_principles": "Lateral deltoid isolation.",
     "key_technical_checkpoints": "Lean slightly forward; lead with elbows; don't lift above shoulder height.",
@@ -93,11 +119,16 @@
     "name": "Barbell Bench Press",
     "category": "Chest",
     "level": "Intermediate",
-    "tags": ["push", "compound", "barbell", "strength"],
+    "tags": [
+      "push",
+      "compound",
+      "barbell",
+      "strength"
+    ],
     "description": "Lying on a bench, pressing a barbell from chest to full arm extension.",
     "key_principles": "Horizontal pushing power and structural stability.",
     "key_technical_checkpoints": "Keep elbows tucked at 45 degrees; maintain 5 points of contact; bar path is slightly diagonal.",
-    "tutor_video": "https://www.youtube.com/embed/gRVjAtPip0Y",
+    "tutor_video": "https://www.youtube.com/embed/vthMCtgVtFw",
     "instructions": [
       "Lie flat on a bench with your feet planted firmly on the ground. Your back should have a slight, natural arch, and your shoulder blades should be retracted and pressed into the bench.",
       "Grip the barbell with your hands slightly wider than shoulder-width apart. Your pinkies or ring fingers should be on the knurl rings of the barbell.",
@@ -111,11 +142,16 @@
     "name": "Romanian Deadlift (RDL)",
     "category": "Legs",
     "level": "Intermediate",
-    "tags": ["legs", "hamstrings", "hinge", "barbell"],
+    "tags": [
+      "legs",
+      "hamstrings",
+      "hinge",
+      "barbell"
+    ],
     "description": "Hinge movement lowering weights while keeping legs mostly straight.",
     "key_principles": "Hamstring and glute isolation via the hip hinge.",
     "key_technical_checkpoints": "Move hips backward; go only until you feel a deep stretch in hamstrings.",
-    "tutor_video": "https://www.youtube.com/embed/2SHsk9AzdjA",
+    "tutor_video": "https://www.youtube.com/embed/_oyxCn2iSjU",
     "instructions": [
       "Stand with your feet hip-width apart, holding a barbell or dumbbells with an overhand grip in front of your thighs. Your knees should have a slight bend.",
       "Keeping your back straight, initiate the movement by hinging at your hips and pushing your glutes backward. Maintain a proud chest and engaged core.",
@@ -129,11 +165,16 @@
     "name": "Barbell Back Squat",
     "category": "Legs",
     "level": "Advanced",
-    "tags": ["legs", "quads", "barbell", "compound"],
+    "tags": [
+      "legs",
+      "quads",
+      "barbell",
+      "compound"
+    ],
     "description": "Squatting with a bar on the upper back.",
     "key_principles": "Lower body strength and axial loading management.",
     "key_technical_checkpoints": "Sit back into hips; knees track over toes; keep chest up.",
-    "tutor_video": "https://www.youtube.com/embed/8PMjqgR8Wa8",
+    "tutor_video": "https://www.youtube.com/embed/bEv6CCg2BC8",
     "instructions": [
       "Set up the barbell in a squat rack at the height of your upper chest. Position yourself under the bar, allowing it to rest on your upper traps, not on your neck.",
       "Grasp the bar with a firm, overhand grip, slightly wider than your shoulders. Keep your wrists straight and your elbows pointing down.",
@@ -147,11 +188,16 @@
     "name": "Hanging Leg Raise",
     "category": "Core",
     "level": "Advanced",
-    "tags": ["abs", "core", "bodyweight", "lower abs"],
+    "tags": [
+      "abs",
+      "core",
+      "bodyweight",
+      "lower abs"
+    ],
     "description": "Hanging from a bar and lifting legs toward the chest.",
     "key_principles": "Advanced abdominal strength and grip endurance.",
     "key_technical_checkpoints": "Don't swing; focus on curling the pelvis upward toward the ribs.",
-    "tutor_video": "https://www.youtube.com/embed/hdng3Nm1x_E",
+    "tutor_video": "https://www.youtube.com/embed/PjFeAHXSoY0",
     "instructions": [
       "Grasp a pull-up bar with an overhand grip, with your hands positioned shoulder-width apart. Let your body hang with your arms fully extended.",
       "Engage your core and keep your legs straight with your feet together. Try to minimize any swinging or use of momentum.",
@@ -165,11 +211,16 @@
     "name": "Traditional Deadlift",
     "category": "Back",
     "level": "Advanced",
-    "tags": ["pull", "posterior chain", "barbell", "compound"],
+    "tags": [
+      "pull",
+      "posterior chain",
+      "barbell",
+      "compound"
+    ],
     "description": "Lifting a loaded barbell from the ground to hip height.",
     "key_principles": "Maximum posterior chain strength and total body bracing.",
     "key_technical_checkpoints": "Keep back flat; drive with legs; bar stays close to body.",
-    "tutor_video": "https://www.youtube.com/embed/VL5Ab0T07e4",
+    "tutor_video": "https://www.youtube.com/embed/r4MzxtBKyNE",
     "instructions": [
       "Approach the barbell so that it is centered over your feet. Your feet should be about hip-width apart, with the bar dissecting the middle of your feet.",
       "Hinge at your hips and bend your knees to grip the bar. Your hands should be placed just outside of your shins. Use a double overhand or mixed grip.",
@@ -183,11 +234,16 @@
     "name": "Chest Dips",
     "category": "Chest",
     "level": "Intermediate",
-    "tags": ["push", "bodyweight", "lower chest", "triceps"],
+    "tags": [
+      "push",
+      "bodyweight",
+      "lower chest",
+      "triceps"
+    ],
     "description": "Lowering and lifting the body using parallel bars.",
     "key_principles": "Vertical pressing targeting the lower pectorals.",
     "key_technical_checkpoints": "Lean forward for chest focus; keep shoulders stable.",
-    "tutor_video": "https://www.youtube.com/embed/2z8JmcrW-As",
+    "tutor_video": "https://www.youtube.com/embed/yN6Q1UI_xkE",
     "instructions": [
       "Position yourself between a set of parallel bars and grip them with your hands. Extend your arms to lift your body above the bars.",
       "To target the chest, lean your torso forward at a 30 to 45-degree angle. To emphasize the triceps, keep your torso as upright as possible.",
@@ -201,11 +257,16 @@
     "name": "Pull-Up",
     "category": "Back",
     "level": "Intermediate",
-    "tags": ["pull", "vertical", "bodyweight", "lats"],
+    "tags": [
+      "pull",
+      "vertical",
+      "bodyweight",
+      "lats"
+    ],
     "description": "Lifting bodyweight to a bar using an overhand grip.",
     "key_principles": "Vertical pulling and relative strength.",
     "key_technical_checkpoints": "Dead hang start; pull chest to bar; control the descent.",
-    "tutor_video": "https://www.youtube.com/embed/eGo4IYlbE5g",
+    "tutor_video": "https://www.youtube.com/embed/fO3dKSQayfg",
     "instructions": [
       "Grasp a pull-up bar with an overhand (pronated) grip, with your hands positioned slightly wider than your shoulders.",
       "Begin from a dead hang, with your arms fully extended and your body in a straight line. Engage your core to prevent swinging.",
@@ -219,11 +280,16 @@
     "name": "Bulgarian Split Squat",
     "category": "Legs",
     "level": "Advanced",
-    "tags": ["legs", "quads", "unilateral", "dumbbell"],
+    "tags": [
+      "legs",
+      "quads",
+      "unilateral",
+      "dumbbell"
+    ],
     "description": "Single-leg squat with rear foot elevated.",
     "key_principles": "Unilateral strength and balance.",
     "key_technical_checkpoints": "Keep front heel planted; maintain upright or slightly leaned torso.",
-    "tutor_video": "https://www.youtube.com/embed/2C-uNgKwPLE",
+    "tutor_video": "https://www.youtube.com/embed/hlHJKu0XX4c",
     "instructions": [
       "Stand a few feet in front of a bench or elevated platform. Place the top of one foot on the bench behind you.",
       "Your front foot should be positioned far enough forward so that when you lower into the squat, your front knee forms a 90-degree angle and does not travel past your toes.",
@@ -237,11 +303,16 @@
     "name": "Arnold Press",
     "category": "Shoulders",
     "level": "Intermediate",
-    "tags": ["push", "shoulders", "dumbbell", "hypertrophy"],
+    "tags": [
+      "push",
+      "shoulders",
+      "dumbbell",
+      "hypertrophy"
+    ],
     "description": "Shoulder press with a rotational wrist movement.",
     "key_principles": "Multi-planar deltoid engagement.",
     "key_technical_checkpoints": "Rotate palms toward you at bottom, away at top.",
-    "tutor_video": "https://www.youtube.com/embed/6Z15_WdXmVw",
+    "tutor_video": "https://www.youtube.com/embed/SgyUoY0IZ7A",
     "instructions": [
       "Sit on a bench with back support, holding a dumbbell in each hand. Start with the dumbbells at shoulder height, with your palms facing your body and your elbows bent.",
       "Keep your core engaged and your back pressed firmly against the bench.",
@@ -255,11 +326,16 @@
     "name": "Skull Crushers",
     "category": "Arms",
     "level": "Intermediate",
-    "tags": ["isolation", "triceps", "barbell", "long head"],
+    "tags": [
+      "isolation",
+      "triceps",
+      "barbell",
+      "long head"
+    ],
     "description": "Lowering a bar toward the forehead while lying down.",
     "key_principles": "Tricep long-head activation through stretch.",
     "key_technical_checkpoints": "Upper arms stationary; lower slightly behind the head.",
-    "tutor_video": "https://www.youtube.com/embed/d_KZxkY_0cM",
+    "tutor_video": "https://www.youtube.com/embed/OpRMRhr0Ycc",
     "instructions": [
       "Lie flat on a bench with your feet firmly on the floor. Hold an EZ bar or two dumbbells with an overhand, narrow grip (about shoulder-width apart) and extend your arms directly above your chest.",
       "Keeping your upper arms stationary and perpendicular to the floor, inhale and slowly lower the weight by bending your elbows.",
@@ -273,7 +349,12 @@
     "name": "Kettlebell Swing",
     "category": "HIIT",
     "level": "Intermediate",
-    "tags": ["full body", "power", "kettlebell", "hinge"],
+    "tags": [
+      "full body",
+      "power",
+      "kettlebell",
+      "hinge"
+    ],
     "description": "Swinging a kettlebell through a hip hinge motion.",
     "key_principles": "Explosive posterior chain power.",
     "key_technical_checkpoints": "Hinge at hips, don't squat; snap hips forward to move weight.",
@@ -291,11 +372,16 @@
     "name": "Box Jumps",
     "category": "HIIT",
     "level": "Advanced",
-    "tags": ["plyometric", "legs", "explosive", "power"],
+    "tags": [
+      "plyometric",
+      "legs",
+      "explosive",
+      "power"
+    ],
     "description": "Jumping onto an elevated platform.",
     "key_principles": "Plyometric explosive power and landing mechanics.",
     "key_technical_checkpoints": "Land softly; step down to protect joints.",
-    "tutor_video": "https://www.youtube.com/embed/52r_Ul5k03g",
+    "tutor_video": "https://www.youtube.com/embed/hxldG9FX4j4",
     "instructions": [
       "Select a sturdy box of an appropriate height. Stand facing the box with your feet positioned shoulder-width apart.",
       "Initiate the movement by performing a shallow squat, swinging your arms back to load up for the jump.",
@@ -309,11 +395,16 @@
     "name": "Incline Dumbbell Press",
     "category": "Chest",
     "level": "Intermediate",
-    "tags": ["push", "dumbbell", "upper chest", "hypertrophy"],
+    "tags": [
+      "push",
+      "dumbbell",
+      "upper chest",
+      "hypertrophy"
+    ],
     "description": "Pressing dumbbells on a 30-45 degree incline.",
     "key_principles": "Upper chest (clavicular head) targeting.",
     "key_technical_checkpoints": "Shoulders back and down; control dumbbells on the descent.",
-    "tutor_video": "https://www.youtube.com/embed/8iPEnn-ltC8",
+    "tutor_video": "https://www.youtube.com/embed/1V3vpcaxRYQ",
     "instructions": [
       "Set an adjustable bench to a 30-45 degree incline. Sit on the edge of the bench with a dumbbell in each hand, resting on your thighs.",
       "To get into position, 'kick' the dumbbells up to your shoulders one at a time as you lie back on the bench. Plant your feet firmly on the floor.",
@@ -327,11 +418,16 @@
     "name": "Seated Cable Row",
     "category": "Back",
     "level": "Beginner",
-    "tags": ["pull", "horizontal", "cable", "mid-back"],
+    "tags": [
+      "pull",
+      "horizontal",
+      "cable",
+      "mid-back"
+    ],
     "description": "Pulling a cable handle toward the waist while seated.",
     "key_principles": "Mid-back development and posture.",
     "key_technical_checkpoints": "Keep chest up; squeeze shoulder blades at the peak.",
-    "tutor_video": "https://www.youtube.com/embed/GZbfZ033f74",
+    "tutor_video": "https://www.youtube.com/embed/jLvqKgW-_G8",
     "instructions": [
       "Sit at a cable row machine and place your feet securely on the foot platform. Your knees should be slightly bent.",
       "Grasp the V-bar or straight bar attachment with a neutral or overhand grip. Sit upright with a straight back, chest out, and shoulders pulled back and down.",
@@ -345,11 +441,16 @@
     "name": "Leg Press",
     "category": "Legs",
     "level": "Beginner",
-    "tags": ["legs", "quads", "machine", "hypertrophy"],
+    "tags": [
+      "legs",
+      "quads",
+      "machine",
+      "hypertrophy"
+    ],
     "description": "Pushing a weighted platform with the feet.",
     "key_principles": "Quad isolation with low spinal stress.",
     "key_technical_checkpoints": "Don't lock knees; keep lower back flat on the pad.",
-    "tutor_video": "https://www.youtube.com/embed/IZxyjW7MPJQ",
+    "tutor_video": "https://www.youtube.com/embed/8vk6rWMSxOk",
     "instructions": [
       "Sit down on the leg press machine and place your feet on the platform, positioned about shoulder-width apart with your toes pointing slightly outward.",
       "Ensure your back and head are resting comfortably against the padded support. Your hips should be positioned securely at the bottom of the seat.",
@@ -363,7 +464,12 @@
     "name": "Overhead Press",
     "category": "Shoulders",
     "level": "Advanced",
-    "tags": ["push", "shoulders", "barbell", "power"],
+    "tags": [
+      "push",
+      "shoulders",
+      "barbell",
+      "power"
+    ],
     "description": "Standing barbell press to full overhead lockout.",
     "key_principles": "Vertical pressing and full body tension.",
     "key_technical_checkpoints": "Squeeze glutes; bar path stays close to face; head through at top.",
@@ -381,11 +487,16 @@
     "name": "Barbell Bicep Curl",
     "category": "Arms",
     "level": "Beginner",
-    "tags": ["isolation", "biceps", "barbell", "mass"],
+    "tags": [
+      "isolation",
+      "biceps",
+      "barbell",
+      "mass"
+    ],
     "description": "Curling a barbell using a supinated grip.",
     "key_principles": "Bicep hypertrophy through isolation.",
     "key_technical_checkpoints": "Keep elbows pinned; avoid using body momentum.",
-    "tutor_video": "https://www.youtube.com/embed/sAq_ocpRh_I",
+    "tutor_video": "https://www.youtube.com/embed/GNO4OtYoCYk",
     "instructions": [
       "Stand tall with your feet shoulder-width apart, holding a barbell with a supinated (underhand) grip. Your hands should be positioned about shoulder-width apart.",
       "Keep your elbows pinned to your sides and your chest up. Your arms should be fully extended at the start.",
@@ -399,7 +510,12 @@
     "name": "Bicycle Crunches",
     "category": "Core",
     "level": "Beginner",
-    "tags": ["abs", "core", "bodyweight", "rotation"],
+    "tags": [
+      "abs",
+      "core",
+      "bodyweight",
+      "rotation"
+    ],
     "description": "Supine core rotation with pedaling legs.",
     "key_principles": "Engaging obliques and rectus abdominis.",
     "key_technical_checkpoints": "Opposite elbow to knee; move slowly and with control.",
@@ -417,11 +533,16 @@
     "name": "Burpees",
     "category": "HIIT",
     "level": "Advanced",
-    "tags": ["full body", "cardio", "bodyweight", "explosive"],
+    "tags": [
+      "full body",
+      "cardio",
+      "bodyweight",
+      "explosive"
+    ],
     "description": "Combination of squat, plank, push-up, and jump.",
     "key_principles": "Metabolic conditioning and full body power.",
     "key_technical_checkpoints": "Maintain core tension; land flat-footed on the jump.",
-    "tutor_video": "https://www.youtube.com/embed/auBLPXO8Fww",
+    "tutor_video": "https://www.youtube.com/embed/qLBImHhCXSw",
     "instructions": [
       "Start in a standing position with your feet shoulder-width apart.",
       "Lower your body into a squat position and place your hands on the floor in front of you.",
@@ -435,7 +556,12 @@
     "name": "Cable Crossover",
     "category": "Chest",
     "level": "Intermediate",
-    "tags": ["isolation", "cable", "chest", "tension"],
+    "tags": [
+      "isolation",
+      "cable",
+      "chest",
+      "tension"
+    ],
     "description": "Bringing cable handles together across the midline.",
     "key_principles": "Constant tension throughout the pectorals.",
     "key_technical_checkpoints": "Chest out; slight elbow bend; hard squeeze at center.",
@@ -453,7 +579,12 @@
     "name": "Face Pulls",
     "category": "Shoulders",
     "level": "Beginner",
-    "tags": ["pull", "rear delt", "posture", "cable"],
+    "tags": [
+      "pull",
+      "rear delt",
+      "posture",
+      "cable"
+    ],
     "description": "Pulling a cable rope toward the forehead.",
     "key_principles": "Shoulder health and rear deltoid isolation.",
     "key_technical_checkpoints": "Pull rope apart; thumbs pointing back; keep elbows high.",
@@ -471,11 +602,16 @@
     "name": "Hip Thrust",
     "category": "Legs",
     "level": "Intermediate",
-    "tags": ["legs", "glutes", "barbell", "power"],
+    "tags": [
+      "legs",
+      "glutes",
+      "barbell",
+      "power"
+    ],
     "description": "Weighted bridge with shoulders on a bench.",
     "key_principles": "Maximal glute activation and hip extension.",
     "key_technical_checkpoints": "Vertical shins at top; chin tucked; full hip lockout.",
-    "tutor_video": "https://www.youtube.com/embed/xDmFkJxPzeM",
+    "tutor_video": "https://www.youtube.com/embed/SEdqd1n0cvg",
     "instructions": [
       "Sit on the floor with your upper back against a bench. Place a barbell across your hips. Your knees should be bent and your feet flat on the floor, about shoulder-width apart.",
       "Your shoulder blades should be positioned on the edge of the bench. You can use a pad on the barbell for comfort.",
@@ -489,11 +625,16 @@
     "name": "Tricep Pushdown",
     "category": "Arms",
     "level": "Beginner",
-    "tags": ["isolation", "triceps", "cable", "hypertrophy"],
+    "tags": [
+      "isolation",
+      "triceps",
+      "cable",
+      "hypertrophy"
+    ],
     "description": "Pushing a cable bar/rope down by extending elbows.",
     "key_principles": "Tricep isolation and elbow health.",
     "key_technical_checkpoints": "Upper arms stationary; full extension at bottom.",
-    "tutor_video": "https://www.youtube.com/embed/2-LAMcpzODU",
+    "tutor_video": "https://www.youtube.com/embed/OpRMRhr0Ycc",
     "instructions": [
       "Attach a straight bar or rope to a high pulley on a cable machine. Grasp the attachment with an overhand grip, with your hands positioned about shoulder-width apart.",
       "Stand with your feet shoulder-width apart and a slight bend in your knees. Lean slightly forward at the hips.",
@@ -507,7 +648,12 @@
     "name": "Dead Bug",
     "category": "Core",
     "level": "Beginner",
-    "tags": ["stability", "core", "bodyweight", "safe"],
+    "tags": [
+      "stability",
+      "core",
+      "bodyweight",
+      "safe"
+    ],
     "description": "Lowering opposite arm and leg while lying on back.",
     "key_principles": "Spinal stability and core control.",
     "key_technical_checkpoints": "Keep lower back glued to the floor; move slowly.",
@@ -525,7 +671,12 @@
     "name": "Mountain Climbers",
     "category": "HIIT",
     "level": "Intermediate",
-    "tags": ["cardio", "core", "bodyweight", "intensity"],
+    "tags": [
+      "cardio",
+      "core",
+      "bodyweight",
+      "intensity"
+    ],
     "description": "Alternating knee drives in a plank position.",
     "key_principles": "Cardiovascular endurance and core stability.",
     "key_technical_checkpoints": "Keep hips low; shoulders over hands.",
@@ -543,11 +694,16 @@
     "name": "Barbell Bent-Over Row",
     "category": "Back",
     "level": "Intermediate",
-    "tags": ["pull", "horizontal", "barbell", "thickness"],
+    "tags": [
+      "pull",
+      "horizontal",
+      "barbell",
+      "thickness"
+    ],
     "description": "Pulling a bar to the waist while hinged.",
     "key_principles": "Horizontal pulling for back thickness.",
     "key_technical_checkpoints": "Neutral spine; pull elbows past the ribs; control the bar.",
-    "tutor_video": "https://www.youtube.com/embed/FWJR5Ve8bnQ",
+    "tutor_video": "https://www.youtube.com/embed/T3N-TO4reLQ",
     "instructions": [
       "Stand with your feet shoulder-width apart, holding a barbell with an overhand grip. Your knees should be slightly bent.",
       "Hinge at your hips until your torso is nearly parallel to the floor. Keep your back straight and your core engaged.",
@@ -561,11 +717,16 @@
     "name": "Walking Lunges",
     "category": "Legs",
     "level": "Beginner",
-    "tags": ["legs", "glutes", "unilateral", "dynamic"],
+    "tags": [
+      "legs",
+      "glutes",
+      "unilateral",
+      "dynamic"
+    ],
     "description": "Stepping forward into alternating lunges.",
     "key_principles": "Dynamic balance and lower body isolation.",
     "key_technical_checkpoints": "Upright torso; front knee over ankle; 90-degree angles.",
-    "tutor_video": "https://www.youtube.com/embed/QOVaHwm-Q6U",
+    "tutor_video": "https://www.youtube.com/embed/xvC10-eCuXs",
     "instructions": [
       "Stand tall with your feet together. You can hold dumbbells in each hand for added resistance.",
       "Take a step forward with your right leg, lowering your hips until both knees are bent at a 90-degree angle.",
@@ -579,7 +740,12 @@
     "name": "Hammer Curl",
     "category": "Arms",
     "level": "Beginner",
-    "tags": ["isolation", "biceps", "dumbbell", "forearms"],
+    "tags": [
+      "isolation",
+      "biceps",
+      "dumbbell",
+      "forearms"
+    ],
     "description": "Neutral grip bicep curl.",
     "key_principles": "Targeting the brachialis and brachioradialis.",
     "key_technical_checkpoints": "Keep palms facing each other; no wrist rotation.",
@@ -597,11 +763,16 @@
     "name": "Russian Twist",
     "category": "Core",
     "level": "Beginner",
-    "tags": ["abs", "obliques", "rotation", "core"],
+    "tags": [
+      "abs",
+      "obliques",
+      "rotation",
+      "core"
+    ],
     "description": "Seated torso rotation.",
     "key_principles": "Oblique strength and coordination.",
     "key_technical_checkpoints": "Follow hands with gaze; keep feet elevated for challenge.",
-    "tutor_video": "https://www.youtube.com/embed/DJQGX2J4IVw",
+    "tutor_video": "https://www.youtube.com/embed/wkD8rjkodUI",
     "instructions": [
       "Sit on the floor with your knees bent and your feet flat on the ground. Lean back slightly, so your torso is at a 45-degree angle to the floor. Keep your back straight.",
       "For a greater challenge, lift your feet off the ground. You can hold a weight or medicine ball with both hands for added resistance.",
@@ -615,11 +786,16 @@
     "name": "Skater Hops",
     "category": "HIIT",
     "level": "Intermediate",
-    "tags": ["cardio", "lateral", "bodyweight", "balance"],
+    "tags": [
+      "cardio",
+      "lateral",
+      "bodyweight",
+      "balance"
+    ],
     "description": "Lateral explosive jumps.",
     "key_principles": "Lateral power and athletic stability.",
     "key_technical_checkpoints": "Land softly; stick the landing; use arms for balance.",
-    "tutor_video": "https://www.youtube.com/embed/JkacHtlPYds",
+    "tutor_video": "https://www.youtube.com/embed/u2EY1zaODYo",
     "instructions": [
       "Start in a standing position with your feet together.",
       "Hop to your right, landing on your right foot with your right knee bent. Your left leg should swing behind your right leg.",
@@ -633,11 +809,16 @@
     "name": "Inverted Row",
     "category": "Back",
     "level": "Beginner",
-    "tags": ["pull", "bodyweight", "horizontal", "beginner"],
+    "tags": [
+      "pull",
+      "bodyweight",
+      "horizontal",
+      "beginner"
+    ],
     "description": "Horizontal row under a bar with feet on the ground.",
     "key_principles": "Bodyweight pulling for back strength.",
     "key_technical_checkpoints": "Body in straight line; pull chest to bar.",
-    "tutor_video": "https://www.youtube.com/embed/hXTc1mDnZCw",
+    "tutor_video": "https://www.youtube.com/embed/XZV9IwluPjw",
     "instructions": [
       "Set a barbell in a squat rack at about waist height. The higher the bar, the easier the exercise will be.",
       "Position yourself under the bar, lying on your back. Grasp the bar with an overhand grip, slightly wider than your shoulders.",
@@ -651,11 +832,16 @@
     "name": "Leg Extension",
     "category": "Legs",
     "level": "Beginner",
-    "tags": ["legs", "quads", "machine", "isolation"],
+    "tags": [
+      "legs",
+      "quads",
+      "machine",
+      "isolation"
+    ],
     "description": "Seated leg extension against resistance.",
     "key_principles": "Pure quad isolation.",
     "key_technical_checkpoints": "Align knee with machine pivot; control descent.",
-    "tutor_video": "https://www.youtube.com/embed/m0FOpMEgero",
+    "tutor_video": "https://www.youtube.com/embed/YyvSfVjQeL0",
     "instructions": [
       "Sit on a leg extension machine and adjust the back pad so your knees are at the edge of the seat. Your knees should be aligned with the machine's pivot point.",
       "Position the lower leg pad so it rests on your shins, just above your ankles.",
@@ -669,11 +855,16 @@
     "name": "Rear Delt Fly",
     "category": "Shoulders",
     "level": "Beginner",
-    "tags": ["isolation", "shoulders", "dumbbell", "rear delt"],
+    "tags": [
+      "isolation",
+      "shoulders",
+      "dumbbell",
+      "rear delt"
+    ],
     "description": "Hinged lateral lift for the back of the shoulder.",
     "key_principles": "Rear deltoid isolation and upper back health.",
     "key_technical_checkpoints": "Pinkies up; squeeze shoulder blades; keep spine flat.",
-    "tutor_video": "https://www.youtube.com/embed/EA7u4Q_8HQ0",
+    "tutor_video": "https://www.youtube.com/embed/dKluhLck1Zs",
     "instructions": [
       "Sit on the edge of a bench or stand with your feet shoulder-width apart, holding a dumbbell in each hand.",
       "Hinge at your hips so your torso is nearly parallel to the floor. Keep your back straight and your core engaged.",
@@ -687,11 +878,16 @@
     "name": "Preacher Curl",
     "category": "Arms",
     "level": "Beginner",
-    "tags": ["isolation", "biceps", "barbell", "strict"],
+    "tags": [
+      "isolation",
+      "biceps",
+      "barbell",
+      "strict"
+    ],
     "description": "Curling on a slanted support pad.",
     "key_principles": "Strict bicep isolation without momentum.",
     "key_technical_checkpoints": "Full extension at bottom; armpits tight to pad.",
-    "tutor_video": "https://www.youtube.com/embed/fIWP-FRFNU0",
+    "tutor_video": "https://www.youtube.com/embed/GNO4OtYoCYk",
     "instructions": [
       "Adjust the seat of a preacher curl bench so that your armpits are resting near the top of the pad.",
       "Grasp an EZ bar or dumbbells with an underhand grip, and sit down with your upper arms resting on the pad.",
@@ -705,11 +901,16 @@
     "name": "Bird Dog",
     "category": "Core",
     "level": "Beginner",
-    "tags": ["stability", "core", "bodyweight", "balance"],
+    "tags": [
+      "stability",
+      "core",
+      "bodyweight",
+      "balance"
+    ],
     "description": "Extending opposite arm and leg on all fours.",
     "key_principles": "Spinal stability and balance.",
     "key_technical_checkpoints": "Don't arch back; reach long; keep hips square.",
-    "tutor_video": "https://www.youtube.com/embed/wiFNA3sqjCA",
+    "tutor_video": "https://www.youtube.com/embed/QABW99qPiNM",
     "instructions": [
       "Start on all fours, with your hands directly under your shoulders and your knees directly under your hips. Your back should be flat.",
       "Engage your core to keep your spine in a neutral position.",
@@ -723,11 +924,16 @@
     "name": "High Knees",
     "category": "HIIT",
     "level": "Beginner",
-    "tags": ["cardio", "warm-up", "bodyweight", "speed"],
+    "tags": [
+      "cardio",
+      "warm-up",
+      "bodyweight",
+      "speed"
+    ],
     "description": "Running in place with high knee drives.",
     "key_principles": "Cardiovascular speed and hip flexor engagement.",
     "key_technical_checkpoints": "Stay on balls of feet; drive knees to hip height.",
-    "tutor_video": "https://www.youtube.com/embed/DfjpR6dzLVg",
+    "tutor_video": "https://www.youtube.com/embed/tx5rgpDAJRI",
     "instructions": [
       "Stand with your feet hip-width apart and your arms at your sides.",
       "Begin by jogging in place, driving your right knee up towards your chest as high as you can.",
@@ -741,11 +947,16 @@
     "name": "Machine Chest Press",
     "category": "Chest",
     "level": "Beginner",
-    "tags": ["push", "chest", "machine", "beginner"],
+    "tags": [
+      "push",
+      "chest",
+      "machine",
+      "beginner"
+    ],
     "description": "Seated horizontal press using a machine.",
     "key_principles": "Foundational chest strength with guided path.",
     "key_technical_checkpoints": "Set seat height at mid-chest; keep back against pad.",
-    "tutor_video": "https://www.youtube.com/embed/xUm0BiZCWlQ",
+    "tutor_video": "https://www.youtube.com/embed/fGm-ef-4PVk",
     "instructions": [
       "Adjust the seat of the machine so the handles are at mid-chest level. Sit with your back firmly against the pad.",
       "Grasp the handles with an overhand grip, and plant your feet firmly on the floor.",
@@ -759,11 +970,16 @@
     "name": "One-Arm Dumbbell Row",
     "category": "Back",
     "level": "Beginner",
-    "tags": ["pull", "unilateral", "dumbbell", "back"],
+    "tags": [
+      "pull",
+      "unilateral",
+      "dumbbell",
+      "back"
+    ],
     "description": "Sawing motion dumbbell pull.",
     "key_principles": "Unilateral back strength and core stability.",
     "key_technical_checkpoints": "Pull toward hip; keep back flat; avoid torso twist.",
-    "tutor_video": "https://www.youtube.com/embed/roCP6wCXPqo",
+    "tutor_video": "https://www.youtube.com/embed/pYcpY20QaE8",
     "instructions": [
       "Place your left knee and left hand on a flat bench, with your right foot planted firmly on the floor.",
       "Your torso should be parallel to the floor, and your back should be straight. Hold a dumbbell in your right hand with a neutral grip.",
@@ -775,13 +991,18 @@
   },
   {
     "name": "Standing Calf Raise",
-    "category": "Legs",
+    "category": "Calves",
     "level": "Beginner",
-    "tags": ["legs", "calves", "isolation", "hypertrophy"],
+    "tags": [
+      "legs",
+      "calves",
+      "isolation",
+      "hypertrophy"
+    ],
     "description": "Rising on toes with weight.",
     "key_principles": "Calf muscle hypertrophy.",
     "key_technical_checkpoints": "Full stretch at bottom; hard squeeze at top.",
-    "tutor_video": "https://www.youtube.com/embed/gwLzBJYoWlI",
+    "tutor_video": "https://www.youtube.com/embed/-tJSMx4n6-g",
     "instructions": [
       "Stand with your feet flat on the floor or with the balls of your feet on an elevated surface, like a step or calf raise block.",
       "You can perform this exercise with bodyweight, holding dumbbells, or using a calf raise machine.",
@@ -795,11 +1016,16 @@
     "name": "Upright Row",
     "category": "Shoulders",
     "level": "Intermediate",
-    "tags": ["pull", "shoulders", "barbell", "traps"],
+    "tags": [
+      "pull",
+      "shoulders",
+      "barbell",
+      "traps"
+    ],
     "description": "Pulling weight vertically toward chin.",
     "key_principles": "Side delt and trap activation.",
     "key_technical_checkpoints": "Keep bar close; elbows above wrists; pull to mid-chest.",
-    "tutor_video": "https://www.youtube.com/embed/Ub6QruNKfbY",
+    "tutor_video": "https://www.youtube.com/embed/pZlr90LUDcU",
     "instructions": [
       "Grasp a barbell or EZ bar with an overhand grip, with your hands positioned slightly narrower than shoulder-width apart.",
       "Stand tall with your feet shoulder-width apart and your arms fully extended, with the bar resting against your thighs.",
@@ -813,11 +1039,16 @@
     "name": "Close-Grip Bench Press",
     "category": "Arms",
     "level": "Intermediate",
-    "tags": ["push", "triceps", "barbell", "compound"],
+    "tags": [
+      "push",
+      "triceps",
+      "barbell",
+      "compound"
+    ],
     "description": "Bench press with narrow hand placement.",
     "key_principles": "Tricep-dominant pressing strength.",
     "key_technical_checkpoints": "Hands shoulder-width; elbows close to body.",
-    "tutor_video": "https://www.youtube.com/embed/nEF0bv2FW94",
+    "tutor_video": "https://www.youtube.com/embed/OpRMRhr0Ycc",
     "instructions": [
       "Lie flat on a bench with your feet firmly on the floor. Grip the barbell with your hands positioned shoulder-width apart or slightly narrower.",
       "Unrack the bar and hold it directly over your chest with your arms fully extended.",
@@ -831,11 +1062,17 @@
     "name": "Side Plank",
     "category": "Core",
     "level": "Beginner",
-    "tags": ["isometric", "core", "obliques", "stability", "timer"],
+    "tags": [
+      "isometric",
+      "core",
+      "obliques",
+      "stability",
+      "timer"
+    ],
     "description": "Balancing on one forearm sideways.",
     "key_principles": "Oblique and lateral core stability.",
     "key_technical_checkpoints": "Keep hips high; straight body alignment.",
-    "tutor_video": "https://www.youtube.com/embed/K2VljzCC16g",
+    "tutor_video": "https://www.youtube.com/embed/F-nQ_KJgfCY",
     "instructions": [
       "Lie on your right side with your legs straight and stacked on top of each other.",
       "Place your right elbow directly under your shoulder, with your forearm perpendicular to your body.",
@@ -849,11 +1086,16 @@
     "name": "Bear Crawl",
     "category": "HIIT",
     "level": "Intermediate",
-    "tags": ["full body", "core", "bodyweight", "coordination"],
+    "tags": [
+      "full body",
+      "core",
+      "bodyweight",
+      "coordination"
+    ],
     "description": "Moving on all fours with hovering knees.",
     "key_principles": "Dynamic core and coordination.",
     "key_technical_checkpoints": "Flat back; small movements; knees close to floor.",
-    "tutor_video": "https://www.youtube.com/embed/Ee1BQNI6zN4?start=10",
+    "tutor_video": "https://www.youtube.com/embed/X6rk8saEAo8",
     "instructions": [
       "Start on all fours, with your hands directly under your shoulders and your knees directly under your hips.",
       "Lift your knees off the floor so they are hovering just above the ground. Your back should be flat.",
@@ -867,11 +1109,16 @@
     "name": "Jumping Jacks",
     "category": "HIIT",
     "level": "Beginner",
-    "tags": ["cardio", "warm-up", "bodyweight", "classic"],
+    "tags": [
+      "cardio",
+      "warm-up",
+      "bodyweight",
+      "classic"
+    ],
     "description": "Classic jumping arm/leg spread.",
     "key_principles": "Metabolic warm-up and coordination.",
     "key_technical_checkpoints": "Soft landing; full arm range.",
-    "tutor_video": "https://www.youtube.com/embed/nGaXj3kkmrU",
+    "tutor_video": "https://www.youtube.com/embed/yDSMdd8hiFg",
     "instructions": [
       "Stand with your feet together and your arms at your sides.",
       "In one fluid motion, jump your feet out to the sides, wider than your shoulders, while simultaneously raising your arms out to the sides and overhead.",
@@ -879,6 +1126,1480 @@
       "Then, jump back to the starting position, bringing your feet together and your arms back to your sides.",
       "Continue this movement for the desired number of repetitions or duration.",
       "Maintain a steady rhythm and land softly on the balls of your feet."
+    ]
+  },
+  {
+    "name": "Decline Bench Press",
+    "category": "Chest",
+    "level": "Intermediate",
+    "tags": [
+      "Strength",
+      "Barbell",
+      "Lower Chest"
+    ],
+    "description": "Barbell press on a decline bench targeting lower chest fibers with greater range of motion.",
+    "key_principles": "Lower chest emphasis, control the descent, drive through chest not shoulders, maintain shoulder blade retraction.",
+    "key_technical_checkpoints": "Bar touches lower chest, elbows 45-degree angle, feet secured, arch maintained, full lockout at top.",
+    "tutor_video": "https://www.youtube.com/embed/fGm-ef-4PVk",
+    "instructions": [
+      "Secure feet at the end of decline bench, lie back with bar above lower chest",
+      "Grip bar slightly wider than shoulder-width, unrack with straight arms",
+      "Lower bar in controlled manner to lower chest, elbows at 45 degrees",
+      "Press bar up and slightly back toward face until arms fully extended",
+      "Pause briefly at top, squeeze chest, repeat for desired reps",
+      "Re-rack bar safely with spotter assistance if using heavy weight"
+    ]
+  },
+  {
+    "name": "Dumbbell Pullover",
+    "category": "Chest",
+    "level": "Intermediate",
+    "tags": [
+      "Strength",
+      "Dumbbell",
+      "Chest Expansion"
+    ],
+    "description": "Classic exercise targeting chest and lats with emphasis on ribcage expansion and upper body stretch.",
+    "key_principles": "Controlled arc motion, stretch at bottom, keep hips low, breathe deeply, focus on chest contraction.",
+    "key_technical_checkpoints": "Elbows slightly bent, dumbbell path follows arc, deep stretch without shoulder pain, core engaged.",
+    "tutor_video": "https://www.youtube.com/embed/fGm-ef-4PVk",
+    "instructions": [
+      "Lie perpendicular on bench with shoulders supported, hips below bench level",
+      "Hold one dumbbell with both hands above chest, slight bend in elbows",
+      "Lower dumbbell in arc behind head until stretch felt in chest and lats",
+      "Keep elbow angle constant throughout movement, breathe deeply at stretch",
+      "Pull dumbbell back to start position using chest and lats",
+      "Repeat maintaining constant tension and control throughout"
+    ]
+  },
+  {
+    "name": "Cable Chest Fly",
+    "category": "Chest",
+    "level": "Beginner",
+    "tags": [
+      "Isolation",
+      "Cable",
+      "Chest Definition"
+    ],
+    "description": "Cable fly variation providing constant tension throughout the movement for chest isolation and definition.",
+    "key_principles": "Constant tension, slight bend in elbows, focus on chest squeeze, control the eccentric, chest-level cables.",
+    "key_technical_checkpoints": "Slight forward lean, elbows fixed angle, full stretch without shoulder impingement, squeeze at midline.",
+    "tutor_video": "https://www.youtube.com/embed/Iwe6AmxVf7o",
+    "instructions": [
+      "Set cables at chest height, grab handles, step forward into split stance",
+      "Lean slightly forward, arms extended with slight elbow bend",
+      "Bring handles together in front of chest in wide arc motion",
+      "Squeeze chest hard at peak contraction for 1-2 seconds",
+      "Control handles back to start position feeling deep chest stretch",
+      "Maintain same elbow angle throughout, repeat for desired reps"
+    ]
+  },
+  {
+    "name": "Diamond Push-Up",
+    "category": "Chest",
+    "level": "Intermediate",
+    "tags": [
+      "Bodyweight",
+      "Triceps",
+      "Inner Chest"
+    ],
+    "description": "Close-grip push-up variation emphasizing inner chest and triceps with hands forming diamond shape.",
+    "key_principles": "Hands close together, elbows tucked, controlled descent, full range of motion, core tight.",
+    "key_technical_checkpoints": "Diamond hand position, body straight, chest touches hands, elbows stay close to body.",
+    "tutor_video": "https://www.youtube.com/embed/J0DnG1_S92I",
+    "instructions": [
+      "Start in plank position with hands close together forming diamond with index fingers and thumbs",
+      "Position hands directly under chest, body in straight line",
+      "Lower body by bending elbows, keeping them close to sides",
+      "Descend until chest nearly touches hands or until good stretch felt",
+      "Press back up powerfully until arms fully extended",
+      "Maintain rigid core throughout, repeat for desired reps"
+    ]
+  },
+  {
+    "name": "T-Bar Row",
+    "category": "Back",
+    "level": "Intermediate",
+    "tags": [
+      "Strength",
+      "Barbell",
+      "Thickness"
+    ],
+    "description": "Compound rowing movement for building back thickness and strength using landmine or T-bar setup.",
+    "key_principles": "Hinge at hips, chest up, pull to sternum, squeeze shoulder blades, neutral spine throughout.",
+    "key_technical_checkpoints": "Flat back, knees bent, full range stretch, elbows drive back, controlled eccentric.",
+    "tutor_video": "https://www.youtube.com/embed/jLvqKgW-_G8",
+    "instructions": [
+      "Straddle the bar with feet shoulder-width, hinge at hips with chest up",
+      "Grip handles or bar with neutral grip, arms fully extended",
+      "Pull bar toward lower chest by driving elbows back and up",
+      "Squeeze shoulder blades together at top of movement",
+      "Lower bar with control to full arm extension, maintaining back position",
+      "Repeat without letting plates touch floor between reps"
+    ]
+  },
+  {
+    "name": "Face Pull",
+    "category": "Back",
+    "level": "Beginner",
+    "tags": [
+      "Cable",
+      "Rear Delts",
+      "Posture"
+    ],
+    "description": "Cable exercise targeting rear deltoids and upper back, crucial for shoulder health and posture.",
+    "key_principles": "High cable position, pull to face, external rotation, squeeze rear delts, controlled tempo.",
+    "key_technical_checkpoints": "Elbows high and wide, rope splits at face, shoulder blades retracted, no forward lean.",
+    "tutor_video": "https://www.youtube.com/embed/rep-qVOkqgk",
+    "instructions": [
+      "Set cable at upper chest height, attach rope handle",
+      "Grip rope with neutral grip, step back to create tension",
+      "Pull rope toward face, splitting rope handles at face level",
+      "Keep elbows high and wide, externally rotate shoulders",
+      "Squeeze shoulder blades and rear delts at peak contraction",
+      "Slowly return to start position with control, repeat"
+    ]
+  },
+  {
+    "name": "Wide Grip Pull-Up",
+    "category": "Back",
+    "level": "Advanced",
+    "tags": [
+      "Bodyweight",
+      "Lats",
+      "Width"
+    ],
+    "description": "Pull-up variation with wide grip emphasizing lat width and upper back development.",
+    "key_principles": "Wide grip, pull to upper chest, full hang, shoulder blades lead, no swinging.",
+    "key_technical_checkpoints": "Grip wider than shoulders, chest to bar, dead hang between reps, controlled descent.",
+    "tutor_video": "https://www.youtube.com/embed/3YvfRx31xDE",
+    "instructions": [
+      "Hang from bar with grip 6-8 inches wider than shoulder-width, palms forward",
+      "Start from full dead hang with arms completely straight",
+      "Initiate pull by depressing shoulder blades and engaging lats",
+      "Pull body up until upper chest touches or nears the bar",
+      "Lower with control back to full dead hang position",
+      "Avoid swinging or kipping, repeat for desired reps"
+    ]
+  },
+  {
+    "name": "Meadows Row",
+    "category": "Back",
+    "level": "Advanced",
+    "tags": [
+      "Strength",
+      "Barbell",
+      "Unilateral"
+    ],
+    "description": "One-arm landmine row named after John Meadows, excellent for unilateral back development and core stability.",
+    "key_principles": "Staggered stance, pull to hip, full stretch, rotation through torso, squeeze at top.",
+    "key_technical_checkpoints": "Landmine setup, staggered stance, arm fully extends, pull through lat, no excessive trunk rotation.",
+    "tutor_video": "https://www.youtube.com/embed/EsmIWi_0lio",
+    "instructions": [
+      "Set up barbell in landmine, stand perpendicular with staggered stance",
+      "Bend at hips with chest up, grip end of bar with one hand",
+      "Pull bar toward hip in arcing motion, keeping elbow close",
+      "Rotate slightly through torso, squeeze lat at top position",
+      "Lower with control to full arm extension and stretch",
+      "Complete all reps on one side before switching"
+    ]
+  },
+  {
+    "name": "Chest-Supported Row",
+    "category": "Back",
+    "level": "Beginner",
+    "tags": [
+      "Dumbbell",
+      "Machine",
+      "Isolation"
+    ],
+    "description": "Row variation with chest support removing lower back stress, allowing focus on back muscles.",
+    "key_principles": "Chest braced, pull with elbows, squeeze shoulder blades, no momentum, full range.",
+    "key_technical_checkpoints": "Chest firmly against pad, neutral spine, elbows drive back, peak contraction hold.",
+    "tutor_video": "https://www.youtube.com/embed/jLvqKgW-_G8",
+    "instructions": [
+      "Set incline bench to 45 degrees or use chest-supported row machine",
+      "Lie face down with chest firmly against pad, arms hanging straight",
+      "Grip dumbbells or handles with neutral or pronated grip",
+      "Pull weights toward lower chest by driving elbows back",
+      "Squeeze shoulder blades together at top, hold briefly",
+      "Lower with control to full extension, repeat"
+    ]
+  },
+  {
+    "name": "Front Squat",
+    "category": "Legs",
+    "level": "Advanced",
+    "tags": [
+      "Strength",
+      "Barbell",
+      "Quads"
+    ],
+    "description": "Barbell squat with bar positioned in front, heavily targeting quadriceps and requiring excellent mobility.",
+    "key_principles": "Upright torso, elbows high, drive through full foot, core braced, controlled descent.",
+    "key_technical_checkpoints": "Bar on front delts, elbows up, knees track toes, depth to parallel or below, vertical torso.",
+    "tutor_video": "https://www.youtube.com/embed/wyDbagKS7Rg",
+    "instructions": [
+      "Approach bar, position on front deltoids with elbows high, clean grip or cross-arm grip",
+      "Unrack bar, step back, feet shoulder-width with slight toe out",
+      "Brace core hard, initiate squat by breaking at knees and hips simultaneously",
+      "Descend keeping elbows high and torso upright until thighs parallel or below",
+      "Drive through full foot, maintaining vertical torso angle",
+      "Stand to full extension, repeat while maintaining bar position and elbow height"
+    ]
+  },
+  {
+    "name": "Hack Squat",
+    "category": "Legs",
+    "level": "Intermediate",
+    "tags": [
+      "Machine",
+      "Quads",
+      "Hypertrophy"
+    ],
+    "description": "Machine-based squat variation isolating quadriceps with reduced spinal loading.",
+    "key_principles": "Back against pad, controlled tempo, full range of motion, push through heels, knees aligned.",
+    "key_technical_checkpoints": "Back flat on pad, feet mid-platform, knees track toes, depth controlled, no lockout bounce.",
+    "tutor_video": "https://www.youtube.com/embed/0tn5K9NlCfo",
+    "instructions": [
+      "Position back against pad, shoulders under pads, feet mid-platform shoulder-width",
+      "Release safety handles, lower body by bending knees",
+      "Descend until thighs parallel to platform or deeper if mobility allows",
+      "Keep back pressed against pad, core engaged throughout",
+      "Drive through heels and mid-foot to press platform away",
+      "Extend to just before lockout, maintain tension, repeat"
+    ]
+  },
+  {
+    "name": "Nordic Hamstring Curl",
+    "category": "Legs",
+    "level": "Advanced",
+    "tags": [
+      "Bodyweight",
+      "Hamstrings",
+      "Eccentric"
+    ],
+    "description": "Intense bodyweight hamstring exercise focusing on eccentric strength, excellent for injury prevention.",
+    "key_principles": "Controlled descent, use hamstrings to brake, push back up with hands if needed, gradual progression.",
+    "key_technical_checkpoints": "Feet anchored, body straight, hamstrings engaged throughout, controlled eccentric phase.",
+    "tutor_video": "https://www.youtube.com/embed/6NCN6kOagfY",
+    "instructions": [
+      "Kneel on pad with feet secured under stable object or partner holding ankles",
+      "Keep body in straight line from knees to shoulders, arms ready to catch",
+      "Slowly lean forward, resisting with hamstrings as long as possible",
+      "Use hamstrings to control descent as body lowers toward ground",
+      "Catch yourself with hands at bottom, push back to start if needed",
+      "Over time, increase range and resistance as hamstring strength improves"
+    ]
+  },
+  {
+    "name": "Leg Curl",
+    "category": "Legs",
+    "level": "Beginner",
+    "tags": [
+      "Machine",
+      "Hamstrings",
+      "Isolation"
+    ],
+    "description": "Isolation exercise for hamstrings using machine, lying or seated variation for posterior chain development.",
+    "key_principles": "Full range of motion, squeeze at peak, slow eccentric, avoid using momentum, ankles flexed.",
+    "key_technical_checkpoints": "Pad on lower calves, hips down, full extension to full flexion, no hip lift.",
+    "tutor_video": "https://www.youtube.com/embed/ELOCsoDSmrg",
+    "instructions": [
+      "Lie face down on leg curl machine, pad positioned just above heels",
+      "Grip handles, keep hips pressed into pad throughout movement",
+      "Curl legs up by flexing knees, bringing heels toward glutes",
+      "Squeeze hamstrings hard at top position, hold briefly",
+      "Lower weight with control to full extension without letting weight stack touch",
+      "Maintain tension throughout, repeat for desired reps"
+    ]
+  },
+  {
+    "name": "Sissy Squat",
+    "category": "Legs",
+    "level": "Advanced",
+    "tags": [
+      "Bodyweight",
+      "Quads",
+      "Knee Health"
+    ],
+    "description": "Advanced bodyweight quad exercise with extreme knee flexion, building strength and resilience in quads and knees.",
+    "key_principles": "Lean back while descending, knees push forward, maintain straight line, use support initially.",
+    "key_technical_checkpoints": "Heels may lift, body leans back, knees well forward of toes, controlled range, gradual progression.",
+    "tutor_video": "https://www.youtube.com/embed/VUiFlZ2FsKA",
+    "instructions": [
+      "Stand with feet close together, hold support with one hand if needed",
+      "Rise onto balls of feet, maintain this position throughout",
+      "Lean entire body back while pushing knees forward",
+      "Lower body in controlled manner keeping torso and thighs in line",
+      "Descend until deep knee bend achieved, quads fully stretched",
+      "Contract quads to return to start position, repeat with control"
+    ]
+  },
+  {
+    "name": "Sumo Deadlift",
+    "category": "Legs",
+    "level": "Intermediate",
+    "tags": [
+      "Strength",
+      "Barbell",
+      "Glutes"
+    ],
+    "description": "Deadlift variation with wide stance emphasizing glutes, adductors and reducing range of motion.",
+    "key_principles": "Wide stance, toes out, vertical shins, chest up, drive through floor, hip hinge pattern.",
+    "key_technical_checkpoints": "Feet wide and angled out, knees track toes, arms inside legs, bar close to body, hips and shoulders rise together.",
+    "tutor_video": "https://www.youtube.com/embed/XsrD5y8EIKU",
+    "instructions": [
+      "Approach bar with wide stance (feet near plates), toes angled 30-45 degrees out",
+      "Hinge at hips, bend knees, grip bar with arms inside legs",
+      "Flatten back, chest up, create tension by pulling slack from bar",
+      "Drive through full foot, extending hips and knees simultaneously",
+      "Keep bar close to body, finish with lockout by driving hips through",
+      "Lower bar with control maintaining back position, repeat"
+    ]
+  },
+  {
+    "name": "Cable Lateral Raise",
+    "category": "Shoulders",
+    "level": "Beginner",
+    "tags": [
+      "Cable",
+      "Side Delts",
+      "Isolation"
+    ],
+    "description": "Cable variation of lateral raise providing constant tension throughout movement for shoulder width.",
+    "key_principles": "Slight forward lean, lead with elbow, raise to shoulder height, control descent, avoid momentum.",
+    "key_technical_checkpoints": "Cable from low position, elbow slightly bent, raise to shoulder level, thumb slightly down.",
+    "tutor_video": "https://www.youtube.com/embed/X8tZOGFovj0",
+    "instructions": [
+      "Stand sideways to cable machine, grab handle with far hand, cable at low position",
+      "Step away to create tension, slight bend in elbow, lean slightly away from cable",
+      "Raise arm out to side in arc motion until hand reaches shoulder height",
+      "Lead with elbow, keep wrist and elbow at same height",
+      "Pause briefly at top, lower with control against resistance",
+      "Complete all reps, then switch sides"
+    ]
+  },
+  {
+    "name": "Landmine Press",
+    "category": "Shoulders",
+    "level": "Intermediate",
+    "tags": [
+      "Strength",
+      "Barbell",
+      "Unilateral"
+    ],
+    "description": "Single-arm overhead press using landmine setup, excellent for shoulder strength and core stability.",
+    "key_principles": "Vertical press path, core engaged, no excessive lean, full extension, controlled eccentric.",
+    "key_technical_checkpoints": "Landmine secured, elbow under wrist, press to full lockout, maintain square hips and shoulders.",
+    "tutor_video": "https://www.youtube.com/embed/CUZRUJfLxFs",
+    "instructions": [
+      "Load barbell in landmine, face the landmine, feet shoulder-width",
+      "Pick up end of barbell at shoulder height, elbow under wrist",
+      "Brace core, press barbell up and slightly back to full extension",
+      "Keep wrist neutral, drive through full range of motion",
+      "Lower with control back to shoulder position",
+      "Complete all reps on one side before switching"
+    ]
+  },
+  {
+    "name": "Seated Dumbbell Press",
+    "category": "Shoulders",
+    "level": "Beginner",
+    "tags": [
+      "Strength",
+      "Dumbbell",
+      "Mass"
+    ],
+    "description": "Seated overhead press with dumbbells for shoulder development with back support for stability.",
+    "key_principles": "Back supported, press straight up, full range, control descent, avoid excessive arch.",
+    "key_technical_checkpoints": "Bench at 85-90 degrees, elbows below wrists, press to lockout overhead, smooth motion.",
+    "tutor_video": "https://www.youtube.com/embed/SgyUoY0IZ7A",
+    "instructions": [
+      "Set bench to near-vertical position, sit with back firmly against pad",
+      "Bring dumbbells to shoulder height, palms forward, elbows bent",
+      "Brace core, press dumbbells straight up until arms fully extended",
+      "Avoid hitting dumbbells together at top, keep tension on shoulders",
+      "Lower dumbbells with control to shoulder height",
+      "Repeat maintaining strict form and full range of motion"
+    ]
+  },
+  {
+    "name": "Bradford Press",
+    "category": "Shoulders",
+    "level": "Advanced",
+    "tags": [
+      "Barbell",
+      "Hypertrophy",
+      "Time Under Tension"
+    ],
+    "description": "Continuous press variation moving bar from front to back of head, maintaining constant shoulder tension.",
+    "key_principles": "Partial range, front to back, constant tension, light weight, strict form, no momentum.",
+    "key_technical_checkpoints": "Bar stays above head level, controlled transitions, shoulder-width grip, maintain upright posture.",
+    "tutor_video": "https://www.youtube.com/embed/gD6XoIXGmDI",
+    "instructions": [
+      "Load bar with light weight, position in front rack on shoulders",
+      "Press bar partially up (not full lockout) to forehead level",
+      "Move bar behind head to back of neck without lowering below ear level",
+      "Press partially back up, return bar to front position",
+      "Continue alternating front to back, maintaining tension throughout",
+      "Complete desired reps or time, constant motion without rest"
+    ]
+  },
+  {
+    "name": "Cable Tricep Overhead Extension",
+    "category": "Arms",
+    "level": "Beginner",
+    "tags": [
+      "Cable",
+      "Triceps",
+      "Long Head"
+    ],
+    "description": "Overhead cable extension targeting tricep long head with arms overhead position for maximum stretch.",
+    "key_principles": "Elbows high and forward, only forearms move, full stretch, controlled extension, squeeze at bottom.",
+    "key_technical_checkpoints": "Face away from cable, rope behind head, elbows stationary, full extension, slow eccentric.",
+    "tutor_video": "https://www.youtube.com/embed/OpRMRhr0Ycc",
+    "instructions": [
+      "Set cable at low position, attach rope handle, face away from machine",
+      "Grip rope overhead with both hands, step forward to create tension",
+      "Position elbows high beside head, rope behind head at starting position",
+      "Extend arms overhead by contracting triceps until arms straight",
+      "Squeeze triceps at full extension for a moment",
+      "Lower with control feeling stretch in triceps, repeat"
+    ]
+  },
+  {
+    "name": "Concentration Curl",
+    "category": "Arms",
+    "level": "Beginner",
+    "tags": [
+      "Dumbbell",
+      "Biceps",
+      "Peak"
+    ],
+    "description": "Isolated bicep curl with elbow braced against inner thigh for strict form and peak contraction.",
+    "key_principles": "Elbow stationary, full supination, squeeze at top, slow eccentric, no momentum.",
+    "key_technical_checkpoints": "Seated position, elbow inside thigh, full range, wrist supinated at top, controlled throughout.",
+    "tutor_video": "https://www.youtube.com/embed/Jvj2wV0vOYU",
+    "instructions": [
+      "Sit on bench, spread legs, hold dumbbell in one hand",
+      "Brace elbow against inside of same-side thigh, arm extended",
+      "Curl dumbbell up toward shoulder keeping elbow stationary",
+      "Rotate wrist to full supination at top, squeeze bicep hard",
+      "Lower with control to full arm extension without losing tension",
+      "Complete all reps before switching arms"
+    ]
+  },
+  {
+    "name": "EZ Bar Curl",
+    "category": "Arms",
+    "level": "Beginner",
+    "tags": [
+      "Barbell",
+      "Biceps",
+      "Mass"
+    ],
+    "description": "Bicep curl using EZ bar for reduced wrist strain and effective bicep development.",
+    "key_principles": "Elbows at sides, controlled curl, full range, no swinging, constant tension.",
+    "key_technical_checkpoints": "Grip on angled portion, elbows fixed, curl to full contraction, slow descent.",
+    "tutor_video": "https://www.youtube.com/embed/GNO4OtYoCYk",
+    "instructions": [
+      "Stand with feet shoulder-width, grip EZ bar at angled portions",
+      "Let arms hang fully extended, elbows close to sides",
+      "Curl bar up toward shoulders by contracting biceps",
+      "Keep elbows stationary throughout movement, no swinging",
+      "Squeeze biceps at top for peak contraction",
+      "Lower bar with control to full extension, repeat"
+    ]
+  },
+  {
+    "name": "Overhead Tricep Extension",
+    "category": "Arms",
+    "level": "Intermediate",
+    "tags": [
+      "Dumbbell",
+      "Triceps",
+      "Stretch"
+    ],
+    "description": "Overhead dumbbell extension for triceps emphasizing long head with deep stretch.",
+    "key_principles": "Elbows close to head, deep stretch, controlled movement, squeeze at top, bilateral or unilateral.",
+    "key_technical_checkpoints": "Dumbbell behind head, elbows pointing up, full extension, no elbow flare.",
+    "tutor_video": "https://www.youtube.com/embed/OpRMRhr0Ycc",
+    "instructions": [
+      "Stand or sit with dumbbell held with both hands overhead",
+      "Keep upper arms vertical with elbows pointing up and close to head",
+      "Lower dumbbell behind head by bending elbows until deep stretch felt",
+      "Keep elbows as stationary as possible throughout movement",
+      "Extend arms by contracting triceps until arms straight overhead",
+      "Squeeze triceps briefly at top, lower with control, repeat"
+    ]
+  },
+  {
+    "name": "Zottman Curl",
+    "category": "Arms",
+    "level": "Intermediate",
+    "tags": [
+      "Dumbbell",
+      "Biceps",
+      "Forearms"
+    ],
+    "description": "Curl variation combining supinated curl up and pronated lower for complete arm development.",
+    "key_principles": "Supinate on way up, pronate at top, control eccentric, full range, targets biceps and forearms.",
+    "key_technical_checkpoints": "Palms up during curl, rotate at top, palms down during lowering, elbows stationary.",
+    "tutor_video": "https://www.youtube.com/embed/ZrpRBgswtHs",
+    "instructions": [
+      "Stand with dumbbells at sides, arms extended, palms forward",
+      "Curl dumbbells up toward shoulders with standard supinated curl",
+      "At top of movement, rotate wrists so palms face down (pronated)",
+      "Lower dumbbells slowly in pronated position back to start",
+      "At bottom, rotate wrists back to palms-up position",
+      "Immediately begin next rep, continuous motion"
+    ]
+  },
+  {
+    "name": "Ab Wheel Rollout",
+    "category": "Core",
+    "level": "Advanced",
+    "tags": [
+      "Equipment",
+      "Abs",
+      "Anti-Extension"
+    ],
+    "description": "Intense core exercise using ab wheel, training anti-extension strength and full core stability.",
+    "key_principles": "Brace core hard, controlled rollout, prevent lower back arch, use hips to return, progressive range.",
+    "key_technical_checkpoints": "Neutral spine maintained, full extension if able, no hip sag, controlled throughout.",
+    "tutor_video": "https://www.youtube.com/embed/A3uK5TPzHq8",
+    "instructions": [
+      "Kneel on pad with ab wheel in front, hands on handles",
+      "Brace core maximally, engage glutes to prevent back arch",
+      "Slowly roll wheel forward extending arms and body",
+      "Maintain rigid core, go as far as possible while keeping back neutral",
+      "Squeeze core and glutes to roll back to starting position",
+      "Start with shorter range, progress to full extension over time"
+    ]
+  },
+  {
+    "name": "Hollow Body Hold",
+    "category": "Core",
+    "level": "Intermediate",
+    "tags": [
+      "Bodyweight",
+      "Isometric",
+      "Full Core"
+    ],
+    "description": "Fundamental gymnastic position building total core strength and body tension awareness.",
+    "key_principles": "Lower back pressed to floor, legs and shoulders off ground, constant tension, breathe steadily.",
+    "key_technical_checkpoints": "No lower back arch, chin tucked, arms extended overhead, legs straight, controlled breathing.",
+    "tutor_video": "https://www.youtube.com/embed/LlDNef_Ztsc",
+    "instructions": [
+      "Lie on back, press lower back into floor by engaging abs",
+      "Extend arms overhead, legs straight, point toes",
+      "Raise shoulders and legs off floor 6-12 inches",
+      "Press lower back down continuously, creating 'hollow' body position",
+      "Hold this position breathing steadily, no arching allowed",
+      "Start with 10-20 seconds, progress to longer holds"
+    ]
+  },
+  {
+    "name": "Cable Crunch",
+    "category": "Core",
+    "level": "Beginner",
+    "tags": [
+      "Cable",
+      "Abs",
+      "Resistance"
+    ],
+    "description": "Kneeling cable crunch allowing progressive overload for abdominal development.",
+    "key_principles": "Rope to forehead, crunch down, squeeze abs, controlled return, weight progression possible.",
+    "key_technical_checkpoints": "Rope behind head, knees on pad, hip flexion minimal, spine flexion emphasized.",
+    "tutor_video": "https://www.youtube.com/embed/2RrGnjxSsiA",
+    "instructions": [
+      "Kneel facing high cable with rope attachment, pull rope to forehead",
+      "Hold rope behind or beside head, elbows in fixed position",
+      "Crunch downward by flexing spine, bringing elbows toward knees",
+      "Focus on abs doing the work, minimize hip flexion",
+      "Squeeze abs hard at bottom position, hold briefly",
+      "Return to start with control maintaining tension, repeat"
+    ]
+  },
+  {
+    "name": "Dragon Flag",
+    "category": "Core",
+    "level": "Advanced",
+    "tags": [
+      "Bodyweight",
+      "Full Core",
+      "Advanced"
+    ],
+    "description": "Bruce Lee's famous exercise requiring extreme core strength and control of entire body.",
+    "key_principles": "Body rigid as a board, lower with control, minimal lower back contact, shoulder blade pivot point.",
+    "key_technical_checkpoints": "Grip bench behind head, body straight, lower to near-parallel, raise without momentum.",
+    "tutor_video": "https://www.youtube.com/embed/pvz7k5gO-DE",
+    "instructions": [
+      "Lie on bench, grip edges behind head firmly for stability",
+      "Raise entire body except shoulder blades off bench, body straight",
+      "Keep body rigid, slowly lower legs and torso toward horizontal",
+      "Maintain straight body line, control descent with core strength",
+      "Before touching bench, use abs to raise body back to vertical",
+      "Start with partial range, progress gradually over weeks/months"
+    ]
+  },
+  {
+    "name": "Pallof Press",
+    "category": "Core",
+    "level": "Intermediate",
+    "tags": [
+      "Cable",
+      "Anti-Rotation",
+      "Stability"
+    ],
+    "description": "Anti-rotation exercise training core stability by resisting rotational forces from cable.",
+    "key_principles": "Square hips and shoulders, press out and resist rotation, core engaged throughout, controlled tempo.",
+    "key_technical_checkpoints": "Cable at chest height, perpendicular stance, full extension without rotation, slow return.",
+    "tutor_video": "https://www.youtube.com/embed/5_8d8vHgZvU",
+    "instructions": [
+      "Set cable at chest height, stand perpendicular to machine",
+      "Hold handle with both hands at chest, step away for tension",
+      "Stand with feet shoulder-width, brace core to resist rotation",
+      "Press handle straight out from chest, resist cable's pull to rotate",
+      "Hold extended position briefly maintaining square hips and shoulders",
+      "Return handle to chest with control, repeat all reps, then switch sides"
+    ]
+  },
+  {
+    "name": "Battle Ropes",
+    "category": "HIIT",
+    "level": "Intermediate",
+    "tags": [
+      "Cardio",
+      "Full Body",
+      "Power"
+    ],
+    "description": "High-intensity rope exercise building cardiovascular endurance, grip strength, and power.",
+    "key_principles": "Athletic stance, generate power from hips, maintain rhythm, work intervals, breathe steadily.",
+    "key_technical_checkpoints": "Slight knee bend, core engaged, arms alternate or simultaneous, rope waves consistent.",
+    "tutor_video": "https://www.youtube.com/embed/658VcTBuovQ",
+    "instructions": [
+      "Face anchor point with rope ends in each hand, feet shoulder-width",
+      "Bend knees slightly, hinge at hips, engage core for athletic stance",
+      "Create waves by alternating arms up and down with power",
+      "Generate force from core and hips, not just arms",
+      "Maintain consistent wave amplitude and tempo throughout interval",
+      "Work for 20-30 seconds, rest, repeat for multiple rounds"
+    ]
+  },
+  {
+    "name": "Prowler Push",
+    "category": "HIIT",
+    "level": "Advanced",
+    "tags": [
+      "Sled",
+      "Legs",
+      "Conditioning"
+    ],
+    "description": "Weighted sled push for building lower body power, strength endurance, and conditioning.",
+    "key_principles": "Low body position, drive through legs, maintain pace, push through full foot, progressive loading.",
+    "key_technical_checkpoints": "Arms extended, torso angled forward, legs drive powerfully, short powerful steps.",
+    "tutor_video": "https://www.youtube.com/embed/9XRRXaUpnLk",
+    "instructions": [
+      "Load prowler/sled with appropriate weight, grip high or low handles",
+      "Position body leaning into sled, arms extended, athletic stance",
+      "Drive through legs taking short, powerful steps",
+      "Keep core braced, maintain forward lean throughout",
+      "Push for distance (15-40 meters) at consistent pace",
+      "Rest as needed, repeat for multiple rounds or distances"
+    ]
+  },
+  {
+    "name": "Broad Jump",
+    "category": "HIIT",
+    "level": "Intermediate",
+    "tags": [
+      "Plyometric",
+      "Power",
+      "Legs"
+    ],
+    "description": "Explosive horizontal jump testing and building lower body power and athletic performance.",
+    "key_principles": "Swing arms, load hips, explode forward, land softly, full body coordination.",
+    "key_technical_checkpoints": "Hip hinge load, arm swing for momentum, jump for distance, soft landing, balance on landing.",
+    "tutor_video": "https://www.youtube.com/embed/hSunks_4wIE",
+    "instructions": [
+      "Stand with feet shoulder-width, prepare for broad jump",
+      "Swing arms back while hinging at hips, loading legs like a spring",
+      "Explode forward swinging arms forward for momentum",
+      "Drive through legs, extend hips forcefully, jump for maximum distance",
+      "Land on both feet simultaneously, absorbing impact with bent knees",
+      "Stick landing with balance, reset, repeat for desired reps"
+    ]
+  },
+  {
+    "name": "Tuck Jump",
+    "category": "HIIT",
+    "level": "Advanced",
+    "tags": [
+      "Plyometric",
+      "Explosive",
+      "Full Body"
+    ],
+    "description": "Maximum vertical jump bringing knees to chest, developing explosive power and reactivity.",
+    "key_principles": "Maximum effort, quick ground contact, bring knees high, land softly, minimize ground time between reps.",
+    "key_technical_checkpoints": "Arms help drive up, knees to chest at peak, soft landing, immediate rebound if doing continuous.",
+    "tutor_video": "https://www.youtube.com/embed/ZR6aFqdRi2Y",
+    "instructions": [
+      "Stand with feet shoulder-width in athletic ready position",
+      "Dip down quickly into quarter squat, arms swing back",
+      "Explode upward jumping as high as possible, swing arms up",
+      "Pull knees up toward chest at peak height of jump",
+      "Extend legs before landing, land softly on balls of feet",
+      "If doing multiple reps, quickly rebound into next jump"
+    ]
+  },
+  {
+    "name": "Assault Bike Sprint",
+    "category": "HIIT",
+    "level": "Intermediate",
+    "tags": [
+      "Cardio",
+      "Full Body",
+      "Conditioning"
+    ],
+    "description": "High-intensity air bike sprints using arms and legs simultaneously for metabolic conditioning.",
+    "key_principles": "Full body effort, push and pull arms, drive with legs, maintain high cadence, interval-based.",
+    "key_technical_checkpoints": "Proper seat height, both arms and legs working, maintain pace, controlled breathing.",
+    "tutor_video": "https://www.youtube.com/embed/x6UyziJYpao",
+    "instructions": [
+      "Set seat height so slight knee bend at bottom of pedal stroke",
+      "Grip handles firmly, feet secured in pedal straps",
+      "Begin sprinting using both arms and legs at maximum effort",
+      "Push and pull handles while driving legs through full pedal stroke",
+      "Maintain highest sustainable cadence for sprint duration (20-60 seconds)",
+      "Rest for 1-2 minutes or recovery interval, repeat for desired rounds"
+    ]
+  },
+  {
+    "name": "Neck Flexion",
+    "category": "Neck",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Neck Strength",
+      "Posture"
+    ],
+    "description": "Forward neck strengthening exercise building anterior neck muscles and improving posture.",
+    "key_principles": "Controlled movement, gentle resistance, never jerk, progressive overload, maintain alignment.",
+    "key_technical_checkpoints": "Smooth motion, no jerking, controlled resistance, neutral spine, breathe steadily.",
+    "tutor_video": "https://www.youtube.com/embed/gimeRpdqWQw",
+    "instructions": [
+      "Lie on back on bench with head hanging off edge",
+      "Place light weight plate or towel on forehead for resistance",
+      "Slowly tuck chin and lift head up toward chest",
+      "Hold briefly at top position with controlled tension",
+      "Lower head back down with control to starting position",
+      "Repeat for desired reps, never use momentum or jerking"
+    ]
+  },
+  {
+    "name": "Neck Extension",
+    "category": "Neck",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Neck Strength",
+      "Posterior"
+    ],
+    "description": "Backward neck strengthening targeting posterior neck muscles for balanced development.",
+    "key_principles": "Gentle resistance, controlled tempo, no excessive range, build gradually, proper breathing.",
+    "key_technical_checkpoints": "Face down position, smooth extension, no hyperextension, equal tempo up and down.",
+    "tutor_video": "https://www.youtube.com/embed/gimeRpdqWQw",
+    "instructions": [
+      "Lie face down on bench with head hanging off edge",
+      "Place light weight plate or hands on back of head for resistance",
+      "Slowly extend neck raising head up toward ceiling",
+      "Keep movement controlled, don't hyperextend neck",
+      "Hold briefly at top with posterior neck muscles engaged",
+      "Lower head back to start position with control, repeat"
+    ]
+  },
+  {
+    "name": "Neck Lateral Flexion",
+    "category": "Neck",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Neck Strength",
+      "Lateral"
+    ],
+    "description": "Side neck strengthening for lateral flexors, important for complete neck development.",
+    "key_principles": "Lie sideways, controlled motion, equal both sides, light resistance, no jerking.",
+    "key_technical_checkpoints": "Sideways position, ear toward shoulder, controlled throughout, same reps both sides.",
+    "tutor_video": "https://www.youtube.com/embed/gimeRpdqWQw",
+    "instructions": [
+      "Lie on side on bench with head hanging off edge",
+      "Place light weight plate or hand on side of head",
+      "Slowly lift head sideways bringing ear toward shoulder",
+      "Keep movement in frontal plane, no rotation",
+      "Hold briefly at top position, lower with control",
+      "Complete all reps on one side, then switch to other side"
+    ]
+  },
+  {
+    "name": "Neck Isometric Holds",
+    "category": "Neck",
+    "level": "Beginner",
+    "tags": [
+      "Isometric",
+      "Stability",
+      "Injury Prevention"
+    ],
+    "description": "Static neck strengthening using isometric holds in multiple directions for stability.",
+    "key_principles": "No movement, push into resistance, hold steady tension, all directions, breathing continues.",
+    "key_technical_checkpoints": "Position held, consistent pressure, no movement, balanced effort all directions.",
+    "tutor_video": "https://www.youtube.com/embed/0kWF968uFXY",
+    "instructions": [
+      "Sit or stand with good posture, place hand on forehead",
+      "Push head forward into hand while resisting with hand",
+      "Hold this isometric contraction for 10-20 seconds",
+      "Repeat with hand on back of head pushing backward",
+      "Repeat with hand on each side of head",
+      "Maintain steady breathing, never hold breath during holds"
+    ]
+  },
+  {
+    "name": "Neck Rotations (Controlled)",
+    "category": "Neck",
+    "level": "Beginner",
+    "tags": [
+      "Mobility",
+      "Warm-up",
+      "Range of Motion"
+    ],
+    "description": "Controlled neck rotations for mobility, warm-up, and maintaining healthy range of motion.",
+    "key_principles": "Slow and controlled, full range safely, no forcing, both directions equally, relaxed shoulders.",
+    "key_technical_checkpoints": "Smooth motion, no jerking, comfortable range, shoulders down, even tempo.",
+    "tutor_video": "https://www.youtube.com/embed/XCFap7diu3E",
+    "instructions": [
+      "Sit or stand with shoulders relaxed and down",
+      "Slowly turn head to look over one shoulder as far as comfortable",
+      "Hold briefly, feeling gentle stretch",
+      "Return to center with control",
+      "Rotate to opposite side, same range and tempo",
+      "Continue alternating sides for desired reps or time"
+    ]
+  },
+  {
+    "name": "Bicycle Crunch (Obliques)",
+    "category": "Waist",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Obliques",
+      "Rotation"
+    ],
+    "description": "Dynamic core exercise emphasizing obliques through rotation and opposite elbow-to-knee movement.",
+    "key_principles": "Rotate through core, opposite elbow to knee, controlled tempo, full extension, breathe rhythmically.",
+    "key_technical_checkpoints": "Lower back pressed down, rotate from core, full leg extension, steady pace.",
+    "tutor_video": "https://www.youtube.com/embed/P7iESCcoIaI",
+    "instructions": [
+      "Lie on back, hands behind head, legs extended, lower back pressed to floor",
+      "Bring one knee toward chest while lifting shoulder and rotating torso",
+      "Touch opposite elbow to knee at peak of crunch",
+      "Simultaneously extend other leg straight out hovering above ground",
+      "Switch sides in fluid pedaling motion, rotating through core",
+      "Continue alternating with controlled rhythm for desired reps"
+    ]
+  },
+  {
+    "name": "Wood Chop",
+    "category": "Waist",
+    "level": "Intermediate",
+    "tags": [
+      "Cable",
+      "Obliques",
+      "Rotation"
+    ],
+    "description": "Diagonal cable chop movement training rotational power and oblique strength.",
+    "key_principles": "Rotate through core, diagonal path, hips and shoulders move together, control the weight.",
+    "key_technical_checkpoints": "Cable high to low, pivot on back foot, arms stay extended, full core rotation.",
+    "tutor_video": "https://www.youtube.com/embed/pAplQXk3dkU",
+    "instructions": [
+      "Set cable at high position, stand sideways to machine, grab handle with both hands",
+      "Start with arms extended up near cable, rotate torso toward cable",
+      "Pull cable down and across body in diagonal chopping motion",
+      "Rotate through hips and core, pivot on back foot",
+      "Finish with hands outside opposite hip, core fully rotated",
+      "Return with control, complete all reps one side, then switch"
+    ]
+  },
+  {
+    "name": "Reverse Wood Chop",
+    "category": "Waist",
+    "level": "Intermediate",
+    "tags": [
+      "Cable",
+      "Obliques",
+      "Anti-Rotation"
+    ],
+    "description": "Low-to-high diagonal cable movement targeting obliques and rotational strength.",
+    "key_principles": "Rotate from hips, low to high path, controlled movement, maintain tension, core driven.",
+    "key_technical_checkpoints": "Cable low to high, pivot feet, arms extended, full rotation, explosive but controlled.",
+    "tutor_video": "https://www.youtube.com/embed/9YkCZXv7upU",
+    "instructions": [
+      "Set cable at low position, stand sideways, grip handle with both hands",
+      "Start in athletic stance with hands at low position near cable",
+      "Rotate and lift cable up and across body in diagonal path",
+      "Pivot on feet, extend through hips, rotate core powerfully",
+      "Finish with arms extended high on opposite side",
+      "Control back to start, complete all reps, then switch sides"
+    ]
+  },
+  {
+    "name": "Side Bend (Dumbbell)",
+    "category": "Waist",
+    "level": "Beginner",
+    "tags": [
+      "Dumbbell",
+      "Obliques",
+      "Lateral Flexion"
+    ],
+    "description": "Standing dumbbell side bend isolating obliques through lateral flexion.",
+    "key_principles": "Pure lateral movement, controlled bend, stretch opposite side, no forward/back lean, light weight.",
+    "key_technical_checkpoints": "Stand tall, bend directly to side, dumbbell slides down leg, opposite oblique stretches.",
+    "tutor_video": "https://www.youtube.com/embed/dL9ZzqtQI5c",
+    "instructions": [
+      "Stand with feet shoulder-width, hold dumbbell in one hand at side",
+      "Place other hand behind head or on hip for balance",
+      "Keep shoulders back, bend directly to weighted side",
+      "Let dumbbell slide down leg, feeling stretch on opposite side",
+      "Contract obliques to return to upright position",
+      "Complete all reps on one side before switching to other side"
+    ]
+  },
+  {
+    "name": "Hanging Oblique Raise",
+    "category": "Waist",
+    "level": "Advanced",
+    "tags": [
+      "Bodyweight",
+      "Obliques",
+      "Hanging"
+    ],
+    "description": "Advanced hanging exercise bringing knees to side targeting obliques with rotation.",
+    "key_principles": "Hang dead, rotate hips, bring knees to side, controlled lower, no swinging.",
+    "key_technical_checkpoints": "Dead hang start, knees come to side not center, hip rotation, slow eccentric.",
+    "tutor_video": "https://www.youtube.com/embed/QyVq5oUBpss",
+    "instructions": [
+      "Hang from pull-up bar with overhand grip, arms fully extended",
+      "Engage core, rotate hips and bring knees up toward one elbow",
+      "Focus on oblique contraction pulling knees to the side",
+      "Hold briefly at top with knees elevated and rotated",
+      "Lower legs with control back to dead hang",
+      "Alternate sides each rep or complete all reps one side first"
+    ]
+  },
+  {
+    "name": "Landmine Rotation",
+    "category": "Waist",
+    "level": "Intermediate",
+    "tags": [
+      "Barbell",
+      "Obliques",
+      "Power"
+    ],
+    "description": "Rotational power exercise using landmine for explosive oblique and core strength.",
+    "key_principles": "Explosive rotation, pivot on feet, arms stay extended, drive from hips and core.",
+    "key_technical_checkpoints": "Landmine setup, hold bar at chest, rotate side to side, feet pivot, power from core.",
+    "tutor_video": "https://www.youtube.com/embed/CUZRUJfLxFs",
+    "instructions": [
+      "Load barbell in landmine, grip end with both hands at chest level",
+      "Stand with feet shoulder-width, arms extended holding bar at chest",
+      "Explosively rotate torso to one side, pivoting on feet",
+      "Keep arms relatively straight, power comes from core and hips",
+      "Rotate to opposite side in fluid motion, like swinging bat",
+      "Continue alternating sides with power and control"
+    ]
+  },
+  {
+    "name": "Glute Bridge",
+    "category": "Hips",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Glutes",
+      "Hip Extension"
+    ],
+    "description": "Fundamental hip extension exercise activating glutes and building hip strength.",
+    "key_principles": "Drive through heels, squeeze glutes at top, maintain neutral spine, full hip extension.",
+    "key_technical_checkpoints": "Feet flat, knees bent 90 degrees, shoulders on ground, hips fully extended, glutes squeezed.",
+    "tutor_video": "https://www.youtube.com/embed/3ryh7PNhz3E",
+    "instructions": [
+      "Lie on back with knees bent, feet flat on floor hip-width apart",
+      "Arms at sides or across chest, shoulders pressed into floor",
+      "Drive through heels, lift hips up toward ceiling",
+      "Squeeze glutes hard at top, creating straight line from knees to shoulders",
+      "Hold briefly maintaining glute contraction",
+      "Lower hips with control, lightly touch ground, repeat"
+    ]
+  },
+  {
+    "name": "Frog Pump",
+    "category": "Hips",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Glutes",
+      "Activation"
+    ],
+    "description": "High-rep glute activation exercise with feet together, excellent for glute pump and mind-muscle connection.",
+    "key_principles": "Feet together, knees out, squeeze glutes, high reps, constant tension, controlled tempo.",
+    "key_technical_checkpoints": "Soles of feet together, knees wide, hips fully extended, glutes contract maximally.",
+    "tutor_video": "https://www.youtube.com/embed/3ryh7PNhz3E",
+    "instructions": [
+      "Lie on back, bring soles of feet together letting knees fall out to sides",
+      "Position feet relatively close to glutes, frog-leg position",
+      "Drive through outside edges of feet, thrust hips up",
+      "Squeeze glutes as hard as possible at top position",
+      "Lower hips partway down maintaining tension, don't rest on ground",
+      "Pump hips up and down with rhythm for high reps (20-50+)"
+    ]
+  },
+  {
+    "name": "Single Leg Glute Bridge",
+    "category": "Hips",
+    "level": "Intermediate",
+    "tags": [
+      "Bodyweight",
+      "Glutes",
+      "Unilateral"
+    ],
+    "description": "Unilateral hip thrust variation challenging glutes and hip stability on single leg.",
+    "key_principles": "One leg elevated, drive through working heel, maintain level hips, squeeze glute, balance.",
+    "key_technical_checkpoints": "One foot down, other leg extended, hips level, full extension, working glute contracts.",
+    "tutor_video": "https://www.youtube.com/embed/BL0nv5YyuK0",
+    "instructions": [
+      "Lie on back, one foot flat on floor, extend other leg straight up",
+      "Keep extended leg straight and elevated throughout movement",
+      "Drive through heel of planted foot, lift hips up",
+      "Squeeze working glute, maintain level hips, no tilting",
+      "Lower with control, tap ground lightly",
+      "Complete all reps on one side before switching legs"
+    ]
+  },
+  {
+    "name": "Clamshell",
+    "category": "Hips",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Hip Abduction",
+      "Glute Med"
+    ],
+    "description": "Targeted hip abduction exercise for glute medius and hip external rotators, excellent for hip health.",
+    "key_principles": "Side-lying position, feet together, open top knee, squeeze glute, controlled tempo.",
+    "key_technical_checkpoints": "Lie on side, knees bent, feet together, top knee opens like clamshell, no hip rolling back.",
+    "tutor_video": "https://www.youtube.com/embed/EG5_gXcfozw",
+    "instructions": [
+      "Lie on side with knees bent 90 degrees, feet together",
+      "Rest head on bottom arm, keep hips stacked vertically",
+      "Keeping feet together, lift top knee up as high as possible",
+      "Focus on glute medius contraction, don't let hips roll back",
+      "Hold briefly at top position, squeeze glute",
+      "Lower knee with control, repeat all reps, then switch sides"
+    ]
+  },
+  {
+    "name": "Fire Hydrant",
+    "category": "Hips",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Hip Abduction",
+      "Glutes"
+    ],
+    "description": "Quadruped hip abduction exercise targeting glutes and hip stabilizers.",
+    "key_principles": "Table-top position, lift leg to side, knee stays bent, squeeze glute, no torso rotation.",
+    "key_technical_checkpoints": "Hands under shoulders, knees under hips, lift leg out to side, knee bent 90 degrees.",
+    "tutor_video": "https://www.youtube.com/embed/YanPpmDkRLU",
+    "instructions": [
+      "Start on hands and knees in table-top position",
+      "Keep core engaged, spine neutral throughout movement",
+      "Lift one leg out to side maintaining 90-degree knee bend",
+      "Raise knee to hip height or slightly above, like fire hydrant",
+      "Squeeze glute at top, avoid rotating torso or tilting pelvis",
+      "Lower with control, repeat all reps, then switch legs"
+    ]
+  },
+  {
+    "name": "Hip Airplane",
+    "category": "Hips",
+    "level": "Advanced",
+    "tags": [
+      "Bodyweight",
+      "Hip Mobility",
+      "Balance"
+    ],
+    "description": "Advanced single-leg hip mobility drill improving internal and external rotation while balancing.",
+    "key_principles": "Single leg balance, rotate at hip, control throughout, maintain balance, both directions.",
+    "key_technical_checkpoints": "Standing leg stable, hinge at hip, rotate leg internally and externally, smooth motion.",
+    "tutor_video": "https://www.youtube.com/embed/12NGWxpDlr8",
+    "instructions": [
+      "Stand on one leg, hinge forward at hip to about 45 degrees",
+      "Extend free leg behind you parallel to ground",
+      "Keeping hips hinged, rotate free leg like airplane propeller",
+      "Rotate from hip joint through full internal and external rotation",
+      "Maintain balance on standing leg throughout motion",
+      "Complete desired reps/rotations, then switch to other leg"
+    ]
+  },
+  {
+    "name": "90-90 Hip Stretch",
+    "category": "Hips",
+    "level": "Beginner",
+    "tags": [
+      "Mobility",
+      "Flexibility",
+      "Hip Health"
+    ],
+    "description": "Seated hip mobility stretch working both internal and external rotation simultaneously.",
+    "key_principles": "Both legs at 90 degrees, sit tall, lean forward gently, breathe, hold stretch, switch sides.",
+    "key_technical_checkpoints": "Both knees 90 degrees, shins parallel, upright posture, gentle forward lean if able.",
+    "tutor_video": "https://www.youtube.com/embed/JlxndP60w8E",
+    "instructions": [
+      "Sit on floor with both legs bent at 90-degree angles",
+      "Position front leg with knee pointing forward, back leg with knee to side",
+      "Sit as upright as possible with tall spine",
+      "Lean forward gently over front leg if seeking deeper stretch",
+      "Hold position breathing deeply for 30-60 seconds",
+      "Switch leg positions and repeat on opposite side"
+    ]
+  },
+  {
+    "name": "Seated Calf Raise",
+    "category": "Calves",
+    "level": "Beginner",
+    "tags": [
+      "Machine",
+      "Soleus",
+      "Isolation"
+    ],
+    "description": "Seated calf exercise targeting soleus muscle with knees bent position.",
+    "key_principles": "Full range of motion, stretch at bottom, squeeze at top, controlled tempo, progressive load.",
+    "key_technical_checkpoints": "Knees bent 90 degrees, balls of feet on platform, full stretch and contraction, no bouncing.",
+    "tutor_video": "https://www.youtube.com/embed/JbyjNymZOt0",
+    "instructions": [
+      "Sit on calf raise machine with balls of feet on platform",
+      "Position knees under pads, adjust weight appropriately",
+      "Lower heels as far below platform as possible for full stretch",
+      "Press up onto toes raising heels as high as possible",
+      "Squeeze calves hard at peak contraction, hold briefly",
+      "Lower with control to full stretch, repeat without bouncing"
+    ]
+  },
+  {
+    "name": "Donkey Calf Raise",
+    "category": "Calves",
+    "level": "Intermediate",
+    "tags": [
+      "Machine",
+      "Gastrocnemius",
+      "Stretched Position"
+    ],
+    "description": "Bent-over calf raise allowing extreme stretch and range of motion for calf development.",
+    "key_principles": "Bent at hips, full stretch, drive through balls of feet, maximum height, controlled descent.",
+    "key_technical_checkpoints": "Hips hinged, back flat, full ankle dorsiflexion at bottom, maximum plantarflexion at top.",
+    "tutor_video": "https://www.youtube.com/embed/-qsRtp_PbVM",
+    "instructions": [
+      "Position on donkey calf raise machine or lean over platform",
+      "Hinge at hips to 90 degrees, back flat, weight on hips/back",
+      "Stand on balls of feet on elevated platform",
+      "Lower heels below platform level as far as possible",
+      "Drive up onto toes raising heels as high as possible",
+      "Squeeze calves at top, lower slowly to deep stretch, repeat"
+    ]
+  },
+  {
+    "name": "Single Leg Calf Raise",
+    "category": "Calves",
+    "level": "Intermediate",
+    "tags": [
+      "Bodyweight",
+      "Unilateral",
+      "Balance"
+    ],
+    "description": "Single leg calf raise improving balance and addressing strength imbalances.",
+    "key_principles": "One leg at a time, full range, balance throughout, hold support lightly, equal reps both sides.",
+    "key_technical_checkpoints": "Stand on one foot, free leg relaxed, full stretch to full contraction, stable throughout.",
+    "tutor_video": "https://www.youtube.com/embed/ORT4oJ_R8Qs",
+    "instructions": [
+      "Stand on one leg on edge of step or platform",
+      "Hold wall or support lightly for balance only",
+      "Lower heel below step level for maximum calf stretch",
+      "Press up onto toes raising heel as high as possible",
+      "Squeeze calf hard at top, maintain balance",
+      "Lower slowly to full stretch, complete all reps, switch legs"
+    ]
+  },
+  {
+    "name": "Jump Rope (Calf Focus)",
+    "category": "Calves",
+    "level": "Beginner",
+    "tags": [
+      "Cardio",
+      "Plyometric",
+      "Endurance"
+    ],
+    "description": "Jump rope exercise with emphasis on calf conditioning and endurance.",
+    "key_principles": "Stay on balls of feet, quick ground contact, calves absorb and push, rhythmic breathing, build duration.",
+    "key_technical_checkpoints": "Minimal knee bend, ankles do the work, light bounces, stay on toes, consistent rhythm.",
+    "tutor_video": "https://www.youtube.com/embed/imYy1V9NgBQ",
+    "instructions": [
+      "Hold jump rope handles, position rope behind feet",
+      "Stay on balls of feet throughout, minimal knee involvement",
+      "Jump just high enough to clear rope, quick ground contact",
+      "Let calves do the work absorbing landing and propelling next jump",
+      "Maintain steady rhythm and pace for desired time interval",
+      "Start with 30-60 seconds, build to several minutes for calf endurance"
+    ]
+  },
+  {
+    "name": "Wrist Curl",
+    "category": "Forearms",
+    "level": "Beginner",
+    "tags": [
+      "Dumbbell",
+      "Flexors",
+      "Isolation"
+    ],
+    "description": "Forearm flexor exercise building wrist curl strength and forearm mass.",
+    "key_principles": "Forearms supported, wrist only moves, full range, controlled tempo, light weight high reps.",
+    "key_technical_checkpoints": "Forearms on bench, palms up, wrists curl weight up, full extension and flexion.",
+    "tutor_video": "https://www.youtube.com/embed/rOEfjEd7DeI",
+    "instructions": [
+      "Sit on bench, rest forearms on thighs or bench with palms facing up",
+      "Hold dumbbells or barbell with wrists extended over edge",
+      "Let weight pull wrists down into full extension stretch",
+      "Curl wrists up by contracting forearm flexors",
+      "Squeeze at top of curl, then lower with control to stretch",
+      "Keep forearms stationary, only wrists move throughout"
+    ]
+  },
+  {
+    "name": "Reverse Wrist Curl",
+    "category": "Forearms",
+    "level": "Beginner",
+    "tags": [
+      "Dumbbell",
+      "Extensors",
+      "Balance"
+    ],
+    "description": "Forearm extensor exercise for balanced forearm development and wrist health.",
+    "key_principles": "Forearms supported, palms down, wrists extend up, controlled movement, lighter weight than flexors.",
+    "key_technical_checkpoints": "Forearms stable, palms down, wrists extend upward, full range, slow and controlled.",
+    "tutor_video": "https://www.youtube.com/embed/lpiENczIFrw",
+    "instructions": [
+      "Sit on bench, rest forearms on thighs or bench with palms facing down",
+      "Hold dumbbells or barbell with wrists extended over edge",
+      "Let weight pull wrists down toward floor",
+      "Extend wrists upward by contracting forearm extensors",
+      "Squeeze briefly at top, lower with control to starting position",
+      "Use lighter weight than wrist curls, forearms stay on support"
+    ]
+  },
+  {
+    "name": "Farmer's Walk",
+    "category": "Forearms",
+    "level": "Intermediate",
+    "tags": [
+      "Grip",
+      "Full Body",
+      "Functional"
+    ],
+    "description": "Loaded carry exercise building grip strength, forearm endurance, and total body stability.",
+    "key_principles": "Heavy weight, walk distance, maintain grip, upright posture, core tight, breathing steady.",
+    "key_technical_checkpoints": "Heavy dumbbells or implements, tall posture, shoulders down, strong grip, steady pace.",
+    "tutor_video": "https://www.youtube.com/embed/Ujv88lNIxP0",
+    "instructions": [
+      "Pick up heavy dumbbells, kettlebells, or farmer's walk handles",
+      "Stand tall with shoulders down and back, core engaged",
+      "Grip weights firmly, maintain upright posture throughout",
+      "Walk forward at steady pace for desired distance or time",
+      "Keep grip tight entire time, don't let shoulders shrug up",
+      "Set weights down safely when grip begins to fail"
+    ]
+  },
+  {
+    "name": "Dead Hang",
+    "category": "Forearms",
+    "level": "Beginner",
+    "tags": [
+      "Bodyweight",
+      "Grip Endurance",
+      "Shoulders"
+    ],
+    "description": "Simple but effective hanging exercise building grip endurance and shoulder health.",
+    "key_principles": "Full body weight, relaxed hang, active shoulders, hold as long as possible, build time.",
+    "key_technical_checkpoints": "Full dead hang, arms straight, shoulders engaged slightly, breathe steadily.",
+    "tutor_video": "https://www.youtube.com/embed/Jzl77Ibdypw",
+    "instructions": [
+      "Hang from pull-up bar with overhand grip shoulder-width apart",
+      "Let body hang with arms fully extended",
+      "Engage shoulders slightly to protect joint, don't be completely passive",
+      "Hold this position as long as possible maintaining grip",
+      "Breathe steadily throughout, don't hold breath",
+      "When grip fails, drop safely and rest, build up hold time over weeks"
+    ]
+  },
+  {
+    "name": "Plate Pinch",
+    "category": "Forearms",
+    "level": "Intermediate",
+    "tags": [
+      "Grip",
+      "Pinch Strength",
+      "Thumbs"
+    ],
+    "description": "Pinch grip exercise using weight plates to develop thumb and finger pinch strength.",
+    "key_principles": "Pinch with fingers and thumb, hold smooth side, static hold, progressive weight, both hands.",
+    "key_technical_checkpoints": "Smooth side out, fingers on one side thumb on other, vertical hold, no resting on body.",
+    "tutor_video": "https://www.youtube.com/embed/f__a85JNN8c",
+    "instructions": [
+      "Take one or two weight plates, smooth sides facing out",
+      "Pinch plates between fingers and thumb of one hand",
+      "Lift plates off ground holding vertically at your side",
+      "Hold this position as long as possible squeezing to maintain grip",
+      "When grip fails, set down safely and shake out hand",
+      "Complete hold on other hand, aim for equal time both sides"
+    ]
+  },
+  {
+    "name": "Towel Pull-Up",
+    "category": "Forearms",
+    "level": "Advanced",
+    "tags": [
+      "Bodyweight",
+      "Grip",
+      "Back"
+    ],
+    "description": "Pull-up variation using towel for extreme grip challenge and forearm development.",
+    "key_principles": "Grip towel firmly, pull-up as normal, crushing grip required, forearms burn, scale as needed.",
+    "key_technical_checkpoints": "Towel draped over bar, grip towel tight, pull up, full range, controlled descent.",
+    "tutor_video": "https://www.youtube.com/embed/IwCyFcL6Tqg",
+    "instructions": [
+      "Drape towel or two towels over pull-up bar",
+      "Grip each side of towel firmly with each hand",
+      "Hang with arms extended, gripping towel tightly",
+      "Pull yourself up just like regular pull-up while maintaining grip",
+      "Squeeze towel continuously, forearms will fatigue quickly",
+      "Lower with control, complete as many reps as grip allows"
+    ]
+  },
+  {
+    "name": "Spider Curl",
+    "category": "Arms",
+    "level": "Intermediate",
+    "tags": [
+      "Dumbbell",
+      "Biceps",
+      "Isolation"
+    ],
+    "description": "Strict bicep curl over incline bench eliminating momentum and maximizing bicep isolation.",
+    "key_principles": "Arms vertical, no swing, strict form, full contraction, squeeze at top, slow eccentric.",
+    "key_technical_checkpoints": "Chest against bench, arms hang vertical, curl straight up, full range, elbows stationary.",
+    "tutor_video": "https://www.youtube.com/embed/GNO4OtYoCYk",
+    "instructions": [
+      "Set incline bench to 45 degrees, lie face down with chest against bench",
+      "Let arms hang straight down holding dumbbells, perpendicular to floor",
+      "Keep upper arms stationary, curl weights up toward shoulders",
+      "Squeeze biceps hard at top of curl with full contraction",
+      "Lower with control to full arm extension maintaining tension",
+      "No momentum possible in this position, very strict bicep isolation"
+    ]
+  },
+  {
+    "name": "JM Press",
+    "category": "Arms",
+    "level": "Advanced",
+    "tags": [
+      "Barbell",
+      "Triceps",
+      "Strength"
+    ],
+    "description": "Tricep-focused press combining elements of close-grip bench and skull crusher for maximum tricep overload.",
+    "key_principles": "Hybrid movement, lower to lower chest/upper abs, press straight up, heavy loading possible, strict form.",
+    "key_technical_checkpoints": "Bar lowers to chest/abs area, elbows stay in, press straight up, feel in triceps not chest.",
+    "tutor_video": "https://www.youtube.com/embed/OpRMRhr0Ycc",
+    "instructions": [
+      "Lie on bench, grip barbell with close grip (6-8 inches apart)",
+      "Start with bar over chest, arms extended",
+      "Lower bar under control toward lower chest/upper abdomen",
+      "Keep elbows tucked, feel stretch in triceps throughout descent",
+      "Press bar straight back up by extending elbows and contracting triceps",
+      "Use spotter for safety, this allows heavy weight for triceps"
+    ]
+  },
+  {
+    "name": "Incline Dumbbell Curl",
+    "category": "Arms",
+    "level": "Intermediate",
+    "tags": [
+      "Dumbbell",
+      "Biceps",
+      "Stretch"
+    ],
+    "description": "Bicep curl on incline bench providing maximum stretch and emphasizing long head of biceps.",
+    "key_principles": "Arms hang back, full stretch, curl up, maintain arm angle, squeeze biceps, slow eccentric.",
+    "key_technical_checkpoints": "Bench inclined 45-60 degrees, arms hang back, curl without moving upper arms forward.",
+    "tutor_video": "https://www.youtube.com/embed/GNO4OtYoCYk",
+    "instructions": [
+      "Set bench to 45-60 degree incline, sit with back against pad",
+      "Let arms hang straight down and slightly back holding dumbbells",
+      "Without moving upper arms forward, curl weights up toward shoulders",
+      "Keep upper arms stationary in same position throughout movement",
+      "Squeeze biceps at top, feel peak contraction",
+      "Lower slowly to full stretch position, repeat maintaining arm angle"
+    ]
+  },
+  {
+    "name": "Overhead Cable Tricep Extension (Rope)",
+    "category": "Arms",
+    "level": "Intermediate",
+    "tags": [
+      "Cable",
+      "Triceps",
+      "Long Head"
+    ],
+    "description": "High cable rope extension with overhead position for maximum tricep long head activation.",
+    "key_principles": "Elbows high and forward, only forearms move, full extension, squeeze triceps, slow return.",
+    "key_technical_checkpoints": "Face away from cable, rope behind head, elbows stationary, full extension forward.",
+    "tutor_video": "https://www.youtube.com/embed/OpRMRhr0Ycc",
+    "instructions": [
+      "Set cable at high position with rope attachment, face away from machine",
+      "Grip rope with both hands, step forward creating tension",
+      "Position rope behind head, elbows bent and pointing forward",
+      "Extend arms forward and up by contracting triceps",
+      "Squeeze triceps hard at full extension, hold briefly",
+      "Lower with control feeling stretch in triceps, repeat"
+    ]
+  },
+  {
+    "name": "21s (Bicep Curl)",
+    "category": "Arms",
+    "level": "Advanced",
+    "tags": [
+      "Barbell",
+      "Biceps",
+      "Time Under Tension"
+    ],
+    "description": "Intense bicep training method doing 21 total reps across three ranges of motion without rest.",
+    "key_principles": "Three ranges: bottom half (7), top half (7), full range (7), no rest between, lighter weight, pump.",
+    "key_technical_checkpoints": "7 bottom-to-middle, 7 middle-to-top, 7 full range, continuous tension, controlled throughout.",
+    "tutor_video": "https://www.youtube.com/embed/GNO4OtYoCYk",
+    "instructions": [
+      "Hold barbell or dumbbells, start with arms fully extended",
+      "Perform 7 reps from bottom to halfway point (90 degrees)",
+      "Immediately do 7 reps from halfway point to full contraction",
+      "Without rest, perform 7 full range reps from bottom to top",
+      "Total of 21 reps without stopping, intense bicep pump",
+      "Use lighter weight than normal curls, focus on mind-muscle connection"
     ]
   }
 ]
