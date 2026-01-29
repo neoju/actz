@@ -73,7 +73,7 @@
     {/if}
 
     <!-- YouTube Video -->
-    {#if ctx.detail?.youtube_tutor_video && ctx.initialized}
+    {#if ctx.detail?.tutor_video && ctx.initialized}
         <div class="space-y-2">
             <div class="flex items-center gap-2">
                 <YoutubeIcon class="h-4 w-4 text-red-500" />
@@ -85,7 +85,7 @@
                 <iframe
                     width="100%"
                     height="100%"
-                    src={ctx.detail.youtube_tutor_video}
+                    src={ctx.detail.tutor_video}
                     title="YouTube video player for {ctx.exercise.name}"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

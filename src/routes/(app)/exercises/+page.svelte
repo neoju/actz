@@ -25,15 +25,27 @@
     let expandedExercise = $state<string | null>(null);
     let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
 
-    // Debounce search query
-    $effect(() => {
+    // Debounce search query handler
+    function handleSearchInput(event: Event) {
+        const target = event.target as HTMLInputElement;
+        searchQuery = target.value;
+
         if (debounceTimeout) {
             clearTimeout(debounceTimeout);
         }
+
         debounceTimeout = setTimeout(() => {
             debouncedSearchQuery = searchQuery;
-        }, 300);
-    });
+        }, 150);
+    }
+
+    function clearSearch() {
+        searchQuery = "";
+        debouncedSearchQuery = "";
+        if (debounceTimeout) {
+            clearTimeout(debounceTimeout);
+        }
+    }
 
     // Extract unique categories and levels
     const categories = $derived(
@@ -139,12 +151,13 @@
         <Input
             type="text"
             placeholder="Search exercises, tags, or categories..."
-            bind:value={searchQuery}
+            value={searchQuery}
+            oninput={handleSearchInput}
             class="pl-10 pr-10"
         />
         {#if searchQuery}
             <button
-                onclick={() => (searchQuery = "")}
+                onclick={clearSearch}
                 class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label="Clear search"
             >
@@ -395,7 +408,7 @@
                                 </div>
 
                                 <!-- YouTube Video -->
-                                {#if exercise.youtube_tutor_video}
+                                {#if exercise.tutor_video}
                                     <div class="space-y-2">
                                         <div class="flex items-center gap-2">
                                             <YoutubeIcon
@@ -406,7 +419,7 @@
                                             </h3>
                                         </div>
                                         <a
-                                            href={exercise.youtube_tutor_video.replace(
+                                            href={exercise.tutor_video.replace(
                                                 "/embed/",
                                                 "/watch?v=",
                                             )}
@@ -419,7 +432,7 @@
                                                 class="aspect-video rounded-md overflow-hidden border border-border hover:border-primary transition-colors"
                                             >
                                                 <iframe
-                                                    src={exercise.youtube_tutor_video}
+                                                    src={exercise.tutor_video}
                                                     title="YouTube video player for {exercise.name}"
                                                     frameborder="0"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
