@@ -1,4 +1,3 @@
-
 import { json } from "@sveltejs/kit";
 import Groq from "groq-sdk";
 import { z } from "zod";
@@ -75,8 +74,13 @@ export async function POST({ request, locals }) {
     const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
 
     // Optimize context based on equipment
-    const { categories, tags, exerciseNames, count } = getOptimizedContext(equipment, exercisesDB);
-    console.log(`Context optimized: ${exercisesDB.length} -> ${count} exercises`);
+    const { categories, tags, exerciseNames, count } = getOptimizedContext(
+      equipment,
+      exercisesDB,
+    );
+    console.log(
+      `Context optimized: ${exercisesDB.length} -> ${count} exercises`,
+    );
 
     const systemPrompt = `
         You are an elite Personal Trainer (PT) and Nutritionist.
@@ -155,7 +159,7 @@ export async function POST({ request, locals }) {
           content: userPrompt,
         },
       ],
-      model: "llama-3.3-70b-versatile",
+      model: "openai/gpt-oss-120b",
       response_format: { type: "json_object" },
     });
 
