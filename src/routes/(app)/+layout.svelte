@@ -75,7 +75,7 @@
         >
             <!-- Mobile Header with Hamburger Menu -->
             <header
-                class="fixed max-w-md w-md mx-auto top-0 z-40 bg-background border-b border-border p-4 flex items-end justify-end"
+                class="fixed max-w-md w-screen mx-auto top-0 z-40 bg-background border-b border-border p-4 flex items-end justify-end"
             >
                 <Sheet.Root bind:open={isMenuOpen}>
                     <ModeSwitcher />
