@@ -5,7 +5,7 @@
     import XIcon from "@lucide/svelte/icons/x";
     import SkipForwardIcon from "@lucide/svelte/icons/skip-forward";
     import ExerciseContent from "./ExerciseContent.svelte";
-    import ExerciseControls from "./ExerciseControls.svelte";
+    import FocusModeControls from "./FocusModeControls.svelte";
     import { useExercise } from "./ctx.svelte";
 
     const ctx = useExercise();
@@ -81,6 +81,6 @@
 
     <!-- Footer Controls -->
     <div class="p-6 border-t bg-card pb-safe space-y-2">
-        <ExerciseControls isFocusMode={true} />
+        <FocusModeControls />
     </div>
 </div>

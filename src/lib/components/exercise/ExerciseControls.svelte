@@ -1,8 +1,8 @@
 <script lang="ts">
     import { Button } from "$lib/components/ui/button";
-    import PressHoldButton from "$lib/components/PressHoldButton.svelte";
     import { cn } from "$lib/utils";
     import * as AlertDialog from "$lib/components/ui/alert-dialog";
+    import MaximizeIcon from "@lucide/svelte/icons/maximize";
     import { useExercise } from "./ctx.svelte";
 
     let { isFocusMode = false } = $props();
@@ -11,78 +11,17 @@
 
     // Skip Dialog
     let showSkipDialog = $state(false);
-
-    // Derived button content
-    let buttonContent = $derived.by(() => {
-        if (ctx.isTimerExercise && ctx.timeLeft > 0) {
-            const minutes = Math.floor(ctx.timeLeft / 60);
-            const seconds = (ctx.timeLeft % 60).toString().padStart(2, "0");
-            return `${minutes}:${seconds}`;
-        }
-        if (ctx.isSetInProgress) {
-            return ctx.totalSets > 1
-                ? `Finish Set ${ctx.currentSet}`
-                : "Finish";
-        }
-        return ctx.totalSets > 1 ? `Start Set ${ctx.currentSet}` : "Start";
-    });
-
-    // Derived button classes
-    let buttonClasses = $derived(
-        cn(
-            "flex-1",
-            ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
-            ctx.isSetInProgress
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-green-600 hover:bg-green-700",
-        ),
-    );
-
-    function requiresHold() {
-        if (ctx.status !== "IN_PROGRESS") return false;
-        if (ctx.isTimerExercise && ctx.timeLeft > 0) return false;
-
-        if (ctx.currentSet === ctx.totalSets && ctx.isSetInProgress) {
-            return true;
-        }
-        if (ctx.totalSets > 1) return ctx.isSetInProgress;
-        if (ctx.isTimerExercise && ctx.isSetInProgress) return true;
-        return false;
-    }
-
-    async function handleMainAction() {
-        if (ctx.status === "PENDING") {
-            await ctx.handleUpdateActivity(ctx.exercise.id, "IN_PROGRESS");
-            ctx.handleFullscreenStart();
-        } else if (ctx.status === "IN_PROGRESS") {
-            if (ctx.totalSets > 1) {
-                if (ctx.isSetInProgress) {
-                    ctx.handleFinishSet();
-                } else {
-                    ctx.handleStartSet();
-                }
-            } else {
-                // Single set flow
-                if (ctx.isTimerExercise && !ctx.isSetInProgress) {
-                    ctx.handleStartSet();
-                    return;
-                }
-
-                // Non-blocking: Fire and forget
-                ctx.handleUpdateActivity(
-                    ctx.exercise.id,
-                    "COMPLETED",
-                    ctx.activity?.id,
-                );
-                ctx.handleComplete();
-            }
-
-            ctx.handleFullscreenStart();
-        }
-    }
-
     // Reset Dialog
     let showResetDialog = $state(false);
+
+    function handleStartFocusMode() {
+        if (ctx.status === "PENDING") {
+            // Start the exercise and enter focus mode
+            ctx.handleUpdateActivity(ctx.exercise.id, "IN_PROGRESS");
+        }
+        // Enter focus mode
+        ctx.handleFullscreenStart();
+    }
 
     function handleSkip() {
         ctx.handleUpdateActivity(ctx.exercise.id, "SKIPPED", ctx.activity?.id);
@@ -92,17 +31,22 @@
 
 <div class="flex gap-2">
     {#if ctx.status === "PENDING"}
+        <!-- PENDING: Only show Start in Focus Mode and Skip buttons -->
         <div class="flex gap-2 w-full">
-            <Button
-                class={cn(
-                    isFocusMode ? "w-full" : "flex-1",
-                    ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
-                )}
-                onclick={handleMainAction}
-            >
-                Start Exercise
-            </Button>
-            {#if !isFocusMode}
+            {#if isFocusMode}
+                <!-- In focus mode - should not happen for PENDING, but just in case -->
+                <Button
+                    class="w-full h-16 text-xl font-bold"
+                    onclick={handleStartFocusMode}
+                >
+                    Start Exercise
+                </Button>
+            {:else}
+                <!-- Normal mode - Start button opens focus mode -->
+                <Button class="flex-1" onclick={handleStartFocusMode}>
+                    <MaximizeIcon class="h-4 w-4 mr-2" />
+                    Start in Focus Mode
+                </Button>
                 <AlertDialog.Root
                     open={showSkipDialog}
                     onOpenChange={(e) => (showSkipDialog = e)}
@@ -112,12 +56,7 @@
                             <Button
                                 {...props}
                                 variant="outline"
-                                class={cn(
-                                    "flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50",
-                                    ctx.isFullScreen
-                                        ? "h-16 text-xl font-bold"
-                                        : "",
-                                )}
+                                class="flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50"
                             >
                                 Skip
                             </Button>
@@ -146,26 +85,16 @@
             {/if}
         </div>
     {:else if ctx.status === "IN_PROGRESS"}
-        <!-- Dynamic Button for Sets -->
-        {#if requiresHold()}
-            <PressHoldButton
-                onAction={handleMainAction}
-                variant="default"
-                class={buttonClasses}
-            >
-                {buttonContent}
-            </PressHoldButton>
+        <!-- IN_PROGRESS: Only show Continue in Focus Mode and Skip in normal mode -->
+        {#if isFocusMode}
+            <!-- In focus mode - skip is in header, don't show anything here except main action -->
+            <!-- This content is actually in FocusMode.svelte footer -->
         {:else}
-            <Button
-                onclick={handleMainAction}
-                variant="default"
-                class={buttonClasses}
-            >
-                {buttonContent}
+            <!-- Normal mode - Only show Continue in Focus Mode and Skip -->
+            <Button class="flex-1" onclick={handleStartFocusMode}>
+                <MaximizeIcon class="h-4 w-4 mr-2" />
+                Continue in Focus Mode
             </Button>
-        {/if}
-
-        {#if !isFocusMode}
             <AlertDialog.Root
                 open={showSkipDialog}
                 onOpenChange={(e) => (showSkipDialog = e)}
@@ -175,12 +104,7 @@
                         <Button
                             {...props}
                             variant="outline"
-                            class={cn(
-                                "flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50",
-                                ctx.isFullScreen
-                                    ? "h-16 text-xl font-bold"
-                                    : "",
-                            )}
+                            class="flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50"
                             disabled={ctx.isLocked || ctx.cooldownActive}
                         >
                             Skip
@@ -208,6 +132,7 @@
             </AlertDialog.Root>
         {/if}
     {:else}
+        <!-- COMPLETED or SKIPPED: Show Reset and status -->
         <AlertDialog.Root
             open={showResetDialog}
             onOpenChange={(e) => (showResetDialog = e)}
@@ -231,7 +156,6 @@
                     <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
                     <AlertDialog.Action
                         onclick={() => {
-                            // Non-blocking: Fire and forget
                             ctx.handleUpdateActivity(
                                 ctx.exercise.id,
                                 "PENDING",
