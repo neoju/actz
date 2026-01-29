@@ -73,8 +73,7 @@
             }
         }
 
-        // Fire API call in background without waiting
-        updateActivityMutation
+        return updateActivityMutation
             .mutateAsync({
                 plannedExerciseId,
                 status,
@@ -193,7 +192,7 @@
         transition:fade
     >
         <div
-            class="bg-card p-6 rounded-lg shadow-lg border border-border w-full h-full max-w-sm text-center space-y-4 flex justify-center items-center flex-col"
+            class="bg-card rounded-lg shadow-lg border border-border w-full h-full max-w-md text-center space-y-4 flex justify-center items-center flex-col"
             transition:scale
         >
             <h2 class="text-2xl font-bold">Rest Time</h2>

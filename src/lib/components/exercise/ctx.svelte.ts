@@ -142,12 +142,12 @@ export class ExerciseContext {
     this.onStartCooldownProp();
   };
 
-  handleUpdateActivity = (id: string, status: string, aid?: string) => {
+  handleUpdateActivity = async (id: string, status: string, aid?: string) => {
     if (status === "SKIPPED" || status === "COMPLETED") {
       this.isFullScreen = false;
     }
     // Fire API call without blocking UI
-    this.onUpdateActivityProp(id, status, aid);
+    return this.onUpdateActivityProp(id, status, aid);
   };
 
   handleFullscreenStart = () => {

@@ -5,7 +5,12 @@
     import * as AlertDialog from "$lib/components/ui/alert-dialog";
     import { useExercise } from "./ctx.svelte";
 
+    let { isFocusMode = false } = $props();
+
     const ctx = useExercise();
+
+    // Skip Dialog
+    let showSkipDialog = $state(false);
 
     // Derived button content
     let buttonContent = $derived.by(() => {
@@ -45,16 +50,11 @@
         return false;
     }
 
-    function handleMainAction() {
+    async function handleMainAction() {
         if (ctx.status === "PENDING") {
-            // Eagerly trigger fullscreen
+            await ctx.handleUpdateActivity(ctx.exercise.id, "IN_PROGRESS");
             ctx.handleFullscreenStart();
-            // Non-blocking: Fire and forget
-            ctx.handleUpdateActivity(ctx.exercise.id, "IN_PROGRESS");
         } else if (ctx.status === "IN_PROGRESS") {
-            // Also trigger fullscreen if interacting with in-progress exercise
-            ctx.handleFullscreenStart();
-
             if (ctx.totalSets > 1) {
                 if (ctx.isSetInProgress) {
                     ctx.handleFinishSet();
@@ -76,11 +76,18 @@
                 );
                 ctx.handleComplete();
             }
+
+            ctx.handleFullscreenStart();
         }
     }
 
     // Reset Dialog
     let showResetDialog = $state(false);
+
+    function handleSkip() {
+        ctx.handleUpdateActivity(ctx.exercise.id, "SKIPPED", ctx.activity?.id);
+        showSkipDialog = false;
+    }
 </script>
 
 <div class="flex gap-2">
@@ -88,28 +95,55 @@
         <div class="flex gap-2 w-full">
             <Button
                 class={cn(
-                    "flex-1",
+                    isFocusMode ? "w-full" : "flex-1",
                     ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
                 )}
                 onclick={handleMainAction}
             >
                 Start Exercise
             </Button>
-            <PressHoldButton
-                class={cn(
-                    "flex-1 border-yellow-500 text-yellow-700",
-                    ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
-                )}
-                variant="outline"
-                onAction={() =>
-                    ctx.handleUpdateActivity(
-                        ctx.exercise.id,
-                        "SKIPPED",
-                        ctx.activity?.id,
-                    )}
-            >
-                Skip
-            </PressHoldButton>
+            {#if !isFocusMode}
+                <AlertDialog.Root
+                    open={showSkipDialog}
+                    onOpenChange={(e) => (showSkipDialog = e)}
+                >
+                    <AlertDialog.Trigger>
+                        {#snippet child({ props })}
+                            <Button
+                                {...props}
+                                variant="outline"
+                                class={cn(
+                                    "flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50",
+                                    ctx.isFullScreen
+                                        ? "h-16 text-xl font-bold"
+                                        : "",
+                                )}
+                            >
+                                Skip
+                            </Button>
+                        {/snippet}
+                    </AlertDialog.Trigger>
+                    <AlertDialog.Content>
+                        <AlertDialog.Header>
+                            <AlertDialog.Title>Skip Exercise</AlertDialog.Title>
+                            <AlertDialog.Description>
+                                Are you sure you want to skip "{ctx.exercise
+                                    .name}"? This exercise will be marked as
+                                skipped.
+                            </AlertDialog.Description>
+                        </AlertDialog.Header>
+                        <AlertDialog.Footer>
+                            <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+                            <AlertDialog.Action
+                                onclick={handleSkip}
+                                class="bg-yellow-600 hover:bg-yellow-700"
+                            >
+                                Skip Exercise
+                            </AlertDialog.Action>
+                        </AlertDialog.Footer>
+                    </AlertDialog.Content>
+                </AlertDialog.Root>
+            {/if}
         </div>
     {:else if ctx.status === "IN_PROGRESS"}
         <!-- Dynamic Button for Sets -->
@@ -131,22 +165,48 @@
             </Button>
         {/if}
 
-        <PressHoldButton
-            variant="outline"
-            class={cn(
-                "flex-1 border-yellow-500 text-yellow-700",
-                ctx.isFullScreen ? "h-16 text-xl font-bold" : "",
-            )}
-            onAction={() =>
-                ctx.handleUpdateActivity(
-                    ctx.exercise.id,
-                    "SKIPPED",
-                    ctx.activity?.id,
-                )}
-            disabled={ctx.isLocked || ctx.cooldownActive}
-        >
-            Skip
-        </PressHoldButton>
+        {#if !isFocusMode}
+            <AlertDialog.Root
+                open={showSkipDialog}
+                onOpenChange={(e) => (showSkipDialog = e)}
+            >
+                <AlertDialog.Trigger>
+                    {#snippet child({ props })}
+                        <Button
+                            {...props}
+                            variant="outline"
+                            class={cn(
+                                "flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50",
+                                ctx.isFullScreen
+                                    ? "h-16 text-xl font-bold"
+                                    : "",
+                            )}
+                            disabled={ctx.isLocked || ctx.cooldownActive}
+                        >
+                            Skip
+                        </Button>
+                    {/snippet}
+                </AlertDialog.Trigger>
+                <AlertDialog.Content>
+                    <AlertDialog.Header>
+                        <AlertDialog.Title>Skip Exercise</AlertDialog.Title>
+                        <AlertDialog.Description>
+                            Are you sure you want to skip "{ctx.exercise.name}"?
+                            This exercise will be marked as skipped.
+                        </AlertDialog.Description>
+                    </AlertDialog.Header>
+                    <AlertDialog.Footer>
+                        <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+                        <AlertDialog.Action
+                            onclick={handleSkip}
+                            class="bg-yellow-600 hover:bg-yellow-700"
+                        >
+                            Skip Exercise
+                        </AlertDialog.Action>
+                    </AlertDialog.Footer>
+                </AlertDialog.Content>
+            </AlertDialog.Root>
+        {/if}
     {:else}
         <AlertDialog.Root
             open={showResetDialog}
