@@ -2,7 +2,7 @@
   import { Button } from "$lib/components/ui/button";
   import * as Tabs from "$lib/components/ui/tabs";
   import * as Card from "$lib/components/ui/card";
-  import { FormInput, FormSelect, FormTextarea } from "$lib/components/ui/form";
+  import { FormInput, FormSelect, FormTextarea, FormCombobox } from "$lib/components/ui/form";
   import { ArrowLeft, RefreshCw } from "@lucide/svelte";
   import { goto, invalidate } from "$app/navigation";
   import {
@@ -10,6 +10,9 @@
     equipmentOptions,
     genderOptions,
     fitnessLevelOptions,
+    targetOptions,
+    limitationOptions,
+    muscleOptions,
   } from "$lib/schemas/profile";
   import {
     useProfileQuery,
@@ -36,8 +39,10 @@
     fitnessLevel: "",
     equipment: "",
     schedule: "",
-    limitations: "",
+    limitations: [] as string[],
     target: "",
+    primaryFocus: "",
+    secondaryFocus: "",
   });
 
       let isEditing = $state(false);
@@ -58,8 +63,10 @@
                   fitnessLevel: user.fitnessLevel || "",
                   equipment: user.equipment || "",
                   schedule: user.schedule || "",
-                  limitations: user.limitations || "",
+                  limitations: user.limitations ? user.limitations.split(",") : [],
                   target: user.target || "",
+                  primaryFocus: user.primaryFocus || "",
+                  secondaryFocus: user.secondaryFocus || "",
               };
           }
       });
@@ -274,20 +281,41 @@
                 error={errors.schedule?.[0]}
               />
 
-              <FormInput
+              <FormCombobox
                 id="limitations"
                 label="Limitations"
-                placeholder="Lower back pain..."
+                options={limitationOptions}
                 bind:value={profileData.limitations}
+                placeholder="Select Limitation"
                 error={errors.limitations?.[0]}
+                multiple={true}
               />
 
-              <FormTextarea
+              <FormCombobox
                 id="target"
                 label="Goal / Target"
-                placeholder="I want to lose weight and build muscle..."
+                options={targetOptions}
                 bind:value={profileData.target}
+                placeholder="Select Goal"
                 error={errors.target?.[0]}
+              />
+
+              <FormCombobox
+                id="primaryFocus"
+                label="Primary Muscle Focus"
+                options={muscleOptions}
+                bind:value={profileData.primaryFocus}
+                placeholder="Select Primary Focus"
+                error={errors.primaryFocus?.[0]}
+              />
+
+              <FormCombobox
+                id="secondaryFocus"
+                label="Secondary Muscle Focus"
+                options={muscleOptions}
+                bind:value={profileData.secondaryFocus}
+                placeholder="Select Secondary Focus"
+                error={errors.secondaryFocus?.[0]}
               />
             </Card.Content>
 
@@ -309,8 +337,10 @@
                       fitnessLevel: user.fitnessLevel || "",
                       equipment: user.equipment || "",
                       schedule: user.schedule || "",
-                      limitations: user.limitations || "",
+                      limitations: user.limitations ? user.limitations.split(",") : [],
                       target: user.target || "",
+                      primaryFocus: user.primaryFocus || "",
+                      secondaryFocus: user.secondaryFocus || "",
                     };
                   }
                 }}
@@ -389,7 +419,9 @@
             <div>
               <p class="text-sm text-muted-foreground">Limitations</p>
               <p class="font-medium">
-                {profileData.limitations || "None"}
+                {profileData.limitations?.length
+                  ? profileData.limitations.join(", ")
+                  : "None"}
               </p>
             </div>
 
@@ -397,6 +429,20 @@
               <p class="text-sm text-muted-foreground">Goal / Target</p>
               <p class="font-medium">
                 {profileData.target || "N/A"}
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm text-muted-foreground">Primary Focus</p>
+              <p class="font-medium">
+                {profileData.primaryFocus || "N/A"}
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm text-muted-foreground">Secondary Focus</p>
+              <p class="font-medium">
+                {profileData.secondaryFocus || "N/A"}
               </p>
             </div>
           </Card.Content>

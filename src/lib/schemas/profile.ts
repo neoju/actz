@@ -20,6 +20,43 @@ export const fitnessLevelOptions = [
   { label: "Advanced", value: "Advanced" },
 ];
 
+export const targetOptions = [
+  { label: "Lose Weight", value: "Lose Weight" },
+  { label: "Build Muscle", value: "Build Muscle" },
+  { label: "Improve Endurance", value: "Improve Endurance" },
+  { label: "Increase Strength", value: "Increase Strength" },
+  { label: "Tone Body", value: "Tone Body" },
+  { label: "Flexibility & Mobility", value: "Flexibility & Mobility" },
+  { label: "General Fitness", value: "General Fitness" },
+];
+
+export const limitationOptions = [
+  { label: "None", value: "None" },
+  { label: "Back Pain", value: "Back Pain" },
+  { label: "Knee Pain", value: "Knee Pain" },
+  { label: "Shoulder Pain", value: "Shoulder Pain" },
+  { label: "Joint Issues", value: "Joint Issues" },
+  { label: "Limited Mobility", value: "Limited Mobility" },
+  { label: "Cardiovascular Issues", value: "Cardiovascular Issues" },
+  { label: "Asthma", value: "Asthma" },
+  { label: "Recovering from Injury", value: "Recovering from Injury" },
+];
+
+export const muscleOptions = [
+  "Arms",
+  "Back",
+  "Calves",
+  "Chest",
+  "Core",
+  "Forearms",
+  "HIIT",
+  "Hips",
+  "Legs",
+  "Neck",
+  "Shoulders",
+  "Waist",
+].map((opt) => ({ label: opt, value: opt }));
+
 export const profileSchema = z.object({
   age: z.coerce
     .number()
@@ -61,19 +98,26 @@ export const profileSchema = z.object({
     },
   ),
   limitations: z
-    .string()
-    .optional()
-    .refine((val) => !val || val.trim().split(/\s+/).length <= 50, {
-      message: "Max 50 words allowed.",
+    .array(z.string())
+    .refine((val) => val.every((v) => limitationOptions.some((o) => o.value === v)), {
+      message: "Please select valid limitations.",
     }),
   target: z
     .string()
-    .min(1, "Please enter your goal.")
-    .refine((val) => val.trim().split(/\s+/).length >= 3, {
-      message: "Please describe your goal in at least 3 words.",
-    })
-    .refine((val) => val.trim().split(/\s+/).length <= 100, {
-      message: "Max 100 words allowed.",
+    .refine((val) => targetOptions.some((o) => o.value === val), {
+      message: "Please select a valid goal.",
+    }),
+  primaryFocus: z
+    .string()
+    .optional()
+    .refine((val) => !val || muscleOptions.some((o) => o.value === val), {
+      message: "Please select a valid muscle group.",
+    }),
+  secondaryFocus: z
+    .string()
+    .optional()
+    .refine((val) => !val || muscleOptions.some((o) => o.value === val), {
+      message: "Please select a valid muscle group.",
     }),
   gender: z.string().min(1, "Please select gender"),
   fitnessLevel: z.string().min(1, "Please select fitness level"),

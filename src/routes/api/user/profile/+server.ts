@@ -9,7 +9,7 @@ export async function POST({ request, locals }) {
     }
 
     const data = await request.json();
-    const {
+    let {
       age,
       gender,
       weight,
@@ -19,7 +19,14 @@ export async function POST({ request, locals }) {
       schedule,
       limitations,
       target,
+      primaryFocus,
+      secondaryFocus,
     } = data;
+
+    // Handle limitations array from frontend
+    if (Array.isArray(limitations)) {
+      limitations = limitations.join(",");
+    }
 
     // Validate required fields
     if (!age || !gender || !weight || !height || !fitnessLevel) {
@@ -42,6 +49,8 @@ export async function POST({ request, locals }) {
         schedule,
         limitations,
         target,
+        primaryFocus,
+        secondaryFocus,
       },
     });
 
@@ -63,6 +72,8 @@ export async function POST({ request, locals }) {
         schedule: updatedUser.schedule,
         limitations: updatedUser.limitations,
         target: updatedUser.target,
+        primaryFocus: updatedUser.primaryFocus,
+        secondaryFocus: updatedUser.secondaryFocus,
       },
     });
   } catch (e) {
@@ -91,6 +102,8 @@ export async function GET({ locals }) {
         schedule: true,
         limitations: true,
         target: true,
+        primaryFocus: true,
+        secondaryFocus: true,
       },
     });
 
