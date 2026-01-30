@@ -66,9 +66,15 @@ export const profileSchema = z.object({
     .refine((val) => !val || val.trim().split(/\s+/).length <= 50, {
       message: "Max 50 words allowed.",
     }),
-  target: z.string().refine((val) => val.trim().split(/\s+/).length <= 100, {
-    message: "Max 100 words allowed.",
-  }),
+  target: z
+    .string()
+    .min(1, "Please enter your goal.")
+    .refine((val) => val.trim().split(/\s+/).length >= 3, {
+      message: "Please describe your goal in at least 3 words.",
+    })
+    .refine((val) => val.trim().split(/\s+/).length <= 100, {
+      message: "Max 100 words allowed.",
+    }),
   gender: z.string().min(1, "Please select gender"),
   fitnessLevel: z.string().min(1, "Please select fitness level"),
 });

@@ -80,7 +80,7 @@ const driverConfig = {
   overlayClickNext: false,
   disableActiveInteraction: true,
   popoverClass: "actz-tour-popover",
-  onDestroyStarted: () => {
+  onDestroyed: () => {
     // Mark tour as dismissed if user closes it before completion
     markTourAsDismissed();
   },
@@ -160,7 +160,6 @@ export function startDashboardTour() {
         },
       },
     ],
-    onDestroyStarted: undefined, // Override global setting for this tour section
   });
 
   driverObj.drive();
@@ -243,7 +242,6 @@ export function startDayTour() {
         },
       },
     ],
-    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -286,7 +284,6 @@ export function startMenuTour() {
         },
       },
     ],
-    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -356,7 +353,6 @@ export function startSettingsTour() {
         },
       },
     ],
-    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -401,7 +397,6 @@ export function startLibraryTour() {
         },
       },
     ],
-    onDestroyStarted: undefined,
   });
 
   driverObj.drive();
@@ -478,7 +473,6 @@ export function startLibraryPageTour() {
       // Navigate back to dashboard
       goto("/dashboard");
     },
-    onDestroyStarted: undefined,
   });
 
   driverObj.drive();

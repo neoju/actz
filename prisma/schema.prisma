@@ -39,6 +39,7 @@ model User {
   weeklyPlans  WeeklyPlan[]
   monthlyPlans MonthlyPlan[]
   activities   ExerciseActivity[]
+  planGenerationLogs PlanGenerationLog[]
 }
 
 model Account {
@@ -157,4 +158,13 @@ enum ActivityStatus {
   IN_PROGRESS
   COMPLETED
   SKIPPED
+}
+
+model PlanGenerationLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
 }

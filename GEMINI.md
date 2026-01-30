@@ -1,0 +1,2 @@
+- Use '@lucide/svelte' instead of 'lucide-svelte' for Svelte projects.
+- Import { page, navigation } from '$app/state' in SvelteKit projects. Don't use deprecated things.

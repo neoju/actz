@@ -34,6 +34,26 @@ export async function POST({ request, locals }) {
       return json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Check generation limit (5 per week)
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    const generationCount = await prisma.planGenerationLog.count({
+      where: {
+        userId: session.user.id,
+        createdAt: {
+          gte: oneWeekAgo,
+        },
+      },
+    });
+
+    if (generationCount >= 5) {
+      return json(
+        { error: "Weekly generation limit reached (5 plans/week)." },
+        { status: 429 },
+      );
+    }
+
     // Fetch user profile from database
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
@@ -204,6 +224,13 @@ export async function POST({ request, locals }) {
             },
           })),
         },
+      },
+    });
+
+    // Log the generation
+    await prisma.planGenerationLog.create({
+      data: {
+        userId: session.user.id,
       },
     });
 
