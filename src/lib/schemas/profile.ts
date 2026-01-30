@@ -103,8 +103,8 @@ export const profileSchema = z.object({
       message: "Please select valid limitations.",
     }),
   target: z
-    .string()
-    .refine((val) => targetOptions.some((o) => o.value === val), {
+    .array(z.string())
+    .refine((val) => val.every((v) => targetOptions.some((o) => o.value === v)), {
       message: "Please select a valid goal.",
     }),
   primaryFocus: z

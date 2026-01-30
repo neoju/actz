@@ -28,6 +28,11 @@ export async function POST({ request, locals }) {
       limitations = limitations.join(",");
     }
 
+    // Handle target array from frontend
+    if (Array.isArray(target)) {
+      target = target.join(",");
+    }
+
     // Validate required fields
     if (!age || !gender || !weight || !height || !fitnessLevel) {
       return json(

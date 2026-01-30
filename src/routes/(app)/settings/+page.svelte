@@ -2,7 +2,11 @@
   import { Button } from "$lib/components/ui/button";
   import * as Tabs from "$lib/components/ui/tabs";
   import * as Card from "$lib/components/ui/card";
-  import { FormInput, FormSelect, FormTextarea, FormCombobox } from "$lib/components/ui/form";
+  import {
+    FormInput,
+    FormSelect,
+    FormMultiSelect,
+  } from "$lib/components/ui/form";
   import { ArrowLeft, RefreshCw } from "@lucide/svelte";
   import { goto, invalidate } from "$app/navigation";
   import {
@@ -40,76 +44,76 @@
     equipment: "",
     schedule: "",
     limitations: [] as string[],
-    target: "",
+    target: [] as string[],
     primaryFocus: "",
     secondaryFocus: "",
   });
 
-      let isEditing = $state(false);
-      let isRefreshingLimit = $state(false);
-      let generatingPlan = $state<"week" | "month" | null>(null);
-      let errors: Record<string, string[] | undefined> = $state({});
-  
-      // Update profileData when query data changes
-      $effect(() => {
-          if (profileQuery.data) {
-              const user = (profileQuery.data as any).user;
-              profileData = {
-                  age: user.age?.toString() || "",
-                  gender: user.gender || "",
-                  weight: user.weight?.toString() || "",
-                  height: user.height?.toString() || "",
-                  bmi: user.bmi || "",
-                  fitnessLevel: user.fitnessLevel || "",
-                  equipment: user.equipment || "",
-                  schedule: user.schedule || "",
-                  limitations: user.limitations ? user.limitations.split(",") : [],
-                  target: user.target || "",
-                  primaryFocus: user.primaryFocus || "",
-                  secondaryFocus: user.secondaryFocus || "",
-              };
-          }
+  let isEditing = $state(false);
+  let isRefreshingLimit = $state(false);
+  let generatingPlan = $state<"week" | "month" | null>(null);
+  let errors: Record<string, string[] | undefined> = $state({});
+
+  // Update profileData when query data changes
+  $effect(() => {
+    if (profileQuery.data) {
+      const user = (profileQuery.data as any).user;
+      profileData = {
+        age: user.age?.toString() || "",
+        gender: user.gender || "",
+        weight: user.weight?.toString() || "",
+        height: user.height?.toString() || "",
+        bmi: user.bmi || "",
+        fitnessLevel: user.fitnessLevel || "",
+        equipment: user.equipment || "",
+        schedule: user.schedule || "",
+        limitations: user.limitations ? user.limitations.split(",") : [],
+        target: user.target ? user.target.split(",") : [],
+        primaryFocus: user.primaryFocus || "",
+        secondaryFocus: user.secondaryFocus || "",
+      };
+    }
+  });
+
+  async function handleUpdateProfile(e: Event) {
+    e.preventDefault();
+    errors = {};
+
+    const result = profileSchema.safeParse(profileData);
+
+    if (!result.success) {
+      errors = result.error.flatten().fieldErrors;
+      toast.error("Validation failed", {
+        description: "Please check your inputs and try again.",
       });
-  
-      async function handleUpdateProfile(e: Event) {
-          e.preventDefault();
-          errors = {};
-  
-          const result = profileSchema.safeParse(profileData);
-  
-          if (!result.success) {
-              errors = result.error.flatten().fieldErrors;
-              toast.error("Validation failed", {
-                  description: "Please check your inputs and try again.",
-              });
-              return;
-          }
-  
-          try {
-              const data = await updateProfileMutation.mutateAsync(result.data);
-              profileData.bmi = (data as any).user.bmi || "";
-              isEditing = false;
-              toast.success("Profile updated successfully!", {
-                  description: "Your changes have been saved.",
-              });
-          } catch (error) {
-              console.error("Error updating profile:", error);
-              toast.error("Failed to update profile", {
-                  description:
-                      "Please try again or contact support if the issue persists.",
-              });
-          }
-      }
-  
-      async function refreshPlanLimit() {
-          try {
-              isRefreshingLimit = true;
-              await invalidate("app:planLimit");
-              toast.success("Usage limit refreshed");
-          } finally {
-              isRefreshingLimit = false;
-          }
-      }
+      return;
+    }
+
+    try {
+      const data = await updateProfileMutation.mutateAsync(result.data);
+      profileData.bmi = (data as any).user.bmi || "";
+      isEditing = false;
+      toast.success("Profile updated successfully!", {
+        description: "Your changes have been saved.",
+      });
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("Failed to update profile", {
+        description:
+          "Please try again or contact support if the issue persists.",
+      });
+    }
+  }
+
+  async function refreshPlanLimit() {
+    try {
+      isRefreshingLimit = true;
+      await invalidate("app:planLimit");
+      toast.success("Usage limit refreshed");
+    } finally {
+      isRefreshingLimit = false;
+    }
+  }
   function formatDate(dateString: string) {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, "0");
@@ -257,21 +261,23 @@
                 />
               </div>
 
-              <FormSelect
-                label="Fitness Level"
-                options={fitnessLevelOptions}
-                bind:value={profileData.fitnessLevel}
-                placeholder="Select Level"
-                error={errors.fitnessLevel?.[0]}
-              />
+              <div class="grid grid-cols-2 gap-4">
+                <FormSelect
+                  label="Fitness Level"
+                  options={fitnessLevelOptions}
+                  bind:value={profileData.fitnessLevel}
+                  placeholder="Select Level"
+                  error={errors.fitnessLevel?.[0]}
+                />
 
-              <FormSelect
-                label="Equipment"
-                options={equipmentOptions}
-                bind:value={profileData.equipment}
-                placeholder="Select Equipment"
-                error={errors.equipment?.[0]}
-              />
+                <FormSelect
+                  label="Equipment"
+                  options={equipmentOptions}
+                  bind:value={profileData.equipment}
+                  placeholder="Select Equipment"
+                  error={errors.equipment?.[0]}
+                />
+              </div>
 
               <FormInput
                 id="schedule"
@@ -281,42 +287,42 @@
                 error={errors.schedule?.[0]}
               />
 
-              <FormCombobox
+              <FormMultiSelect
                 id="limitations"
                 label="Limitations"
                 options={limitationOptions}
                 bind:value={profileData.limitations}
-                placeholder="Select Limitation"
+                placeholder="Select Limitations"
                 error={errors.limitations?.[0]}
-                multiple={true}
               />
 
-              <FormCombobox
+              <FormMultiSelect
                 id="target"
                 label="Goal / Target"
                 options={targetOptions}
                 bind:value={profileData.target}
-                placeholder="Select Goal"
+                placeholder="Select Goals"
                 error={errors.target?.[0]}
+                max={3}
               />
 
-              <FormCombobox
-                id="primaryFocus"
-                label="Primary Muscle Focus"
-                options={muscleOptions}
-                bind:value={profileData.primaryFocus}
-                placeholder="Select Primary Focus"
-                error={errors.primaryFocus?.[0]}
-              />
+              <div class="grid grid-cols-2 gap-4">
+                <FormSelect
+                  label="Primary Muscle Focus"
+                  options={muscleOptions}
+                  bind:value={profileData.primaryFocus}
+                  placeholder="Select Primary Focus (Optional)"
+                  error={errors.primaryFocus?.[0]}
+                />
 
-              <FormCombobox
-                id="secondaryFocus"
-                label="Secondary Muscle Focus"
-                options={muscleOptions}
-                bind:value={profileData.secondaryFocus}
-                placeholder="Select Secondary Focus"
-                error={errors.secondaryFocus?.[0]}
-              />
+                <FormSelect
+                  label="Secondary Muscle Focus"
+                  options={muscleOptions}
+                  bind:value={profileData.secondaryFocus}
+                  placeholder="Select Secondary Focus (Optional)"
+                  error={errors.secondaryFocus?.[0]}
+                />
+              </div>
             </Card.Content>
 
             <Card.Footer class="flex gap-2 mt-4">
@@ -337,8 +343,10 @@
                       fitnessLevel: user.fitnessLevel || "",
                       equipment: user.equipment || "",
                       schedule: user.schedule || "",
-                      limitations: user.limitations ? user.limitations.split(",") : [],
-                      target: user.target || "",
+                      limitations: user.limitations
+                        ? user.limitations.split(",")
+                        : [],
+                      target: user.target ? user.target.split(",") : [],
                       primaryFocus: user.primaryFocus || "",
                       secondaryFocus: user.secondaryFocus || "",
                     };
@@ -428,7 +436,9 @@
             <div>
               <p class="text-sm text-muted-foreground">Goal / Target</p>
               <p class="font-medium">
-                {profileData.target || "N/A"}
+                {profileData.target?.length
+                  ? profileData.target.join(", ")
+                  : "N/A"}
               </p>
             </div>
 
@@ -467,7 +477,9 @@
                 disabled={isRefreshingLimit}
                 title="Refresh limit"
               >
-                <RefreshCw class="h-3 w-3 {isRefreshingLimit ? 'animate-spin' : ''}" />
+                <RefreshCw
+                  class="h-3 w-3 {isRefreshingLimit ? 'animate-spin' : ''}"
+                />
               </Button>
             </div>
           </div>

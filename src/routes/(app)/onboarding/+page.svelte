@@ -1,6 +1,10 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button";
-  import { FormInput, FormSelect, FormTextarea } from "$lib/components/ui/form";
+  import {
+    FormInput,
+    FormSelect,
+    FormMultiSelect,
+  } from "$lib/components/ui/form";
   import * as Card from "$lib/components/ui/card";
   import { goto } from "$app/navigation";
   import { Check, CalendarRange, CalendarDays } from "@lucide/svelte";
@@ -9,6 +13,9 @@
     equipmentOptions,
     genderOptions,
     fitnessLevelOptions,
+    targetOptions,
+    limitationOptions,
+    muscleOptions,
     createInitialProfileData,
   } from "$lib/schemas/profile";
   import { useUpdateProfileMutation } from "$lib/queries/profile";
@@ -133,21 +140,23 @@
           />
         </div>
 
-        <FormSelect
-          label="Fitness Level"
-          options={fitnessLevelOptions}
-          bind:value={profileData.fitnessLevel}
-          placeholder="Select Level"
-          error={errors.fitnessLevel?.[0]}
-        />
+        <div class="grid grid-cols-2 gap-4">
+          <FormSelect
+            label="Fitness Level"
+            options={fitnessLevelOptions}
+            bind:value={profileData.fitnessLevel}
+            placeholder="Select Level"
+            error={errors.fitnessLevel?.[0]}
+          />
 
-        <FormSelect
-          label="Equipment"
-          options={equipmentOptions}
-          bind:value={profileData.equipment}
-          placeholder="Select Equipment"
-          error={errors.equipment?.[0]}
-        />
+          <FormSelect
+            label="Equipment"
+            options={equipmentOptions}
+            bind:value={profileData.equipment}
+            placeholder="Select Equipment"
+            error={errors.equipment?.[0]}
+          />
+        </div>
 
         <FormInput
           id="schedule"
@@ -157,21 +166,42 @@
           error={errors.schedule?.[0]}
         />
 
-        <FormInput
+        <FormMultiSelect
           id="limitations"
           label="Limitations"
-          placeholder="Lower back pain..."
+          options={limitationOptions}
           bind:value={profileData.limitations}
+          placeholder="Select Limitations"
           error={errors.limitations?.[0]}
         />
 
-        <FormTextarea
+        <FormMultiSelect
           id="target"
           label="Goal / Target"
-          placeholder="I want to lose weight and build muscle..."
+          options={targetOptions}
           bind:value={profileData.target}
+          placeholder="Select Goals"
           error={errors.target?.[0]}
+          max={3}
         />
+
+        <div class="grid grid-cols-2 gap-4">
+          <FormSelect
+            label="Primary Muscle Focus"
+            options={muscleOptions}
+            bind:value={profileData.primaryFocus}
+            placeholder="Select Muscle"
+            error={errors.primaryFocus?.[0]}
+          />
+
+          <FormSelect
+            label="Secondary Muscle Focus"
+            options={muscleOptions}
+            bind:value={profileData.secondaryFocus}
+            placeholder="Select Muscle"
+            error={errors.secondaryFocus?.[0]}
+          />
+        </div>
 
         <Button
           type="submit"

@@ -1,107 +1,139 @@
 <script lang="ts">
- import { Combobox } from "bits-ui";
- import { Check, ChevronsUpDown, X } from "@lucide/svelte";
- import { fly } from "svelte/transition";
- import { cn } from "$lib/utils";
- import { Badge } from "$lib/components/ui/badge";
+  import { Check, ChevronsUpDown, X } from "@lucide/svelte";
+  import { tick } from "svelte";
+  import { useId } from "bits-ui";
+  import { cn } from "$lib/utils";
+  import { Badge } from "$lib/components/ui/badge";
+  import * as Popover from "$lib/components/ui/popover";
+  import * as Command from "$lib/components/ui/command";
+  import { buttonVariants } from "$lib/components/ui/button";
 
- let { 
-     value = $bindable(), 
-     placeholder = "Select...", 
-     options = [], 
-     class: className,
-     multiple = false
- } = $props();
+  let {
+    value = $bindable(),
+    placeholder = "Select...",
+    options = [],
+    class: className,
+    multiple = false,
+  } = $props();
 
- let inputValue = $state("");
- let touchedInput = $state(false);
+  let open = $state(false);
 
- let filteredOptions = $derived(
-  inputValue && touchedInput
-   ? options.filter((option: any) =>
-     option.label.toLowerCase().includes(inputValue.toLowerCase())
-    )
-   : options
- );
- 
- // Sync inputValue with selected value label when value changes externally or initially (only for single mode)
- $effect(() => {
-     if (!multiple && value) {
-         const option = options.find((o: any) => o.value === value);
-         if (option && !touchedInput) {
-             inputValue = option.label;
-         }
-     }
- });
+  const selectedOption = $derived(() => {
+    if (multiple) {
+      return null;
+    }
+    return options.find((o: any) => o.value === value);
+  });
+
+  const selectedOptions = $derived(() => {
+    if (!multiple || !Array.isArray(value)) {
+      return [];
+    }
+    return options.filter((o: any) => value.includes(o.value));
+  });
+
+  function closeAndFocusTrigger(triggerId: string) {
+    open = false;
+    tick().then(() => {
+      document.getElementById(triggerId)?.focus();
+    });
+  }
+
+  function handleSelect(optionValue: string) {
+    if (multiple) {
+      if (Array.isArray(value)) {
+        if (value.includes(optionValue)) {
+          value = value.filter((v: string) => v !== optionValue);
+        } else {
+          value = [...value, optionValue];
+        }
+      } else {
+        value = [optionValue];
+      }
+    } else {
+      value = optionValue;
+      closeAndFocusTrigger(triggerId);
+    }
+  }
+
+  function removeValue(optionValue: string) {
+    if (Array.isArray(value)) {
+      value = value.filter((v: string) => v !== optionValue);
+    }
+  }
+
+  const triggerId = useId();
 </script>
 
-<Combobox.Root 
-    type={multiple ? "multiple" : "single"} 
-    bind:value 
-    onOpenChange={(open) => {
-        if (open) {
-            touchedInput = false; 
-        }
-    }}
->
- <div class="relative w-full">
+<div class="w-full">
   {#if multiple && Array.isArray(value) && value.length > 0}
-      <div class="flex flex-wrap gap-2 mb-2">
-          {#each value as v}
-              <Badge variant="secondary" class="gap-1 pr-1.5">
-                  {options.find((o: any) => o.value === v)?.label || v}
-                  <button 
-                    type="button"
-                    onclick={(e) => {
-                        e.stopPropagation();
-                        value = value.filter((i: any) => i !== v);
-                    }} 
-                    class="ml-1 hover:text-destructive focus:outline-none"
-                  >
-                      <X class="h-3 w-3" />
-                  </button>
-              </Badge>
-          {/each}
-      </div>
-  {/if}
-  <div class="relative">
-      <Combobox.Input>
-        {#snippet child({ props })}
-            <input 
-                {...props} 
-                class={cn("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pr-8", className)}
-                placeholder={placeholder}
-                bind:value={inputValue}
-                oninput={() => (touchedInput = true)}
-            />
-        {/snippet}
-      </Combobox.Input>
-      <Combobox.Trigger class="absolute right-0 top-0 h-full px-2 flex items-center justify-center">
-          <ChevronsUpDown class="h-4 w-4 text-muted-foreground" />
-      </Combobox.Trigger>
-  </div>
- </div>
-
- <Combobox.Content
-  class="z-50 min-w-[var(--bits-combobox-anchor-width)] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md outline-none max-h-60 overflow-y-auto"
- >
-  <div class="p-1">
-      {#each filteredOptions as option (option.value)}
-        <Combobox.Item
-            class="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground data-[disabled]:opacity-50"
-            value={option.value}
-            label={option.label}
-        >
-            {#if multiple ? (Array.isArray(value) && value.includes(option.value)) : value === option.value}
-                <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-                    <Check class="h-4 w-4" />
-                </span>
-            {/if}
-            {option.label}
-        </Combobox.Item>
-      {:else}
-        <div class="py-6 text-center text-sm text-muted-foreground">No results found.</div>
+    <div class="flex flex-wrap gap-2 mb-2">
+      {#each selectedOptions() as option}
+        <Badge variant="secondary" class="gap-1 pr-1.5">
+          {option.label}
+          <button
+            type="button"
+            onclick={(e) => {
+              e.stopPropagation();
+              removeValue(option.value);
+            }}
+            class="ml-1 hover:text-destructive focus:outline-none"
+          >
+            <X class="h-3 w-3" />
+          </button>
+        </Badge>
       {/each}
-  </div>
- </Combobox.Content>
-</Combobox.Root>
+    </div>
+  {/if}
+
+  <Popover.Root bind:open>
+    <Popover.Trigger
+      id={triggerId}
+      class={cn(
+        buttonVariants({ variant: "outline" }),
+        "w-full justify-between",
+        !value && "text-muted-foreground",
+        className,
+      )}
+    >
+      {#if multiple && Array.isArray(value) && value.length > 0}
+        {value.length} selected
+      {:else if selectedOption()}
+        {selectedOption().label}
+      {:else}
+        {placeholder}
+      {/if}
+      <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+    </Popover.Trigger>
+    <Popover.Content class="w-(--bits-popover-trigger-width) p-0">
+      <Command.Root>
+        <Command.Input placeholder="Search..." />
+        <Command.List>
+          <Command.Empty>No results found.</Command.Empty>
+          <Command.Group>
+            {#each options as option (option.value)}
+              <Command.Item
+                value={option.value}
+                onSelect={() => handleSelect(option.value)}
+              >
+                <Check
+                  class={cn(
+                    "mr-2 h-4 w-4",
+                    multiple
+                      ? Array.isArray(value) && value.includes(option.value)
+                        ? "opacity-100"
+                        : "opacity-0"
+                      : value === option.value
+                        ? "opacity-100"
+                        : "opacity-0",
+                  )}
+                />
+                {option.label}
+              </Command.Item>
+            {/each}
+          </Command.Group>
+        </Command.List>
+      </Command.Root>
+    </Popover.Content>
+  </Popover.Root>
+</div>
