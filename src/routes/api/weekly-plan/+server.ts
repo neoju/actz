@@ -67,6 +67,8 @@ export async function POST({ request, locals }) {
         schedule: true,
         limitations: true,
         target: true,
+        primaryFocus: true,
+        secondaryFocus: true,
       },
     });
 
@@ -87,6 +89,8 @@ export async function POST({ request, locals }) {
       schedule,
       limitations,
       target,
+      primaryFocus,
+      secondaryFocus,
     } = user;
 
     // Calculate BMI
@@ -159,6 +163,8 @@ export async function POST({ request, locals }) {
         - Schedule: ${schedule}
         - Limitations/Injuries: ${limitations}
         - Primary Goal: ${target}
+        - Primary Focus Area: ${primaryFocus || "General"}
+        - Secondary Focus Area: ${secondaryFocus || "None"}
         `;
 
     const apiKey = env.GROQ_API_KEY;

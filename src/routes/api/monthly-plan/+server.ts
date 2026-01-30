@@ -26,6 +26,8 @@ export async function POST({ locals }) {
         schedule: true,
         limitations: true,
         target: true,
+        primaryFocus: true,
+        secondaryFocus: true,
       },
     });
 
@@ -46,6 +48,8 @@ export async function POST({ locals }) {
       schedule,
       limitations,
       target,
+      primaryFocus,
+      secondaryFocus,
     } = user;
 
     // Calculate BMI
@@ -108,6 +112,8 @@ export async function POST({ locals }) {
         - Schedule: ${schedule}
         - Limitations: ${limitations}
         - Goal: ${target}
+        - Focus Area: ${primaryFocus || "General"}
+        - Secondary Focus: ${secondaryFocus || "None"}
 
         Context:
         - Categories: ${JSON.stringify(categories)}
