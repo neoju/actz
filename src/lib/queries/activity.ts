@@ -2,9 +2,9 @@ import { createMutation, useQueryClient } from "@tanstack/svelte-query";
 import { invalidateAll } from "$app/navigation";
 
 interface UpdateActivityRequest {
-  plannedExerciseId: string;
+  plannedExerciseId: number;
   status: string;
-  activityId?: string;
+  activityId?: number;
 }
 
 /**
@@ -12,7 +12,7 @@ interface UpdateActivityRequest {
  */
 export const activityKeys = {
   all: ["activity"] as const,
-  byExercise: (exerciseId: string) =>
+  byExercise: (exerciseId: number) =>
     [...activityKeys.all, "exercise", exerciseId] as const,
 };
 

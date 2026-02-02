@@ -478,7 +478,7 @@ export function startLibraryPageTour() {
     
     // Start tour after a brief delay to allow navigation
     setTimeout(() => {
-      drive();
+      driver.drive();
     }, 500);
     },
   });

@@ -7,11 +7,21 @@ export async function load({ params, locals }) {
     throw redirect(303, "/signin");
   }
 
-  const { dayId } = params;
+  const { weeklyPlanId, daySlug } = params;
+  const wId = parseInt(weeklyPlanId);
+  
+  if (isNaN(wId)) {
+    throw error(404, "Invalid plan ID");
+  }
 
   const dayPlan = await prisma.dayPlan
     .findUnique({
-      where: { id: dayId },
+      where: {
+        weeklyPlanId_slug: {
+          weeklyPlanId: wId,
+          slug: daySlug,
+        },
+      },
       include: {
         weeklyPlan: {
           select: {

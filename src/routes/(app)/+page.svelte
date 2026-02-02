@@ -165,7 +165,7 @@
       {@const isPastUntouched = isPast && !isTouched}
       {@const isPastTouched = isPast && isTouched && !isCompleted}
       {@const isDisabled = isFuture || isPastUntouched || isRestDay}
-      {@const dayLink = `/planned-exercises/${day.id}`}
+      {@const dayLink = `/planned-exercises/${plan.id}/${day.slug}`}
       {@const isLoading = navigating.to?.url.pathname === dayLink}
 
       <a

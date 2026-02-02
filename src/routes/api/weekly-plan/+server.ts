@@ -5,6 +5,7 @@ import { env } from "$env/dynamic/private";
 import exercisesDB from "$lib/exercises.json";
 import prisma from "$lib/prisma";
 import { getOptimizedContext } from "$lib/utils/context-optimizer";
+import { slugify } from "$lib/utils";
 
 const PlanSchema = z.object({
   pt_summary: z.string(),
@@ -216,6 +217,7 @@ export async function POST({ request, locals }) {
         days: {
           create: result.weekly_plan.map((day, index) => ({
             dayName: day.day,
+            slug: slugify(`${day.day}-${day.title}`),
             title: day.title,
             estimatedTime: day.estimated_time,
             order: index + 1,

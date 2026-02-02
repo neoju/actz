@@ -72,11 +72,11 @@ model Session {
 }
 
 model WeeklyPlan {
-  id     String @id @default(cuid())
+  id     Int @id @default(autoincrement())
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  monthlyPlanId String?
+  monthlyPlanId Int?
   monthlyPlan   MonthlyPlan? @relation(fields: [monthlyPlanId], references: [id])
 
   ptSummary       String?
@@ -92,7 +92,7 @@ model WeeklyPlan {
 }
 
 model MonthlyPlan {
-  id     String @id @default(cuid())
+  id     Int @id @default(autoincrement())
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -109,21 +109,24 @@ model MonthlyPlan {
 }
 
 model DayPlan {
-  id           String     @id @default(cuid())
-  weeklyPlanId String
+  id           Int     @id @default(autoincrement())
+  weeklyPlanId Int
   weeklyPlan   WeeklyPlan @relation(fields: [weeklyPlanId], references: [id], onDelete: Cascade)
 
   dayName       String // e.g., "Day 1", "Monday"
+  slug          String
   title         String // e.g., "Push Day"
   estimatedTime String?
   order         Int // 1-7
 
   exercises PlannedExercise[]
+
+  @@unique([weeklyPlanId, slug])
 }
 
 model PlannedExercise {
-  id        String  @id @default(cuid())
-  dayPlanId String
+  id        Int  @id @default(autoincrement())
+  dayPlanId Int
   dayPlan   DayPlan @relation(fields: [dayPlanId], references: [id], onDelete: Cascade)
 
   name  String
@@ -136,11 +139,11 @@ model PlannedExercise {
 }
 
 model ExerciseActivity {
-  id     String @id @default(cuid())
+  id     Int @id @default(autoincrement())
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  plannedExerciseId String
+  plannedExerciseId Int
   plannedExercise   PlannedExercise @relation(fields: [plannedExerciseId], references: [id], onDelete: Cascade)
 
   status      ActivityStatus @default(PENDING)
@@ -163,7 +166,7 @@ enum ActivityStatus {
 }
 
 model PlanGenerationLog {
-  id        String   @id @default(cuid())
+  id        Int   @id @default(autoincrement())
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())

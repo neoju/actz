@@ -43,7 +43,7 @@
 {/if}
 
 <Accordion.Item
-    value={exercise.id}
+    value={exercise.id.toString()}
     disabled={isLocked || (ctx.status === "PENDING" && cooldownActive)}
 >
     <Accordion.Trigger class="hover:no-underline">

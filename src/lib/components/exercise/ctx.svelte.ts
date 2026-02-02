@@ -142,7 +142,7 @@ export class ExerciseContext {
     this.onStartCooldownProp();
   };
 
-  handleUpdateActivity = async (id: string, status: string, aid?: string) => {
+  handleUpdateActivity = async (id: number, status: string, aid?: number) => {
     if (status === "SKIPPED" || status === "COMPLETED") {
       this.isFullScreen = false;
     }
