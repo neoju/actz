@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
-  import NavigationProgress from "$lib/components/NavigationProgress.svelte";
+  import NavigationProgress from "$lib/components/navigation-progress.svelte";
   import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
 
   import "$lib/styles/view-transitions.css";

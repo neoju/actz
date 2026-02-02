@@ -4,8 +4,8 @@
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import XIcon from "@lucide/svelte/icons/x";
   import SkipForwardIcon from "@lucide/svelte/icons/skip-forward";
-  import ExerciseContent from "./ExerciseContent.svelte";
-  import FocusModeControls from "./FocusModeControls.svelte";
+  import ExerciseContent from "./exercise-content.svelte";
+  import FocusModeControls from "./focus-mode-controls.svelte";
   import { useExercise } from "./ctx.svelte";
 
   const ctx = useExercise();

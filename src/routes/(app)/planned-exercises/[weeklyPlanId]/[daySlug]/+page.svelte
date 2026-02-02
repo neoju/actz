@@ -6,7 +6,7 @@
   import * as Card from "$lib/components/ui/card";
   import { Button } from "$lib/components/ui/button";
   import { Lock, Trophy, Clock, Timer } from "@lucide/svelte";
-  import ExerciseItem from "$lib/components/exercise/ExerciseItem.svelte";
+  import ExerciseItem from "$lib/components/exercise/exercise-item.svelte";
 
   let { data } = $props();
   let selectedDay = $derived(data.day);

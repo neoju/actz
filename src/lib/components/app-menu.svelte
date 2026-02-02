@@ -15,7 +15,7 @@
     Linkedin,
   } from "@lucide/svelte";
   import ModeSwitcher from "$lib/components/mode-switcher.svelte";
-  import AppMenuItem from "./app-menu-item.svelte";
+  import type { Component } from "svelte";
 
   let isMenuOpen = $state(false);
 
@@ -40,6 +40,25 @@
   }
 </script>
 
+{#snippet MenuItem(
+  Icon: Component,
+  label: string,
+  onclick?: () => void,
+  dataTour?: string,
+  variant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" = "ghost",
+  className?: string
+)}
+  <Button
+    {variant}
+    class="justify-start gap-3 {className}"
+    {onclick}
+    data-tour={dataTour}
+  >
+    <Icon class="h-5 w-5" />
+    <span>{label}</span>
+  </Button>
+{/snippet}
+
 <Sheet.Root bind:open={isMenuOpen}>
   <ModeSwitcher />
   <Sheet.Trigger>
@@ -62,41 +81,15 @@
       <Sheet.Description>Your AI-Powered Fitness Companion</Sheet.Description>
     </Sheet.Header>
     <div class="flex flex-col gap-4 mt-6 flex-1">
-      <AppMenuItem
-        icon={House}
-        label="Home"
-        onclick={() => handleNavigation("/")}
-      />
-      <AppMenuItem
-        icon={BookSearch}
-        label="Library"
-        onclick={() => handleNavigation("/exercises")}
-        data-tour="library-link"
-      />
-      <AppMenuItem
-        icon={Settings}
-        label="Settings"
-        onclick={() => handleNavigation("/settings")}
-        data-tour="settings-link"
-      />
+      {@render MenuItem(House, "Home", () => handleNavigation("/"))}
+      {@render MenuItem(BookSearch, "Library", () => handleNavigation("/exercises"), "library-link")}
+      {@render MenuItem(Settings, "Settings", () => handleNavigation("/settings"), "settings-link")}
+      
       <div class="border-t border-border my-2"></div>
-      <AppMenuItem
-        icon={CircleQuestionMark}
-        label="FAQ"
-        onclick={() => handleNavigation("/faq")}
-      />
-
-      <AppMenuItem
-        icon={Map}
-        label="Restart Guided Tour"
-        onclick={handleRestartTour}
-      />
-      <AppMenuItem
-        icon={LogOut}
-        label="Logout"
-        onclick={handleLogout}
-        class="text-destructive hover:text-destructive hover:bg-destructive/10"
-      />
+      
+      {@render MenuItem(CircleQuestionMark, "FAQ", () => handleNavigation("/faq"), "settings-link")}
+      {@render MenuItem(Map, "Restart Guided Tour", handleRestartTour)}
+      {@render MenuItem(LogOut, "Logout", handleLogout, undefined, "ghost", "text-destructive hover:text-destructive hover:bg-destructive/10")}
     </div>
 
     <Sheet.Footer class="mt-auto pt-6 border-t border-border">

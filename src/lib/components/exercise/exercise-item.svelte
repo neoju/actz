@@ -1,10 +1,9 @@
 <script lang="ts">
     import * as Accordion from "$lib/components/ui/accordion";
-    import ExerciseHeader from "$lib/components/exercise/ExerciseHeader.svelte";
-    import ExerciseContent from "$lib/components/exercise/ExerciseContent.svelte";
-    import ExerciseControls from "$lib/components/exercise/ExerciseControls.svelte";
-    import FocusMode from "$lib/components/exercise/FocusMode.svelte";
-    import { setExerciseContext } from "$lib/components/exercise/ctx.svelte";
+    import ExerciseHeader from "$lib/components/exercise/exercise-header.svelte";
+    import ExerciseContent from "$lib/components/exercise/exercise-content.svelte";
+    import ExerciseControls from "$lib/components/exercise/exercise-controls.svelte";
+    import FocusMode from "$lib/components/exercise/focus-mode.svelte";    import { setExerciseContext } from "$lib/components/exercise/ctx.svelte";
 
     let {
         isOpened,
