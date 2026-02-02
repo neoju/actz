@@ -7,7 +7,7 @@
     FormSelect,
     FormMultiSelect,
   } from "$lib/components/ui/form";
-  import { ArrowLeft, RefreshCw } from "@lucide/svelte";
+  import { RefreshCw } from "@lucide/svelte";
   import { goto, invalidate } from "$app/navigation";
   import {
     profileSchema,
@@ -169,9 +169,6 @@
 
 <div class="space-y-6">
   <div class="flex items-center space-x-2">
-    <Button variant="ghost" size="icon" href="/">
-      <ArrowLeft class="h-4 w-4" />
-    </Button>
     <h1 class="text-2xl font-bold">Settings</h1>
   </div>
 

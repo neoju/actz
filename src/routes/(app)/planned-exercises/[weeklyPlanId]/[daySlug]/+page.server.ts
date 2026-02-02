@@ -9,7 +9,7 @@ export async function load({ params, locals }) {
 
   const { weeklyPlanId, daySlug } = params;
   const wId = parseInt(weeklyPlanId);
-  
+
   if (isNaN(wId)) {
     throw error(404, "Invalid plan ID");
   }

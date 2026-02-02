@@ -1,96 +1,76 @@
-<script lang="ts">
-    import { Button } from "$lib/components/ui/button";
-    import { ArrowLeft } from "@lucide/svelte";
-</script>
-
 <div class="space-y-6 pb-8">
-    <div class="flex items-center space-x-2">
-        <Button variant="ghost" size="icon" href="/">
-            <ArrowLeft class="h-4 w-4" />
-        </Button>
-        <h1 class="text-2xl font-bold">Privacy Policy</h1>
-    </div>
+  <div class="flex items-center space-x-2">
+    <h1 class="text-2xl font-bold">Privacy Policy</h1>
+  </div>
 
-    <div
-        class="prose prose-sm dark:prose-invert text-muted-foreground leading-relaxed"
-    >
-        <p class="font-medium text-foreground">
-            Last updated: January 26, 2026
-        </p>
+  <div
+    class="prose prose-sm dark:prose-invert text-muted-foreground leading-relaxed"
+  >
+    <p class="font-medium text-foreground">Last updated: January 26, 2026</p>
 
-        <h2 class="text-foreground mt-6 text-lg font-semibold">
-            1. Information Collection
-        </h2>
-        <p>
-            We collect information that you provide directly to us when you
-            create an account, specifically your Google profile information
-            (name, email address, and profile picture) when you sign in using
-            Google. We also collect data related to your workouts and usage of
-            the application.
-        </p>
+    <h2 class="text-foreground mt-6 text-lg font-semibold">
+      1. Information Collection
+    </h2>
+    <p>
+      We collect information that you provide directly to us when you create an
+      account, specifically your Google profile information (name, email
+      address, and profile picture) when you sign in using Google. We also
+      collect data related to your workouts and usage of the application.
+    </p>
 
-        <h2 class="text-foreground mt-6 text-lg font-semibold">
-            2. Use of Information
-        </h2>
-        <p>
-            We use the information we collect to provide, maintain, and improve
-            our services, including:
-        </p>
-        <ul class="list-disc pl-5 space-y-1">
-            <li>Providing and maintaining your user account;</li>
-            <li>Tracking your workout progress and history;</li>
-            <li>Personalizing your experience;</li>
-            <li>
-                Communicating with you about updates or changes to our services.
-            </li>
-        </ul>
+    <h2 class="text-foreground mt-6 text-lg font-semibold">
+      2. Use of Information
+    </h2>
+    <p>
+      We use the information we collect to provide, maintain, and improve our
+      services, including:
+    </p>
+    <ul class="list-disc pl-5 space-y-1">
+      <li>Providing and maintaining your user account;</li>
+      <li>Tracking your workout progress and history;</li>
+      <li>Personalizing your experience;</li>
+      <li>Communicating with you about updates or changes to our services.</li>
+    </ul>
 
-        <h2 class="text-foreground mt-6 text-lg font-semibold">
-            3. Cookies and Local Storage
-        </h2>
-        <p>
-            We use cookies and local storage to maintain your authenticated
-            session and to store your preferences. You can control cookies
-            through your browser settings, but disabling them may limit your
-            ability to use certain features of the service.
-        </p>
+    <h2 class="text-foreground mt-6 text-lg font-semibold">
+      3. Cookies and Local Storage
+    </h2>
+    <p>
+      We use cookies and local storage to maintain your authenticated session
+      and to store your preferences. You can control cookies through your
+      browser settings, but disabling them may limit your ability to use certain
+      features of the service.
+    </p>
 
-        <h2 class="text-foreground mt-6 text-lg font-semibold">
-            4. Data Security
-        </h2>
-        <p>
-            We take reasonable measures to help protect information about you
-            from loss, theft, misuse and unauthorized access, disclosure,
-            alteration and destruction. However, no internet transmission is
-            completely secure, and we cannot guarantee the absolute security of
-            your data.
-        </p>
+    <h2 class="text-foreground mt-6 text-lg font-semibold">4. Data Security</h2>
+    <p>
+      We take reasonable measures to help protect information about you from
+      loss, theft, misuse and unauthorized access, disclosure, alteration and
+      destruction. However, no internet transmission is completely secure, and
+      we cannot guarantee the absolute security of your data.
+    </p>
 
-        <h2 class="text-foreground mt-6 text-lg font-semibold">
-            5. Third-Party Services
-        </h2>
-        <p>
-            We use Google for authentication. Their use of your information is
-            governed by their own privacy policies. We do not sell your personal
-            information to third parties.
-        </p>
+    <h2 class="text-foreground mt-6 text-lg font-semibold">
+      5. Third-Party Services
+    </h2>
+    <p>
+      We use Google for authentication. Their use of your information is
+      governed by their own privacy policies. We do not sell your personal
+      information to third parties.
+    </p>
 
-        <h2 class="text-foreground mt-6 text-lg font-semibold">
-            6. Changes to this Policy
-        </h2>
-        <p>
-            We may update this privacy policy from time to time. If we make
-            material changes, we will notify you by revising the date at the top
-            of the policy and, in some cases, we may provide you with additional
-            notice.
-        </p>
+    <h2 class="text-foreground mt-6 text-lg font-semibold">
+      6. Changes to this Policy
+    </h2>
+    <p>
+      We may update this privacy policy from time to time. If we make material
+      changes, we will notify you by revising the date at the top of the policy
+      and, in some cases, we may provide you with additional notice.
+    </p>
 
-        <h2 class="text-foreground mt-6 text-lg font-semibold">
-            7. Contact Us
-        </h2>
-        <p>
-            If you have any questions about this Privacy Policy, please contact
-            us.
-        </p>
-    </div>
+    <h2 class="text-foreground mt-6 text-lg font-semibold">7. Contact Us</h2>
+    <p>
+      If you have any questions about this Privacy Policy, please contact us.
+    </p>
+  </div>
 </div>

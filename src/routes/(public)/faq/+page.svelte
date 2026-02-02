@@ -4,11 +4,8 @@
   import { ArrowLeft } from "@lucide/svelte";
 </script>
 
-<div class="container mx-auto py-10 px-4 max-w-3xl">
+<div class="mx-auto py-4">
   <div class="mb-8 flex items-center gap-4">
-    <Button variant="ghost" size="icon" href="/">
-      <ArrowLeft class="h-4 w-4" />
-    </Button>
     <h1 class="text-3xl font-bold tracking-tight">
       Frequently Asked Questions
     </h1>

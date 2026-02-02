@@ -1,7 +1,6 @@
 import { json } from "@sveltejs/kit";
 import Groq from "groq-sdk";
 import { env } from "$env/dynamic/private";
-import { z } from "zod";
 import exercisesDB from "$lib/exercises.json";
 import prisma from "$lib/prisma";
 import { getOptimizedContext } from "$lib/utils/context-optimizer";
@@ -75,6 +74,7 @@ export async function POST({ locals }) {
             - Week 4: Deload/Recovery
         3.  **Consistency**: Ensure the plan fits their schedule and limitations perfectly.
         4.  **Monthly Summary**: Write a motivating overview of the entire month's journey.
+        5.  **Only use Available Exercises in Database**
 
         Response Format:
         Return valid JSON only. NO Text blocks or markdown.

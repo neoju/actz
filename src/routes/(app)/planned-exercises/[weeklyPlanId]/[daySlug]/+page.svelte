@@ -1,24 +1,19 @@
 <script lang="ts">
   import { scale, fade } from "svelte/transition";
-  import { Lock } from "@lucide/svelte";
+  import { toast } from "svelte-sonner";
+  import { useUpdateActivityMutation } from "$lib/queries/activity";
   import * as Accordion from "$lib/components/ui/accordion";
   import * as Card from "$lib/components/ui/card";
   import { Button } from "$lib/components/ui/button";
-  import { ChevronLeft, Trophy, Clock, Timer } from "@lucide/svelte";
-  import { useUpdateActivityMutation } from "$lib/queries/activity";
+  import { Lock, Trophy, Clock, Timer } from "@lucide/svelte";
   import ExerciseItem from "$lib/components/exercise/ExerciseItem.svelte";
-  import { toast } from "svelte-sonner";
 
   let { data } = $props();
   let selectedDay = $derived(data.day);
   let isPastDay = $derived(data.isPastDay);
 
   // Check if this is a rest day
-  let isRestDay = $derived(
-    selectedDay.exercises.length === 0 ||
-      selectedDay.title.toLowerCase().includes("rest") ||
-      selectedDay.dayName.toLowerCase().includes("rest"),
-  );
+  let isRestDay = $derived(selectedDay.exercises.length === 0);
 
   // Check if any exercise has been touched (started)
   let isTouched = $derived(
@@ -34,9 +29,7 @@
   let isPastUntouched = $derived(isPastDay && !isTouched);
 
   // svelte-ignore state_referenced_locally
-  let openedExercise = $state<string | undefined>(
-    data.day.exercises[0]?.id.toString(),
-  );
+  let openedExercise = $state<string>(data.day.exercises[0]?.id.toString());
 
   // Use TanStack Query mutation for updating activity
   const updateActivityMutation = useUpdateActivityMutation();
@@ -125,7 +118,7 @@
         openedExercise = selectedDay.exercises[nextIndex].id.toString();
       } else {
         // All done
-        openedExercise = undefined;
+        openedExercise = "";
         if (!finishTime) finishTime = Date.now();
 
         // Only show congrats if we didn't start with it all done
@@ -276,9 +269,6 @@
 <div class="space-y-6 pb-8 main-content">
   <!-- Header with Back Button -->
   <div class="flex items-center space-x-2 pt-4">
-    <Button variant="ghost" size="icon" href="/">
-      <ChevronLeft class="h-6 w-6" />
-    </Button>
     <div>
       <h1 class="text-2xl font-bold tracking-tight">
         {selectedDay.title}
@@ -296,7 +286,7 @@
       class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-start gap-3"
       transition:scale={{ duration: 200 }}
     >
-      <Lock class="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
+      <Lock class="h-5 w-5 text-red-600 mt-0.5 shrink-0" />
       <div class="space-y-1">
         <h3 class="text-sm font-semibold text-red-600">
           Missed Workout - Read Only
@@ -313,7 +303,7 @@
       class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 flex items-start gap-3"
       transition:scale={{ duration: 200 }}
     >
-      <Clock class="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+      <Clock class="h-5 w-5 text-yellow-600 mt-0.5 shrink-0" />
       <div class="space-y-1">
         <h3 class="text-sm font-semibold text-yellow-600">
           In Progress - Complete Anytime

@@ -28,7 +28,7 @@ const PlanSchema = z.object({
   alert_msg: z.string().optional(),
 });
 
-export async function POST({ request, locals }) {
+export async function POST({ locals }) {
   try {
     const session = await locals.auth();
     if (!session?.user?.id) {
@@ -118,11 +118,12 @@ export async function POST({ request, locals }) {
         4.  **Safety First:** If the client has limitations (e.g., knee pain), strictly avoid or modify exercises that aggravate it.
         5.  **Summary:** Write a warm, encouraging, and professional personal note to the client. Address them directly (you can use "you"). Briefly assess their current state based on their profile and explain *specifically* why this plan is designed for them. motivating them to get started. Do not just list facts.
         6.  **Plan Description:** A brief overview of the week's focus (e.g., "Hypertrophy focus with 3 rest days").
+        7.  **Only use Available Exercises in Database**
 
         Context:
         - The client has access to the following exercise categories: ${JSON.stringify(categories)}.
         - Relevant tags: ${JSON.stringify(tags)}.
-        - Available Exercises in Database (prefer these names if suitable): ${exerciseNames}
+        - Available Exercises in Database: ${exerciseNames}
 
         Response Format:
         You must return a valid JSON object. Do not include any markdown formatting, code blocks, or explanations outside the JSON.

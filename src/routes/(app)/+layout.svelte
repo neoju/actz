@@ -17,6 +17,7 @@
     Map,
     CircleQuestionMark,
     Linkedin,
+    ChevronLeft,
   } from "@lucide/svelte";
   import { ModeWatcher } from "mode-watcher";
   import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
@@ -92,15 +93,30 @@
 <Toaster richColors position="top-center" />
 <QueryClientProvider client={queryClient}>
   <div
-    class="min-h-screen bg-muted/20 text-foreground font-sans antialiased flex justify-center"
+    class="min-h-screen bg-muted/20 text-foreground font-sans antialiased flex
+    justify-center"
   >
     <div
-      class="w-full max-w-md min-h-screen bg-background shadow-2xl overflow-hidden relative flex flex-col border-x border-border"
+      class="w-full max-w-md min-h-screen bg-background shadow-2xl overflow-hidden
+      relative flex flex-col border-x border-border"
     >
       <!-- Mobile Header with Hamburger Menu -->
       <header
-        class="fixed max-w-md w-screen mx-auto top-0 z-40 bg-background border-b border-border p-4 flex items-end justify-end"
+        class="fixed max-w-md w-screen mx-auto top-0 z-40 bg-background border-b
+        border-border p-4 flex items-end justify-end"
       >
+        {#if page.url.pathname != "/"}
+          <div class="grow">
+            <Button
+              class="pl-0!"
+              variant="ghost"
+              onclick={() => window.history.back()}
+            >
+              <ChevronLeft class="size-6" />
+            </Button>
+          </div>
+        {/if}
+
         <Sheet.Root bind:open={isMenuOpen}>
           <ModeSwitcher />
           <Sheet.Trigger>
