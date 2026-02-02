@@ -6,7 +6,7 @@
   async function handleGuestLogin() {
     const deviceId = localStorage.getItem("actz_device_id");
     // If deviceId is null, the backend will create a new user.
-    await signIn("credentials", { guestUserId: deviceId });
+    await signIn("credentials", { guestUserId: deviceId, redirectTo: "/" });
   }
 </script>
 
@@ -15,7 +15,7 @@
 
   <div class="w-full text-center flex-col items-center flex space-y-4">
     <Button
-      onclick={() => signIn("google")}
+      onclick={() => signIn("google", { redirectTo: "/" })}
       variant="outline"
       class="border-[#e84133]! text-[#e84133]! w-3xs"
     >
@@ -32,46 +32,28 @@
       <span class="flex flex-1 justify-center">Continue as Guest</span>
     </Button>
 
-            <p class="text-center text-sm text-muted-foreground mx-auto">
+    <p class="text-center text-sm text-muted-foreground mx-auto">
+      By clicking continue, you agree to our
 
-                By clicking continue, you agree to our
+      <a href="/terms" class="underline underline-offset-4 hover:text-primary"
+        >Terms of Service</a
+      >
 
-                <a
+      and
 
-                    href="/terms"
+      <a
+        href="/privacy-policy"
+        class="underline underline-offset-4 hover:text-primary"
+        >Privacy Policy</a
+      >.
+    </p>
 
-                    class="underline underline-offset-4 hover:text-primary"
+    <p class="text-center text-sm text-muted-foreground mx-auto">
+      Have questions? Check out our
 
-                    >Terms of Service</a
-
-                >
-
-                and
-
-                <a
-
-                    href="/privacy-policy"
-
-                    class="underline underline-offset-4 hover:text-primary"
-
-                    >Privacy Policy</a
-
-                >.
-
-            </p>
-
-            <p class="text-center text-sm text-muted-foreground mx-auto">
-
-                Have questions? Check out our
-
-                <a
-
-                    href="/faq"
-
-                    class="underline underline-offset-4 hover:text-primary">FAQ</a
-
-                >.
-
-            </p>
+      <a href="/faq" class="underline underline-offset-4 hover:text-primary"
+        >FAQ</a
+      >.
+    </p>
   </div>
 </div>

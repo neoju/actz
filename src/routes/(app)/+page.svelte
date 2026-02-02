@@ -17,8 +17,9 @@
   let { data } = $props();
   let plan = $derived(data.plan);
 
-  // Calculate current day index (0-based)
+  // Calculate current day index (0-based) only if plan exists
   let currentDayIndex = $derived.by(() => {
+    if (!plan) return 0;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -29,14 +30,15 @@
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
   });
 
-  // Sort days
-  let days = $derived(plan.days.sort((a: any, b: any) => a.order - b.order));
+  // Sort days only if plan exists
+  let days = $derived(plan ? plan.days.sort((a: any, b: any) => a.order - b.order) : []);
 
   // Check if plan is completed (currentDayIndex beyond all days)
-  let isPlanCompleted = $derived(currentDayIndex >= days.length);
+  let isPlanCompleted = $derived(days.length > 0 && currentDayIndex >= days.length);
 
   // Auto-scroll to today's card or new adventure section on mount
   onMount(() => {
+    if (!plan) return;
     setTimeout(() => {
       if (isPlanCompleted) {
         // Scroll to new adventure section
@@ -90,6 +92,32 @@
 </script>
 
 <div class="space-y-6 pb-8">
+  {#if !plan}
+    <!-- No Plan Greeting -->
+    <div class="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6 animate-in fade-in zoom-in duration-500">
+        <div class="bg-primary/10 p-6 rounded-full">
+            <Sparkles class="w-12 h-12 text-primary" />
+        </div>
+        
+        <div class="space-y-2 max-w-md">
+            <h1 class="text-3xl font-bold tracking-tight">Welcome to Action Z!</h1>
+            <p class="text-muted-foreground text-lg">
+                Your journey to a better you starts here. 
+            </p>
+        </div>
+
+        <div class="flex flex-col gap-4 w-full max-w-xs">
+            <Button href="/exercises" size="lg" class="w-full gap-2 text-lg h-14">
+                Explore Exercises
+                <ArrowRight class="w-5 h-5" />
+            </Button>
+            
+            <Button href="/settings" variant="outline" size="lg" class="w-full gap-2">
+                Generate a Plan
+            </Button>
+        </div>
+    </div>
+  {:else}
   <!-- Header -->
   <div class="space-y-2 pt-4">
     <h1 class="text-3xl font-bold tracking-tight mb-3">Your Weekly Plan</h1>
@@ -137,7 +165,7 @@
       {@const isPastUntouched = isPast && !isTouched}
       {@const isPastTouched = isPast && isTouched && !isCompleted}
       {@const isDisabled = isFuture || isPastUntouched || isRestDay}
-      {@const dayLink = `/dashboard/day/${day.id}`}
+      {@const dayLink = `/planned-exercises/${day.id}`}
       {@const isLoading = navigating.to?.url.pathname === dayLink}
 
       <a
@@ -307,6 +335,7 @@
         </div>
       </div>
     </div>
+  {/if}
   {/if}
 </div>
 

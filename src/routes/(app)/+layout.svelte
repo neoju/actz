@@ -75,7 +75,7 @@
   function handleRestartTour() {
     isMenuOpen = false;
     resetTour();
-    goto("/dashboard").then(() => {
+    goto("/").then(() => {
       setTimeout(() => {
         startCompleteTour();
       }, 500);
@@ -84,7 +84,7 @@
 
   async function handleLogout() {
     isMenuOpen = false;
-    await signOut({ callbackUrl: "/" });
+    await signOut({ callbackUrl: "/login" });
   }
 </script>
 
@@ -128,7 +128,7 @@
               <Button
                 variant="ghost"
                 class="justify-start gap-3"
-                onclick={() => handleNavigation("/dashboard")}
+                onclick={() => handleNavigation("/")}
               >
                 <House class="h-5 w-5" />
                 <span>Home</span>

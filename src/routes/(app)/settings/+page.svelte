@@ -134,7 +134,7 @@
           description: "Redirecting to dashboard...",
           duration: 2000,
           onAutoClose: () => {
-            goto("/dashboard");
+            goto("/");
           },
         });
       } else {
@@ -144,7 +144,7 @@
           description: "Redirecting to dashboard...",
           duration: 2000,
           onAutoClose: () => {
-            goto("/dashboard");
+            goto("/");
           },
         });
       }
@@ -169,7 +169,7 @@
 
 <div class="space-y-6">
   <div class="flex items-center space-x-2">
-    <Button variant="ghost" size="icon" href="/dashboard">
+    <Button variant="ghost" size="icon" href="/">
       <ArrowLeft class="h-4 w-4" />
     </Button>
     <h1 class="text-2xl font-bold">Settings</h1>

@@ -76,7 +76,7 @@
         await generateMonthlyPlanMutation.mutateAsync();
       }
 
-      goto("/dashboard");
+      goto("/");
     } catch (error) {
       console.error(`Error generating ${type} plan:`, error);
     } finally {
@@ -214,6 +214,20 @@
             Next
           {/if}
         </Button>
+        
+        <div class="text-center pt-2">
+            <button 
+                type="button"
+                class="text-sm text-muted-foreground hover:text-primary underline underline-offset-4"
+                onclick={() => {
+                    if (confirm("Are you sure you want to skip? You can update your profile and generate a plan later in Settings.")) {
+                        goto("/");
+                    }
+                }}
+            >
+                Skip for now
+            </button>
+        </div>
       </fieldset>
     </form>
   {:else}
@@ -326,6 +340,20 @@
           </Card.Content>
         </Card.Root>
       </button>
+    </div>
+    
+    <div class="text-center pt-4">
+        <button 
+            type="button"
+            class="text-sm text-muted-foreground hover:text-primary underline underline-offset-4"
+            onclick={() => {
+                if (confirm("Are you sure you want to skip? You can generate a plan later in Settings.")) {
+                    goto("/");
+                }
+            }}
+        >
+            Skip plan generation for now
+        </button>
     </div>
   {/if}
 </div>

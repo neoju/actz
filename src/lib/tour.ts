@@ -471,7 +471,15 @@ export function startLibraryPageTour() {
         markTourAsCompleted();
       }
       // Navigate back to dashboard
-      goto("/dashboard");
+    // Navigate to dashboard if not already there
+    if (window.location.pathname !== "/") {
+      goto("/");
+    }
+    
+    // Start tour after a brief delay to allow navigation
+    setTimeout(() => {
+      drive();
+    }, 500);
     },
   });
 

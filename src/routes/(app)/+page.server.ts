@@ -4,7 +4,7 @@ import prisma from "$lib/prisma";
 export async function load({ locals }) {
   const session = await locals.auth();
   if (!session?.user) {
-    throw redirect(303, "/signin"); // Or wherever login is
+    throw redirect(303, "/login"); // Or wherever login is
   }
 
   // Check if user has an active plan
@@ -20,11 +20,11 @@ export async function load({ locals }) {
           exercises: {
             orderBy: { order: "asc" },
             include: {
-                activities: {
-                    where: { userId: session.user.id },
-                    orderBy: { createdAt: 'desc' },
-                    take: 1
-                }
+              activities: {
+                where: { userId: session.user.id },
+                orderBy: { createdAt: 'desc' },
+                take: 1
+              }
             }
           },
         },
@@ -33,18 +33,11 @@ export async function load({ locals }) {
   });
 
   if (!activePlan) {
-    // Check if user needs onboarding
-    const user = await prisma.user.findUnique({
-        where: { id: session.user.id }
-    });
-
-    if (!user?.age || !user?.weight) {
-        throw redirect(303, "/onboarding");
-    }
-
-    // If user has data but no plan, maybe they finished one? Or error?
-    // For now redirect to onboarding to create one
-    throw redirect(303, "/onboarding");
+    // If user has data but no plan, return null so UI can show greeting
+    return {
+      plan: null,
+      user: session.user
+    };
   }
 
   return {
