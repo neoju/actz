@@ -3,11 +3,14 @@
   import { signIn, type SignInOptions } from "@auth/sveltekit/client";
   import { Button } from "$lib/components/ui/button";
   import { LoaderPinwheel, User } from "@lucide/svelte";
+  import { useProfileQuery } from "$lib/queries/profile";
 
   let { data } = $props();
 
   let loading = $state(false);
   let providerId = $state("");
+
+  const profileQuery = useProfileQuery();
 
   function handleLogin(provider: string) {
     let params: SignInOptions = {
@@ -21,9 +24,18 @@
     loading = true;
     providerId = provider;
 
-    signIn(provider, params).finally(() => {
-      loading = false;
-    });
+    signIn(provider, params)
+      .then(() => profileQuery.refetch())
+      .then(() => {
+        if (!profileQuery.data?.user.age) {
+          return goto("/setup");
+        }
+
+        goto("/");
+      })
+      .finally(() => {
+        loading = false;
+      });
   }
 
   $effect(() => {
