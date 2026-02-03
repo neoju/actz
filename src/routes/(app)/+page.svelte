@@ -1,46 +1,45 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button";
   import { Sparkles, ArrowRight, Calendar } from "@lucide/svelte";
+  import "$lib/assets/css/dashboard.css";
 
   let { data } = $props();
   let hasActivePlan = $derived(data.hasActivePlan);
 </script>
 
-<div class="space-y-6 pb-8">
+<div class="dashboard-container">
   <!-- Welcome Greeting -->
-  <div
-    class="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-6 animate-in fade-in zoom-in duration-500"
-  >
-    <div class="bg-primary/10 p-6 rounded-full">
-      <Sparkles class="w-12 h-12 text-primary" />
+  <div class="welcome-section">
+    <div class="welcome-icon-wrapper">
+      <Sparkles class="welcome-icon" />
     </div>
 
-    <div class="space-y-2 max-w-md">
-      <h1 class="text-3xl font-bold tracking-tight">Welcome to Action Z!</h1>
-      <p class="text-muted-foreground text-lg">
+    <div class="welcome-text-container">
+      <h1 class="welcome-title">Welcome to Action Z!</h1>
+      <p class="welcome-desc">
         Your journey to a better you starts here.
       </p>
     </div>
 
-    <div class="flex flex-col gap-4 w-full max-w-xs">
+    <div class="action-buttons">
       {#if hasActivePlan}
         <Button
           href="/planned-exercises"
           size="lg"
-          class="w-full gap-2 text-lg h-14"
+          class="primary-action-btn"
         >
           View My Plan
-          <Calendar class="w-5 h-5" />
+          <Calendar class="btn-icon" />
         </Button>
       {:else}
         <Button
           href="/settings"
           variant="default"
           size="lg"
-          class="w-full gap-2 h-14 text-lg"
+          class="primary-action-btn"
         >
           Generate a Plan
-          <ArrowRight class="w-5 h-5" />
+          <ArrowRight class="btn-icon" />
         </Button>
       {/if}
 
@@ -48,7 +47,7 @@
         href="/exercises"
         variant="outline"
         size="lg"
-        class="w-full gap-2"
+        class="secondary-action-btn"
       >
         Explore Exercises
       </Button>

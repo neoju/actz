@@ -4,6 +4,7 @@
   import { Button } from "$lib/components/ui/button";
   import { LoaderPinwheel, User } from "@lucide/svelte";
   import { useProfileQuery } from "$lib/queries/profile";
+  import "$lib/assets/css/login.css";
 
   let { data } = $props();
 
@@ -45,49 +46,47 @@
   });
 </script>
 
-<div
-  class="min-h-dvh bg-muted/20 text-foreground font-sans antialiased flex justify-center"
->
-  <div class="flex-1 flex flex-col items-center justify-center space-y-10 px-4">
-    <img src="/actz.png" alt="App Logo" class="w-48 h-48" />
+<div class="login-wrapper">
+  <div class="login-container">
+    <img src="/actz.png" alt="App Logo" class="login-logo" />
 
-    <div class="w-full text-center flex-col items-center flex space-y-4">
+    <div class="login-actions">
       <Button
-        class="border-[#e84133]! text-[#e84133]! w-3xs"
+        class="google-btn"
         variant="outline"
         disabled={loading}
         onclick={() => handleLogin("google")}
       >
         {#if loading && providerId === "google"}
-          <LoaderPinwheel class="animate-spin" />
+          <LoaderPinwheel class="loader-icon" />
         {:else}
           <img
             src="https://cdn.shadcnstudio.com/ss-assets/brand-logo/google-icon.png?width=20&height=20&format=auto"
             alt="Google Icon"
-            class="size-5"
+            class="google-icon"
           />
         {/if}
-        <span class="flex flex-1 justify-center">Continue with Google</span>
+        <span class="btn-text-center">Continue with Google</span>
       </Button>
 
       <Button
         variant="outline"
-        class="w-3xs"
+        class="guest-btn"
         disabled={loading}
         onclick={() => handleLogin("credentials")}
       >
         {#if loading && providerId === "credentials"}
-          <LoaderPinwheel class="animate-spin" />
+          <LoaderPinwheel class="loader-icon" />
         {:else}
-          <User class="mr-2 size-5" />
+          <User class="user-icon" />
         {/if}
-        <span class="flex flex-1 justify-center">Continue as Guest</span>
+        <span class="btn-text-center">Continue as Guest</span>
       </Button>
 
-      <p class="text-center text-sm text-muted-foreground mx-auto">
+      <p class="terms-text">
         By clicking continue, you agree to our
 
-        <a href="/terms" class="underline underline-offset-4 hover:text-primary"
+        <a href="/terms" class="link-text"
           >Terms of Service</a
         >
 
@@ -95,15 +94,15 @@
 
         <a
           href="/privacy-policy"
-          class="underline underline-offset-4 hover:text-primary"
+          class="link-text"
           >Privacy Policy</a
         >.
       </p>
 
-      <p class="text-center text-sm text-muted-foreground mx-auto">
+      <p class="terms-text">
         Have questions? Check out our
 
-        <a href="/faq" class="underline underline-offset-4 hover:text-primary"
+        <a href="/faq" class="link-text"
           >FAQ</a
         >.
       </p>

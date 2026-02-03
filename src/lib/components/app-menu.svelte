@@ -16,6 +16,7 @@
   } from "@lucide/svelte";
   import ModeSwitcher from "$lib/components/mode-switcher.svelte";
   import type { Component } from "svelte";
+  import "$lib/assets/css/components/app-menu.css";
 
   let isMenuOpen = $state(false);
 
@@ -56,7 +57,7 @@
 )}
   <Button
     {variant}
-    class="justify-start gap-3 {className}"
+    class="menu-item-btn {className}"
     data-tour={dataTour}
     {onclick}
   >
@@ -71,7 +72,7 @@
     <Button
       variant="outline"
       size="icon"
-      class="ml-2 bg-primary!"
+      class="menu-trigger-btn"
       data-tour="menu-button"
     >
       <MenuIcon class="h-5 w-5" />
@@ -79,14 +80,14 @@
   </Sheet.Trigger>
   <Sheet.Content
     side="right"
-    class="w-75 sm:w-100 flex flex-col h-full"
+    class="menu-sheet-content"
     data-tour="menu-sheet"
   >
     <Sheet.Header>
       <Sheet.Title>Action Z</Sheet.Title>
       <Sheet.Description>Your AI-Powered Fitness Companion</Sheet.Description>
     </Sheet.Header>
-    <div class="flex flex-col gap-4 mt-6 flex-1">
+    <div class="menu-items-container">
       {@render MenuItem(House, "Home", () => handleNavigation("/"))}
       {@render MenuItem(
         BookSearch,
@@ -101,7 +102,7 @@
         "settings-link",
       )}
 
-      <div class="border-t border-border my-2"></div>
+      <div class="menu-separator"></div>
 
       {@render MenuItem(CircleQuestionMark, "FAQ", () =>
         handleNavigation("/faq"),
@@ -113,18 +114,18 @@
         handleLogout,
         undefined,
         "ghost",
-        "text-destructive hover:text-destructive hover:bg-destructive/10",
+        "logout-btn",
       )}
     </div>
 
-    <Sheet.Footer class="mt-auto pt-6 border-t border-border">
-      <div class="flex flex-col items-end gap-1 w-full">
-        <p class="text-xs text-muted-foreground">Looking for a dev? 👨‍💻</p>
+    <Sheet.Footer class="menu-footer">
+      <div class="footer-content">
+        <p class="footer-text">Looking for a dev? 👨‍💻</p>
         <a
           href="https://www.linkedin.com/in/neoju/"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-sm font-medium text-primary underline transition-all flex items-center gap-2"
+          class="footer-link"
         >
           Let's connect
           <Linkedin class="h-4 w-4" />

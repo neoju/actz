@@ -2,23 +2,24 @@
   import * as Accordion from "$lib/components/ui/accordion";
   import { Button } from "$lib/components/ui/button";
   import { ArrowLeft } from "@lucide/svelte";
+  import "$lib/assets/css/legal.css";
 </script>
 
-<div class="mx-auto py-4">
-  <div class="mb-8 flex items-center gap-4">
-    <h1 class="text-3xl font-bold tracking-tight">
+<div class="faq-container">
+  <div class="faq-header">
+    <h1 class="faq-title">
       Frequently Asked Questions
     </h1>
   </div>
 
   <div class="space-y-6">
-    <p class="text-muted-foreground">
+    <p class="faq-description">
       Find answers to common questions about your fitness journey with Actz.
     </p>
 
     <Accordion.Root type="single" class="w-full">
       <Accordion.Item value="item-1">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >What is Actz?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -30,7 +31,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-2">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >Is Actz suitable for beginners?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -42,7 +43,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-3">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >Do I need gym equipment to use Actz?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -53,7 +54,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-4">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >How is my data used and stored?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -65,7 +66,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-5">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >Are the workout plans safe?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -78,7 +79,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-6">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >What happens if I use the "Guest" mode?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -91,7 +92,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-7">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >Why is there a limit on generating plans?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -103,7 +104,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-8">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >Can I customize specific days in my plan?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -115,7 +116,7 @@
       </Accordion.Item>
 
       <Accordion.Item value="item-9">
-        <Accordion.Trigger class="font-semibold"
+        <Accordion.Trigger class="accordion-trigger"
           >How do I reset my plan limit?</Accordion.Trigger
         >
         <Accordion.Content>
@@ -127,8 +128,8 @@
       </Accordion.Item>
     </Accordion.Root>
 
-    <div class="mt-12 text-center">
-      <p class="text-sm text-muted-foreground mb-4">Still have questions?</p>
+    <div class="contact-section">
+      <p class="contact-text">Still have questions?</p>
       <Button variant="outline" href="mailto:neo01796@gmail.com"
         >Contact Support</Button
       >

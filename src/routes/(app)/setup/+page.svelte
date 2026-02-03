@@ -21,6 +21,7 @@
   import { useUpdateProfileMutation } from "$lib/queries/profile";
   import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
   import { useGenerateMonthlyPlanMutation } from "$lib/queries/monthly-plan";
+  import "$lib/assets/css/setup.css";
 
   // Use TanStack Query mutations
   const updateProfileMutation = useUpdateProfileMutation();
@@ -86,25 +87,25 @@
   }
 </script>
 
-<div class="space-y-6 pb-8">
-  <div class="space-y-2 pt-4">
+<div class="setup-container">
+  <div class="setup-header">
     {#if step === "profile"}
-      <h1 class="text-3xl font-bold tracking-tight">Tell us about you</h1>
-      <p class="text-muted-foreground">
+      <h1 class="setup-title">Tell us about you</h1>
+      <p class="setup-desc">
         We need some info to create your personalized plan.
       </p>
     {:else}
-      <h1 class="text-3xl font-bold tracking-tight">Choose your path</h1>
-      <p class="text-muted-foreground">
+      <h1 class="setup-title">Choose your path</h1>
+      <p class="setup-desc">
         How would you like to start your fitness journey?
       </p>
     {/if}
   </div>
 
   {#if step === "profile"}
-    <form onsubmit={handleSubmit} class="space-y-6">
-      <fieldset disabled={isLoading} class="space-y-6 group">
-        <div class="grid grid-cols-2 gap-4">
+    <form onsubmit={handleSubmit} class="setup-form">
+      <fieldset disabled={isLoading} class="form-fieldset">
+        <div class="form-grid-2">
           <FormInput
             id="age"
             label="Age"
@@ -121,7 +122,7 @@
           />
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="form-grid-2">
           <FormInput
             id="weight"
             label="Weight (kg)"
@@ -140,7 +141,7 @@
           />
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="form-grid-2">
           <FormSelect
             label="Fitness Level"
             options={fitnessLevelOptions}
@@ -185,7 +186,7 @@
           max={3}
         />
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="form-grid-2">
           <FormSelect
             label="Primary Focus"
             options={muscleOptions}
@@ -205,7 +206,7 @@
 
         <Button
           type="submit"
-          class="w-full text-lg py-6 mt-4"
+          class="submit-btn"
           disabled={isLoading}
         >
           {#if isLoading && loadingStep === "profile"}
@@ -215,10 +216,10 @@
           {/if}
         </Button>
 
-        <div class="text-center pt-2">
+        <div class="skip-container">
           <button
             type="button"
-            class="text-sm text-muted-foreground hover:text-primary underline underline-offset-4"
+            class="skip-btn"
             onclick={() => {
               if (
                 confirm(
@@ -235,28 +236,28 @@
       </fieldset>
     </form>
   {:else}
-    <div class="grid gap-4 grid-cols-1">
+    <div class="plans-selection-grid">
       <!-- Monthly Plan Option (Recommended) -->
       <button
-        class="text-left w-full disabled:opacity-50 disabled:cursor-not-allowed"
+        class="plan-option-btn"
         disabled={isLoading}
         onclick={() => handleGeneratePlan("month")}
       >
         <Card.Root
-          class="h-full hover:border-primary transition-colors cursor-pointer relative overflow-hidden border-2 {selectingPlan ===
+          class="plan-card plan-card-wrapper {selectingPlan ===
           'month'
-            ? 'border-primary'
-            : 'border-border'}"
+            ? 'plan-card-selected'
+            : 'plan-card-default'}"
         >
           <div
-            class="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold rounded-bl-lg z-10"
+            class="recommended-badge"
           >
             RECOMMENDED
           </div>
           <Card.Header>
-            <div class="flex items-center gap-2 mb-2">
-              <div class="p-2 rounded-lg bg-primary/10 text-primary">
-                <CalendarRange class="w-6 h-6" />
+            <div class="card-header-flex">
+              <div class="icon-wrapper-primary">
+                <CalendarRange class="plan-icon" />
               </div>
               <Card.Title>Monthly Plan</Card.Title>
             </div>
@@ -265,21 +266,21 @@
             </Card.Description>
           </Card.Header>
           <Card.Content>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              <li class="flex items-center gap-2">
-                <Check class="w-4 h-4 text-green-500" />
+            <ul class="features-list">
+              <li class="feature-item">
+                <Check class="check-icon" />
                 4-Week Periodization
               </li>
-              <li class="flex items-center gap-2">
-                <Check class="w-4 h-4 text-green-500" />
+              <li class="feature-item">
+                <Check class="check-icon" />
                 Progressive Overload
               </li>
-              <li class="flex items-center gap-2">
-                <Check class="w-4 h-4 text-green-500" />
+              <li class="feature-item">
+                <Check class="check-icon" />
                 Built-in Deload Week
               </li>
             </ul>
-            <Button class="w-full mt-6" variant="default" disabled={isLoading}>
+            <Button class="select-plan-btn" variant="default" disabled={isLoading}>
               {#if selectingPlan === "month"}
                 Generating Month...
               {:else}
@@ -292,22 +293,22 @@
 
       <!-- Weekly Plan Option -->
       <button
-        class="text-left w-full disabled:opacity-50 disabled:cursor-not-allowed"
+        class="plan-option-btn"
         disabled={isLoading}
         onclick={() => handleGeneratePlan("week")}
       >
         <Card.Root
-          class="h-full hover:border-primary transition-colors cursor-pointer border-2 {selectingPlan ===
+          class="plan-card {selectingPlan ===
           'week'
-            ? 'border-primary'
-            : 'border-border'}"
+            ? 'plan-card-selected'
+            : 'plan-card-default'}"
         >
           <Card.Header>
-            <div class="flex items-center gap-2 mb-2">
+            <div class="card-header-flex">
               <div
-                class="p-2 rounded-lg bg-secondary text-secondary-foreground"
+                class="icon-wrapper-secondary"
               >
-                <CalendarDays class="w-6 h-6" />
+                <CalendarDays class="plan-icon" />
               </div>
               <Card.Title>Weekly Plan</Card.Title>
             </div>
@@ -316,22 +317,22 @@
             </Card.Description>
           </Card.Header>
           <Card.Content>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-              <li class="flex items-center gap-2">
-                <Check class="w-4 h-4 text-green-500" />
+            <ul class="features-list">
+              <li class="feature-item">
+                <Check class="check-icon" />
                 7-Day Schedule
               </li>
-              <li class="flex items-center gap-2">
-                <Check class="w-4 h-4 text-green-500" />
+              <li class="feature-item">
+                <Check class="check-icon" />
                 Quick Start
               </li>
-              <li class="flex items-center gap-2">
-                <Check class="w-4 h-4 text-green-500" />
+              <li class="feature-item">
+                <Check class="check-icon" />
                 Flexible Commitment
               </li>
             </ul>
             <Button
-              class="w-full mt-6"
+              class="select-plan-btn"
               variant="secondary"
               disabled={isLoading}
             >
@@ -346,10 +347,10 @@
       </button>
     </div>
 
-    <div class="text-center pt-4">
+    <div class="skip-plan-container">
       <button
         type="button"
-        class="text-sm text-muted-foreground hover:text-primary underline underline-offset-4"
+        class="skip-btn"
         onclick={() => {
           if (
             confirm(

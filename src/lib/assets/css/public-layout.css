@@ -1,0 +1,29 @@
+@reference './__core.css';
+
+.public-layout-wrapper {
+    @apply min-h-dvh bg-muted/20 text-foreground font-sans antialiased flex justify-center;
+}
+
+.public-layout-container {
+    @apply w-full max-w-md min-h-full bg-background shadow-2xl overflow-hidden relative flex flex-col border-x border-border;
+}
+
+.public-header {
+    @apply fixed max-w-md w-screen mx-auto top-0 z-40 bg-background border-b border-border p-4 flex items-end justify-end;
+}
+
+.header-grow {
+    @apply grow;
+}
+
+.back-btn {
+    @apply pl-0!;
+}
+
+.back-icon {
+    @apply size-6;
+}
+
+.public-main {
+    @apply flex-1 p-6 pt-20 flex flex-col;
+}

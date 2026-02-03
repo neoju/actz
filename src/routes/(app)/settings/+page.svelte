@@ -25,6 +25,7 @@
   import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
   import { useGenerateMonthlyPlanMutation } from "$lib/queries/monthly-plan";
   import { toast } from "svelte-sonner";
+  import "$lib/assets/css/settings.css";
 
   let { data } = $props();
 
@@ -167,23 +168,23 @@
   }
 </script>
 
-<div class="space-y-6">
-  <div class="flex items-center space-x-2">
-    <h1 class="text-2xl font-bold">Settings</h1>
+<div class="settings-container">
+  <div class="settings-header">
+    <h1 class="settings-title">Settings</h1>
   </div>
 
-  <Tabs.Root value="profile" class="w-full">
-    <Tabs.List class="w-full grid grid-cols-2">
+  <Tabs.Root value="profile" class="tabs-root">
+    <Tabs.List class="tabs-list">
       <Tabs.Trigger value="profile" data-tour="profile-tab"
         >Profile</Tabs.Trigger
       >
       <Tabs.Trigger value="plans" data-tour="plans-tab">Plans</Tabs.Trigger>
     </Tabs.List>
 
-    <Tabs.Content value="profile" class="mt-4">
+    <Tabs.Content value="profile" class="tabs-content">
       <Card.Root>
         <Card.Header>
-          <div class="flex items-center justify-between">
+          <div class="card-header-flex">
             <div>
               <Card.Title>User Profile</Card.Title>
               <Card.Description>
@@ -209,20 +210,20 @@
 
         {#if profileQuery.isLoading}
           <Card.Content>
-            <p class="text-muted-foreground text-center py-8">
+            <p class="loading-state">
               Loading profile...
             </p>
           </Card.Content>
         {:else if profileQuery.isError}
           <Card.Content>
-            <p class="text-destructive text-center py-8">
+            <p class="error-state">
               Failed to load profile. Please try again.
             </p>
           </Card.Content>
         {:else if isEditing}
           <form onsubmit={handleUpdateProfile}>
-            <Card.Content class="space-y-4">
-              <div class="grid grid-cols-2 gap-4">
+            <Card.Content class="form-content">
+              <div class="form-grid-2">
                 <FormInput
                   id="age"
                   label="Age"
@@ -239,7 +240,7 @@
                 />
               </div>
 
-              <div class="grid grid-cols-2 gap-4">
+              <div class="form-grid-2">
                 <FormInput
                   id="weight"
                   label="Weight (kg)"
@@ -258,7 +259,7 @@
                 />
               </div>
 
-              <div class="grid grid-cols-2 gap-4">
+              <div class="form-grid-2">
                 <FormSelect
                   label="Fitness Level"
                   options={fitnessLevelOptions}
@@ -303,7 +304,7 @@
                 max={3}
               />
 
-              <div class="grid grid-cols-2 gap-4">
+              <div class="form-grid-2">
                 <FormSelect
                   label="Primary Focus"
                   options={muscleOptions}
@@ -322,11 +323,11 @@
               </div>
             </Card.Content>
 
-            <Card.Footer class="flex gap-2 mt-4">
+            <Card.Footer class="form-footer">
               <Button
                 type="button"
                 variant="outline"
-                class="flex-1"
+                class="form-cancel-btn"
                 onclick={() => {
                   isEditing = false;
                   if (profileQuery.data) {
@@ -355,7 +356,7 @@
               </Button>
               <Button
                 type="submit"
-                class="flex-1"
+                class="form-save-btn"
                 disabled={updateProfileMutation.isPending}
               >
                 {updateProfileMutation.isPending ? "Saving..." : "Save Changes"}
@@ -363,67 +364,67 @@
             </Card.Footer>
           </form>
         {:else}
-          <Card.Content class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
+          <Card.Content class="form-content">
+            <div class="form-grid-2">
               <div>
-                <p class="text-sm text-muted-foreground">Age</p>
-                <p class="font-medium">
+                <p class="profile-field-label">Age</p>
+                <p class="profile-field-value">
                   {profileData.age || "N/A"}
                 </p>
               </div>
               <div>
-                <p class="text-sm text-muted-foreground">Gender</p>
-                <p class="font-medium">
+                <p class="profile-field-label">Gender</p>
+                <p class="profile-field-value">
                   {profileData.gender || "N/A"}
                 </p>
               </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-4">
+            <div class="form-grid-3">
               <div>
-                <p class="text-sm text-muted-foreground">Weight</p>
-                <p class="font-medium">
+                <p class="profile-field-label">Weight</p>
+                <p class="profile-field-value">
                   {profileData.weight ? `${profileData.weight} kg` : "N/A"}
                 </p>
               </div>
               <div>
-                <p class="text-sm text-muted-foreground">Height</p>
-                <p class="font-medium">
+                <p class="profile-field-label">Height</p>
+                <p class="profile-field-value">
                   {profileData.height ? `${profileData.height} cm` : "N/A"}
                 </p>
               </div>
               <div>
-                <p class="text-sm text-muted-foreground">BMI</p>
-                <p class="font-medium">
+                <p class="profile-field-label">BMI</p>
+                <p class="profile-field-value">
                   {profileData.bmi || "N/A"}
                 </p>
               </div>
             </div>
 
             <div>
-              <p class="text-sm text-muted-foreground">Fitness Level</p>
-              <p class="font-medium">
+              <p class="profile-field-label">Fitness Level</p>
+              <p class="profile-field-value">
                 {profileData.fitnessLevel || "N/A"}
               </p>
             </div>
 
             <div>
-              <p class="text-sm text-muted-foreground">Equipment</p>
-              <p class="font-medium">
+              <p class="profile-field-label">Equipment</p>
+              <p class="profile-field-value">
                 {profileData.equipment || "N/A"}
               </p>
             </div>
 
             <div>
-              <p class="text-sm text-muted-foreground">Schedule</p>
-              <p class="font-medium">
+              <p class="profile-field-label">Schedule</p>
+              <p class="profile-field-value">
                 {profileData.schedule || "N/A"}
               </p>
             </div>
 
             <div>
-              <p class="text-sm text-muted-foreground">Limitations</p>
-              <p class="font-medium">
+              <p class="profile-field-label">Limitations</p>
+              <p class="profile-field-value">
                 {profileData.limitations?.length
                   ? profileData.limitations.join(", ")
                   : "None"}
@@ -431,8 +432,8 @@
             </div>
 
             <div>
-              <p class="text-sm text-muted-foreground">Goal / Target</p>
-              <p class="font-medium">
+              <p class="profile-field-label">Goal / Target</p>
+              <p class="profile-field-value">
                 {profileData.target?.length
                   ? profileData.target.join(", ")
                   : "N/A"}
@@ -440,15 +441,15 @@
             </div>
 
             <div>
-              <p class="text-sm text-muted-foreground">Primary Focus</p>
-              <p class="font-medium">
+              <p class="profile-field-label">Primary Focus</p>
+              <p class="profile-field-value">
                 {profileData.primaryFocus || "N/A"}
               </p>
             </div>
 
             <div>
-              <p class="text-sm text-muted-foreground">Secondary Focus</p>
-              <p class="font-medium">
+              <p class="profile-field-label">Secondary Focus</p>
+              <p class="profile-field-value">
                 {profileData.secondaryFocus || "N/A"}
               </p>
             </div>
@@ -457,44 +458,44 @@
       </Card.Root>
     </Tabs.Content>
 
-    <Tabs.Content value="plans" class="mt-4">
+    <Tabs.Content value="plans" class="tabs-content">
       {#if data.planLimit}
-        <div class="mb-6 space-y-2 px-1">
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-muted-foreground">Weekly Generations</span>
-            <div class="flex items-center gap-2">
-              <span class="font-medium"
+        <div class="plan-limit-container">
+          <div class="plan-limit-header">
+            <span class="plan-limit-label">Weekly Generations</span>
+            <div class="plan-limit-stats">
+              <span class="plan-limit-value"
                 >{data.planLimit.used} / {data.planLimit.max}</span
               >
               <Button
                 variant="ghost"
                 size="icon"
-                class="h-5 w-5"
+                class="refresh-btn"
                 onclick={refreshPlanLimit}
                 disabled={isRefreshingLimit}
                 title="Refresh limit"
               >
                 <RefreshCw
-                  class="h-3 w-3 {isRefreshingLimit ? 'animate-spin' : ''}"
+                  class="refresh-icon {isRefreshingLimit ? 'animate-spin' : ''}"
                 />
               </Button>
             </div>
           </div>
-          <div class="h-2 w-full rounded-full bg-secondary">
+          <div class="progress-bar-bg">
             <div
-              class="h-full rounded-full bg-primary transition-all"
+              class="progress-bar-fill"
               style="width: {(data.planLimit.used / data.planLimit.max) * 100}%"
             ></div>
           </div>
           {#if data.planLimit.resetAt}
-            <p class="text-xs text-muted-foreground text-right">
+            <p class="reset-date">
               Next reset: {formatDate(data.planLimit.resetAt)}
             </p>
           {/if}
         </div>
       {/if}
 
-      <div class="grid gap-4">
+      <div class="plans-grid">
         <Card.Root>
           <Card.Header>
             <Card.Title>Weekly Plan</Card.Title>
@@ -505,16 +506,16 @@
           <Card.Content>
             <Button
               variant="secondary"
-              class="w-full"
+              class="plan-generate-btn"
               disabled={generatingPlan !== null ||
                 data.planLimit?.remaining === 0}
               onclick={() => handleRegeneratePlan("week")}
             >
               {#if generatingPlan === "week"}
-                <RefreshCw class="mr-2 h-4 w-4 animate-spin" />
+                <RefreshCw class="btn-icon animate-spin" />
                 Generating...
               {:else}
-                <RefreshCw class="mr-2 h-4 w-4" />
+                <RefreshCw class="btn-icon" />
                 Generate New Weekly Plan
               {/if}
             </Button>
@@ -530,16 +531,16 @@
           </Card.Header>
           <Card.Content>
             <Button
-              class="w-full"
+              class="plan-generate-btn"
               disabled={generatingPlan !== null ||
                 data.planLimit?.remaining === 0}
               onclick={() => handleRegeneratePlan("month")}
             >
               {#if generatingPlan === "month"}
-                <RefreshCw class="mr-2 h-4 w-4 animate-spin" />
+                <RefreshCw class="btn-icon animate-spin" />
                 Generating...
               {:else}
-                <RefreshCw class="mr-2 h-4 w-4" />
+                <RefreshCw class="btn-icon" />
                 Generate New Monthly Plan
               {/if}
             </Button>

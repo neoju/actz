@@ -7,6 +7,7 @@
   import { Button } from "$lib/components/ui/button";
   import { Lock, Trophy, Clock, Timer } from "@lucide/svelte";
   import ExerciseItem from "$lib/components/exercise/exercise-item.svelte";
+  import "$lib/assets/css/exercise-detail.css";
 
   let { data } = $props();
   let selectedDay = $derived(data.day);
@@ -181,21 +182,15 @@
 </script>
 
 {#if cooldownActive}
-  <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-    transition:fade
-  >
-    <div
-      class="bg-card rounded-lg shadow-lg border border-border w-full h-full max-w-md text-center space-y-4 flex justify-center items-center flex-col"
-      transition:scale
-    >
-      <h2 class="text-2xl font-bold">Rest Time</h2>
-      <div class="text-6xl font-mono font-bold text-primary">
+  <div class="cooldown-overlay" transition:fade>
+    <div class="cooldown-modal" transition:scale>
+      <h2 class="cooldown-title">Rest Time</h2>
+      <div class="cooldown-timer">
         {Math.floor(cooldownTime / 60)}:{(cooldownTime % 60)
           .toString()
           .padStart(2, "0")}
       </div>
-      <p class="text-muted-foreground">
+      <p class="cooldown-desc">
         Take a breather before your next exercise!
       </p>
       <Button variant="outline" onclick={() => (cooldownActive = false)}>
@@ -206,59 +201,42 @@
 {/if}
 
 {#if showCongrats}
-  <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-md p-4"
-    transition:fade={{ duration: 500 }}
-  >
+  <div class="congrats-overlay" transition:fade={{ duration: 500 }}>
     <div
-      class="max-w-md w-full text-center space-y-8"
+      class="congrats-content"
       in:scale={{ duration: 600, start: 0.5, delay: 200 }}
     >
-      <div class="relative inline-block">
-        <div
-          class="absolute inset-0 animate-ping opacity-20 bg-yellow-400 rounded-full blur-xl"
-        ></div>
-        <Trophy
-          class="w-32 h-32 text-yellow-500 mx-auto relative z-10 drop-shadow-2xl"
-        />
+      <div class="trophy-wrapper">
+        <div class="trophy-glow"></div>
+        <Trophy class="trophy-icon" />
       </div>
 
-      <div class="space-y-2">
-        <h1 class="text-4xl font-extrabold tracking-tight text-primary">
-          Congratulations!
-        </h1>
-        <p class="text-xl text-muted-foreground">
+      <div class="congrats-text">
+        <h1 class="congrats-title">Congratulations!</h1>
+        <p class="congrats-subtitle">
           You crushed today's workout!
         </p>
       </div>
 
-      <Card.Root class="overflow-hidden border-2 border-primary/20">
-        <Card.Content class="p-6 grid grid-cols-2 gap-4">
-          <div class="flex flex-col items-center p-3 bg-muted/50 rounded-xl">
-            <Clock class="w-6 h-6 text-primary mb-2" />
-            <span class="text-xs text-muted-foreground uppercase font-bold"
-              >Total Time</span
-            >
-            <span class="text-xl font-bold">
+      <Card.Root class="stats-card">
+        <Card.Content class="stats-grid">
+          <div class="stat-item">
+            <Clock class="stat-icon" />
+            <span class="stat-label">Total Time</span>
+            <span class="stat-value">
               {finishTime ? formatTime(finishTime - startTime) : "0m 0s"}
             </span>
           </div>
-          <div class="flex flex-col items-center p-3 bg-muted/50 rounded-xl">
-            <Timer class="w-6 h-6 text-primary mb-2" />
-            <span class="text-xs text-muted-foreground uppercase font-bold"
-              >Exercises</span
-            >
-            <span class="text-xl font-bold">{completedCount}</span>
+          <div class="stat-item">
+            <Timer class="stat-icon" />
+            <span class="stat-label">Exercises</span>
+            <span class="stat-value">{completedCount}</span>
           </div>
         </Card.Content>
       </Card.Root>
 
-      <div class="flex gap-4 pt-4 justify-center">
-        <Button
-          href="/"
-          size="lg"
-          class="w-full max-w-xs font-bold text-lg h-14 shadow-lg shadow-primary/20"
-        >
+      <div class="congrats-actions">
+        <Button href="/" size="lg" class="home-btn">
           Back to Home
         </Button>
       </div>
@@ -266,14 +244,14 @@
   </div>
 {/if}
 
-<div class="space-y-6 pb-8 main-content">
+<div class="exercise-detail-container">
   <!-- Header with Back Button -->
-  <div class="flex items-center space-x-2 pt-4">
+  <div class="detail-header">
     <div>
-      <h1 class="text-2xl font-bold tracking-tight">
+      <h1 class="detail-title">
         {selectedDay.title}
       </h1>
-      <p class="text-sm text-muted-foreground">
+      <p class="detail-subtitle">
         Estimated Time: {selectedDay.estimatedTime || "N/A"}
       </p>
     </div>
@@ -282,16 +260,11 @@
   <!-- Banner for Past Days -->
   {#if isPastUntouched}
     <!-- Past Untouched - Readonly Banner -->
-    <div
-      class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-start gap-3"
-      transition:scale={{ duration: 200 }}
-    >
-      <Lock class="h-5 w-5 text-red-600 mt-0.5 shrink-0" />
+    <div class="banner-past-untouched" transition:scale={{ duration: 200 }}>
+      <Lock class="banner-icon-red" />
       <div class="space-y-1">
-        <h3 class="text-sm font-semibold text-red-600">
-          Missed Workout - Read Only
-        </h3>
-        <p class="text-xs text-muted-foreground">
+        <h3 class="banner-title-red">Missed Workout - Read Only</h3>
+        <p class="banner-text">
           This workout day was never started and cannot be modified. Focus on
           today's workout to stay on track with your fitness goals.
         </p>
@@ -299,16 +272,11 @@
     </div>
   {:else if isPastDay && isTouched}
     <!-- Past Touched - Can Still Complete Banner -->
-    <div
-      class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 flex items-start gap-3"
-      transition:scale={{ duration: 200 }}
-    >
-      <Clock class="h-5 w-5 text-yellow-600 mt-0.5 shrink-0" />
+    <div class="banner-past-touched" transition:scale={{ duration: 200 }}>
+      <Clock class="banner-icon-yellow" />
       <div class="space-y-1">
-        <h3 class="text-sm font-semibold text-yellow-600">
-          In Progress - Complete Anytime
-        </h3>
-        <p class="text-xs text-muted-foreground">
+        <h3 class="banner-title-yellow">In Progress - Complete Anytime</h3>
+        <p class="banner-text">
           You started this workout. You can still complete the remaining
           exercises whenever you're ready.
         </p>
@@ -319,17 +287,12 @@
   <!-- Details -->
   {#if isRestDay}
     <!-- Rest Day Message -->
-    <div
-      class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-8 text-center space-y-4"
-      transition:scale={{ duration: 200 }}
-    >
-      <div class="flex justify-center">
-        <div
-          class="h-16 w-16 rounded-full bg-blue-500/20 flex items-center justify-center"
-        >
+    <div class="rest-day-container" transition:scale={{ duration: 200 }}>
+      <div class="rest-icon-wrapper">
+        <div class="rest-icon-bg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8 text-blue-600"
+            class="rest-icon"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -343,22 +306,22 @@
           </svg>
         </div>
       </div>
-      <div class="space-y-2">
-        <h3 class="text-xl font-bold text-blue-600">Rest Day</h3>
-        <p class="text-muted-foreground">
+      <div class="rest-content">
+        <h3 class="rest-title">Rest Day</h3>
+        <p class="rest-desc">
           No exercises scheduled for today. Take this time to recover and
           prepare for your next workout.
         </p>
       </div>
-      <div class="pt-4">
-        <p class="text-sm text-muted-foreground italic">
+      <div class="rest-footer">
+        <p class="rest-footer-text">
           Rest is an essential part of your fitness journey. Use this day to
           stretch, hydrate, and let your muscles recover.
         </p>
       </div>
     </div>
   {:else}
-    <Accordion.Root type="single" class="w-full" bind:value={openedExercise}>
+    <Accordion.Root type="single" class="accordion-root" bind:value={openedExercise}>
       {#each selectedDay.exercises as exercise, index}
         <div data-tour={index === 0 ? "exercise-item" : undefined}>
           <ExerciseItem

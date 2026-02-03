@@ -1,0 +1,49 @@
+@reference './__core.css';
+
+.login-wrapper {
+    @apply min-h-dvh bg-muted/20 text-foreground font-sans antialiased flex justify-center;
+}
+
+.login-container {
+    @apply flex-1 flex flex-col items-center justify-center space-y-10 px-4;
+}
+
+.login-logo {
+    @apply w-48 h-48;
+}
+
+.login-actions {
+    @apply w-full text-center flex-col items-center flex space-y-4;
+}
+
+.google-btn {
+    @apply border-[#e84133]! text-[#e84133]! w-3xs;
+}
+
+.loader-icon {
+    @apply animate-spin;
+}
+
+.google-icon {
+    @apply size-5;
+}
+
+.btn-text-center {
+    @apply flex flex-1 justify-center;
+}
+
+.guest-btn {
+    @apply w-3xs;
+}
+
+.user-icon {
+    @apply mr-2 size-5;
+}
+
+.terms-text {
+    @apply text-center text-sm text-muted-foreground mx-auto;
+}
+
+.link-text {
+    @apply underline underline-offset-4 hover:text-primary;
+}

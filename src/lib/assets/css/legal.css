@@ -1,0 +1,58 @@
+@reference './__core.css';
+
+.legal-container {
+    @apply space-y-6 pb-8;
+}
+
+.legal-header {
+    @apply flex items-center space-x-2;
+}
+
+.legal-title {
+    @apply text-2xl font-bold;
+}
+
+.legal-content {
+    @apply text-muted-foreground leading-relaxed;
+}
+
+.last-updated {
+    @apply font-medium text-foreground;
+}
+
+.legal-section-title {
+    @apply text-foreground mt-6 text-lg font-semibold;
+}
+
+.legal-list {
+    @apply list-disc pl-5 space-y-1;
+}
+
+/* FAQ Specific */
+.faq-container {
+    @apply mx-auto py-4;
+}
+
+.faq-header {
+    @apply mb-8 flex items-center gap-4;
+}
+
+.faq-title {
+    @apply text-3xl font-bold tracking-tight;
+}
+
+.faq-description {
+    @apply text-muted-foreground;
+}
+
+.accordion-trigger {
+    @apply font-semibold;
+}
+
+.contact-section {
+    @apply mt-12 text-center;
+}
+
+.contact-text {
+    @apply text-sm text-muted-foreground mb-4;
+}

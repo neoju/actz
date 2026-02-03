@@ -1,0 +1,168 @@
+@reference './__core.css';
+
+:global(.today-pulse) {
+  animation: pulse 2s ease-in-out;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Page Layout */
+.page-container {
+  @apply space-y-6 pb-8;
+}
+
+/* Empty State */
+.empty-state {
+  @apply flex flex-col items-center justify-center min-h-[40vh] text-center space-y-6;
+}
+.empty-state-content {
+  @apply space-y-2 max-w-md;
+}
+.empty-state-title {
+  @apply text-2xl font-bold tracking-tight;
+}
+.empty-state-desc {
+  @apply text-muted-foreground;
+}
+
+/* Plan Header */
+.plan-header {
+  @apply space-y-2 pt-4;
+}
+.plan-title {
+  @apply text-3xl font-bold tracking-tight mb-3;
+}
+.plan-label {
+  @apply text-sm font-bold;
+}
+.plan-label-spacing {
+  @apply my-2;
+}
+.plan-desc {
+  @apply px-4 text-muted-foreground transition-all text-sm;
+}
+.plan-note {
+  @apply px-4 bg-muted/50 rounded-lg text-sm italic transition-all;
+}
+
+/* Day Card Grid */
+.days-grid {
+  @apply grid gap-4;
+}
+
+/* Day Card States & Elements */
+.day-card-link {
+  @apply block;
+}
+.day-card-root {
+  @apply transition-all;
+}
+/* Modifiers for Day Card Root */
+.day-card-interactive {
+  @apply hover:shadow-md hover:scale-[1.01];
+}
+.day-card-today {
+  @apply border-primary bg-primary/5;
+}
+.day-card-future {
+  @apply opacity-60 bg-muted;
+}
+.day-card-completed {
+  @apply bg-green-500/10 border-green-500/20;
+}
+.day-card-past-untouched {
+  @apply opacity-50 bg-red-500/5 border-red-500/20 cursor-not-allowed;
+}
+.day-card-past-touched {
+  @apply bg-yellow-500/10 border-yellow-500/20 hover:bg-yellow-500/15;
+}
+.day-card-rest {
+  @apply bg-green-500/5 border-green-500/20 opacity-70 cursor-not-allowed;
+}
+.day-card-loading {
+  @apply opacity-80;
+}
+
+.day-card-header {
+  @apply flex flex-row items-center justify-between pb-2;
+}
+.day-card-title {
+  @apply text-base;
+}
+.day-card-title-strikethrough {
+  @apply line-through opacity-70;
+}
+.day-card-desc-strikethrough {
+  @apply line-through opacity-60;
+}
+
+/* Status Icons/Badges */
+.status-icon-base {
+  @apply h-8 w-8 aspect-square flex items-center justify-center;
+}
+.status-icon-completed {
+  @apply h-8 w-8 aspect-square rounded-full bg-green-500/20 flex items-center justify-center text-green-600;
+}
+.status-badge-rest {
+  @apply text-xs font-semibold px-2 py-1 bg-blue-500/20 text-blue-700 rounded-full;
+}
+.status-icon-past-untouched {
+  @apply h-8 w-8 aspect-square rounded-full bg-red-500/20 flex items-center justify-center;
+}
+.status-icon-past-touched {
+  @apply h-8 w-8 aspect-square rounded-full bg-yellow-500/20 flex items-center justify-center;
+}
+.status-badge-today {
+  @apply text-xs font-bold px-2 py-1 bg-primary text-primary-foreground rounded-full;
+}
+
+/* Card Content */
+.day-card-content-rest {
+  @apply text-sm font-medium italic;
+}
+.day-card-content-text {
+  @apply text-sm text-muted-foreground line-clamp-2;
+}
+
+/* Adventure Section */
+.adventure-section {
+  @apply mt-8 p-8 rounded-lg border-2 border-dashed border-primary/30 bg-linear-to-br from-primary/5 to-primary/10;
+}
+.adventure-inner {
+  @apply text-center space-y-6;
+}
+.adventure-icon-wrapper {
+  @apply h-20 w-20 rounded-full bg-primary/20 flex items-center justify-center animate-pulse;
+}
+.adventure-title {
+  @apply text-3xl font-bold tracking-tight;
+}
+.adventure-subtext {
+  @apply text-muted-foreground;
+}
+.adventure-stats-grid {
+  @apply grid grid-cols-2 gap-4 max-w-sm mx-auto;
+}
+.adventure-stat-box {
+  @apply p-4 rounded-lg bg-background/50 border border-border;
+}
+.adventure-stat-label {
+  @apply text-sm text-muted-foreground;
+}
+.adventure-stat-value {
+  @apply text-2xl font-bold;
+}
+.adventure-cta-btn {
+  @apply w-full max-w-xs mx-auto font-bold text-lg h-14 shadow-lg;
+}
+.adventure-cta-footer {
+  @apply text-xs text-muted-foreground mt-4;
+}

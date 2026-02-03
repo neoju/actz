@@ -1,0 +1,41 @@
+@reference '../__core.css';
+
+.menu-trigger-btn {
+    @apply ml-2 bg-primary!;
+}
+
+.menu-sheet-content {
+    @apply w-75 sm:w-100 flex flex-col h-full;
+}
+
+.menu-items-container {
+    @apply flex flex-col gap-4 mt-6 flex-1;
+}
+
+.menu-separator {
+    @apply border-t border-border my-2;
+}
+
+.logout-btn {
+    @apply text-destructive hover:text-destructive hover:bg-destructive/10;
+}
+
+.menu-footer {
+    @apply mt-auto pt-6 border-t border-border;
+}
+
+.footer-content {
+    @apply flex flex-col items-end gap-1 w-full;
+}
+
+.footer-text {
+    @apply text-xs text-muted-foreground;
+}
+
+.footer-link {
+    @apply text-sm font-medium text-primary underline transition-all flex items-center gap-2;
+}
+
+.menu-item-btn {
+    @apply justify-start gap-3;
+}

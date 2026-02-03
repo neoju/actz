@@ -1,0 +1,105 @@
+@reference './__core.css';
+
+.setup-container {
+    @apply space-y-6 pb-8;
+}
+
+.setup-header {
+    @apply space-y-2 pt-4;
+}
+
+.setup-title {
+    @apply text-3xl font-bold tracking-tight;
+}
+
+.setup-desc {
+    @apply text-muted-foreground;
+}
+
+.setup-form {
+    @apply space-y-6;
+}
+
+.form-fieldset {
+    @apply space-y-6;
+}
+
+.form-grid-2 {
+    @apply grid grid-cols-2 gap-4;
+}
+
+.submit-btn {
+    @apply w-full text-lg py-6 mt-4;
+}
+
+.skip-container {
+    @apply text-center pt-2;
+}
+
+.skip-btn {
+    @apply text-sm text-muted-foreground hover:text-primary underline underline-offset-4;
+}
+
+.plans-selection-grid {
+    @apply grid gap-4 grid-cols-1;
+}
+
+.plan-option-btn {
+    @apply text-left w-full disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.plan-card {
+    @apply h-full hover:border-primary transition-colors cursor-pointer border-2;
+}
+
+.plan-card-selected {
+    @apply border-primary;
+}
+
+.plan-card-default {
+    @apply border-border;
+}
+
+.plan-card-wrapper {
+    @apply relative overflow-hidden;
+}
+
+.recommended-badge {
+    @apply absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold rounded-bl-lg z-10;
+}
+
+.card-header-flex {
+    @apply flex items-center gap-2 mb-2;
+}
+
+.icon-wrapper-primary {
+    @apply p-2 rounded-lg bg-primary/10 text-primary;
+}
+
+.icon-wrapper-secondary {
+    @apply p-2 rounded-lg bg-secondary text-secondary-foreground;
+}
+
+.plan-icon {
+    @apply w-6 h-6;
+}
+
+.features-list {
+    @apply space-y-2 text-sm text-muted-foreground;
+}
+
+.feature-item {
+    @apply flex items-center gap-2;
+}
+
+.check-icon {
+    @apply w-4 h-4 text-green-500;
+}
+
+.select-plan-btn {
+    @apply w-full mt-6;
+}
+
+.skip-plan-container {
+    @apply text-center pt-4;
+}

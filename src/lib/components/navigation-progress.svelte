@@ -1,6 +1,7 @@
 <script lang="ts">
   import { navigating } from "$app/state";
   import { onMount } from "svelte";
+  import "$lib/assets/css/components/navigation-progress.css";
 
   interface Props {
     height?: number;
@@ -59,7 +60,7 @@
 
 {#if isNavigating}
   <div
-    class="navigation-progress-container fixed top-0 left-0 right-0 z-999999"
+    class="navigation-progress-container"
     style="height: {height}px"
   >
     <div
@@ -71,40 +72,3 @@
     {/if}
   </div>
 {/if}
-
-<style>
-  .navigation-progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-    background: transparent;
-    pointer-events: none;
-  }
-
-  .navigation-progress-bar {
-    height: 100%;
-    transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: width;
-  }
-
-  .navigation-spinner {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    width: 18px;
-    height: 18px;
-    border: 2px solid transparent;
-    border-top-color: hsl(var(--primary));
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    z-index: 9999;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>

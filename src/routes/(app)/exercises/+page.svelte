@@ -15,6 +15,7 @@
     import YoutubeIcon from "@lucide/svelte/icons/youtube";
     import XIcon from "@lucide/svelte/icons/x";
     import exercises from "$lib/exercises.json";
+    import "$lib/assets/css/exercises.css";
 
     // State management
     let searchQuery = $state("");
@@ -107,13 +108,13 @@
     function getLevelColor(level: string) {
         switch (level.toLowerCase()) {
             case "beginner":
-                return "bg-green-500/10 text-green-700 border-green-500/20";
+                return "badge-beginner";
             case "intermediate":
-                return "bg-yellow-500/10 text-yellow-700 border-yellow-500/20";
+                return "badge-intermediate";
             case "advanced":
-                return "bg-red-500/10 text-red-700 border-red-500/20";
+                return "badge-advanced";
             default:
-                return "bg-gray-500/10 text-gray-700 border-gray-500/20";
+                return "badge-default";
         }
     }
 
@@ -134,58 +135,58 @@
     }
 </script>
 
-<div class="space-y-4 pb-8">
+<div class="exercises-container">
     <!-- Header -->
-    <div class="space-y-2 pt-4" data-tour="library-header">
-        <h1 class="text-3xl font-bold tracking-tight">Exercise Library</h1>
-        <p class="text-sm text-muted-foreground">
+    <div class="exercises-header" data-tour="library-header">
+        <h1 class="header-title">Exercise Library</h1>
+        <p class="header-desc">
             Browse and learn about all available exercises
         </p>
     </div>
 
     <!-- Search Bar -->
-    <div class="relative" data-tour="library-search">
+    <div class="search-container" data-tour="library-search">
         <SearchIcon
-            class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+            class="search-icon"
         />
         <Input
             type="text"
             placeholder="Search exercises, tags, or categories..."
             value={searchQuery}
             oninput={handleSearchInput}
-            class="pl-10 pr-10"
+            class="search-input"
         />
         {#if searchQuery}
             <button
                 onclick={clearSearch}
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                class="search-clear-btn"
                 aria-label="Clear search"
             >
-                <XIcon class="h-4 w-4" />
+                <XIcon class="search-clear-icon" />
             </button>
         {/if}
     </div>
 
     <!-- Filter Toggle Button -->
-    <div class="flex items-center justify-between">
+    <div class="filter-actions">
         <Button
             variant="outline"
             size="sm"
             onclick={() => (showFilters = !showFilters)}
-            class="gap-2"
+            class="filter-toggle-btn"
             data-tour="library-filters"
         >
-            <FilterIcon class="h-4 w-4" />
+            <FilterIcon class="filter-icon" />
             Filters
             {#if activeFiltersCount > 0}
-                <Badge variant="default" class="ml-1 h-5 px-1.5">
+                <Badge variant="default" class="filter-count-badge">
                     {activeFiltersCount}
                 </Badge>
             {/if}
             {#if showFilters}
-                <ChevronUpIcon class="h-4 w-4" />
+                <ChevronUpIcon class="filter-chevron" />
             {:else}
-                <ChevronDownIcon class="h-4 w-4" />
+                <ChevronDownIcon class="filter-chevron" />
             {/if}
         </Button>
 
@@ -194,7 +195,7 @@
                 variant="ghost"
                 size="sm"
                 onclick={clearFilters}
-                class="text-muted-foreground"
+                class="filter-clear-all-btn"
             >
                 Clear all
             </Button>
@@ -204,13 +205,13 @@
     <!-- Filters Panel -->
     {#if showFilters}
         <div
-            class="space-y-4 p-4 border rounded-lg bg-muted/30"
+            class="filters-panel"
             transition:slide={{ duration: 300 }}
         >
             <!-- Category Filter -->
-            <div class="space-y-2">
-                <p class="text-sm font-medium">Category</p>
-                <div class="flex flex-wrap gap-2">
+            <div class="filter-group">
+                <p class="filter-label">Category</p>
+                <div class="filter-options">
                     {#each categories as category}
                         <Button
                             variant={selectedCategory === category
@@ -222,7 +223,7 @@
                                     selectedCategory === category
                                         ? null
                                         : category)}
-                            class="gap-1"
+                            class="filter-option-btn"
                         >
                             <span>{getCategoryEmoji(category)}</span>
                             {category}
@@ -232,9 +233,9 @@
             </div>
 
             <!-- Level Filter -->
-            <div class="space-y-2">
-                <p class="text-sm font-medium">Level</p>
-                <div class="flex flex-wrap gap-2">
+            <div class="filter-group">
+                <p class="filter-label">Level</p>
+                <div class="filter-options">
                     {#each levels as level}
                         <Button
                             variant={selectedLevel === level
@@ -255,7 +256,7 @@
 
     <!-- Results Count -->
     <div
-        class="flex items-center justify-between text-sm text-muted-foreground"
+        class="results-count"
     >
         <span>
             {filteredExercises.length} exercise{filteredExercises.length !== 1
@@ -265,17 +266,17 @@
     </div>
 
     <!-- Exercise List -->
-    <div class="space-y-3">
+    <div class="exercises-list">
         {#if filteredExercises.length === 0}
-            <Card.Root class="border-dashed">
+            <Card.Root class="no-results-card">
                 <Card.Content
-                    class="flex flex-col items-center justify-center py-12"
+                    class="no-results-content"
                 >
                     <AlertCircleIcon
-                        class="h-12 w-12 text-muted-foreground mb-4"
+                        class="no-results-icon"
                     />
-                    <p class="text-sm font-medium">No exercises found</p>
-                    <p class="text-xs text-muted-foreground mt-1">
+                    <p class="no-results-title">No exercises found</p>
+                    <p class="no-results-desc">
                         Try adjusting your filters or search query
                     </p>
                     {#if activeFiltersCount > 0 || debouncedSearchQuery}
@@ -283,7 +284,7 @@
                             variant="outline"
                             size="sm"
                             onclick={clearFilters}
-                            class="mt-4"
+                            class="no-results-clear-btn"
                         >
                             Clear filters
                         </Button>
@@ -295,8 +296,8 @@
                 {@const isExpanded = expandedExercise === exercise.name}
                 <Card.Root
                     class={cn(
-                        "transition-all hover:shadow-md",
-                        isExpanded && "shadow-lg border-primary/50",
+                        "exercise-card",
+                        isExpanded && "exercise-card-expanded",
                     )}
                     data-tour={filteredExercises.indexOf(exercise) === 0
                         ? "library-exercise-card"
@@ -304,27 +305,27 @@
                 >
                     <button
                         onclick={() => toggleExercise(exercise.name)}
-                        class="w-full text-left"
+                        class="exercise-toggle-btn"
                         aria-label="Toggle exercise details for {exercise.name}"
                     >
-                        <Card.Header class="pb-3">
-                            <div class="flex items-start justify-between gap-2">
-                                <div class="flex-1 space-y-1">
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-lg">
+                        <Card.Header class="exercise-header-content">
+                            <div class="exercise-header-flex">
+                                <div class="exercise-info">
+                                    <div class="exercise-title-row">
+                                        <span class="exercise-emoji">
                                             {getCategoryEmoji(
                                                 exercise.category,
                                             )}
                                         </span>
-                                        <Card.Title class="text-base">
+                                        <Card.Title class="exercise-title">
                                             {exercise.name}
                                         </Card.Title>
                                     </div>
-                                    <Card.Description class="text-xs">
+                                    <Card.Description class="exercise-desc">
                                         {exercise.description}
                                     </Card.Description>
                                 </div>
-                                <div class="flex flex-col items-end gap-2">
+                                <div class="exercise-meta">
                                     <Badge
                                         variant="outline"
                                         class={getLevelColor(exercise.level)}
@@ -333,23 +334,23 @@
                                     </Badge>
                                     {#if isExpanded}
                                         <ChevronUpIcon
-                                            class="h-5 w-5 text-muted-foreground"
+                                            class="chevron-icon"
                                         />
                                     {:else}
                                         <ChevronDownIcon
-                                            class="h-5 w-5 text-muted-foreground"
+                                            class="chevron-icon"
                                         />
                                     {/if}
                                 </div>
                             </div>
 
                             <!-- Tags -->
-                            <div class="flex flex-wrap gap-1.5 pt-2">
-                                <Badge variant="secondary" class="text-xs">
+                            <div class="tags-list">
+                                <Badge variant="secondary" class="tag-category">
                                     {exercise.category}
                                 </Badge>
                                 {#each exercise.tags as tag}
-                                    <Badge variant="outline" class="text-xs">
+                                    <Badge variant="outline" class="tag-item">
                                         {tag}
                                     </Badge>
                                 {/each}
@@ -360,50 +361,50 @@
                     <!-- Expanded Content -->
                     {#if isExpanded}
                         <div transition:slide={{ duration: 333 }}>
-                            <Card.Content class="space-y-4 pt-0">
+                            <Card.Content class="expanded-content">
                                 <!-- Key Principles -->
-                                <div class="space-y-2">
-                                    <div class="flex items-center gap-2">
+                                <div class="content-section">
+                                    <div class="section-header">
                                         <TargetIcon
-                                            class="h-4 w-4 text-primary"
+                                            class="section-icon"
                                         />
-                                        <h3 class="text-sm font-semibold">
+                                        <h3 class="section-title">
                                             Key Principles
                                         </h3>
                                     </div>
                                     <p
-                                        class="text-sm text-muted-foreground pl-6 bg-primary/5 p-3 rounded-md"
+                                        class="section-text-primary"
                                     >
                                         {exercise.key_principles}
                                     </p>
                                 </div>
 
                                 <!-- Technical Checkpoints -->
-                                <div class="space-y-2">
-                                    <div class="flex items-center gap-2">
+                                <div class="content-section">
+                                    <div class="section-header">
                                         <DumbbellIcon
-                                            class="h-4 w-4 text-primary"
+                                            class="section-icon"
                                         />
-                                        <h3 class="text-sm font-semibold">
+                                        <h3 class="section-title">
                                             Technical Checkpoints
                                         </h3>
                                     </div>
                                     <p
-                                        class="text-sm text-muted-foreground pl-6 bg-orange-500/5 p-3 rounded-md"
+                                        class="section-text-orange"
                                     >
                                         {exercise.key_technical_checkpoints}
                                     </p>
                                 </div>
 
                                 <!-- Instructions -->
-                                <div class="space-y-2">
-                                    <h3 class="text-sm font-semibold">
+                                <div class="content-section">
+                                    <h3 class="section-title">
                                         Instructions
                                     </h3>
-                                    <ol class="space-y-2 pl-6">
+                                    <ol class="instructions-list">
                                         {#each exercise.instructions as instruction, index}
                                             <li
-                                                class="text-sm text-muted-foreground list-decimal"
+                                                class="instruction-item"
                                             >
                                                 {instruction}
                                             </li>
@@ -413,12 +414,12 @@
 
                                 <!-- YouTube Video -->
                                 {#if exercise.tutor_video}
-                                    <div class="space-y-2">
-                                        <div class="flex items-center gap-2">
+                                    <div class="content-section">
+                                        <div class="section-header">
                                             <YoutubeIcon
-                                                class="h-4 w-4 text-red-500"
+                                                class="section-icon-red"
                                             />
-                                            <h3 class="text-sm font-semibold">
+                                            <h3 class="section-title">
                                                 Video Tutorial
                                             </h3>
                                         </div>
@@ -429,11 +430,11 @@
                                             )}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            class="block"
+                                            class="video-link"
                                             aria-label="Watch video tutorial for {exercise.name} on YouTube"
                                         >
                                             <div
-                                                class="aspect-video rounded-md overflow-hidden border border-border hover:border-primary transition-colors"
+                                                class="video-container"
                                             >
                                                 <iframe
                                                     src={exercise.tutor_video}
@@ -441,7 +442,7 @@
                                                     frameborder="0"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                     allowfullscreen
-                                                    class="w-full h-full"
+                                                    class="video-iframe"
                                                 ></iframe>
                                             </div>
                                         </a>
@@ -454,9 +455,9 @@
                                     size="sm"
                                     onclick={() =>
                                         toggleExercise(exercise.name)}
-                                    class="w-full"
+                                    class="collapse-btn"
                                 >
-                                    <ChevronUpIcon class="h-4 w-4 mr-2" />
+                                    <ChevronUpIcon class="collapse-icon" />
                                     Show Less
                                 </Button>
                             </Card.Content>

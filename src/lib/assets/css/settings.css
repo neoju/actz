@@ -1,0 +1,121 @@
+@reference './__core.css';
+
+.settings-container {
+    @apply space-y-6;
+}
+
+.settings-header {
+    @apply flex items-center space-x-2;
+}
+
+.settings-title {
+    @apply text-2xl font-bold;
+}
+
+.tabs-root {
+    @apply w-full;
+}
+
+.tabs-list {
+    @apply w-full grid grid-cols-2;
+}
+
+.tabs-content {
+    @apply mt-4;
+}
+
+.card-header-flex {
+    @apply flex items-center justify-between;
+}
+
+.loading-state {
+    @apply text-muted-foreground text-center py-8;
+}
+
+.error-state {
+    @apply text-destructive text-center py-8;
+}
+
+.form-content {
+    @apply space-y-4;
+}
+
+.form-grid-2 {
+    @apply grid grid-cols-2 gap-4;
+}
+
+.form-grid-3 {
+    @apply grid grid-cols-3 gap-4;
+}
+
+.form-footer {
+    @apply flex gap-2 mt-4;
+}
+
+.form-cancel-btn {
+    @apply flex-1;
+}
+
+.form-save-btn {
+    @apply flex-1;
+}
+
+.profile-field-label {
+    @apply text-sm text-muted-foreground;
+}
+
+.profile-field-value {
+    @apply font-medium;
+}
+
+.plan-limit-container {
+    @apply mb-6 space-y-2 px-1;
+}
+
+.plan-limit-header {
+    @apply flex items-center justify-between text-sm;
+}
+
+.plan-limit-label {
+    @apply text-muted-foreground;
+}
+
+.plan-limit-stats {
+    @apply flex items-center gap-2;
+}
+
+.plan-limit-value {
+    @apply font-medium;
+}
+
+.refresh-btn {
+    @apply h-5 w-5;
+}
+
+.refresh-icon {
+    @apply h-3 w-3;
+}
+
+.progress-bar-bg {
+    @apply h-2 w-full rounded-full bg-secondary;
+}
+
+.progress-bar-fill {
+    @apply h-full rounded-full bg-primary transition-all;
+}
+
+.reset-date {
+    @apply text-xs text-muted-foreground text-right;
+}
+
+.plans-grid {
+    @apply grid gap-4;
+}
+
+.plan-generate-btn {
+    @apply w-full;
+}
+
+.btn-icon {
+    @apply mr-2 h-4 w-4;
+}

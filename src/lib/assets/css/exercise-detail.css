@@ -1,0 +1,169 @@
+@reference './__core.css';
+
+.exercise-detail-container {
+    @apply space-y-6 pb-8;
+}
+
+.cooldown-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm;
+}
+
+.cooldown-modal {
+    @apply bg-card rounded-lg shadow-lg border border-border w-full h-full max-w-md text-center space-y-4 flex justify-center items-center flex-col;
+}
+
+.cooldown-title {
+    @apply text-2xl font-bold;
+}
+
+.cooldown-timer {
+    @apply text-6xl font-mono font-bold text-primary;
+}
+
+.cooldown-desc {
+    @apply text-muted-foreground;
+}
+
+.congrats-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-background/95 backdrop-blur-md p-4;
+}
+
+.congrats-content {
+    @apply max-w-md w-full text-center space-y-8;
+}
+
+.trophy-wrapper {
+    @apply relative inline-block;
+}
+
+.trophy-glow {
+    @apply absolute inset-0 animate-ping opacity-20 bg-yellow-400 rounded-full blur-xl;
+}
+
+.trophy-icon {
+    @apply w-32 h-32 text-yellow-500 mx-auto relative z-10 drop-shadow-2xl;
+}
+
+.congrats-text {
+    @apply space-y-2;
+}
+
+.congrats-title {
+    @apply text-4xl font-extrabold tracking-tight text-primary;
+}
+
+.congrats-subtitle {
+    @apply text-xl text-muted-foreground;
+}
+
+.stats-card {
+    @apply overflow-hidden border-2 border-primary/20;
+}
+
+.stats-grid {
+    @apply p-6 grid grid-cols-2 gap-4;
+}
+
+.stat-item {
+    @apply flex flex-col items-center p-3 bg-muted/50 rounded-xl;
+}
+
+.stat-icon {
+    @apply w-6 h-6 text-primary mb-2;
+}
+
+.stat-label {
+    @apply text-xs text-muted-foreground uppercase font-bold;
+}
+
+.stat-value {
+    @apply text-xl font-bold;
+}
+
+.congrats-actions {
+    @apply flex gap-4 pt-4 justify-center;
+}
+
+.home-btn {
+    @apply w-full max-w-xs font-bold text-lg h-14 shadow-lg shadow-primary/20;
+}
+
+.detail-header {
+    @apply flex items-center space-x-2 pt-4;
+}
+
+.detail-title {
+    @apply text-2xl font-bold tracking-tight;
+}
+
+.detail-subtitle {
+    @apply text-sm text-muted-foreground;
+}
+
+.banner-past-untouched {
+    @apply bg-red-500/10 border border-red-500/20 rounded-lg p-4 flex items-start gap-3;
+}
+
+.banner-icon-red {
+    @apply h-5 w-5 text-red-600 mt-0.5 shrink-0;
+}
+
+.banner-title-red {
+    @apply text-sm font-semibold text-red-600;
+}
+
+.banner-text {
+    @apply text-xs text-muted-foreground;
+}
+
+.banner-past-touched {
+    @apply bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4 flex items-start gap-3;
+}
+
+.banner-icon-yellow {
+    @apply h-5 w-5 text-yellow-600 mt-0.5 shrink-0;
+}
+
+.banner-title-yellow {
+    @apply text-sm font-semibold text-yellow-600;
+}
+
+.rest-day-container {
+    @apply bg-blue-500/10 border border-blue-500/20 rounded-lg p-8 text-center space-y-4;
+}
+
+.rest-icon-wrapper {
+    @apply flex justify-center;
+}
+
+.rest-icon-bg {
+    @apply h-16 w-16 rounded-full bg-blue-500/20 flex items-center justify-center;
+}
+
+.rest-icon {
+    @apply h-8 w-8 text-blue-600;
+}
+
+.rest-content {
+    @apply space-y-2;
+}
+
+.rest-title {
+    @apply text-xl font-bold text-blue-600;
+}
+
+.rest-desc {
+    @apply text-muted-foreground;
+}
+
+.rest-footer {
+    @apply pt-4;
+}
+
+.rest-footer-text {
+    @apply text-sm text-muted-foreground italic;
+}
+
+.accordion-root {
+    @apply w-full;
+}

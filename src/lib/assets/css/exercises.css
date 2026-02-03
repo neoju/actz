@@ -1,0 +1,250 @@
+@reference './__core.css';
+
+.exercises-container {
+    @apply space-y-4 pb-8;
+}
+
+.exercises-header {
+    @apply space-y-2 pt-4;
+}
+
+.header-title {
+    @apply text-3xl font-bold tracking-tight;
+}
+
+.header-desc {
+    @apply text-sm text-muted-foreground;
+}
+
+.search-container {
+    @apply relative;
+}
+
+.search-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground;
+}
+
+.search-input {
+    @apply pl-10 pr-10;
+}
+
+.search-clear-btn {
+    @apply absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground;
+}
+
+.search-clear-icon {
+    @apply h-4 w-4;
+}
+
+.filter-actions {
+    @apply flex items-center justify-between;
+}
+
+.filter-toggle-btn {
+    @apply gap-2;
+}
+
+.filter-icon {
+    @apply h-4 w-4;
+}
+
+.filter-count-badge {
+    @apply ml-1 h-5 px-1.5;
+}
+
+.filter-chevron {
+    @apply h-4 w-4;
+}
+
+.filter-clear-all-btn {
+    @apply text-muted-foreground;
+}
+
+.filters-panel {
+    @apply space-y-4 p-4 border rounded-lg bg-muted/30;
+}
+
+.filter-group {
+    @apply space-y-2;
+}
+
+.filter-label {
+    @apply text-sm font-medium;
+}
+
+.filter-options {
+    @apply flex flex-wrap gap-2;
+}
+
+.filter-option-btn {
+    @apply gap-1;
+}
+
+.results-count {
+    @apply flex items-center justify-between text-sm text-muted-foreground;
+}
+
+.exercises-list {
+    @apply space-y-3;
+}
+
+.no-results-card {
+    @apply border-dashed;
+}
+
+.no-results-content {
+    @apply flex flex-col items-center justify-center py-12;
+}
+
+.no-results-icon {
+    @apply h-12 w-12 text-muted-foreground mb-4;
+}
+
+.no-results-title {
+    @apply text-sm font-medium;
+}
+
+.no-results-desc {
+    @apply text-xs text-muted-foreground mt-1;
+}
+
+.no-results-clear-btn {
+    @apply mt-4;
+}
+
+.exercise-card {
+    @apply transition-all hover:shadow-md;
+}
+
+.exercise-card-expanded {
+    @apply shadow-lg border-primary/50;
+}
+
+.exercise-toggle-btn {
+    @apply w-full text-left;
+}
+
+.exercise-header-content {
+    @apply pb-3;
+}
+
+.exercise-header-flex {
+    @apply flex items-start justify-between gap-2;
+}
+
+.exercise-info {
+    @apply flex-1 space-y-1;
+}
+
+.exercise-title-row {
+    @apply flex items-center gap-2;
+}
+
+.exercise-emoji {
+    @apply text-lg;
+}
+
+.exercise-title {
+    @apply text-base;
+}
+
+.exercise-desc {
+    @apply text-xs;
+}
+
+.exercise-meta {
+    @apply flex flex-col items-end gap-2;
+}
+
+.chevron-icon {
+    @apply h-5 w-5 text-muted-foreground;
+}
+
+.tags-list {
+    @apply flex flex-wrap gap-1.5 pt-2;
+}
+
+.tag-category {
+    @apply text-xs;
+}
+
+.tag-item {
+    @apply text-xs;
+}
+
+.expanded-content {
+    @apply space-y-4 pt-0;
+}
+
+.content-section {
+    @apply space-y-2;
+}
+
+.section-header {
+    @apply flex items-center gap-2;
+}
+
+.section-icon {
+    @apply h-4 w-4 text-primary;
+}
+
+.section-icon-red {
+    @apply h-4 w-4 text-red-500;
+}
+
+.section-title {
+    @apply text-sm font-semibold;
+}
+
+.section-text-primary {
+    @apply text-sm text-muted-foreground pl-6 bg-primary/5 p-3 rounded-md;
+}
+
+.section-text-orange {
+    @apply text-sm text-muted-foreground pl-6 bg-orange-500/5 p-3 rounded-md;
+}
+
+.instructions-list {
+    @apply space-y-2 pl-6;
+}
+
+.instruction-item {
+    @apply text-sm text-muted-foreground list-decimal;
+}
+
+.video-link {
+    @apply block;
+}
+
+.video-container {
+    @apply aspect-video rounded-md overflow-hidden border border-border hover:border-primary transition-colors;
+}
+
+.video-iframe {
+    @apply w-full h-full;
+}
+
+.collapse-btn {
+    @apply w-full;
+}
+
+.collapse-icon {
+    @apply h-4 w-4 mr-2;
+}
+
+/* Badge variants */
+.badge-beginner {
+    @apply bg-green-500/10 text-green-700 border-green-500/20;
+}
+
+.badge-intermediate {
+    @apply bg-yellow-500/10 text-yellow-700 border-yellow-500/20;
+}
+
+.badge-advanced {
+    @apply bg-red-500/10 text-red-700 border-red-500/20;
+}
+
+.badge-default {
+    @apply bg-gray-500/10 text-gray-700 border-gray-500/20;
+}

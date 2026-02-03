@@ -6,6 +6,7 @@
   import { ModeWatcher } from "mode-watcher";
   import { Toaster } from "$lib/components/ui/sonner";
   import AppMenu from "$lib/components/app-menu.svelte";
+  import "$lib/assets/css/app-layout.css";
 
   let { children } = $props();
 
@@ -22,27 +23,18 @@
 
 <ModeWatcher />
 <Toaster richColors position="top-center" />
-<div
-  class="min-h-screen bg-muted/20 text-foreground font-sans antialiased flex
-    justify-center"
->
-  <div
-    class="w-full max-w-md min-h-screen bg-background shadow-2xl overflow-hidden
-      relative flex flex-col border-x border-border"
-  >
+<div class="app-wrapper">
+  <div class="mobile-container">
     <!-- Mobile Header with Hamburger Menu -->
-    <header
-      class="fixed max-w-md w-screen mx-auto top-0 z-40 bg-background border-b
-        border-border p-4 flex items-end justify-end"
-    >
+    <header class="mobile-header">
       {#if page.url.pathname != "/"}
-        <div class="grow">
+        <div class="header-spacer">
           <Button
-            class="pl-0!"
+            class="back-btn"
             variant="ghost"
             onclick={() => window.history.back()}
           >
-            <ChevronLeft class="size-6" />
+            <ChevronLeft class="back-icon" />
           </Button>
         </div>
       {/if}
@@ -50,9 +42,8 @@
       <AppMenu />
     </header>
 
-    <main class="flex-1 p-4 pt-20 flex flex-col overflow-auto page-transition">
+    <main class="main-content page-transition">
       {@render children()}
     </main>
   </div>
 </div>
-

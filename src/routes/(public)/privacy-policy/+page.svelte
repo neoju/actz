@@ -1,14 +1,16 @@
-<div class="space-y-6 pb-8">
-  <div class="flex items-center space-x-2">
-    <h1 class="text-2xl font-bold">Privacy Policy</h1>
+<script>
+  import "$lib/assets/css/legal.css";
+</script>
+
+<div class="legal-container">
+  <div class="legal-header">
+    <h1 class="legal-title">Privacy Policy</h1>
   </div>
 
-  <div
-    class="prose prose-sm dark:prose-invert text-muted-foreground leading-relaxed"
-  >
-    <p class="font-medium text-foreground">Last updated: January 26, 2026</p>
+  <div class="legal-content">
+    <p class="last-updated">Last updated: January 26, 2026</p>
 
-    <h2 class="text-foreground mt-6 text-lg font-semibold">
+    <h2 class="legal-section-title">
       1. Information Collection
     </h2>
     <p>
@@ -18,21 +20,21 @@
       collect data related to your workouts and usage of the application.
     </p>
 
-    <h2 class="text-foreground mt-6 text-lg font-semibold">
+    <h2 class="legal-section-title">
       2. Use of Information
     </h2>
     <p>
       We use the information we collect to provide, maintain, and improve our
       services, including:
     </p>
-    <ul class="list-disc pl-5 space-y-1">
+    <ul class="legal-list">
       <li>Providing and maintaining your user account;</li>
       <li>Tracking your workout progress and history;</li>
       <li>Personalizing your experience;</li>
       <li>Communicating with you about updates or changes to our services.</li>
     </ul>
 
-    <h2 class="text-foreground mt-6 text-lg font-semibold">
+    <h2 class="legal-section-title">
       3. Cookies and Local Storage
     </h2>
     <p>
@@ -42,7 +44,7 @@
       features of the service.
     </p>
 
-    <h2 class="text-foreground mt-6 text-lg font-semibold">4. Data Security</h2>
+    <h2 class="legal-section-title">4. Data Security</h2>
     <p>
       We take reasonable measures to help protect information about you from
       loss, theft, misuse and unauthorized access, disclosure, alteration and
@@ -50,7 +52,7 @@
       we cannot guarantee the absolute security of your data.
     </p>
 
-    <h2 class="text-foreground mt-6 text-lg font-semibold">
+    <h2 class="legal-section-title">
       5. Third-Party Services
     </h2>
     <p>
@@ -59,7 +61,7 @@
       information to third parties.
     </p>
 
-    <h2 class="text-foreground mt-6 text-lg font-semibold">
+    <h2 class="legal-section-title">
       6. Changes to this Policy
     </h2>
     <p>
@@ -68,7 +70,7 @@
       and, in some cases, we may provide you with additional notice.
     </p>
 
-    <h2 class="text-foreground mt-6 text-lg font-semibold">7. Contact Us</h2>
+    <h2 class="legal-section-title">7. Contact Us</h2>
     <p>
       If you have any questions about this Privacy Policy, please contact us.
     </p>
