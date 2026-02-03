@@ -45,8 +45,14 @@
   label: string,
   onclick?: () => void,
   dataTour?: string,
-  variant: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" = "ghost",
-  className?: string
+  variant:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link" = "ghost",
+  className?: string,
 )}
   <Button
     {variant}
@@ -82,14 +88,36 @@
     </Sheet.Header>
     <div class="flex flex-col gap-4 mt-6 flex-1">
       {@render MenuItem(House, "Home", () => handleNavigation("/"))}
-      {@render MenuItem(BookSearch, "Library", () => handleNavigation("/exercises"), "library-link")}
-      {@render MenuItem(Settings, "Settings", () => handleNavigation("/settings"), "settings-link")}
-      
+      {@render MenuItem(
+        BookSearch,
+        "Library",
+        () => handleNavigation("/exercises"),
+        "library-link",
+      )}
+      {@render MenuItem(
+        Settings,
+        "Settings",
+        () => handleNavigation("/settings"),
+        "settings-link",
+      )}
+
       <div class="border-t border-border my-2"></div>
-      
-      {@render MenuItem(CircleQuestionMark, "FAQ", () => handleNavigation("/faq"), "settings-link")}
+
+      {@render MenuItem(
+        CircleQuestionMark,
+        "FAQ",
+        () => handleNavigation("/faq"),
+        "settings-link",
+      )}
       {@render MenuItem(Map, "Restart Guided Tour", handleRestartTour)}
-      {@render MenuItem(LogOut, "Logout", handleLogout, undefined, "ghost", "text-destructive hover:text-destructive hover:bg-destructive/10")}
+      {@render MenuItem(
+        LogOut,
+        "Logout",
+        handleLogout,
+        undefined,
+        "ghost",
+        "text-destructive hover:text-destructive hover:bg-destructive/10",
+      )}
     </div>
 
     <Sheet.Footer class="mt-auto pt-6 border-t border-border">
@@ -108,3 +136,4 @@
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>
+

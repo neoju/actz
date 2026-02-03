@@ -1,5 +1,4 @@
 import { createMutation, useQueryClient } from "@tanstack/svelte-query";
-import type { ProfileFormData } from "$lib/schemas/profile";
 
 interface WeeklyPlanResponse {
   pt_summary: string;
@@ -54,7 +53,7 @@ export function useGenerateWeeklyPlanMutation() {
 
   return createMutation(() => ({
     mutationFn: generateWeeklyPlan,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // Invalidate weekly plan queries to refetch
       queryClient.invalidateQueries({ queryKey: weeklyPlanKeys.all });
     },
