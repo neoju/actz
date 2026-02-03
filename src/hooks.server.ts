@@ -1,6 +1,17 @@
 import { redirect, type Handle } from "@sveltejs/kit";
 import { handle as authenticationHandle } from "$lib/auth";
 import { sequence } from "@sveltejs/kit/hooks";
+import { paraglideMiddleware } from "$lib/paraglide/server";
+
+const paraglideHandle: Handle = ({ event, resolve }) =>
+  paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
+    event.request = localizedRequest;
+    return resolve(event, {
+      transformPageChunk: ({ html }) => {
+        return html.replace('%lang%', locale);
+      }
+    });
+  });
 
 const authorizationHandle: Handle = async ({ event, resolve }) => {
   const session = await event.locals.auth();
@@ -21,4 +32,4 @@ const authorizationHandle: Handle = async ({ event, resolve }) => {
   return resolve(event);
 };
 
-export const handle = sequence(authenticationHandle, authorizationHandle);
+export const handle = sequence(paraglideHandle, authenticationHandle, authorizationHandle);

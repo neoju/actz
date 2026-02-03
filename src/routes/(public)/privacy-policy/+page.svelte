@@ -1,14 +1,15 @@
 <script>
   import "$lib/assets/css/legal.css";
+  import * as m from "$lib/paraglide/messages.js";
 </script>
 
 <div class="legal-container">
   <div class="legal-header">
-    <h1 class="legal-title">Privacy Policy</h1>
+    <h1 class="legal-title">{m.privacy_title()}</h1>
   </div>
 
   <div class="legal-content">
-    <p class="last-updated">Last updated: January 26, 2026</p>
+    <p class="last-updated">{m.privacy_lastUpdated()}</p>
 
     <h2 class="legal-section-title">
       1. Information Collection

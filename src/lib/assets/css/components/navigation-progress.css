@@ -1,13 +1,13 @@
 @reference '../__core.css';
 
 .navigation-progress-container {
-    @apply fixed top-0 left-0 right-0 z-[9999] bg-transparent pointer-events-none;
+    @apply fixed top-0 left-0 right-0 z-9999 bg-transparent pointer-events-none;
 }
 
 .navigation-progress-bar {
-    @apply h-full transition-[width] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-[width];
+    @apply h-full transition-[width] duration-200 ease-in-out will-change-[width];
 }
 
 .navigation-spinner {
-    @apply fixed top-[15px] right-[15px] w-[18px] h-[18px] border-2 border-transparent border-t-primary rounded-full animate-spin z-[9999];
+    @apply fixed top-3.75 right-3.75 w-4.5 h-4.5 border-2 border-transparent border-t-primary rounded-full animate-spin z-9999;
 }

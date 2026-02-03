@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { page } from "$app/state";
-  import NavigationProgress from "$lib/components/navigation-progress.svelte";
-  import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
-
-  import "$lib/styles/view-transitions.css";
-  import "./layout.css";
   import { onNavigate } from "$app/navigation";
+  import { QueryClient, QueryClientProvider } from "@tanstack/svelte-query";
+  import NavigationProgress from "$lib/components/navigation-progress.svelte";
+
+  import "./layout.css";
+  import "$lib/styles/view-transitions.css";
 
   let { children } = $props();
 
@@ -19,6 +20,15 @@
         retry: 1,
       },
     },
+  });
+
+  // Register service worker
+  onMount(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js").catch((error) => {
+        console.error("Service Worker registration failed:", error);
+      });
+    }
   });
 
   $effect(() => {

@@ -3,101 +3,82 @@
   import { Button } from "$lib/components/ui/button";
   import { ArrowLeft } from "@lucide/svelte";
   import "$lib/assets/css/legal.css";
+  import * as m from "$lib/paraglide/messages.js";
 </script>
 
 <div class="faq-container">
   <div class="faq-header">
     <h1 class="faq-title">
-      Frequently Asked Questions
+      {m.faq_title()}
     </h1>
   </div>
 
   <div class="space-y-6">
     <p class="faq-description">
-      Find answers to common questions about your fitness journey with Actz.
+      {m.faq_description()}
     </p>
 
     <Accordion.Root type="single" class="w-full">
       <Accordion.Item value="item-1">
         <Accordion.Trigger class="accordion-trigger"
-          >What is Actz?</Accordion.Trigger
+          >{m.faq_q1()}</Accordion.Trigger
         >
         <Accordion.Content>
-          Actz is an AI-powered fitness companion designed to generate
-          personalized weekly and monthly workout plans based on your unique
-          profile, goals, and available equipment. Whether you're a beginner or
-          an advanced athlete, Actz tailors the routine to you.
+          {m.faq_a1()}
         </Accordion.Content>
       </Accordion.Item>
 
       <Accordion.Item value="item-2">
         <Accordion.Trigger class="accordion-trigger"
-          >Is Actz suitable for beginners?</Accordion.Trigger
+          >{m.faq_q2()}</Accordion.Trigger
         >
         <Accordion.Content>
-          Absolutely! When you set up your profile, you can select "Beginner" as
-          your fitness level. The AI will design workouts that focus on building
-          a solid foundation, proper form, and manageable intensity to help you
-          get started safely.
+          {m.faq_a2()}
         </Accordion.Content>
       </Accordion.Item>
 
       <Accordion.Item value="item-3">
         <Accordion.Trigger class="accordion-trigger"
-          >Do I need gym equipment to use Actz?</Accordion.Trigger
+          >{m.faq_q3()}</Accordion.Trigger
         >
         <Accordion.Content>
-          No. Actz adapts to your environment. You can specify "Bodyweight" or
-          "Home Gym" in your profile settings, and the generated plan will only
-          include exercises you can perform with what you have.
+          {m.faq_a3()}
         </Accordion.Content>
       </Accordion.Item>
 
       <Accordion.Item value="item-4">
         <Accordion.Trigger class="accordion-trigger"
-          >How is my data used and stored?</Accordion.Trigger
+          >{m.faq_q4()}</Accordion.Trigger
         >
         <Accordion.Content>
-          We take your privacy seriously. Your profile data (age, weight, goals,
-          etc.) is used solely to generate your workout plans. If you use
-          "Continue as Guest," your identity is stored locally on your device.
-          We do not sell your personal data to third parties.
+          {m.faq_a4()}
         </Accordion.Content>
       </Accordion.Item>
 
       <Accordion.Item value="item-5">
         <Accordion.Trigger class="accordion-trigger"
-          >Are the workout plans safe?</Accordion.Trigger
+          >{m.faq_q5()}</Accordion.Trigger
         >
         <Accordion.Content>
-          Our AI generates plans based on general fitness principles and the
-          limitations you provide. However, Actz is not a substitute for
-          professional medical advice. We strongly recommend consulting with a
-          healthcare provider before starting any new exercise program,
-          especially if you have pre-existing conditions.
+          {m.faq_a5()}
         </Accordion.Content>
       </Accordion.Item>
 
       <Accordion.Item value="item-6">
         <Accordion.Trigger class="accordion-trigger"
-          >What happens if I use the "Guest" mode?</Accordion.Trigger
+          >{m.faq_q6()}</Accordion.Trigger
         >
         <Accordion.Content>
-          Guest mode allows you to use the full features of Actz without
-          creating a social account. Your progress is linked to a unique ID
-          stored on your current device. <strong>Note:</strong> If you clear your
-          browser cache or switch devices, you may lose access to your guest account
-          history.
+          {m.faq_a6()}
         </Accordion.Content>
       </Accordion.Item>
 
       <Accordion.Item value="item-7">
         <Accordion.Trigger class="accordion-trigger"
-          >Why is there a limit on generating plans?</Accordion.Trigger
+          >{m.faq_q7()}</Accordion.Trigger
         >
         <Accordion.Content>
-          To ensure fair usage and manage the costs associated with our advanced
-          AI models, we limit plan generations to 5 per week. This also
+          {m.faq_a7()}
           encourages sticking to a plan for at least a few days to see results,
           rather than constantly switching routines.
         </Accordion.Content>

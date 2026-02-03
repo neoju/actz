@@ -35,6 +35,15 @@ model User {
   primaryFocus String?
   secondaryFocus String?
 
+  // User Preferences
+  language     String?  @default("en")  // Language preference: 'en' or 'vi'
+
+  // Notification Settings
+  preferredWorkoutTime  String?  // Format: "HH:mm" (e.g., "18:00")
+  reminderMinutesBefore Int?     @default(30)
+  notificationsEnabled  Boolean  @default(false)
+  pushSubscription      Json?    // Store push subscription data
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -1,7 +1,7 @@
 @reference './__core.css';
 
 .settings-container {
-    @apply space-y-6;
+    @apply space-y-2;
 }
 
 .settings-header {
@@ -22,10 +22,6 @@
 
 .tabs-content {
     @apply mt-4;
-}
-
-.card-header-flex {
-    @apply flex items-center justify-between;
 }
 
 .loading-state {

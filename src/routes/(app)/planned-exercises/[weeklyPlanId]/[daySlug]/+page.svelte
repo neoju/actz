@@ -8,6 +8,7 @@
   import { Lock, Trophy, Clock, Timer } from "@lucide/svelte";
   import ExerciseItem from "$lib/components/exercise/exercise-item.svelte";
   import "$lib/assets/css/exercise-detail.css";
+  import * as m from "$lib/paraglide/messages.js";
 
   let { data } = $props();
   let selectedDay = $derived(data.day);
@@ -42,8 +43,8 @@
   ) {
     // Prevent updates on past untouched days only
     if (isPastUntouched) {
-      toast.error("Cannot modify past untouched days", {
-        description: "This workout day has passed and was never started.",
+      toast.error(m.dayDetail_toast_cannotModify(), {
+        description: m.dayDetail_toast_cannotModifyDesc(),
       });
       return;
     }
@@ -77,8 +78,8 @@
       })
       .catch((error) => {
         console.error("Failed to update activity:", error);
-        toast.error("Failed to update exercise", {
-          description: "Your progress may not be saved. Please try again.",
+        toast.error(m.dayDetail_toast_updateFailed(), {
+          description: m.dayDetail_toast_updateFailedDesc(),
         });
       });
   }
@@ -184,17 +185,17 @@
 {#if cooldownActive}
   <div class="cooldown-overlay" transition:fade>
     <div class="cooldown-modal" transition:scale>
-      <h2 class="cooldown-title">Rest Time</h2>
+      <h2 class="cooldown-title">{m.dayDetail_cooldown_title()}</h2>
       <div class="cooldown-timer">
         {Math.floor(cooldownTime / 60)}:{(cooldownTime % 60)
           .toString()
           .padStart(2, "0")}
       </div>
       <p class="cooldown-desc">
-        Take a breather before your next exercise!
+        {m.dayDetail_cooldown_desc()}
       </p>
       <Button variant="outline" onclick={() => (cooldownActive = false)}>
-        Skip Rest
+        {m.dayDetail_cooldown_skip()}
       </Button>
     </div>
   </div>
@@ -212,9 +213,9 @@
       </div>
 
       <div class="congrats-text">
-        <h1 class="congrats-title">Congratulations!</h1>
+        <h1 class="congrats-title">{m.dayDetail_congrats_title()}</h1>
         <p class="congrats-subtitle">
-          You crushed today's workout!
+          {m.dayDetail_congrats_subtitle()}
         </p>
       </div>
 
@@ -222,14 +223,14 @@
         <Card.Content class="stats-grid">
           <div class="stat-item">
             <Clock class="stat-icon" />
-            <span class="stat-label">Total Time</span>
+            <span class="stat-label">{m.dayDetail_congrats_totalTime()}</span>
             <span class="stat-value">
               {finishTime ? formatTime(finishTime - startTime) : "0m 0s"}
             </span>
           </div>
           <div class="stat-item">
             <Timer class="stat-icon" />
-            <span class="stat-label">Exercises</span>
+            <span class="stat-label">{m.dayDetail_congrats_exercises()}</span>
             <span class="stat-value">{completedCount}</span>
           </div>
         </Card.Content>
@@ -237,7 +238,7 @@
 
       <div class="congrats-actions">
         <Button href="/" size="lg" class="home-btn">
-          Back to Home
+          {m.dayDetail_congrats_backHome()}
         </Button>
       </div>
     </div>
@@ -252,7 +253,7 @@
         {selectedDay.title}
       </h1>
       <p class="detail-subtitle">
-        Estimated Time: {selectedDay.estimatedTime || "N/A"}
+        {m.dayDetail_estimatedTime({ time: selectedDay.estimatedTime || "N/A" })}
       </p>
     </div>
   </div>
@@ -263,10 +264,9 @@
     <div class="banner-past-untouched" transition:scale={{ duration: 200 }}>
       <Lock class="banner-icon-red" />
       <div class="space-y-1">
-        <h3 class="banner-title-red">Missed Workout - Read Only</h3>
+        <h3 class="banner-title-red">{m.dayDetail_banner_missedTitle()}</h3>
         <p class="banner-text">
-          This workout day was never started and cannot be modified. Focus on
-          today's workout to stay on track with your fitness goals.
+          {m.dayDetail_banner_missedDesc()}
         </p>
       </div>
     </div>
@@ -275,10 +275,9 @@
     <div class="banner-past-touched" transition:scale={{ duration: 200 }}>
       <Clock class="banner-icon-yellow" />
       <div class="space-y-1">
-        <h3 class="banner-title-yellow">In Progress - Complete Anytime</h3>
+        <h3 class="banner-title-yellow">{m.dayDetail_banner_inProgressTitle()}</h3>
         <p class="banner-text">
-          You started this workout. You can still complete the remaining
-          exercises whenever you're ready.
+          {m.dayDetail_banner_inProgressDesc()}
         </p>
       </div>
     </div>
@@ -307,16 +306,14 @@
         </div>
       </div>
       <div class="rest-content">
-        <h3 class="rest-title">Rest Day</h3>
+        <h3 class="rest-title">{m.plan_restDay()}</h3>
         <p class="rest-desc">
-          No exercises scheduled for today. Take this time to recover and
-          prepare for your next workout.
+          {m.plan_restDayDesc()}
         </p>
       </div>
       <div class="rest-footer">
         <p class="rest-footer-text">
-          Rest is an essential part of your fitness journey. Use this day to
-          stretch, hydrate, and let your muscles recover.
+          {m.dayDetail_restDay_desc()}
         </p>
       </div>
     </div>

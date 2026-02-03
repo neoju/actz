@@ -9,19 +9,20 @@
   import { goto } from "$app/navigation";
   import { Check, CalendarRange, CalendarDays } from "@lucide/svelte";
   import {
-    profileSchema,
-    equipmentOptions,
-    genderOptions,
-    fitnessLevelOptions,
-    targetOptions,
-    limitationOptions,
-    muscleOptions,
+    getProfileSchema,
+    getEquipmentOptions,
+    getGenderOptions,
+    getFitnessLevelOptions,
+    getTargetOptions,
+    getLimitationOptions,
+    getMuscleOptions,
     createInitialProfileData,
   } from "$lib/schemas/profile";
   import { useUpdateProfileMutation } from "$lib/queries/profile";
   import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
   import { useGenerateMonthlyPlanMutation } from "$lib/queries/monthly-plan";
   import "$lib/assets/css/setup.css";
+  import * as m from "$lib/paraglide/messages.js";
 
   // Use TanStack Query mutations
   const updateProfileMutation = useUpdateProfileMutation();
@@ -45,7 +46,7 @@
     e.preventDefault();
     errors = {};
 
-    const result = profileSchema.safeParse(profileData);
+    const result = getProfileSchema().safeParse(profileData);
 
     if (!result.success) {
       errors = result.error.flatten().fieldErrors;
@@ -90,14 +91,14 @@
 <div class="setup-container">
   <div class="setup-header">
     {#if step === "profile"}
-      <h1 class="setup-title">Tell us about you</h1>
+      <h1 class="setup-title">{m.setup_step1_title()}</h1>
       <p class="setup-desc">
-        We need some info to create your personalized plan.
+        {m.setup_step1_desc()}
       </p>
     {:else}
-      <h1 class="setup-title">Choose your path</h1>
+      <h1 class="setup-title">{m.setup_step2_title()}</h1>
       <p class="setup-desc">
-        How would you like to start your fitness journey?
+        {m.setup_step2_desc()}
       </p>
     {/if}
   </div>
@@ -108,15 +109,15 @@
         <div class="form-grid-2">
           <FormInput
             id="age"
-            label="Age"
+            label={m.profile_age()}
             type="number"
-            placeholder="25"
+            placeholder={m.setup_placeholder_age()}
             bind:value={profileData.age}
             error={errors.age?.[0]}
           />
           <FormSelect
-            label="Gender"
-            options={genderOptions}
+            label={m.profile_gender()}
+            options={getGenderOptions()}
             bind:value={profileData.gender}
             error={errors.gender?.[0]}
           />
@@ -125,17 +126,17 @@
         <div class="form-grid-2">
           <FormInput
             id="weight"
-            label="Weight (kg)"
+            label={m.profile_weight()}
             type="number"
-            placeholder="70"
+            placeholder={m.setup_placeholder_weight()}
             bind:value={profileData.weight}
             error={errors.weight?.[0]}
           />
           <FormInput
             id="height"
-            label="Height (cm)"
+            label={m.profile_height()}
             type="number"
-            placeholder="175"
+            placeholder={m.setup_placeholder_height()}
             bind:value={profileData.height}
             error={errors.height?.[0]}
           />
@@ -143,63 +144,63 @@
 
         <div class="form-grid-2">
           <FormSelect
-            label="Fitness Level"
-            options={fitnessLevelOptions}
+            label={m.profile_fitnessLevel()}
+            options={getFitnessLevelOptions()}
             bind:value={profileData.fitnessLevel}
-            placeholder="Select Level"
+            placeholder={m.setup_placeholder_selectLevel()}
             error={errors.fitnessLevel?.[0]}
           />
 
           <FormSelect
-            label="Equipment"
-            options={equipmentOptions}
+            label={m.profile_equipment()}
+            options={getEquipmentOptions()}
             bind:value={profileData.equipment}
-            placeholder="Select Equipment"
+            placeholder={m.setup_placeholder_selectEquipment()}
             error={errors.equipment?.[0]}
           />
         </div>
 
         <FormInput
           id="schedule"
-          label="Schedule"
-          placeholder="30 mins/day, 3 days/week"
+          label={m.profile_schedule()}
+          placeholder={m.setup_placeholder_schedule()}
           bind:value={profileData.schedule}
           error={errors.schedule?.[0]}
         />
 
         <FormMultiSelect
           id="limitations"
-          label="Limitations"
-          options={limitationOptions}
+          label={m.profile_limitations()}
+          options={getLimitationOptions()}
           bind:value={profileData.limitations}
-          placeholder="Select Limitations"
+          placeholder={m.setup_placeholder_selectLimitations()}
           error={errors.limitations?.[0]}
         />
 
         <FormMultiSelect
           id="target"
-          label="Goal / Target"
-          options={targetOptions}
+          label={m.profile_target()}
+          options={getTargetOptions()}
           bind:value={profileData.target}
-          placeholder="Select Goals"
+          placeholder={m.setup_placeholder_selectGoals()}
           error={errors.target?.[0]}
           max={3}
         />
 
         <div class="form-grid-2">
           <FormSelect
-            label="Primary Focus"
-            options={muscleOptions}
+            label={m.profile_primaryFocus()}
+            options={getMuscleOptions()}
             bind:value={profileData.primaryFocus}
-            placeholder="Select Muscle"
+            placeholder={m.setup_placeholder_selectMuscle()}
             error={errors.primaryFocus?.[0]}
           />
 
           <FormSelect
-            label="Secondary Focus"
-            options={muscleOptions}
+            label={m.profile_secondaryFocus()}
+            options={getMuscleOptions()}
             bind:value={profileData.secondaryFocus}
-            placeholder="Select Muscle"
+            placeholder={m.setup_placeholder_selectMuscle()}
             error={errors.secondaryFocus?.[0]}
           />
         </div>
@@ -210,9 +211,9 @@
           disabled={isLoading}
         >
           {#if isLoading && loadingStep === "profile"}
-            Updating Profile...
+            {m.setup_button_updatingProfile()}
           {:else}
-            Next
+            {m.setup_button_next()}
           {/if}
         </Button>
 
@@ -221,16 +222,12 @@
             type="button"
             class="skip-btn"
             onclick={() => {
-              if (
-                confirm(
-                  "Are you sure you want to skip? You can update your profile and generate a plan later in Settings.",
-                )
-              ) {
+              if (confirm(m.setup_confirm_skipProfile())) {
                 goto("/");
               }
             }}
           >
-            Skip for now
+            {m.setup_button_skipNow()}
           </button>
         </div>
       </fieldset>
@@ -252,39 +249,39 @@
           <div
             class="recommended-badge"
           >
-            RECOMMENDED
+            {m.setup_badge_recommended()}
           </div>
           <Card.Header>
             <div class="card-header-flex">
               <div class="icon-wrapper-primary">
                 <CalendarRange class="plan-icon" />
               </div>
-              <Card.Title>Monthly Plan</Card.Title>
+              <Card.Title>{m.setup_monthlyPlan_title()}</Card.Title>
             </div>
             <Card.Description>
-              A comprehensive 4-week progression designed to build habits.
+              {m.setup_monthlyPlan_desc()}
             </Card.Description>
           </Card.Header>
           <Card.Content>
             <ul class="features-list">
               <li class="feature-item">
                 <Check class="check-icon" />
-                4-Week Periodization
+                {m.setup_monthlyPlan_feature1()}
               </li>
               <li class="feature-item">
                 <Check class="check-icon" />
-                Progressive Overload
+                {m.setup_monthlyPlan_feature2()}
               </li>
               <li class="feature-item">
                 <Check class="check-icon" />
-                Built-in Deload Week
+                {m.setup_monthlyPlan_feature3()}
               </li>
             </ul>
             <Button class="select-plan-btn" variant="default" disabled={isLoading}>
               {#if selectingPlan === "month"}
-                Generating Month...
+                {m.setup_monthlyPlan_generating()}
               {:else}
-                Start 4-Week Journey
+                {m.setup_monthlyPlan_button()}
               {/if}
             </Button>
           </Card.Content>
@@ -310,25 +307,25 @@
               >
                 <CalendarDays class="plan-icon" />
               </div>
-              <Card.Title>Weekly Plan</Card.Title>
+              <Card.Title>{m.setup_weeklyPlan_title()}</Card.Title>
             </div>
             <Card.Description>
-              Focus on one week at a time. Ideal for flexibility.
+              {m.setup_weeklyPlan_desc()}
             </Card.Description>
           </Card.Header>
           <Card.Content>
             <ul class="features-list">
               <li class="feature-item">
                 <Check class="check-icon" />
-                7-Day Schedule
+                {m.setup_weeklyPlan_feature1()}
               </li>
               <li class="feature-item">
                 <Check class="check-icon" />
-                Quick Start
+                {m.setup_weeklyPlan_feature2()}
               </li>
               <li class="feature-item">
                 <Check class="check-icon" />
-                Flexible Commitment
+                {m.setup_weeklyPlan_feature3()}
               </li>
             </ul>
             <Button
@@ -337,9 +334,9 @@
               disabled={isLoading}
             >
               {#if selectingPlan === "week"}
-                Generating Week...
+                {m.setup_weeklyPlan_generating()}
               {:else}
-                Start 1-Week Plan
+                {m.setup_weeklyPlan_button()}
               {/if}
             </Button>
           </Card.Content>
@@ -352,16 +349,12 @@
         type="button"
         class="skip-btn"
         onclick={() => {
-          if (
-            confirm(
-              "Are you sure you want to skip? You can generate a plan later in Settings.",
-            )
-          ) {
+          if (confirm(m.setup_confirm_skipPlan())) {
             goto("/");
           }
         }}
       >
-        Skip plan generation for now
+        {m.setup_button_skipPlan()}
       </button>
     </div>
   {/if}

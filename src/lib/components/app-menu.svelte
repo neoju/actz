@@ -15,6 +15,7 @@
     Linkedin,
   } from "@lucide/svelte";
   import ModeSwitcher from "$lib/components/mode-switcher.svelte";
+  import * as m from "$lib/paraglide/messages.js";
   import type { Component } from "svelte";
   import "$lib/assets/css/components/app-menu.css";
 
@@ -84,33 +85,33 @@
     data-tour="menu-sheet"
   >
     <Sheet.Header>
-      <Sheet.Title>Action Z</Sheet.Title>
-      <Sheet.Description>Your AI-Powered Fitness Companion</Sheet.Description>
+      <Sheet.Title>{m.common_appName()}</Sheet.Title>
+      <Sheet.Description>{m.common_appTagline()}</Sheet.Description>
     </Sheet.Header>
     <div class="menu-items-container">
-      {@render MenuItem(House, "Home", () => handleNavigation("/"))}
+      {@render MenuItem(House, m.nav_home(), () => handleNavigation("/"))}
       {@render MenuItem(
         BookSearch,
-        "Library",
+        m.nav_library(),
         () => handleNavigation("/exercises"),
         "library-link",
       )}
       {@render MenuItem(
         Settings,
-        "Settings",
+        m.nav_settings(),
         () => handleNavigation("/settings"),
         "settings-link",
       )}
 
       <div class="menu-separator"></div>
 
-      {@render MenuItem(CircleQuestionMark, "FAQ", () =>
+      {@render MenuItem(CircleQuestionMark, m.nav_faq(), () =>
         handleNavigation("/faq"),
       )}
-      {@render MenuItem(Map, "Restart Guided Tour", handleRestartTour)}
+      {@render MenuItem(Map, m.nav_restartTour(), handleRestartTour)}
       {@render MenuItem(
         LogOut,
-        "Logout",
+        m.nav_logout(),
         handleLogout,
         undefined,
         "ghost",
@@ -120,14 +121,14 @@
 
     <Sheet.Footer class="menu-footer">
       <div class="footer-content">
-        <p class="footer-text">Looking for a dev? 👨‍💻</p>
+        <p class="footer-text">{m.footer_lookingForDev()}</p>
         <a
           href="https://www.linkedin.com/in/neoju/"
           target="_blank"
           rel="noopener noreferrer"
           class="footer-link"
         >
-          Let's connect
+          {m.footer_letsConnect()}
           <Linkedin class="h-4 w-4" />
         </a>
       </div>

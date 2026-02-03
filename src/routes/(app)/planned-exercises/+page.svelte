@@ -14,6 +14,7 @@
   import { onMount } from "svelte";
   import { shouldShowTour, startCompleteTour } from "$lib/tour";
   import "$lib/assets/css/planned-exercises.css";
+  import * as m from "$lib/paraglide/messages.js";
 
   let { data } = $props();
   let plan = $derived(data.plan);
@@ -100,29 +101,29 @@
   {#if !plan}
     <div class="empty-state">
       <div class="empty-state-content">
-        <h1 class="empty-state-title">No Active Plan</h1>
+        <h1 class="empty-state-title">{m.plan_noActivePlan()}</h1>
         <p class="empty-state-desc">
-          You don't have an active workout plan currently.
+          {m.plan_noActivePlanDesc()}
         </p>
       </div>
       <Button href="/settings" variant="default" size="lg" class="gap-2">
-        Generate a Plan
+        {m.plan_generatePlan()}
         <ArrowRight class="w-4 h-4" />
       </Button>
     </div>
   {:else}
     <!-- Header -->
     <div class="plan-header">
-      <h1 class="plan-title">Your Weekly Plan</h1>
+      <h1 class="plan-title">{m.plan_yourWeeklyPlan()}</h1>
 
-      <p class="plan-label">Description:</p>
+      <p class="plan-label">{m.plan_description()}</p>
       <div data-tour="plan-description">
         <p class={cn("plan-desc")}>
-          {plan.planDescription || "Stay consistent!"}
+          {plan.planDescription || m.plan_defaultDescription()}
         </p>
       </div>
 
-      <p class="plan-label plan-label-spacing">Personal Trainer's Note:</p>
+      <p class="plan-label plan-label-spacing">{m.plan_ptNote()}</p>
       <div data-tour="pt-summary">
         <p class={cn("plan-note")}>
           " {plan.ptSummary} "
@@ -188,7 +189,7 @@
                       "day-card-title-strikethrough",
                   )}
                 >
-                  Day {day.order}: {day.title}
+                  {m.plan_day({ order: day.order.toString(), title: day.title })}
                 </Card.Title>
                 <Card.Description
                   class={cn(
@@ -209,7 +210,7 @@
                   <Check class="h-5 w-5" />
                 </div>
               {:else if isRestDay}
-                <span class="status-badge-rest"> REST </span>
+                <span class="status-badge-rest"> {m.plan_restDay()} </span>
               {:else if isPastUntouched}
                 <div class="status-icon-past-untouched">
                   <Lock class="h-5 w-5 text-red-600" />
@@ -221,13 +222,13 @@
               {:else if isFuture}
                 <Lock class="h-5 w-5 text-muted-foreground" />
               {:else if isToday}
-                <span class="status-badge-today"> TODAY </span>
+                <span class="status-badge-today"> {m.plan_today()} </span>
               {/if}
             </Card.Header>
             <Card.Content>
               {#if isRestDay}
                 <p class="day-card-content-rest">
-                  Recovery Day - No exercises scheduled
+                  {m.plan_restDayDesc()}
                 </p>
               {:else}
                 <p
@@ -238,8 +239,10 @@
                       "day-card-desc-strikethrough",
                   )}
                 >
-                  {day.exercises.length} exercises • {day.estimatedTime ||
-                    "N/A"}
+                  {m.plan_exercisesTime({ 
+                    count: day.exercises.length.toString(), 
+                    time: day.estimatedTime || "N/A" 
+                  })}
                 </p>
               {/if}
             </Card.Content>
@@ -261,21 +264,21 @@
 
           <!-- Congratulations Message -->
           <div class="space-y-2">
-            <h2 class="adventure-title">Congratulations!</h2>
+            <h2 class="adventure-title">{m.plan_congratulations()}</h2>
             <p class="text-5xl my-6">🎉</p>
-            <p class="adventure-subtext">You've completed your workout plan!</p>
+            <p class="adventure-subtext">{m.plan_completedPlan()}</p>
           </div>
 
           <!-- Stats Summary -->
           <div class="adventure-stats-grid">
             <div class="adventure-stat-box">
-              <p class="adventure-stat-label">Total Days</p>
+              <p class="adventure-stat-label">{m.plan_totalDays()}</p>
               <p class="adventure-stat-value text-primary">
                 {days.length}
               </p>
             </div>
             <div class="adventure-stat-box">
-              <p class="adventure-stat-label">Completed</p>
+              <p class="adventure-stat-label">{m.plan_completed()}</p>
               <p class="adventure-stat-value text-green-600">
                 {days.filter((d) =>
                   d.exercises.every(
@@ -291,16 +294,16 @@
           <!-- Call to Action -->
           <div class="pt-4">
             <p class="text-muted-foreground mb-4">
-              Ready to continue your fitness journey?
+              {m.plan_readyToContinue()}
             </p>
             <Button href="/settings" size="lg" class="adventure-cta-btn">
-              Start New Adventure
+              {m.plan_startNewAdventure()}
               <ArrowRight
                 class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"
               />
             </Button>
             <p class="adventure-cta-footer">
-              Generate a new workout plan in settings
+              {m.plan_generateNewPlanFooter()}
             </p>
           </div>
         </div>

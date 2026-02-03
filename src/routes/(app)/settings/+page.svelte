@@ -1,552 +1,207 @@
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button";
-  import * as Tabs from "$lib/components/ui/tabs";
-  import * as Card from "$lib/components/ui/card";
-  import {
-    FormInput,
-    FormSelect,
-    FormMultiSelect,
-  } from "$lib/components/ui/form";
-  import { RefreshCw } from "@lucide/svelte";
-  import { goto, invalidate } from "$app/navigation";
-  import {
-    profileSchema,
-    equipmentOptions,
-    genderOptions,
-    fitnessLevelOptions,
-    targetOptions,
-    limitationOptions,
-    muscleOptions,
-  } from "$lib/schemas/profile";
-  import {
-    useProfileQuery,
-    useUpdateProfileMutation,
-  } from "$lib/queries/profile";
-  import { useGenerateWeeklyPlanMutation } from "$lib/queries/weekly-plan";
-  import { useGenerateMonthlyPlanMutation } from "$lib/queries/monthly-plan";
   import { toast } from "svelte-sonner";
+  import {
+    User,
+    Calendar,
+    Bell,
+    Globe,
+    Palette,
+    FileText,
+    Shield,
+  } from "@lucide/svelte";
+  import { Switch } from "$lib/components/ui/switch";
+  import * as Select from "$lib/components/ui/select";
+  import ModeSwitcher from "$lib/components/mode-switcher.svelte";
+  import SettingsMenuItem from "$lib/components/settings-menu-item.svelte";
+  import * as m from "$lib/paraglide/messages.js";
+  import { setLocale, getLocale } from "$lib/paraglide/runtime.js";
+
   import "$lib/assets/css/settings.css";
 
-  let { data } = $props();
+  let notificationsEnabled = $state(false);
+  let isUpdatingLanguage = $state(false);
 
-  // Use TanStack Query
-  const profileQuery = useProfileQuery();
-  const updateProfileMutation = useUpdateProfileMutation();
-  const generateWeeklyPlanMutation = useGenerateWeeklyPlanMutation();
-  const generateMonthlyPlanMutation = useGenerateMonthlyPlanMutation();
+  const currentLocale = getLocale();
+  const availableLocales = [
+    { value: "en", label: m.language_en() },
+    { value: "vi", label: m.language_vi() },
+  ];
 
-  let profileData = $state({
-    age: "",
-    gender: "",
-    weight: "",
-    height: "",
-    bmi: "",
-    fitnessLevel: "",
-    equipment: "",
-    schedule: "",
-    limitations: [] as string[],
-    target: [] as string[],
-    primaryFocus: "",
-    secondaryFocus: "",
-  });
+  const currentLanguage = $derived.by(
+    () =>
+      availableLocales.find((l) => l.value === currentLocale)?.label ||
+      m.language_en(),
+  );
 
-  let isEditing = $state(false);
-  let isRefreshingLimit = $state(false);
-  let generatingPlan = $state<"week" | "month" | null>(null);
-  let errors: Record<string, string[] | undefined> = $state({});
-
-  // Update profileData when query data changes
-  $effect(() => {
-    if (profileQuery.data) {
-      const user = (profileQuery.data as any).user;
-      profileData = {
-        age: user.age?.toString() || "",
-        gender: user.gender || "",
-        weight: user.weight?.toString() || "",
-        height: user.height?.toString() || "",
-        bmi: user.bmi || "",
-        fitnessLevel: user.fitnessLevel || "",
-        equipment: user.equipment || "",
-        schedule: user.schedule || "",
-        limitations: user.limitations ? user.limitations.split(",") : [],
-        target: user.target ? user.target.split(",") : [],
-        primaryFocus: user.primaryFocus || "",
-        secondaryFocus: user.secondaryFocus || "",
-      };
-    }
-  });
-
-  async function handleUpdateProfile(e: Event) {
-    e.preventDefault();
-    errors = {};
-
-    const result = profileSchema.safeParse(profileData);
-
-    if (!result.success) {
-      errors = result.error.flatten().fieldErrors;
-      toast.error("Validation failed", {
-        description: "Please check your inputs and try again.",
-      });
+  async function handleLanguageChange(locale: string | undefined) {
+    if (!locale || locale === currentLocale || isUpdatingLanguage) {
       return;
     }
 
     try {
-      const data = await updateProfileMutation.mutateAsync(result.data);
-      profileData.bmi = (data as any).user.bmi || "";
-      isEditing = false;
-      toast.success("Profile updated successfully!", {
-        description: "Your changes have been saved.",
+      isUpdatingLanguage = true;
+
+      // Update in database
+      const response = await fetch("/api/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ language: locale }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update language");
+      }
+
+      // Change the locale in UI
+      setLocale(locale as "en" | "vi");
+
+      toast.success(m.toast_profileUpdated(), {
+        description: m.toast_profileUpdatedDesc(),
       });
     } catch (error) {
-      console.error("Error updating profile:", error);
-      toast.error("Failed to update profile", {
-        description:
-          "Please try again or contact support if the issue persists.",
-      });
-    }
-  }
-
-  async function refreshPlanLimit() {
-    try {
-      isRefreshingLimit = true;
-      await invalidate("app:planLimit");
-      toast.success("Usage limit refreshed");
-    } finally {
-      isRefreshingLimit = false;
-    }
-  }
-  function formatDate(dateString: string) {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
-  }
-
-  async function handleRegeneratePlan(duration: "week" | "month") {
-    try {
-      generatingPlan = duration;
-      if (duration === "week") {
-        await generateWeeklyPlanMutation.mutateAsync();
-        await invalidate("app:planLimit");
-        toast.success("Weekly plan generated successfully!", {
-          description: "Redirecting to dashboard...",
-          duration: 2000,
-          onAutoClose: () => {
-            goto("/");
-          },
-        });
-      } else {
-        await generateMonthlyPlanMutation.mutateAsync();
-        await invalidate("app:planLimit");
-        toast.success("Monthly plan generated successfully!", {
-          description: "Redirecting to dashboard...",
-          duration: 2000,
-          onAutoClose: () => {
-            goto("/");
-          },
-        });
-      }
-    } catch (error: any) {
-      console.error("Error regenerating plan:", error);
-      const planType = duration === "week" ? "weekly" : "monthly";
-
-      // Check if it's a known error structure with a message
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Please try again or contact support if the issue persists.";
-
-      toast.error(`Failed to generate ${planType} plan`, {
-        description: errorMessage,
+      console.error("Error updating language:", error);
+      toast.error(m.toast_profileUpdateFailed(), {
+        description: m.toast_profileUpdateFailedDesc(),
       });
     } finally {
-      generatingPlan = null;
+      isUpdatingLanguage = false;
     }
   }
 </script>
 
 <div class="settings-container">
   <div class="settings-header">
-    <h1 class="settings-title">Settings</h1>
+    <h1 class="settings-title">{m.settings_title()}</h1>
   </div>
 
-  <Tabs.Root value="profile" class="tabs-root">
-    <Tabs.List class="tabs-list">
-      <Tabs.Trigger value="profile" data-tour="profile-tab"
-        >Profile</Tabs.Trigger
-      >
-      <Tabs.Trigger value="plans" data-tour="plans-tab">Plans</Tabs.Trigger>
-    </Tabs.List>
-
-    <Tabs.Content value="profile" class="tabs-content">
-      <Card.Root>
-        <Card.Header>
-          <div class="card-header-flex">
-            <div>
-              <Card.Title>User Profile</Card.Title>
-              <Card.Description>
-                {#if isEditing}
-                  Update your fitness profile information
-                {:else}
-                  View your current fitness profile
-                {/if}
-              </Card.Description>
-            </div>
-            {#if !isEditing}
-              <Button
-                size="sm"
-                variant="outline"
-                onclick={() => (isEditing = true)}
-                data-tour="edit-profile"
-              >
-                Edit
-              </Button>
-            {/if}
+  <div class="settings-group">
+    <h2 class="settings-group-title">{m.settings_preferences()}</h2>
+    <div class="settings-group-content">
+      <div class="settings-preference-item">
+        <div class="preference-item-content">
+          <Bell />
+          <div class="preference-item-text">
+            <span class="preference-item-label"
+              >{m.settings_notifications()}</span
+            >
+            <span class="preference-item-desc">{m.notification_desc()}</span>
           </div>
-        </Card.Header>
-
-        {#if profileQuery.isLoading}
-          <Card.Content>
-            <p class="loading-state">
-              Loading profile...
-            </p>
-          </Card.Content>
-        {:else if profileQuery.isError}
-          <Card.Content>
-            <p class="error-state">
-              Failed to load profile. Please try again.
-            </p>
-          </Card.Content>
-        {:else if isEditing}
-          <form onsubmit={handleUpdateProfile}>
-            <Card.Content class="form-content">
-              <div class="form-grid-2">
-                <FormInput
-                  id="age"
-                  label="Age"
-                  type="number"
-                  placeholder="25"
-                  bind:value={profileData.age}
-                  error={errors.age?.[0]}
-                />
-                <FormSelect
-                  label="Gender"
-                  options={genderOptions}
-                  bind:value={profileData.gender}
-                  error={errors.gender?.[0]}
-                />
-              </div>
-
-              <div class="form-grid-2">
-                <FormInput
-                  id="weight"
-                  label="Weight (kg)"
-                  type="number"
-                  placeholder="70"
-                  bind:value={profileData.weight}
-                  error={errors.weight?.[0]}
-                />
-                <FormInput
-                  id="height"
-                  label="Height (cm)"
-                  type="number"
-                  placeholder="175"
-                  bind:value={profileData.height}
-                  error={errors.height?.[0]}
-                />
-              </div>
-
-              <div class="form-grid-2">
-                <FormSelect
-                  label="Fitness Level"
-                  options={fitnessLevelOptions}
-                  bind:value={profileData.fitnessLevel}
-                  placeholder="Select Level"
-                  error={errors.fitnessLevel?.[0]}
-                />
-
-                <FormSelect
-                  label="Equipment"
-                  options={equipmentOptions}
-                  bind:value={profileData.equipment}
-                  placeholder="Select Equipment"
-                  error={errors.equipment?.[0]}
-                />
-              </div>
-
-              <FormInput
-                id="schedule"
-                label="Schedule"
-                placeholder="30 mins/day, 3 days/week"
-                bind:value={profileData.schedule}
-                error={errors.schedule?.[0]}
-              />
-
-              <FormMultiSelect
-                id="limitations"
-                label="Limitations"
-                options={limitationOptions}
-                bind:value={profileData.limitations}
-                placeholder="Select Limitations"
-                error={errors.limitations?.[0]}
-              />
-
-              <FormMultiSelect
-                id="target"
-                label="Goal / Target"
-                options={targetOptions}
-                bind:value={profileData.target}
-                placeholder="Select Goals"
-                error={errors.target?.[0]}
-                max={3}
-              />
-
-              <div class="form-grid-2">
-                <FormSelect
-                  label="Primary Focus"
-                  options={muscleOptions}
-                  bind:value={profileData.primaryFocus}
-                  placeholder="Select Muscle"
-                  error={errors.primaryFocus?.[0]}
-                />
-
-                <FormSelect
-                  label="Secondary Focus"
-                  options={muscleOptions}
-                  bind:value={profileData.secondaryFocus}
-                  placeholder="Select Muscle"
-                  error={errors.secondaryFocus?.[0]}
-                />
-              </div>
-            </Card.Content>
-
-            <Card.Footer class="form-footer">
-              <Button
-                type="button"
-                variant="outline"
-                class="form-cancel-btn"
-                onclick={() => {
-                  isEditing = false;
-                  if (profileQuery.data) {
-                    const user = (profileQuery.data as any).user;
-                    profileData = {
-                      age: user.age?.toString() || "",
-                      gender: user.gender || "",
-                      weight: user.weight?.toString() || "",
-                      height: user.height?.toString() || "",
-                      bmi: user.bmi || "",
-                      fitnessLevel: user.fitnessLevel || "",
-                      equipment: user.equipment || "",
-                      schedule: user.schedule || "",
-                      limitations: user.limitations
-                        ? user.limitations.split(",")
-                        : [],
-                      target: user.target ? user.target.split(",") : [],
-                      primaryFocus: user.primaryFocus || "",
-                      secondaryFocus: user.secondaryFocus || "",
-                    };
-                  }
-                }}
-                disabled={updateProfileMutation.isPending}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                class="form-save-btn"
-                disabled={updateProfileMutation.isPending}
-              >
-                {updateProfileMutation.isPending ? "Saving..." : "Save Changes"}
-              </Button>
-            </Card.Footer>
-          </form>
-        {:else}
-          <Card.Content class="form-content">
-            <div class="form-grid-2">
-              <div>
-                <p class="profile-field-label">Age</p>
-                <p class="profile-field-value">
-                  {profileData.age || "N/A"}
-                </p>
-              </div>
-              <div>
-                <p class="profile-field-label">Gender</p>
-                <p class="profile-field-value">
-                  {profileData.gender || "N/A"}
-                </p>
-              </div>
-            </div>
-
-            <div class="form-grid-3">
-              <div>
-                <p class="profile-field-label">Weight</p>
-                <p class="profile-field-value">
-                  {profileData.weight ? `${profileData.weight} kg` : "N/A"}
-                </p>
-              </div>
-              <div>
-                <p class="profile-field-label">Height</p>
-                <p class="profile-field-value">
-                  {profileData.height ? `${profileData.height} cm` : "N/A"}
-                </p>
-              </div>
-              <div>
-                <p class="profile-field-label">BMI</p>
-                <p class="profile-field-value">
-                  {profileData.bmi || "N/A"}
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <p class="profile-field-label">Fitness Level</p>
-              <p class="profile-field-value">
-                {profileData.fitnessLevel || "N/A"}
-              </p>
-            </div>
-
-            <div>
-              <p class="profile-field-label">Equipment</p>
-              <p class="profile-field-value">
-                {profileData.equipment || "N/A"}
-              </p>
-            </div>
-
-            <div>
-              <p class="profile-field-label">Schedule</p>
-              <p class="profile-field-value">
-                {profileData.schedule || "N/A"}
-              </p>
-            </div>
-
-            <div>
-              <p class="profile-field-label">Limitations</p>
-              <p class="profile-field-value">
-                {profileData.limitations?.length
-                  ? profileData.limitations.join(", ")
-                  : "None"}
-              </p>
-            </div>
-
-            <div>
-              <p class="profile-field-label">Goal / Target</p>
-              <p class="profile-field-value">
-                {profileData.target?.length
-                  ? profileData.target.join(", ")
-                  : "N/A"}
-              </p>
-            </div>
-
-            <div>
-              <p class="profile-field-label">Primary Focus</p>
-              <p class="profile-field-value">
-                {profileData.primaryFocus || "N/A"}
-              </p>
-            </div>
-
-            <div>
-              <p class="profile-field-label">Secondary Focus</p>
-              <p class="profile-field-value">
-                {profileData.secondaryFocus || "N/A"}
-              </p>
-            </div>
-          </Card.Content>
-        {/if}
-      </Card.Root>
-    </Tabs.Content>
-
-    <Tabs.Content value="plans" class="tabs-content">
-      {#if data.planLimit}
-        <div class="plan-limit-container">
-          <div class="plan-limit-header">
-            <span class="plan-limit-label">Weekly Generations</span>
-            <div class="plan-limit-stats">
-              <span class="plan-limit-value"
-                >{data.planLimit.used} / {data.planLimit.max}</span
-              >
-              <Button
-                variant="ghost"
-                size="icon"
-                class="refresh-btn"
-                onclick={refreshPlanLimit}
-                disabled={isRefreshingLimit}
-                title="Refresh limit"
-              >
-                <RefreshCw
-                  class="refresh-icon {isRefreshingLimit ? 'animate-spin' : ''}"
-                />
-              </Button>
-            </div>
-          </div>
-          <div class="progress-bar-bg">
-            <div
-              class="progress-bar-fill"
-              style="width: {(data.planLimit.used / data.planLimit.max) * 100}%"
-            ></div>
-          </div>
-          {#if data.planLimit.resetAt}
-            <p class="reset-date">
-              Next reset: {formatDate(data.planLimit.resetAt)}
-            </p>
-          {/if}
         </div>
-      {/if}
-
-      <div class="plans-grid">
-        <Card.Root>
-          <Card.Header>
-            <Card.Title>Weekly Plan</Card.Title>
-            <Card.Description>
-              Generate a new 7-day workout plan based on your current profile.
-            </Card.Description>
-          </Card.Header>
-          <Card.Content>
-            <Button
-              variant="secondary"
-              class="plan-generate-btn"
-              disabled={generatingPlan !== null ||
-                data.planLimit?.remaining === 0}
-              onclick={() => handleRegeneratePlan("week")}
-            >
-              {#if generatingPlan === "week"}
-                <RefreshCw class="btn-icon animate-spin" />
-                Generating...
-              {:else}
-                <RefreshCw class="btn-icon" />
-                Generate New Weekly Plan
-              {/if}
-            </Button>
-          </Card.Content>
-        </Card.Root>
-
-        <Card.Root>
-          <Card.Header>
-            <Card.Title>Monthly Plan</Card.Title>
-            <Card.Description>
-              Generate a full 4-week periodized plan (Recommended).
-            </Card.Description>
-          </Card.Header>
-          <Card.Content>
-            <Button
-              class="plan-generate-btn"
-              disabled={generatingPlan !== null ||
-                data.planLimit?.remaining === 0}
-              onclick={() => handleRegeneratePlan("month")}
-            >
-              {#if generatingPlan === "month"}
-                <RefreshCw class="btn-icon animate-spin" />
-                Generating...
-              {:else}
-                <RefreshCw class="btn-icon" />
-                Generate New Monthly Plan
-              {/if}
-            </Button>
-          </Card.Content>
-        </Card.Root>
+        <Switch bind:checked={notificationsEnabled} />
       </div>
-    </Tabs.Content>
-  </Tabs.Root>
+
+      <div class="settings-preference-item">
+        <div class="preference-item-content">
+          <Globe />
+          <div class="preference-item-text">
+            <span class="preference-item-label">{m.settings_language()}</span>
+          </div>
+        </div>
+        <Select.Root
+          type="single"
+          onValueChange={(selected) => handleLanguageChange(selected)}
+        >
+          <Select.Trigger class="w-45">{currentLanguage}</Select.Trigger>
+          <Select.Content>
+            {#each availableLocales as locale}
+              <Select.Item value={locale.value}>{locale.label}</Select.Item>
+            {/each}
+          </Select.Content>
+        </Select.Root>
+      </div>
+
+      <div class="settings-preference-item">
+        <div class="preference-item-content">
+          <Palette />
+          <div class="preference-item-text">
+            <span class="preference-item-label">{m.settings_theme()}</span>
+          </div>
+        </div>
+        <ModeSwitcher />
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-group">
+    <h2 class="settings-group-title">{m.settings_account()}</h2>
+    <div class="settings-group-content">
+      <SettingsMenuItem
+        icon={User}
+        label={m.settings_profile()}
+        href="/settings/profile"
+      />
+
+      <SettingsMenuItem
+        icon={Calendar}
+        label={m.settings_exercisePlan()}
+        href="/settings/exercise-plan"
+      />
+
+      <SettingsMenuItem
+        icon={FileText}
+        label={m.settings_terms()}
+        href="/terms"
+      />
+
+      <SettingsMenuItem
+        icon={Shield}
+        label={m.settings_privacyPolicy()}
+        href="/privacy-policy"
+      />
+    </div>
+  </div>
 </div>
+
+<style>
+  .settings-group {
+    margin-bottom: 2rem;
+  }
+
+  .settings-group-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 1rem;
+  }
+
+  .settings-group-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .settings-preference-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--card));
+  }
+
+  .preference-item-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .preference-item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .preference-item-label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  .preference-item-desc {
+    font-size: 0.8125rem;
+    color: hsl(var(--muted-foreground));
+  }
+</style>

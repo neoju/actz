@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button } from "$lib/components/ui/button";
   import { Sparkles, ArrowRight, Calendar } from "@lucide/svelte";
+  import * as m from "$lib/paraglide/messages.js";
   import "$lib/assets/css/dashboard.css";
 
   let { data } = $props();
@@ -15,9 +16,9 @@
     </div>
 
     <div class="welcome-text-container">
-      <h1 class="welcome-title">Welcome to Action Z!</h1>
+      <h1 class="welcome-title">{m.common_welcome()}</h1>
       <p class="welcome-desc">
-        Your journey to a better you starts here.
+        {m.common_welcomeDesc()}
       </p>
     </div>
 
@@ -28,7 +29,7 @@
           size="lg"
           class="primary-action-btn"
         >
-          View My Plan
+          {m.dashboard_viewPlan()}
           <Calendar class="btn-icon" />
         </Button>
       {:else}
@@ -38,7 +39,7 @@
           size="lg"
           class="primary-action-btn"
         >
-          Generate a Plan
+          {m.dashboard_generatePlan()}
           <ArrowRight class="btn-icon" />
         </Button>
       {/if}
@@ -49,7 +50,7 @@
         size="lg"
         class="secondary-action-btn"
       >
-        Explore Exercises
+        {m.dashboard_browseExercises()}
       </Button>
     </div>
   </div>

@@ -335,6 +335,14 @@ export function startSettingsTour() {
       },
       {
         popover: {
+          title: "🔔 Workout Reminders",
+          description:
+            "Want to be reminded before your workouts? Scroll down to set your preferred workout time and enable notifications!",
+          nextBtnText: "Got it!",
+        },
+      },
+      {
+        popover: {
           title: "📚 One More Thing...",
           description: "Let's check out the exercise library!",
           nextBtnText: "Take me there",

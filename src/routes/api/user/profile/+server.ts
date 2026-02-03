@@ -21,6 +21,9 @@ export async function POST({ request, locals }) {
       target,
       primaryFocus,
       secondaryFocus,
+      preferredWorkoutTime,
+      reminderMinutesBefore,
+      notificationsEnabled,
     } = data;
 
     // Handle limitations array from frontend
@@ -56,6 +59,9 @@ export async function POST({ request, locals }) {
         target,
         primaryFocus,
         secondaryFocus,
+        preferredWorkoutTime,
+        reminderMinutesBefore: reminderMinutesBefore ? Number(reminderMinutesBefore) : undefined,
+        notificationsEnabled: notificationsEnabled !== undefined ? Boolean(notificationsEnabled) : undefined,
       },
     });
 
@@ -79,6 +85,9 @@ export async function POST({ request, locals }) {
         target: updatedUser.target,
         primaryFocus: updatedUser.primaryFocus,
         secondaryFocus: updatedUser.secondaryFocus,
+        preferredWorkoutTime: updatedUser.preferredWorkoutTime,
+        reminderMinutesBefore: updatedUser.reminderMinutesBefore,
+        notificationsEnabled: updatedUser.notificationsEnabled,
       },
     });
   } catch (e) {
@@ -109,6 +118,9 @@ export async function GET({ locals }) {
         target: true,
         primaryFocus: true,
         secondaryFocus: true,
+        preferredWorkoutTime: true,
+        reminderMinutesBefore: true,
+        notificationsEnabled: true,
       },
     });
 
