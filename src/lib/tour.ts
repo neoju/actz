@@ -459,27 +459,9 @@ export function startLibraryPageTour() {
         },
       },
     ],
-    onDestroyed: (element, step, options) => {
-      const driver = options.driver;
-      const config = options.config;
-      if (
-        driver &&
-        config.steps &&
-        step === config.steps[config.steps.length - 1]
-      ) {
-        // Mark tour as completed
-        markTourAsCompleted();
-      }
-      // Navigate back to dashboard
-    // Navigate to dashboard if not already there
-    if (window.location.pathname !== "/") {
-      goto("/");
-    }
-    
-    // Start tour after a brief delay to allow navigation
-    setTimeout(() => {
-      driver.drive();
-    }, 500);
+    onDestroyed: () => {
+      markTourAsCompleted();
+      goto("/planned-exercises");
     },
   });
 

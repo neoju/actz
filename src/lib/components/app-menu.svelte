@@ -27,7 +27,7 @@
   function handleRestartTour() {
     isMenuOpen = false;
     resetTour();
-    goto("/").then(() => {
+    goto("/planned-exercises").then(() => {
       setTimeout(() => {
         startCompleteTour();
       }, 500);
@@ -57,8 +57,8 @@
   <Button
     {variant}
     class="justify-start gap-3 {className}"
-    {onclick}
     data-tour={dataTour}
+    {onclick}
   >
     <Icon class="h-5 w-5" />
     <span>{label}</span>
@@ -103,11 +103,8 @@
 
       <div class="border-t border-border my-2"></div>
 
-      {@render MenuItem(
-        CircleQuestionMark,
-        "FAQ",
-        () => handleNavigation("/faq"),
-        "settings-link",
+      {@render MenuItem(CircleQuestionMark, "FAQ", () =>
+        handleNavigation("/faq"),
       )}
       {@render MenuItem(Map, "Restart Guided Tour", handleRestartTour)}
       {@render MenuItem(
@@ -136,4 +133,3 @@
     </Sheet.Footer>
   </Sheet.Content>
 </Sheet.Root>
-

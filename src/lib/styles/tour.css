@@ -225,6 +225,7 @@
 }
 
 .driver-active-element {
+    position: relative;
     z-index: 99998;
 }
 
