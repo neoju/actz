@@ -305,18 +305,18 @@
 
               <div class="grid grid-cols-2 gap-4">
                 <FormSelect
-                  label="Primary Muscle Focus"
+                  label="Primary Focus"
                   options={muscleOptions}
                   bind:value={profileData.primaryFocus}
-                  placeholder="Select Primary Focus (Optional)"
+                  placeholder="Select Muscle"
                   error={errors.primaryFocus?.[0]}
                 />
 
                 <FormSelect
-                  label="Secondary Muscle Focus"
+                  label="Secondary Focus"
                   options={muscleOptions}
                   bind:value={profileData.secondaryFocus}
-                  placeholder="Select Secondary Focus (Optional)"
+                  placeholder="Select Muscle"
                   error={errors.secondaryFocus?.[0]}
                 />
               </div>
