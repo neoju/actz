@@ -133,7 +133,6 @@ export const GET: RequestHandler = async ({ request }) => {
       }
     }
 
-    console.warn("DEBUGPRINT[264]: +server.ts:137: results=", results)
     return json({ success: true, results });
   } catch (error) {
     console.error('Cron job error:', error);
