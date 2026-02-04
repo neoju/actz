@@ -4,46 +4,54 @@ This file provides context for Gemini agents working on the ACTZ project.
 
 ## Project Overview
 
-ACTZ is an AI-powered fitness training application built with **SvelteKit (Svelte 5)**. It uses **PostgreSQL** (via Prisma) for data persistence and **Groq SDK** for generating personalized workout plans. The UI is built with **Tailwind CSS 4** and **shadcn-svelte**.
+ACTZ is an AI-powered fitness training application designed to provide personalized workout plans and interactive exercise tracking. It is a Progressive Web App (PWA) that leverages AI for plan generation and features a comprehensive guided tour for onboarding.
 
 ## Tech Stack
 
 *   **Framework:** SvelteKit (Svelte 5)
 *   **Language:** TypeScript
 *   **Database:** PostgreSQL
-*   **ORM:** Prisma
-*   **Styling:** Tailwind CSS 4, shadcn-svelte
-*   **State Management:** Svelte 5 Runes (`$state`, `$derived`), TanStack Query
-*   **Authentication:** Auth.js (NextAuth)
+*   **ORM:** Prisma (Client generated to `../generated/prisma`)
+*   **Styling:** Tailwind CSS 4 (using `@tailwindcss/vite`), shadcn-svelte, Lucide Icons
+*   **State Management:** Svelte 5 Runes (`$state`, `$derived`, `$effect`, `$props`), TanStack Query for async data
+*   **Authentication:** Auth.js (NextAuth) with Prisma adapter
 *   **AI Integration:** Groq SDK
-*   **Onboarding:** Driver.js
+*   **Onboarding:** Driver.js for guided tours
+*   **Internationalization:** Paraglide-JS for i18n (supports English and Vietnamese)
+
+## Project Structure
+
+*   `src/lib/`: Core application logic and shared components.
+    *   `components/`: Svelte components, including `ui/` (shadcn-svelte).
+    *   `queries/`: TanStack Query hooks for data fetching.
+    *   `schemas/`: Zod schemas for validation.
+    *   `paraglide/`: Generated i18n messages.
+    *   `assets/css/`: Modular CSS files.
+    *   `prisma.ts`: Prisma client initialization with PostgreSQL adapter.
+    *   `tour.ts`: Guided tour configuration and logic.
+*   `src/routes/`: SvelteKit routes.
+    *   `(app)/`: Protected routes for the main application (dashboard, exercises, settings, planned-exercises).
+    *   `(public)/`: Publicly accessible routes (landing, auth, legal).
+    *   `api/`: Backend API endpoints.
+*   `prisma/`: Database schema and migrations.
+*   `static/`: Static assets, including PWA manifest and icons.
 
 ## Development Conventions
 
 ### Svelte 5 & SvelteKit
-*   **Runes:** Use Svelte 5 runes (`$state`, `$derived`, `$effect`, `$props`) for reactivity. Avoid legacy stores (`writable`, `readable`) for new component state, but TanStack Query stores are used for async data.
-*   **Imports:**
-    *   Use `$app/state` for navigation state (e.g., `import { page } from '$app/state'`).
-    *   Use `@lucide/svelte` for icons (e.g., `import { Activity } from '@lucide/svelte'`).
-    *   Use `$lib` alias for imports from `src/lib`.
+*   **Runes:** Exclusively use Svelte 5 runes (`$state`, `$derived`, `$effect`, `$props`) for reactivity.
+*   **Navigation:** Use `$app/state` for reactive page state and `$app/navigation` for programmatic navigation.
+*   **View Transitions:** Built-in support for view transitions in `+layout.svelte`.
+*   **Imports:** Use the `$lib` alias for internal imports.
 
-### Database & Prisma
-*   **Schema:** Defined in `prisma/schema.prisma`.
-*   **Client Generation:** The Prisma client is generated to `../generated/prisma`.
-*   **Commands:**
-    *   `npx prisma generate`: Regenerate client after schema changes.
-    *   `npx prisma db push`: Push schema changes to the database (dev).
-    *   `npx prisma studio`: Open database GUI.
+### Data Fetching & State
+*   **TanStack Query:** Use for all asynchronous data fetching to handle caching, loading states, and refetching.
+*   **Prisma:** All database interactions should go through the Prisma client in `src/lib/prisma.ts`. Note that the client is generated to a custom location (`../generated/prisma`).
 
 ### UI & Styling
-*   **Components:** Reusable UI components (shadcn) are located in `src/lib/components/ui`.
-*   **Tailwind:** Utility-first styling. Configuration in `src/routes/layout.css` (Tailwind 4) and `components.json`.
-
-### Architecture
-*   **Routes:**
-    *   `(app)/`: Protected routes (Home, Exercises, Settings, Workout).
-    *   `(public)/`: Public routes (Landing, Auth, Static pages).
-*   **API:** Backend logic in `+server.ts` files under `src/routes/api` or `+page.server.ts` actions.
+*   **Tailwind 4:** Use utility-first styling. Configuration is integrated via the Vite plugin.
+*   **I18n:** Use Paraglide for all user-facing strings. Import messages from `$lib/paraglide/messages.js`.
+*   **Components:** Follow the shadcn-svelte pattern for reusable UI elements.
 
 ## Common Tasks
 
@@ -52,21 +60,18 @@ ACTZ is an AI-powered fitness training application built with **SvelteKit (Svelt
 npm run dev
 ```
 
-### Type Checking & Linting
-```bash
-npm run check
-# or
-npm run check:watch
-```
-
 ### Database Updates
 When modifying `prisma/schema.prisma`:
 1.  `npx prisma generate`
 2.  `npx prisma db push`
+3.  `npx prisma studio` (to inspect data)
 
-## Key Files
-*   `prisma/schema.prisma`: Database definition.
-*   `src/lib/prisma.ts`: Prisma client instance.
-*   `src/lib/components/ui/`: Shared UI components.
-*   `src/routes/+layout.svelte`: Root layout.
-*   `src/routes/(app)/+page.svelte`: Main user dashboard.
+### Type Checking & Building
+```bash
+npm run check    # Run svelte-check
+npm run build    # Build for production (includes prisma generate)
+```
+
+### Adding New Features
+*   Consider if the feature needs to be added to the **Guided Tour** (`src/lib/tour.ts`).
+*   Ensure all new strings are added to `messages/en.json` and `messages/vi.json` for i18n support.

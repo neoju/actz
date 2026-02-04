@@ -37,7 +37,17 @@ export const load: PageServerLoad = async ({ locals, depends }) => {
     resetAt = resetDate.toISOString();
   }
 
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      notificationsEnabled: true,
+      preferredWorkoutTime: true,
+      reminderMinutesBefore: true,
+    },
+  });
+
   return {
+    profile: user,
     planLimit: {
       used,
       max,

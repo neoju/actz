@@ -15,11 +15,16 @@
   import SettingsMenuItem from "$lib/components/settings-menu-item.svelte";
   import * as m from "$lib/paraglide/messages.js";
   import { setLocale, getLocale } from "$lib/paraglide/runtime.js";
+  import { 
+    subscribeToPushNotifications, 
+    unsubscribeFromPushNotifications,
+    areNotificationsSupported 
+  } from "$lib/utils/notifications";
 
-  import "$lib/assets/css/settings.css";
-
-  let notificationsEnabled = $state(false);
+  let { data } = $props();
+  let notificationsEnabled = $state(data.profile?.notificationsEnabled || false);
   let isUpdatingLanguage = $state(false);
+  let isUpdatingNotifications = $state(false);
 
   const currentLocale = getLocale();
   const availableLocales = [
@@ -33,6 +38,38 @@
       m.language_en(),
   );
 
+  async function handleNotificationToggle(enabled: boolean) {
+    if (isUpdatingNotifications) {
+      return;
+    }
+
+    try {
+      isUpdatingNotifications = true;
+
+      if (enabled) {
+        if (!areNotificationsSupported()) {
+          throw new Error("Notifications not supported");
+        }
+        await subscribeToPushNotifications();
+      } else {
+        await unsubscribeFromPushNotifications();
+      }
+
+      toast.success(m.toast_profileUpdated(), {
+        description: m.toast_profileUpdatedDesc(),
+      });
+    } catch (error) {
+      console.error("Error updating notifications:", error);
+      // Revert the toggle on error
+      notificationsEnabled = !enabled;
+      toast.error(m.toast_profileUpdateFailed(), {
+        description: m.toast_profileUpdateFailedDesc(),
+      });
+    } finally {
+      isUpdatingNotifications = false;
+    }
+  }
+
   async function handleLanguageChange(locale: string | undefined) {
     if (!locale || locale === currentLocale || isUpdatingLanguage) {
       return;
@@ -42,7 +79,7 @@
       isUpdatingLanguage = true;
 
       // Update in database
-      const response = await fetch("/api/user", {
+      const response = await fetch("/api/user/profile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ language: locale }),
@@ -87,7 +124,10 @@
             <span class="preference-item-desc">{m.notification_desc()}</span>
           </div>
         </div>
-        <Switch bind:checked={notificationsEnabled} />
+        <Switch
+          bind:checked={notificationsEnabled}
+          onCheckedChange={(checked) => handleNotificationToggle(checked)}
+        />
       </div>
 
       <div class="settings-preference-item">

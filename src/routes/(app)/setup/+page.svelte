@@ -225,31 +225,13 @@
           />
         </div>
 
-        <Button
-          type="submit"
-          class="submit-btn"
-          disabled={isLoading}
-        >
+        <Button type="submit" class="submit-btn" disabled={isLoading}>
           {#if isLoading && loadingStep === "profile"}
             {m.setup_button_updatingProfile()}
           {:else}
             {m.setup_button_next()}
           {/if}
         </Button>
-
-        <div class="skip-container">
-          <button
-            type="button"
-            class="skip-btn"
-            onclick={() => {
-              if (confirm(m.setup_confirm_skipProfile())) {
-                goto("/");
-              }
-            }}
-          >
-            {m.setup_button_skipNow()}
-          </button>
-        </div>
       </fieldset>
     </form>
   {:else}
@@ -261,14 +243,11 @@
         onclick={() => handleGeneratePlan("month")}
       >
         <Card.Root
-          class="plan-card plan-card-wrapper {selectingPlan ===
-          'month'
+          class="plan-card plan-card-wrapper {selectingPlan === 'month'
             ? 'plan-card-selected'
             : 'plan-card-default'}"
         >
-          <div
-            class="recommended-badge"
-          >
+          <div class="recommended-badge">
             {m.setup_badge_recommended()}
           </div>
           <Card.Header>
@@ -297,7 +276,11 @@
                 {m.setup_monthlyPlan_feature3()}
               </li>
             </ul>
-            <Button class="select-plan-btn" variant="default" disabled={isLoading}>
+            <Button
+              class="select-plan-btn"
+              variant="default"
+              disabled={isLoading}
+            >
               {#if selectingPlan === "month"}
                 {m.setup_monthlyPlan_generating()}
               {:else}
@@ -315,16 +298,13 @@
         onclick={() => handleGeneratePlan("week")}
       >
         <Card.Root
-          class="plan-card {selectingPlan ===
-          'week'
+          class="plan-card {selectingPlan === 'week'
             ? 'plan-card-selected'
             : 'plan-card-default'}"
         >
           <Card.Header>
             <div class="card-header-flex">
-              <div
-                class="icon-wrapper-secondary"
-              >
+              <div class="icon-wrapper-secondary">
                 <CalendarDays class="plan-icon" />
               </div>
               <Card.Title>{m.setup_weeklyPlan_title()}</Card.Title>

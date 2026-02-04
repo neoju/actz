@@ -1,3 +1,5 @@
+import { PUBLIC_VAPID_PUBLIC_KEY } from '$env/static/public';
+
 /**
  * Notification Utilities for ACTZ
  * 
@@ -5,7 +7,7 @@
  * for workout reminders using PWA service worker.
  */
 
-const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY || '';
+const VAPID_PUBLIC_KEY = PUBLIC_VAPID_PUBLIC_KEY || '';
 
 /**
  * Request notification permission from browser
@@ -77,12 +79,13 @@ export async function subscribeToPushNotifications(): Promise<PushSubscription> 
 	}
 
 	// Send subscription to server
-	const response = await fetch('/api/notifications/subscribe', {
+	const response = await fetch('/api/notifications', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
+			action: 'subscribe',
 			subscription: subscription.toJSON(),
 		}),
 	});
@@ -110,11 +113,14 @@ export async function unsubscribeFromPushNotifications(): Promise<void> {
 	}
 
 	// Notify server
-	await fetch('/api/notifications/unsubscribe', {
+	await fetch('/api/notifications', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
+		body: JSON.stringify({
+			action: 'unsubscribe',
+		}),
 	});
 }
 
@@ -133,13 +139,14 @@ export function calculateNotificationTime(
 	const workoutDate = new Date();
 	workoutDate.setHours(hours, minutes, 0, 0);
 
-	// If workout time has passed today, schedule for tomorrow
-	if (workoutDate <= now) {
-		workoutDate.setDate(workoutDate.getDate() + 1);
-	}
-
 	// Calculate notification time
-	const notificationTime = new Date(workoutDate.getTime() - reminderMinutesBefore * 60 * 1000);
+	let notificationTime = new Date(workoutDate.getTime() - reminderMinutesBefore * 60 * 1000);
+
+	// If notification time has passed, schedule for tomorrow
+	if (notificationTime <= now) {
+		workoutDate.setDate(workoutDate.getDate() + 1);
+		notificationTime = new Date(workoutDate.getTime() - reminderMinutesBefore * 60 * 1000);
+	}
 
 	return notificationTime;
 }

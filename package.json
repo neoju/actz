@@ -23,6 +23,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^25.0.10",
+    "@types/web-push": "^3.6.4",
     "bits-ui": "^2.15.4",
     "clsx": "^2.1.1",
     "prisma": "^7.3.0",
@@ -48,6 +49,7 @@
     "mode-watcher": "^1.1.0",
     "pg": "^8.17.2",
     "svelte-sonner": "^1.0.7",
+    "web-push": "^3.6.7",
     "zod": "^4.3.6"
   }
 }

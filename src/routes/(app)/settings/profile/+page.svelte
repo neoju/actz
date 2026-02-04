@@ -31,7 +31,6 @@
   const updateProfileMutation = useUpdateProfileMutation();
 
   let profileData = $state(createInitialProfileData());
-  let isEditing = $state(false);
   let errors: Record<string, string[] | undefined> = $state({});
 
   // Update profileData when query data changes
@@ -75,7 +74,6 @@
     try {
       const data = await updateProfileMutation.mutateAsync(result.data);
       profileData.bmi = (data as any).user.bmi || "";
-      isEditing = false;
       toast.success(m.toast_profileUpdated(), {
         description: m.toast_profileUpdatedDesc(),
       });
@@ -226,7 +224,6 @@
         variant="outline"
         class="form-cancel-btn"
         onclick={() => {
-          isEditing = false;
           if (profileQuery.data) {
             const user = (profileQuery.data as any).user;
             profileData = {

@@ -36,22 +36,14 @@ export async function POST({ request, locals }) {
       target = target.join(",");
     }
 
-    // Validate required fields
-    if (!age || !gender || !weight || !height || !fitnessLevel) {
-      return json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
-
     // Update User Profile
     const updatedUser = await prisma.user.update({
       where: { id: session.user.id },
       data: {
-        age: Number(age),
+        age: age ? Number(age) : undefined,
         gender,
-        weight: Number(weight),
-        height: Number(height),
+        weight: weight ? Number(weight) : undefined,
+        height: height ? Number(height) : undefined,
         fitnessLevel,
         equipment,
         schedule,
@@ -60,35 +52,22 @@ export async function POST({ request, locals }) {
         primaryFocus,
         secondaryFocus,
         preferredWorkoutTime,
+        language: data.language,
         reminderMinutesBefore: reminderMinutesBefore ? Number(reminderMinutesBefore) : undefined,
         notificationsEnabled: notificationsEnabled !== undefined ? Boolean(notificationsEnabled) : undefined,
       },
     });
 
     // Calculate BMI
-    const heightInMeters = height / 100;
-    const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+    let bmi = null;
+    if (updatedUser.height && updatedUser.weight) {
+      const heightInMeters = updatedUser.height / 100;
+      bmi = (updatedUser.weight / (heightInMeters * heightInMeters)).toFixed(1);
+    }
 
     return json({
       success: true,
-      user: {
-        id: updatedUser.id,
-        age: updatedUser.age,
-        gender: updatedUser.gender,
-        weight: updatedUser.weight,
-        height: updatedUser.height,
-        bmi,
-        fitnessLevel: updatedUser.fitnessLevel,
-        equipment: updatedUser.equipment,
-        schedule: updatedUser.schedule,
-        limitations: updatedUser.limitations,
-        target: updatedUser.target,
-        primaryFocus: updatedUser.primaryFocus,
-        secondaryFocus: updatedUser.secondaryFocus,
-        preferredWorkoutTime: updatedUser.preferredWorkoutTime,
-        reminderMinutesBefore: updatedUser.reminderMinutesBefore,
-        notificationsEnabled: updatedUser.notificationsEnabled,
-      },
+      user: { ...updatedUser, bmi },
     });
   } catch (e) {
     console.error("Profile Update Error:", e);
@@ -105,23 +84,6 @@ export async function GET({ locals }) {
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: {
-        id: true,
-        age: true,
-        gender: true,
-        weight: true,
-        height: true,
-        fitnessLevel: true,
-        equipment: true,
-        schedule: true,
-        limitations: true,
-        target: true,
-        primaryFocus: true,
-        secondaryFocus: true,
-        preferredWorkoutTime: true,
-        reminderMinutesBefore: true,
-        notificationsEnabled: true,
-      },
     });
 
     if (!user) {
