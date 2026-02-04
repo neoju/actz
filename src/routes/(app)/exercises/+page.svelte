@@ -14,9 +14,11 @@
   import AlertCircleIcon from "@lucide/svelte/icons/alert-circle";
   import YoutubeIcon from "@lucide/svelte/icons/youtube";
   import XIcon from "@lucide/svelte/icons/x";
-  import exercises from "$lib/exercises.json";
+  import { getExercises } from "$lib/exercises-loader";
   import "$lib/assets/css/exercises.css";
   import * as m from "$lib/paraglide/messages.js";
+
+  const exercises = getExercises();
 
   // State management
   let searchQuery = $state("");

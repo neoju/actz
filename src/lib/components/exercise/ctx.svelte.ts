@@ -1,6 +1,7 @@
 import { getContext, setContext } from "svelte";
-import exercisesDB from "$lib/exercises.json";
+import { getExercises } from "$lib/exercises-loader";
 
+const exercisesDB = getExercises();
 const EXERCISE_KEY = Symbol("EXERCISE");
 
 export class ExerciseContext {

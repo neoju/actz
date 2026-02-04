@@ -53,7 +53,7 @@
       }
 
       // Change the locale in UI
-      setLocale(locale as "en" | "vi");
+      setLocale(locale as any);
 
       toast.success(m.toast_profileUpdated(), {
         description: m.toast_profileUpdatedDesc(),

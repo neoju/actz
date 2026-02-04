@@ -13,6 +13,7 @@
     Map,
     CircleQuestionMark,
     Linkedin,
+    Dumbbell,
   } from "@lucide/svelte";
   import ModeSwitcher from "$lib/components/mode-switcher.svelte";
   import * as m from "$lib/paraglide/messages.js";
@@ -79,17 +80,16 @@
       <MenuIcon class="h-5 w-5" />
     </Button>
   </Sheet.Trigger>
-  <Sheet.Content
-    side="right"
-    class="menu-sheet-content"
-    data-tour="menu-sheet"
-  >
+  <Sheet.Content side="right" class="menu-sheet-content" data-tour="menu-sheet">
     <Sheet.Header>
       <Sheet.Title>{m.common_appName()}</Sheet.Title>
       <Sheet.Description>{m.common_appTagline()}</Sheet.Description>
     </Sheet.Header>
     <div class="menu-items-container">
       {@render MenuItem(House, m.nav_home(), () => handleNavigation("/"))}
+      {@render MenuItem(Dumbbell, m.nav_planned_exercise(), () =>
+        handleNavigation("/planned-exercises"),
+      )}
       {@render MenuItem(
         BookSearch,
         m.nav_library(),

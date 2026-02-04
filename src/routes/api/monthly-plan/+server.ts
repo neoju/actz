@@ -1,9 +1,11 @@
 import { json } from "@sveltejs/kit";
 import Groq from "groq-sdk";
 import { env } from "$env/dynamic/private";
-import exercisesDB from "$lib/exercises.json";
+import { getExercises } from "$lib/exercises-loader";
 import prisma from "$lib/prisma";
 import { getOptimizedContext } from "$lib/utils/context-optimizer";
+
+const exercisesDB = getExercises();
 
 export async function POST({ locals }) {
   try {

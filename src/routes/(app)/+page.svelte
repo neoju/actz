@@ -10,7 +10,7 @@
 
 <div class="dashboard-container">
   <!-- Welcome Greeting -->
-  <div class="welcome-section">
+  <div class="welcome-section pt-30">
     <div class="welcome-icon-wrapper">
       <Sparkles class="welcome-icon" />
     </div>
@@ -24,11 +24,7 @@
 
     <div class="action-buttons">
       {#if hasActivePlan}
-        <Button
-          href="/planned-exercises"
-          size="lg"
-          class="primary-action-btn"
-        >
+        <Button href="/planned-exercises" size="lg" class="primary-action-btn">
           {m.dashboard_viewPlan()}
           <Calendar class="btn-icon" />
         </Button>
@@ -55,4 +51,3 @@
     </div>
   </div>
 </div>
-

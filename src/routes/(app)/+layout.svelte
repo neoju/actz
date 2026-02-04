@@ -10,6 +10,10 @@
 
   let { children } = $props();
 
+  function handleBack() {
+    window.history.back();
+  }
+
   onMount(() => {
     const session = page.data.session;
 
@@ -29,11 +33,7 @@
     <header class="mobile-header">
       {#if page.url.pathname != "/"}
         <div class="header-spacer">
-          <Button
-            class="back-btn"
-            variant="ghost"
-            onclick={() => window.history.back()}
-          >
+          <Button class="back-btn" variant="ghost" onclick={handleBack}>
             <ChevronLeft class="back-icon" />
           </Button>
         </div>

@@ -2,10 +2,12 @@ import { json } from "@sveltejs/kit";
 import Groq from "groq-sdk";
 import { z } from "zod";
 import { env } from "$env/dynamic/private";
-import exercisesDB from "$lib/exercises.json";
+import { getExercises } from "$lib/exercises-loader";
 import prisma from "$lib/prisma";
 import { getOptimizedContext } from "$lib/utils/context-optimizer";
 import { slugify } from "$lib/utils";
+
+const exercisesDB = getExercises();
 
 const PlanSchema = z.object({
   pt_summary: z.string(),
