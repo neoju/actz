@@ -16,6 +16,7 @@
     getTargetOptions,
     getLimitationOptions,
     getMuscleOptions,
+    getReminderTimeOptions,
     createInitialProfileData,
   } from "$lib/schemas/profile";
   import { useUpdateProfileMutation } from "$lib/queries/profile";
@@ -179,7 +180,7 @@
 
         <FormMultiSelect
           id="target"
-          label={m.profile_target()}
+          label={m.profile_goalTarget()}
           options={getTargetOptions()}
           bind:value={profileData.target}
           placeholder={m.setup_placeholder_selectGoals()}
@@ -202,6 +203,25 @@
             bind:value={profileData.secondaryFocus}
             placeholder={m.setup_placeholder_selectMuscle()}
             error={errors.secondaryFocus?.[0]}
+          />
+        </div>
+
+        <div class="form-grid-2">
+          <FormInput
+            id="preferredWorkoutTime"
+            label={m.profile_workoutTime()}
+            type="time"
+            placeholder={m.profile_placeholder_workoutTime()}
+            bind:value={profileData.preferredWorkoutTime}
+            error={errors.preferredWorkoutTime?.[0]}
+          />
+
+          <FormSelect
+            label={m.profile_reminderTime()}
+            options={getReminderTimeOptions()}
+            bind:value={profileData.reminderMinutesBefore}
+            placeholder="Select reminder time"
+            error={errors.reminderMinutesBefore?.[0]}
           />
         </div>
 

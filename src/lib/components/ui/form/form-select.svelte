@@ -9,17 +9,21 @@
         placeholder = "Select",
         error,
     } = $props();
+
+    let selectedLabel = $derived(
+        options.find((o: any) => o.value == value)?.label ?? value
+    );
 </script>
 
 <div class="space-y-2">
     <Label>{label}</Label>
     <Select.Root type="single" bind:value>
         <Select.Trigger class={`w-full ${error ? "border-red-500" : ""}`}>
-            {value ? value : placeholder}
+            {selectedLabel ? selectedLabel : placeholder}
         </Select.Trigger>
         <Select.Content>
             {#each options as option}
-                <Select.Item value={option.value}>{option.label}</Select.Item>
+                <Select.Item value={option.value} label={option.label}>{option.label}</Select.Item>
             {/each}
         </Select.Content>
     </Select.Root>
