@@ -83,7 +83,6 @@
         onAction={handleMainAction}
         variant="default"
         class={buttonClasses}
-        data-tour="hold-to-finish"
       >
         {buttonContent}
       </PressHoldButton>

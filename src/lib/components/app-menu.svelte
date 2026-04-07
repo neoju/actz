@@ -1,7 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { signOut } from "@auth/sveltekit/client";
-  import { resetTour, startCompleteTour } from "$lib/tour";
   import { Button } from "$lib/components/ui/button";
   import * as Sheet from "$lib/components/ui/sheet";
   import {
@@ -10,7 +9,6 @@
     Settings,
     LogOut,
     BookSearch,
-    Map,
     CircleQuestionMark,
     Linkedin,
     Dumbbell,
@@ -27,16 +25,6 @@
     goto(path);
   }
 
-  function handleRestartTour() {
-    isMenuOpen = false;
-    resetTour();
-    goto("/planned-exercises").then(() => {
-      setTimeout(() => {
-        startCompleteTour();
-      }, 500);
-    });
-  }
-
   async function handleLogout() {
     isMenuOpen = false;
     await signOut({ callbackUrl: "/login" });
@@ -47,7 +35,6 @@
   Icon: Component,
   label: string,
   onclick?: () => void,
-  dataTour?: string,
   variant:
     | "default"
     | "destructive"
@@ -60,7 +47,6 @@
   <Button
     {variant}
     class="menu-item-btn {className}"
-    data-tour={dataTour}
     {onclick}
   >
     <Icon class="h-5 w-5" />
@@ -75,12 +61,11 @@
       variant="outline"
       size="icon"
       class="menu-trigger-btn"
-      data-tour="menu-button"
     >
       <MenuIcon class="h-5 w-5" />
     </Button>
   </Sheet.Trigger>
-  <Sheet.Content side="right" class="menu-sheet-content" data-tour="menu-sheet">
+  <Sheet.Content side="right" class="menu-sheet-content">
     <Sheet.Header>
       <Sheet.Title>{m.common_appName()}</Sheet.Title>
       <Sheet.Description>{m.common_appTagline()}</Sheet.Description>
@@ -90,17 +75,11 @@
       {@render MenuItem(Dumbbell, m.nav_planned_exercise(), () =>
         handleNavigation("/planned-exercises"),
       )}
-      {@render MenuItem(
-        BookSearch,
-        m.nav_library(),
-        () => handleNavigation("/exercises"),
-        "library-link",
+      {@render MenuItem(BookSearch, m.nav_library(), () =>
+        handleNavigation("/exercises"),
       )}
-      {@render MenuItem(
-        Settings,
-        m.nav_settings(),
-        () => handleNavigation("/settings"),
-        "settings-link",
+      {@render MenuItem(Settings, m.nav_settings(), () =>
+        handleNavigation("/settings"),
       )}
 
       <div class="menu-separator"></div>
@@ -108,12 +87,10 @@
       {@render MenuItem(CircleQuestionMark, m.nav_faq(), () =>
         handleNavigation("/faq"),
       )}
-      {@render MenuItem(Map, m.nav_restartTour(), handleRestartTour)}
       {@render MenuItem(
         LogOut,
         m.nav_logout(),
         handleLogout,
-        undefined,
         "ghost",
         "logout-btn",
       )}

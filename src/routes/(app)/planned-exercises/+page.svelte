@@ -12,7 +12,6 @@
   } from "@lucide/svelte";
   import { navigating } from "$app/state";
   import { onMount } from "svelte";
-  import { shouldShowTour, startCompleteTour } from "$lib/tour";
   import "$lib/assets/css/planned-exercises.css";
   import * as m from "$lib/paraglide/messages.js";
 
@@ -87,13 +86,6 @@
         }
       }
     }, 100);
-
-    // Start tour for first-time users after login
-    if (shouldShowTour()) {
-      setTimeout(() => {
-        startCompleteTour();
-      }, 1000);
-    }
   });
 </script>
 
@@ -117,18 +109,14 @@
       <h1 class="plan-title">{m.plan_yourWeeklyPlan()}</h1>
 
       <p class="plan-label">{m.plan_description()}</p>
-      <div data-tour="plan-description">
-        <p class={cn("plan-desc")}>
-          {plan.planDescription || m.plan_defaultDescription()}
-        </p>
-      </div>
+      <p class={cn("plan-desc")}>
+        {plan.planDescription || m.plan_defaultDescription()}
+      </p>
 
       <p class="plan-label plan-label-spacing">{m.plan_ptNote()}</p>
-      <div data-tour="pt-summary">
-        <p class={cn("plan-note")}>
-          " {plan.ptSummary} "
-        </p>
-      </div>
+      <p class={cn("plan-note")}>
+        " {plan.ptSummary} "
+      </p>
     </div>
 
     <!-- Days List -->
@@ -164,7 +152,6 @@
           href={isDisabled ? undefined : dayLink}
           class={cn("day-card-link", isDisabled && "pointer-events-none")}
           data-today={isToday}
-          data-tour={isToday && !isRestDay ? "today-card" : undefined}
         >
           <Card.Root
             class={cn(

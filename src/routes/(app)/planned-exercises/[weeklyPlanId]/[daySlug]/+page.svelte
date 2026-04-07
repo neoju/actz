@@ -319,17 +319,15 @@
     </div>
   {:else}
     <Accordion.Root type="single" class="accordion-root" bind:value={openedExercise}>
-      {#each selectedDay.exercises as exercise, index}
-        <div data-tour={index === 0 ? "exercise-item" : undefined}>
-          <ExerciseItem
-            {exercise}
-            {cooldownActive}
-            isOpened={openedExercise === exercise.id.toString()}
-            isLocked={isPastUntouched || isExerciseLocked(index)}
-            onUpdateActivity={updateActivity}
-            onStartCooldown={startCooldown}
-          />
-        </div>
+      {#each selectedDay.exercises as exercise, index (exercise.id)}
+        <ExerciseItem
+          {exercise}
+          {cooldownActive}
+          isOpened={openedExercise === exercise.id.toString()}
+          isLocked={isPastUntouched || isExerciseLocked(index)}
+          onUpdateActivity={updateActivity}
+          onStartCooldown={startCooldown}
+        />
       {/each}
     </Accordion.Root>
   {/if}

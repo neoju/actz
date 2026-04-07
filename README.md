@@ -92,8 +92,7 @@ actz/
 │   │   ├── components/     # Reusable Svelte components
 │   │   ├── queries/        # TanStack Query hooks
 │   │   ├── schemas/        # Zod validation schemas
-│   │   ├── styles/         # Global styles including tour.css
-│   │   ├── tour.ts         # Guided tour logic
+│   │   ├── styles/         # Global styles
 │   │   └── utils.ts        # Utility functions
 │   ├── routes/
 │   │   ├── (app)/          # Protected app routes
@@ -108,14 +107,6 @@ actz/
 ```
 
 ## Key Features
-
-### Guided Tour System
-- Automatic onboarding for first-time users
-- 7-step interactive tour covering all major features
-- Smart navigation between pages
-- Restart capability from settings
-- Mobile-responsive design
-- [Learn more](docs/GUIDED_TOUR.md)
 
 ### Workout Management
 - AI-generated weekly/monthly plans

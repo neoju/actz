@@ -43,7 +43,6 @@
         <Button
           class="flex-1"
           onclick={handleStartFocusMode}
-          data-tour="start-button"
         >
           <MaximizeIcon class="h-4 w-4 mr-2" />
           Start in Focus Mode
@@ -58,7 +57,6 @@
                 {...props}
                 variant="outline"
                 class="flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50"
-                data-tour="skip-button"
               >
                 Skip
               </Button>
@@ -107,7 +105,6 @@
               variant="outline"
               class="flex-1 border-yellow-500 text-yellow-700 hover:bg-yellow-50"
               disabled={ctx.isLocked || ctx.cooldownActive}
-              data-tour="skip-button"
             >
               Skip
             </Button>
@@ -145,7 +142,6 @@
             {...props}
             variant="outline"
             size="sm"
-            data-tour="reset-button"
           >
             Reset
           </Button>

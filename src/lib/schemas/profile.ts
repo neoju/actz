@@ -125,11 +125,13 @@ export function getProfileSchema() {
     ),
     limitations: z
       .array(z.string())
+      .min(1, { message: m.validation_required() })
       .refine((val) => val.every((v) => getLimitationOptions().some((o) => o.value === v)), {
         message: m.validation_required(),
       }),
     target: z
       .array(z.string())
+      .min(1, { message: m.validation_required() })
       .refine((val) => val.every((v) => getTargetOptions().some((o) => o.value === v)), {
         message: m.validation_required(),
       }),
@@ -162,8 +164,14 @@ export function getProfileSchema() {
         },
         { message: "Invalid time format. Use HH:mm (e.g., 18:00)" }
       ),
-    reminderMinutesBefore: z.coerce.number().optional(),
-    notificationsEnabled: z.boolean().optional(),
+    reminderMinutesBefore: z.preprocess(
+      (val) => (val === "" || val === null || val === undefined ? undefined : val),
+      z.coerce.number().optional(),
+    ),
+    notificationsEnabled: z.preprocess(
+      (val) => (val === "" || val === null || val === undefined ? undefined : val),
+      z.boolean().optional(),
+    ),
   });
 }
 
@@ -177,7 +185,17 @@ export function createInitialProfileData(): Record<string, any> {
   const initialData: Record<string, any> = {};
 
   for (const key in schemaShape) {
-    initialData[key] = "";
+    if (key === "limitations" || key === "target") {
+      initialData[key] = [];
+    } else if (
+      key === "notificationsEnabled" ||
+      key === "reminderMinutesBefore"
+    ) {
+      // Optional non-string fields: "" fails z.boolean() / pollutes z.coerce.number()
+      initialData[key] = undefined;
+    } else {
+      initialData[key] = "";
+    }
   }
 
   return initialData;

@@ -139,13 +139,13 @@
 
 <div class="exercises-container">
   <!-- Header -->
-  <div class="exercises-header" data-tour="library-header">
+  <div class="exercises-header">
     <h1 class="header-title">{m.library_title()}</h1>
     <p class="header-desc">{m.library_description()}</p>
   </div>
 
   <!-- Search Bar -->
-  <div class="search-container" data-tour="library-search">
+  <div class="search-container">
     <SearchIcon class="search-icon" />
     <Input
       type="text"
@@ -172,7 +172,6 @@
       size="sm"
       onclick={() => (showFilters = !showFilters)}
       class="filter-toggle-btn"
-      data-tour="library-filters"
     >
       <FilterIcon class="filter-icon" />
       {m.library_filters()}
@@ -279,9 +278,6 @@
         {@const isExpanded = expandedExercise === exercise.name}
         <Card.Root
           class={cn("exercise-card", isExpanded && "exercise-card-expanded")}
-          data-tour={filteredExercises.indexOf(exercise) === 0
-            ? "library-exercise-card"
-            : undefined}
         >
           <button
             onclick={() => toggleExercise(exercise.name)}

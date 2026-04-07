@@ -47,10 +47,6 @@ npx prisma studio        # Open Prisma Studio GUI
   - Uses Svelte stores pattern with `.subscribe()` and reactive bindings
 
 ### Key Modules
-- **`src/lib/tour.ts`** - Driver.js guided tour system
-  - Auto-starts for first-time users
-  - 7-step tour covering dashboard, workouts, settings, library
-  - State tracked in localStorage/sessionStorage
 - **`src/lib/auth.ts`** - Auth.js configuration
 - **`src/lib/exercises.json`** - Static exercise library (name, instructions, video URLs)
 - **`src/hooks.server.ts`** - SvelteKit hooks for auth middleware
@@ -58,7 +54,7 @@ npx prisma studio        # Open Prisma Studio GUI
 ### UI Components
 - **Location:** `src/lib/components/ui/` (shadcn-svelte components)
 - **Icons:** Use `@lucide/svelte` (e.g., `import { Activity } from '@lucide/svelte'`)
-- **Styling:** Tailwind CSS 4 with utilities + custom tour styles in `src/lib/styles/tour.css`
+- **Styling:** Tailwind CSS 4 with utilities
 
 ## Conventions
 
@@ -80,7 +76,6 @@ import { page } from '$app/state'                // SvelteKit state
 
 // External
 import { Activity } from '@lucide/svelte'        // Icons
-import { driver } from 'driver.js'               // Tour system
 ```
 
 ### Styling Rules
@@ -90,7 +85,7 @@ import { driver } from 'driver.js'               // Tour system
   - `block-*` for reusable style blocks (e.g., `block-stat-grid`)
 - **CSS Files:** Extract styles to separate `.css` files for large components/pages
   - Import in component: `import './my-component.css'`
-  - Example: `src/lib/styles/tour.css` for tour-specific styles
+  - Example: `src/lib/assets/css/planned-exercises.css` for page-specific styles
 - **Tailwind First:** Prefer Tailwind utilities, use custom classes only when necessary
 
 ### Code Organization

@@ -59,6 +59,16 @@ async function updateProfile(data: ProfileFormData): Promise<ProfileResponse> {
   return response.json();
 }
 
+async function applySampleProfile(): Promise<ProfileResponse> {
+  const response = await fetch("/api/user/profile/sample", { method: "POST" });
+
+  if (!response.ok) {
+    throw new Error("Failed to apply sample profile");
+  }
+
+  return response.json();
+}
+
 /**
  * Hook to fetch user profile with caching
  */
@@ -79,6 +89,17 @@ export function useUpdateProfileMutation() {
     mutationFn: updateProfile,
     onSuccess: (data) => {
       // Update the cache with the new data
+      queryClient.setQueryData(profileKeys.detail(), data);
+    },
+  }));
+}
+
+export function useApplySampleProfileMutation() {
+  const queryClient = useQueryClient();
+
+  return createMutation<ProfileResponse, Error, void>(() => ({
+    mutationFn: applySampleProfile,
+    onSuccess: (data) => {
       queryClient.setQueryData(profileKeys.detail(), data);
     },
   }));

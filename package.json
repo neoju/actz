@@ -44,7 +44,6 @@
     "@prisma/client": "^7.3.0",
     "@tanstack/svelte-query": "^6.0.18",
     "dotenv": "^17.2.3",
-    "driver.js": "^1.4.0",
     "groq-sdk": "^0.37.0",
     "mode-watcher": "^1.1.0",
     "pg": "^8.17.2",

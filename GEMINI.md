@@ -4,7 +4,7 @@ This file provides context for Gemini agents working on the ACTZ project.
 
 ## Project Overview
 
-ACTZ is an AI-powered fitness training application designed to provide personalized workout plans and interactive exercise tracking. It is a Progressive Web App (PWA) that leverages AI for plan generation and features a comprehensive guided tour for onboarding.
+ACTZ is an AI-powered fitness training application designed to provide personalized workout plans and interactive exercise tracking. It is a Progressive Web App (PWA) that leverages AI for plan generation.
 
 ## Tech Stack
 
@@ -16,7 +16,6 @@ ACTZ is an AI-powered fitness training application designed to provide personali
 *   **State Management:** Svelte 5 Runes (`$state`, `$derived`, `$effect`, `$props`), TanStack Query for async data
 *   **Authentication:** Auth.js (NextAuth) with Prisma adapter
 *   **AI Integration:** Groq SDK
-*   **Onboarding:** Driver.js for guided tours
 *   **Internationalization:** Paraglide-JS for i18n (supports English and Vietnamese)
 
 ## Project Structure
@@ -28,7 +27,6 @@ ACTZ is an AI-powered fitness training application designed to provide personali
     *   `paraglide/`: Generated i18n messages.
     *   `assets/css/`: Modular CSS files.
     *   `prisma.ts`: Prisma client initialization with PostgreSQL adapter.
-    *   `tour.ts`: Guided tour configuration and logic.
 *   `src/routes/`: SvelteKit routes.
     *   `(app)/`: Protected routes for the main application (dashboard, exercises, settings, planned-exercises).
     *   `(public)/`: Publicly accessible routes (landing, auth, legal).
@@ -73,5 +71,4 @@ npm run build    # Build for production (includes prisma generate)
 ```
 
 ### Adding New Features
-*   Consider if the feature needs to be added to the **Guided Tour** (`src/lib/tour.ts`).
 *   Ensure all new strings are added to `messages/en.json` and `messages/vi.json` for i18n support.

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from "$app/environment";
+	import { onMount } from "svelte";
 	import CircleCheckIcon from "@lucide/svelte/icons/circle-check";
 	import InfoIcon from "@lucide/svelte/icons/info";
 	import Loader2Icon from "@lucide/svelte/icons/loader-2";
@@ -9,10 +11,20 @@
 	import { mode } from "mode-watcher";
 
 	let { ...restProps }: SonnerProps = $props();
+
+	/** `mode-watcher` is undefined during SSR but resolves on the client — fixed theme avoids Sonner hydration mismatch. */
+	let toasterMounted = $state(false);
+	onMount(() => {
+		toasterMounted = true;
+	});
+
+	const toasterTheme = $derived(
+		!browser || !toasterMounted ? "light" : (mode.current ?? "light"),
+	);
 </script>
 
 <Sonner
-	theme={mode.current}
+	theme={toasterTheme}
 	class="toaster group"
 	style="--normal-bg: var(--color-popover); --normal-text: var(--color-popover-foreground); --normal-border: var(--color-border);"
 	{...restProps}
